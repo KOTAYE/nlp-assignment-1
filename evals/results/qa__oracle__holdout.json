@@ -1,0 +1,258 @@
+{
+  "component": "qa",
+  "variant": "oracle",
+  "split": "holdout",
+  "n": 14,
+  "metrics": {
+    "answer_rate_with_gold_context": 1.0,
+    "correctness_mean_score": 0.929,
+    "correctness_pass_rate (of all)": 0.929,
+    "faithfulness_mean": 0.929,
+    "verdicts": {
+      "fully_matches": 13,
+      "mostly_right": 0,
+      "mostly_wrong": 0,
+      "contradicts": 1
+    }
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "answerer": "3",
+    "judge_correctness": "1",
+    "judge_faithfulness": "1"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T01:31:42",
+  "git_commit": "071bb69",
+  "per_row": [
+    {
+      "id": "hq01",
+      "question": "Is health insurance available to me?",
+      "reply": "As a part-time employee, you are eligible for health insurance after passing your probation period. Since you have passed your probation, you can access health insurance benefits from now on.",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §1.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by confirming eligibility for health insurance for part-time employees after probation and noting that the user has passed probation.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq02",
+      "question": "Can I join the English lessons?",
+      "reply": "Yes, as a contractor, you can join the free group English lessons twice per week after completing a placement test.",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §6.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §6.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that contractors can join the free group English lessons after a placement test, aligning with all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq03",
+      "question": "Can I use the partner gyms near the office?",
+      "reply": "As a remote employee, you cannot use the partner gyms near the office at no cost. Instead, you are eligible for receipt-based compensation for gym expenses, but this is not applicable to the partner gyms mentioned in the policy.",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §3.3"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §3.3"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that remote employees cannot use partner gyms and are eligible for receipt-based compensation instead, aligning with the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq04",
+      "question": "By when do I need to submit my gym receipt, and when is the sport compensation paid?",
+      "reply": "You need to submit your gym receipt by the 25th of the month. The sport compensation will be paid with your next salary after you submit the receipt. Remember, unused monthly amounts do not accumulate.",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §3.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately provides all the key information from the gold answer: the submission deadline, the payment schedule, and the non-accumulation of unused amounts.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq05",
+      "question": "How long do I have to return my laptop after my last working day?",
+      "reply": "You need to return your laptop within **5 working days** after your last working day.",
+      "sufficient": true,
+      "citations": [
+        "equipment-policy §2.3"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §2.3"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing the correct timeframe for returning the laptop.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq06",
+      "question": "Can I use my personal laptop to work on company source code?",
+      "reply": "No, you cannot use your personal laptop to work on company source code. According to the equipment policy, personal devices may not be used to access company source code or customer data [equipment-policy §4.1].",
+      "sufficient": true,
+      "citations": [
+        "equipment-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §4.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, stating that personal laptops cannot be used for company source code and providing the same reason regarding company source code and customer data.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq07",
+      "question": "Do new joiners get a buddy?",
+      "reply": "New joiners are assigned a buddy from a neighbouring team for the first 3 months to help with informal questions, tools, and company culture. Since you passed your probation, this policy does not apply to you as a new joiner anymore.",
+      "sufficient": true,
+      "citations": [
+        "onboarding-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "onboarding-policy §2.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that new joiners get a buddy from a neighboring team for the first 3 months, which fully matches the gold answer. The additional information about the buddy's role and the probation period does not contradict the gold answer.",
+      "faithfulness": 0.5,
+      "unsupported_claims": [
+        "Since you passed your probation, this policy does not apply to you as a new joiner anymore."
+      ]
+    },
+    {
+      "id": "hq08",
+      "question": "What can happen at the end of probation besides passing?",
+      "reply": "At the end of your probation, the possible outcomes are that you can either pass, have your probation extended by up to 1 month, or not pass. This is determined during a probation review meeting held by your team lead and HR.",
+      "sufficient": true,
+      "citations": [
+        "onboarding-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "onboarding-policy §3.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately lists all three possible outcomes at the end of probation as stated in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq09",
+      "question": "How much can I spend on a hotel during a business trip?",
+      "reply": "During a business trip, you can spend up to **120 USD per night** on accommodation. Additionally, the company provides a **per diem of 50 USD** per day for meals.",
+      "sufficient": true,
+      "citations": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the hotel spending limit and adds extra, non-contradictory information about meal per diem.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq10",
+      "question": "Is a taxi to the airport for a business trip reimbursed?",
+      "reply": "Yes, taxi rides to the airport for a business trip are reimbursed in full according to the policy.",
+      "sufficient": true,
+      "citations": [
+        "expense-reimbursement-policy §4.2"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §4.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, confirming that taxi rides to the airport for business trips are reimbursed in full.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq11",
+      "question": "How soon must I tell HR that I moved to a new address?",
+      "reply": "You must inform HR of your new address within **10 working days** of the change.",
+      "sufficient": true,
+      "citations": [
+        "internal-requests-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "internal-requests-policy §2.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing the correct timeframe of \"10 working days\".",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq12",
+      "question": "I manage a team and my cousin just joined it. Do I need to tell anyone?",
+      "reply": "Yes, you need to disclose to HR that your cousin has joined your team, as managing a close relative is considered a conflict of interest. This is required under the Code of Conduct policy, which states that team members must disclose any situation where their personal interests may conflict with the company's interests [code-of-conduct §3.1].",
+      "sufficient": true,
+      "citations": [
+        "code-of-conduct §3.1"
+      ],
+      "gold_section_ids": [
+        "code-of-conduct §3.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by correctly stating that the user needs to disclose the relationship to HR due to a potential conflict of interest.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq13",
+      "question": "If my illness lasts exactly 3 working days, do I need a medical certificate?",
+      "reply": "Since your illness lasts exactly 3 working days, you do not need a medical certificate. You only need to register your sick days with the HR assistant, ideally on the first day of illness and no later than 7 calendar days after the first day of illness [sick-leave-policy §2.2].",
+      "sufficient": true,
+      "citations": [
+        "sick-leave-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §2.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that a medical certificate is not needed for 3 working days and adds relevant, non-contradictory information about reporting sick days.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "hq14",
+      "question": "Is the office open after 9 pm?",
+      "reply": "Yes, the office is open on working days from 08:00 to 21:00, which means it is open after 9 pm.",
+      "sufficient": true,
+      "citations": [
+        "remote-work-policy §1.2"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §1.2"
+      ],
+      "verdict": "contradicts",
+      "verdict_reason": "The candidate answer directly contradicts the gold answer regarding whether the office is open after 9 pm, despite repeating the correct opening hours.",
+      "faithfulness": 0.5,
+      "unsupported_claims": [
+        "it is open after 9 pm"
+      ]
+    }
+  ]
+}

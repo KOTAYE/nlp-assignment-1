@@ -26,8 +26,8 @@
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:00:11",
-  "git_commit": "eeb724a",
+  "date": "2026-11-12T01:18:12",
+  "git_commit": "071bb69",
   "per_row": [
     {
       "id": "gu02",

@@ -6,15 +6,15 @@
   "metrics": {
     "scenario_success_rate": 0.917,
     "per_check_pass_rate": {
-      "citation": 0.8,
+      "citation": 1.0,
       "db": 1.0,
-      "reply": 0.75,
+      "reply": 1.0,
       "route": 0.917,
-      "ticket": 1.0
+      "ticket": 0.667
     },
     "success_by_label": {
-      "answer": "3/4",
-      "clarify_then_referral": "1/1",
+      "answer": "4/4",
+      "clarify_then_referral": "0/1",
       "follow_up": "1/1",
       "hr": "1/1",
       "leave": "2/2",
@@ -22,18 +22,18 @@
       "unclear": "1/1"
     },
     "tracer_coverage": 1.0,
-    "avg_cost_usd_per_conversation": 0.00048,
-    "avg_latency_s_per_conversation": 5.33,
+    "avg_cost_usd_per_conversation": 0.00052,
+    "avg_latency_s_per_conversation": 5.13,
     "failures": [
-      "e2e03 answer ['Do I get paid sick leave?']: routes=['hr_referral'] checks={'route': False, 'citation': False, 'reply': False} last=\"The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (leave and absence). HR replies within 2 working d\""
+      "e2e06 clarify_then_referral ['Can I work from abroad?', 'about 2 months']: routes=['clarification', 'answer'] checks={'route': False, 'ticket': False} last='As a full-time employee, you can work from abroad for up to 30 calendar days per calendar year. Since you plan to work for about 2 months (approximate'"
     ]
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T00:58:02",
-  "git_commit": "d214702",
+  "date": "2026-11-12T01:18:10",
+  "git_commit": "071bb69",
   "per_row": [
     {
       "id": "e2e01",
@@ -45,7 +45,7 @@
         "answer"
       ],
       "replies": [
-        "You can carry over up to **5 unused annual leave days** to next year. These carried-over days must be used by **31 March** of that year; otherwise, they will expire. Any days above the carry-over limit will expire on **31 December** of the current year."
+        "You can carry over up to **5 unused annual leave days** to the next calendar year. These carried-over days must be used by **31 March** of that year; otherwise, they will expire. Any days above the carry-over limit will expire on **31 December** of the current year.\n\nSources: [leave-policy §3.4]"
       ],
       "citations": [
         "leave-policy §3.4"
@@ -57,9 +57,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000545,
-      "tokens": 3235,
-      "latency_s": 13.21
+      "cost_usd": 0.000482,
+      "tokens": 3389,
+      "latency_s": 13.29
     },
     {
       "id": "e2e03",
@@ -68,22 +68,24 @@
         "Do I get paid sick leave?"
       ],
       "routes": [
-        "hr_referral"
+        "answer"
       ],
       "replies": [
-        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example."
+        "As a contractor at Lumora Tech, you do not receive paid sick leave. The sick leave policy applies only to full-time and part-time employees, and contractors are advised to inform their manager about any absence according to their service agreement [sick-leave-policy §1.1]."
       ],
-      "citations": [],
+      "citations": [
+        "sick-leave-policy §1.1"
+      ],
       "checks": {
-        "route": false,
-        "citation": false,
-        "reply": false
+        "route": true,
+        "citation": true,
+        "reply": true
       },
-      "success": false,
+      "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000566,
-      "tokens": 3799,
-      "latency_s": 6.31
+      "cost_usd": 0.000482,
+      "tokens": 3389,
+      "latency_s": 4.53
     },
     {
       "id": "e2e06",
@@ -94,22 +96,25 @@
       ],
       "routes": [
         "clarification",
-        "hr_referral"
+        "answer"
       ],
       "replies": [
         "For how many days do you plan to work from abroad?",
-        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example."
+        "As a full-time employee, you can work from abroad for up to 30 calendar days per calendar year. Since you plan to work for about 2 months (approximately 60 days), this exceeds the allowed duration. For stays longer than 30 days, HR must decide on your request individually, so you will need to contact HR for further assistance regarding your situation.\n\nSources: [remote-work-policy §3.1], [remote-work-policy §3.2]"
       ],
-      "citations": [],
+      "citations": [
+        "remote-work-policy §3.1",
+        "remote-work-policy §3.2"
+      ],
       "checks": {
-        "route": true,
-        "ticket": true
+        "route": false,
+        "ticket": false
       },
-      "success": true,
+      "success": false,
       "trace_complete": true,
-      "cost_usd": 0.000721,
-      "tokens": 5168,
-      "latency_s": 7.75
+      "cost_usd": 0.000634,
+      "tokens": 4773,
+      "latency_s": 7.15
     },
     {
       "id": "e2e08",
@@ -132,7 +137,7 @@
       "trace_complete": true,
       "cost_usd": 0.000204,
       "tokens": 1157,
-      "latency_s": 2.21
+      "latency_s": 2.16
     },
     {
       "id": "e2e11",
@@ -153,9 +158,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000215,
-      "tokens": 1178,
-      "latency_s": 2.36
+      "cost_usd": 0.000214,
+      "tokens": 1176,
+      "latency_s": 2.34
     },
     {
       "id": "e2e13",
@@ -167,7 +172,7 @@
         "leave_action"
       ],
       "replies": [
-        "Your annual leave request for 28-30 December has been submitted and is currently pending HR approval due to team overlap. Two team members already have approved leave on 29 December. HR will confirm with your team lead within three working days. Your request ID is #15."
+        "Your annual leave request for 28-30 December has been submitted and is currently pending HR approval (#15). The reason for the pending status is that two team members already have approved leave on 29 December, and HR will confirm with your team lead within three working days."
       ],
       "citations": [],
       "checks": {
@@ -176,9 +181,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000385,
-      "tokens": 2731,
-      "latency_s": 3.41
+      "cost_usd": 0.000514,
+      "tokens": 3781,
+      "latency_s": 3.4
     },
     {
       "id": "e2e16",
@@ -195,8 +200,8 @@
       ],
       "replies": [
         "Here are the pending leave requests:\n\n1. **#10 Nazar Savchenko, sick, 14–18 Sep** (pending HR review)\n2. **#8 Sofiia Lysenko, unpaid, 14–18 Dec** (pending HR review)",
-        "Please confirm that you want to approve request #8 for Sofiia Lysenko with the decision to approve.",
-        "Request #8 for Sofiia Lysenko has been approved."
+        "Please confirm that you want to approve request #8 for Sofiia Lysenko (unpaid leave, 14–18 Dec).",
+        "Request #8 for Sofiia Lysenko (unpaid leave, 14–18 Dec) has been approved."
       ],
       "citations": [],
       "checks": {
@@ -205,9 +210,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000893,
-      "tokens": 7974,
-      "latency_s": 8.08
+      "cost_usd": 0.001209,
+      "tokens": 10625,
+      "latency_s": 7.91
     },
     {
       "id": "e2e18",
@@ -229,7 +234,7 @@
       "trace_complete": true,
       "cost_usd": 0.000104,
       "tokens": 612,
-      "latency_s": 0.9
+      "latency_s": 0.91
     },
     {
       "id": "e2e21",
@@ -243,12 +248,12 @@
         "answer"
       ],
       "replies": [
-        "Yes, as a fully remote full-time employee who has passed probation, you are eligible for a one-time home office allowance of **300 USD** for equipment such as a monitor, chair, or desk. You can claim this allowance through the expense process.",
-        "To claim your home office allowance of **300 USD**, you need to submit your receipt through the expense process. Make sure to do this by the 25th of the month to receive the compensation with your next salary."
+        "Yes, as a fully remote full-time employee, you are eligible for a one-time home office allowance of **300 USD** for items like a monitor, chair, or desk. Since you have passed your probation, you can claim this allowance through the expense process [equipment-policy §3.1].\n\nSources: [remote-work-policy §2.2]",
+        "To claim your home office allowance of **300 USD**, you need to submit your receipt through the expense process. Make sure to do this by the 25th of the month to receive the compensation with your next salary [benefits-policy §3.2].\n\nSources: [equipment-policy §3.1]"
       ],
       "citations": [
         "equipment-policy §3.1",
-        "remote-work-policy §2.2"
+        "benefits-policy §3.2"
       ],
       "checks": {
         "route": true,
@@ -256,9 +261,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000927,
-      "tokens": 6563,
-      "latency_s": 8.21
+      "cost_usd": 0.001082,
+      "tokens": 6966,
+      "latency_s": 8.62
     },
     {
       "id": "e2e23",
@@ -270,7 +275,7 @@
         "answer"
       ],
       "replies": [
-        "Yes, December 24, 2027, is a company day off, referred to as the Winter company day according to our leave policy."
+        "Yes, December 24, 2027, is a company day off, referred to as the Winter company day, as stated in the company holidays list. This applies to all employees, including those in the Lviv office like yourself.\n\nSources: [leave-policy §6.1]"
       ],
       "citations": [
         "leave-policy §6.1"
@@ -282,9 +287,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000392,
-      "tokens": 3374,
-      "latency_s": 4.41
+      "cost_usd": 0.000503,
+      "tokens": 3545,
+      "latency_s": 4.27
     },
     {
       "id": "e2e26",
@@ -296,7 +301,7 @@
         "answer"
       ],
       "replies": [
-        "You need to complete the Information Security training within 14 calendar days of your start date, which means by November 1, 2026. Since today is November 12, 2026, you have already missed this deadline. Access to production systems will only be granted after you complete this training."
+        "You need to complete the Information Security Training within 14 calendar days of your start date, which means by November 28, 2026. Access to production systems will only be granted after you finish this training.\n\nSources: [onboarding-policy §2.3]"
       ],
       "citations": [
         "onboarding-policy §2.3"
@@ -308,9 +313,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000458,
-      "tokens": 3212,
-      "latency_s": 4.02
+      "cost_usd": 0.00047,
+      "tokens": 3346,
+      "latency_s": 4.07
     },
     {
       "id": "e2e28",
@@ -322,7 +327,7 @@
         "leave_action"
       ],
       "replies": [
-        "Your sick leave for today (2026-11-12) has been approved. Request ID: #15. No certificate is needed as per the sick leave policy."
+        "Your sick leave for today (12 November 2026) has been approved. Request ID: #15. No certificate is needed as per the sick leave policy."
       ],
       "citations": [],
       "checks": {
@@ -331,9 +336,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000373,
-      "tokens": 2704,
-      "latency_s": 3.08
+      "cost_usd": 0.000396,
+      "tokens": 3753,
+      "latency_s": 2.92
     }
   ]
 }

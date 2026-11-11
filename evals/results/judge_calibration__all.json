@@ -24,8 +24,8 @@
     "judge_correctness": "1"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:02:20",
-  "git_commit": "eeb724a",
+  "date": "2026-11-12T01:20:25",
+  "git_commit": "071bb69",
   "per_row": [
     {
       "id": "cal01",
@@ -79,7 +79,7 @@
       "id": "cal07",
       "expected": "contradicts",
       "judge": "contradicts",
-      "reason": "The candidate answer incorrectly states there is no limit to 100% paid sick days, directly contradicting the gold answer's limit of 10 days.",
+      "reason": "The candidate answer contradicts the gold answer by stating there is no limit to 100% paid sick days, whereas the gold answer specifies a limit of 10 days.",
       "exact": true,
       "adjacent": true
     },
@@ -143,7 +143,7 @@
       "id": "cal15",
       "expected": "fully_matches",
       "judge": "fully_matches",
-      "reason": "The candidate answer fully matches the gold answer, providing the correct amount and conditions.",
+      "reason": "The candidate answer correctly states the sport compensation amount of 500 UAH per month for part-time employees, matching the gold answer.",
       "exact": true,
       "adjacent": true
     },
@@ -167,7 +167,7 @@
       "id": "cal18",
       "expected": "fully_matches",
       "judge": "fully_matches",
-      "reason": "The candidate answer correctly states the 14-calendar-day requirement and the condition for leave longer than 3 working days, matching the gold answer.",
+      "reason": "The candidate answer correctly states the 14-calendar-day requirement and implies it's for longer leave, matching the gold answer.",
       "exact": true,
       "adjacent": true
     },

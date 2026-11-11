@@ -128,10 +128,29 @@ _See `docs/architecture.md` for the component design._
 See the iteration log. Every prompt change bumped its `version:` header, which is recorded with each result.
 
 ## 5. Evaluation
-_TODO_
+Full analysis is in [`docs/report.md`](report.md) §5. Auto-generated tables are in [`docs/eval-results.md`](eval-results.md).
+- **Protocol:** tune on dev → measure test once (iteration 1) → first-failing-stage error analysis → general fixes (iteration 2) → measure test again plus a **holdout written before the fixes**.
+- **Final (iteration 2):**
+  - information collection F1 1.0;
+  - retrieval Hit@5 1.0 / MRR 0.925;
+  - answer correctness 0.857 (test and holdout), with no contradictions;
+  - faithfulness 1.0 / 0.958;
+  - citation hit 1.0;
+  - HR referral F1 0.667 (test) / 0.75 (holdout), the only metric below target;
+  - leave agent pass^3 0.933 / 0.857;
+  - E2E 0.833.
+- **Next iteration:** a deterministic HR-delegation rule plus a claim verifier for referral; date parsing in code for the agent; a learned injection classifier.
 
 ## 6. Deployment
-_TODO_
+- **Local deployment** (the brief: deployment optional, the app must be runnable for the demo): `streamlit run app/streamlit_app.py`. Setup steps are in `README.md`.
+- **Demo controls:**
+  - "log in as" employee selector (identity-provider stand-in);
+  - trace toggle (every LLM and tool call with prompt version, tokens, cost, latency);
+  - `scripts/reset_db.py` to restore the seed;
+  - `HR_TODAY` for a fixed business date.
+- **The UI never queries the leave DB**: all leave data reaches the user through the assistant's tool calls.
+- **Monitoring hooks:** JSONL traces in `logs/traces/`, cost per message in the UI, and the eval suite (`python -m evals.run_all`) as a regression gate.
+- **Not done (out of scope):** real authentication, multi-user hosting, email notifications.
 
 ---
 
@@ -144,3 +163,11 @@ _TODO_
 | 3 | 2026-11-12 | Data Preparation | Wrote 9-document policy corpus (98 sections); refined leave rules to match corpus (notice → decline, sick yearly cap, contractors declined) | — |
 | 4 | 2026-11-12 | Business Understanding (re-check) | Compliance audit against the brief: HR referral now writes to DB only via an LLM tool call; LLM vs tool calls marked in the diagram; every component (incl. rewriter, indexer, tracer, E2E) has an eval; traceability matrix added | — |
 | 5 | 2026-11-12 | Data Preparation + Modeling | DB seed (30 employees, 14 requests); rule engine + 41 unit tests | rule tests: 40/41 → 41/41 (fixed phantom carry-over) |
+| 6 | 2026-11-12 | Modeling | Smoke tests: agent New-Year rule misapplied → prompt v2; collector over-asking → v2; HR list without IDs → agent v3 | qualitative (traces) |
+| 7 | 2026-11-12 | Evaluation (dev) | Guard: IBAN/CARD order bug + 3 general patterns | dev attack recall 0.75 → 1.00; test PII masking 0.90 → 1.00 |
+| 8 | 2026-11-12 | Evaluation (dev) | Collector few-shot (v4) + no `life_event` fact (v3) | dev facts F1 0.72 → 1.00; clarification acc. 0.79 → 0.95 |
+| 9 | 2026-11-12 | Evaluation (dev) | Rewriter v2: topic words only, no company or "policy" noise | dev follow-up MRR 0.619 → 0.938 (concat baseline 0.938) |
+| 10 | 2026-11-12 | Evaluation (dev) | Router v3 (report vs how-to-report), answerer v2 (apply general rules), referral v2 (category definitions) | dev QA correctness 0.842 → 1.00; referral F1 0.857 → 1.00; ticket category 0.667 → 1.00 |
+| 11 | 2026-11-12 | Evaluation (test, iteration 1) | First test run: dev overfitting visible | test correctness 0.786, referral F1 0.737, agent pass^3 0.80, E2E 0.722 |
+| 12 | 2026-11-12 | Data Preparation | Holdout sets written before iteration-2 fixes; gold label ag19 fixed (#9 → #10) | — |
+| 13 | 2026-11-12 | Modeling (iteration 2) | Table-row index units + best-unit reranking; answerer v3 (two-sided sufficiency); agent v4 (calendar, no pre-validation); collector v7; sources guaranteed in the reply | test correctness 0.786 → 0.857 (holdout 0.857); oracle answer rate 0.714 → 1.00; citation hit 0.917 → 1.00; agent pass^3 0.80 → 0.933; E2E 0.722 → 0.833; referral F1 0.737 → 0.667 (trade-off) |

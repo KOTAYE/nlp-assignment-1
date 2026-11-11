@@ -14,6 +14,8 @@ The assistant answers employee questions about HR procedures. It works only from
 | [docs/requirements-traceability.md](docs/requirements-traceability.md) | Every requirement of the assignment brief mapped to an artifact |
 | [CLAUDE.md](CLAUDE.md), [.claude/skills/](.claude/skills/) | How the AI coding agent was steered: rules, CRISP-DM process, conventions, skills |
 | [data/README.md](data/README.md) | Data card: policy corpus, employee/leave seed, external data used |
+| [docs/eval-results.md](docs/eval-results.md) | All evaluation tables, auto-generated from `evals/results/*.json` |
+| [docs/demo-script.md](docs/demo-script.md) | Timed outline of the ≤ 10-minute demo video |
 
 ## Quick start
 
@@ -54,7 +56,7 @@ To reset the demo data: `python scripts/reset_db.py`.
 
 ### Run tests and evaluations
 ```bash
-pytest                                   # 54 unit tests (rule engine, tools, guard, chunker)
+pytest                                   # 55 unit tests (rule engine, tools, guard, chunker)
 python -m evals.build_datasets           # rebuild gold datasets (deterministic)
 python -m evals.run_all --split test     # every component eval on the test split (~5 min, ~$0.10)
 python -m evals.run_qa --split dev       # or a single component on the dev split

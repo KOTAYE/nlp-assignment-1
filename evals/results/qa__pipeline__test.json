@@ -5,39 +5,38 @@
   "n": 37,
   "metrics": {
     "answer_rate (answerable questions answered)": 0.857,
-    "correctness_pass_rate (fully/mostly right, of answerable)": 0.786,
-    "correctness_mean_score (answered)": 0.917,
-    "contradiction_rate (answered)": 0.042,
-    "faithfulness_mean (answered)": 0.986,
-    "citation_hit_rate (answered)": 0.917,
+    "correctness_pass_rate (fully/mostly right, of answerable)": 0.857,
+    "correctness_mean_score (answered)": 1.0,
+    "contradiction_rate (answered)": 0.0,
+    "faithfulness_mean (answered)": 1.0,
+    "citation_hit_rate (answered)": 1.0,
     "answers_with_citation": 1.0,
-    "context_recall@5 (gold section in evidence)": 0.893,
-    "referral_precision": 0.7,
-    "referral_recall": 0.778,
-    "referral_f1": 0.737,
+    "context_recall@5 (gold section in evidence)": 0.929,
+    "referral_precision": 0.667,
+    "referral_recall": 0.667,
+    "referral_f1": 0.667,
     "referral_confusion": {
-      "tp": 7,
+      "tp": 6,
       "fp": 3,
-      "fn": 2,
+      "fn": 3,
       "tn": 25
     },
-    "ticket_category_accuracy": 0.857,
-    "avg_tokens_per_question": 3222,
-    "avg_cost_usd_per_question": 0.00047,
-    "avg_latency_s": 4.76,
+    "ticket_category_accuracy": 0.833,
+    "avg_tokens_per_question": 3411,
+    "avg_cost_usd_per_question": 0.00049,
+    "avg_latency_s": 4.97,
     "failing_stages": {
-      "router/answerer (answered instead of referring)": 2,
-      "answerer (abstained) -> hr_referral": 3,
+      "router/answerer (answered instead of referring)": 3,
+      "retrieval (gold section not in top-5) -> false referral": 1,
       "router -> leave_action": 1,
-      "retrieval": 2
+      "answerer (abstained) -> hr_referral": 2
     },
     "errors": [
-      "qa12 'Can I request annual leave through the HR assistant?': route=answer verdict=contradicts stage=retrieval",
+      "qa12 'Can I request annual leave through the HR assistant?': route=hr_referral verdict=None stage=retrieval (gold section not in top-5) -> false referral",
       "qa14 'Can I cancel a vacation that I already booked?': route=leave_action verdict=None stage=router -> leave_action",
-      "qa29 'How much sport compensation do I get?': route=answer verdict=mostly_wrong stage=retrieval",
-      "qa30 'Can I use the education budget now?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral",
-      "qa34 'Do I need approval to buy a 300 USD online course from my education budget?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral",
-      "qa35 'I took a taxi home at 23:00 after working late. Can I get reimbursed?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral",
+      "qa40 'I lost my company laptop. What should I do?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral",
+      "qa42 'A client wants to give me a gift worth 80 USD. Can I accept it?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral",
+      "un04 'I want to work from Spain for 3 months. Is that OK?': route=answer verdict=None stage=router/answerer (answered instead of referring)",
       "un09 'Will the company pay for my home internet?': route=answer verdict=None stage=router/answerer (answered instead of referring)",
       "un15 'My child is sick. Can I stay home to take care of them and still get paid?': route=answer verdict=None stage=router/answerer (answered instead of referring)"
     ]
@@ -46,16 +45,16 @@
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
     "router": "3",
-    "collector": "6",
+    "collector": "7",
     "rewriter": "2",
-    "answerer": "2",
+    "answerer": "3",
     "referral": "2",
     "judge_correctness": "1",
     "judge_faithfulness": "1"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:05:52",
-  "git_commit": "eeb724a",
+  "date": "2026-11-12T01:24:07",
+  "git_commit": "071bb69",
   "per_row": [
     {
       "id": "qa02",
@@ -63,7 +62,7 @@
       "employee_id": "E006",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Since you joined on September 1, 2026, you are entitled to 8 vacation days for this year. This is calculated as 2 working days for each full calendar month remaining in the year (September, October, November, December).",
+      "reply": "Since you joined on September 1, you are entitled to 2 working days of vacation for each full calendar month remaining in the year. From September to December, there are 4 full months, which gives you a total of 8 vacation days for this year.\n\nSources: [leave-policy §2.1], [leave-policy §2.2]",
       "citations": [
         "leave-policy §2.1",
         "leave-policy §2.2"
@@ -82,11 +81,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3247,
-      "cost_usd": 0.000463,
-      "latency_s": 13.0,
+      "tokens": 3397,
+      "cost_usd": 0.000485,
+      "latency_s": 13.39,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate correctly states the number of vacation days and the calculation method, matching the gold answer exactly.",
+      "verdict_reason": "The candidate correctly calculated the number of vacation days based on the provided start date and the policy of 2 days per full month.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -98,7 +97,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You need to request your two-week vacation at least 14 calendar days before the start date, as leave of more than 3 working days requires this notice period. Requests that do not meet this requirement will be declined automatically.",
+      "reply": "To request a two-week vacation, you need to submit your request at least 14 calendar days before the start date, as your leave is more than 3 working days. Requests that do not meet this notice period will be declined automatically [leave-policy §3.2].",
       "citations": [
         "leave-policy §3.2"
       ],
@@ -116,11 +115,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3423,
-      "cost_usd": 0.00048,
-      "latency_s": 3.96,
+      "tokens": 3588,
+      "cost_usd": 0.000511,
+      "latency_s": 4.73,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer, including the notice period and the condition for that period.",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing the correct notice period and the condition for that period.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -150,9 +149,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3388,
-      "cost_usd": 0.000479,
-      "latency_s": 4.27,
+      "tokens": 3539,
+      "cost_usd": 0.000502,
+      "latency_s": 4.8,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer by stating the correct notice period of 2 working days.",
       "faithfulness": 1.0,
@@ -166,7 +165,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You are entitled to **3 working days** of paid special leave for your own wedding, as stated in the leave policy for special leave events.",
+      "reply": "For your own wedding, you are entitled to **3 working days** of paid special leave. This leave is not deducted from your annual leave balance.\n\nSources: [leave-policy §4.1]",
       "citations": [
         "leave-policy §4.1"
       ],
@@ -184,11 +183,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3251,
-      "cost_usd": 0.000448,
-      "latency_s": 4.48,
+      "tokens": 3404,
+      "cost_usd": 0.000471,
+      "latency_s": 4.21,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by providing the correct number of days and confirming it is paid special leave.",
+      "verdict_reason": "The candidate answer accurately states the number of days off, that it is paid special leave, and that it is not deducted from annual leave, matching all key facts in the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -200,10 +199,9 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "As a full-time employee, you can take up to **20 working days** of unpaid leave per calendar year for personal reasons, subject to approval by your manager and HR review. Requests exceeding this limit will be declined.",
+      "reply": "As a full-time employee, you can take up to **20 working days** of unpaid leave per calendar year for personal reasons, subject to manager approval and HR review [leave-policy §5.1].",
       "citations": [
-        "leave-policy §5.1",
-        "leave-policy §5.2"
+        "leave-policy §5.1"
       ],
       "gold_section_ids": [
         "leave-policy §5.1",
@@ -220,11 +218,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3216,
-      "cost_usd": 0.000452,
-      "latency_s": 4.31,
+      "tokens": 3359,
+      "cost_usd": 0.000469,
+      "latency_s": 5.11,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by stating the correct number of unpaid leave days and the approval process.",
+      "verdict_reason": "The candidate answer correctly states the maximum number of unpaid leave days and the conditions for approval, matching all key facts in the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -236,7 +234,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Yes, December 24, 2027, is a company day off, referred to as the Winter company day according to our leave policy.",
+      "reply": "Yes, December 24, 2027, is a company day off, referred to as the Winter company day according to the leave policy.\n\nSources: [leave-policy §6.1]",
       "citations": [
         "leave-policy §6.1"
       ],
@@ -254,9 +252,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3374,
-      "cost_usd": 0.000392,
-      "latency_s": 3.95,
+      "tokens": 3526,
+      "cost_usd": 0.000492,
+      "latency_s": 4.6,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer, confirming that December 24, 2027, is a company day off and correctly identifying it as the Winter company day.",
       "faithfulness": 1.0,
@@ -269,12 +267,9 @@
       "question": "Can I request annual leave through the HR assistant?",
       "employee_id": "E007",
       "gold_outcome": "answer",
-      "route": "answer",
-      "reply": "Yes, you can request annual leave through the HR assistant by providing the start and end dates of your leave. Your request will be checked against the rules and will receive a status of approved, declined, or pending HR review based on your leave balance and other criteria outlined in the policy.",
-      "citations": [
-        "leave-policy §3.1",
-        "leave-policy §3.3"
-      ],
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
       "gold_section_ids": [
         "leave-policy §1.2"
       ],
@@ -286,18 +281,13 @@
         "leave-policy §2.4"
       ],
       "context_hit": false,
-      "ticket_id": null,
-      "ticket_category": null,
+      "ticket_id": 1,
+      "ticket_category": "leave_and_absence",
       "gold_category": null,
-      "tokens": 3361,
-      "cost_usd": 0.000482,
-      "latency_s": 4.28,
-      "verdict": "contradicts",
-      "verdict_reason": "The candidate answer directly contradicts the gold answer regarding eligibility for annual leave and the method of requesting time off.",
-      "faithfulness": 1.0,
-      "unsupported_claims": [],
-      "citation_hit": false,
-      "failing_stage": "retrieval"
+      "tokens": 4060,
+      "cost_usd": 0.000604,
+      "latency_s": 6.61,
+      "failing_stage": "retrieval (gold section not in top-5) -> false referral"
     },
     {
       "id": "qa14",
@@ -305,7 +295,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "leave_action",
-      "reply": "Yes, you can cancel a vacation request if it is approved or pending and has not started yet. Please provide me with the request ID of the vacation you want to cancel, or I can list your current leave requests to help you find it.",
+      "reply": "You have one approved vacation request: #7 (annual leave, 11–22 May 2026). Would you like to cancel this request?",
       "citations": [],
       "gold_section_ids": [
         "leave-policy §3.5"
@@ -315,9 +305,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 1628,
-      "cost_usd": 0.000281,
-      "latency_s": 1.98,
+      "tokens": 3810,
+      "cost_usd": 0.000518,
+      "latency_s": 2.99,
       "failing_stage": "router -> leave_action"
     },
     {
@@ -326,7 +316,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You do not need a medical certificate for your 2-day illness, as you can take up to 3 consecutive working days of sick leave without one. Just make sure to register your sick days through the HR assistant, ideally on the first day of illness and no later than 7 calendar days after the first day of illness.",
+      "reply": "You do not need a medical certificate for your 2-day illness, as you can take up to 3 consecutive working days of sick leave without one. However, you should register your sick days through the HR assistant, ideally on the first day of illness and no later than 7 calendar days after the first day of illness.\n\nSources: [sick-leave-policy §2.2], [sick-leave-policy §2.4]",
       "citations": [
         "sick-leave-policy §2.2",
         "sick-leave-policy §2.4"
@@ -345,11 +335,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3332,
-      "cost_usd": 0.000491,
-      "latency_s": 4.63,
+      "tokens": 3484,
+      "cost_usd": 0.000514,
+      "latency_s": 5.35,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states that a medical certificate is not needed for 2 days of illness, aligning with the 3 consecutive working days rule, and also includes the instruction to register sick days.",
+      "verdict_reason": "The candidate answer correctly states that a medical certificate is not needed for 2 days of illness and accurately reflects the 3-day limit. It also includes the correct instruction to register sick days.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -361,7 +351,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "At Lumora Tech, you are entitled to **100% of your salary for up to 10 sick days per calendar year**. Any sick days taken beyond this limit will be compensated according to state social insurance rules, and HR will reach out to you regarding the necessary documentation for those days.",
+      "reply": "At Lumora Tech, you are entitled to **100% of your salary for up to 10 sick days per calendar year**. Any sick days taken beyond this limit will be paid according to state social insurance rules, and HR will reach out to you regarding the necessary documentation for those days.\n\nSources: [sick-leave-policy §2.1]",
       "citations": [
         "sick-leave-policy §2.1"
       ],
@@ -370,20 +360,20 @@
       ],
       "evidence_ids": [
         "sick-leave-policy §2.1",
-        "sick-leave-policy §2.2",
         "sick-leave-policy §2.4",
-        "sick-leave-policy §3.2",
-        "sick-leave-policy §2.3"
+        "leave-policy §2.1",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.2"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3312,
-      "cost_usd": 0.000472,
-      "latency_s": 4.93,
+      "tokens": 3455,
+      "cost_usd": 0.000494,
+      "latency_s": 4.27,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by stating 10 sick days per calendar year at 100% salary and mentioning state social insurance rules for days beyond that.",
+      "verdict_reason": "The candidate answer accurately states the number of paid sick days and the payment percentage, and correctly mentions that state social insurance rules apply beyond that limit.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -395,7 +385,7 @@
       "employee_id": "E007",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "As a contractor, you do not receive paid sick leave from Lumora Tech. The sick leave policy applies only to full-time and part-time employees, so you should inform your manager about any absence according to your service agreement instead.",
+      "reply": "As a contractor at Lumora Tech, you do not receive paid sick leave. The sick leave policy applies only to full-time and part-time employees, and contractors are advised to inform their manager about any absence according to their service agreement [sick-leave-policy §1.1].",
       "citations": [
         "sick-leave-policy §1.1"
       ],
@@ -403,21 +393,21 @@
         "sick-leave-policy §1.1"
       ],
       "evidence_ids": [
-        "leave-policy §2.1",
         "sick-leave-policy §2.1",
-        "leave-policy §5.1",
+        "sick-leave-policy §3.4",
         "sick-leave-policy §1.1",
-        "sick-leave-policy §3.4"
+        "leave-policy §1.1",
+        "sick-leave-policy §2.2"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3182,
-      "cost_usd": 0.000445,
-      "latency_s": 4.43,
+      "tokens": 3389,
+      "cost_usd": 0.000482,
+      "latency_s": 5.15,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states that contractors do not receive paid sick leave and advises informing the manager according to the service agreement, matching all key facts in the gold answer.",
+      "verdict_reason": "The candidate answer correctly states that contractors do not receive paid sick leave and should inform their manager according to their service agreement, matching all key facts in the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -429,7 +419,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "As a full-time employee in the Lviv office, you can work from home up to 3 days per week, provided you have an agreement with your team lead. Additionally, your team may establish one common office day each week.",
+      "reply": "As a full-time employee, you can work from home **up to 3 days per week** by agreement with your team lead. Additionally, your team may set one common office day per week.\n\nSources: [remote-work-policy §1.2]",
       "citations": [
         "remote-work-policy §1.2"
       ],
@@ -447,11 +437,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3285,
-      "cost_usd": 0.00046,
-      "latency_s": 4.4,
+      "tokens": 3430,
+      "cost_usd": 0.000479,
+      "latency_s": 4.12,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states the maximum number of work-from-home days and the condition of team lead agreement, and adds extra information that does not contradict the gold answer.",
+      "verdict_reason": "The candidate answer correctly states the maximum number of remote work days and the condition for it, and adds extra information that does not contradict the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -463,10 +453,9 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "As a full-time employee based in the Lviv office, you are not eligible to claim the coworking allowance, as this allowance is only available to fully remote employees. Office-based employees have access to an office and therefore do not qualify for this benefit [remote-work-policy §2.1].",
+      "reply": "As a full-time employee based in the Lviv office, you are not eligible to claim the coworking allowance. This allowance is specifically for fully remote employees, who may claim up to 100 USD per month. Since you have access to an office, this policy does not apply to you [remote-work-policy §2.1].",
       "citations": [
-        "remote-work-policy §2.1",
-        "expense-reimbursement-policy §1.1"
+        "remote-work-policy §2.1"
       ],
       "gold_section_ids": [
         "remote-work-policy §2.1"
@@ -482,11 +471,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3198,
-      "cost_usd": 0.000458,
-      "latency_s": 5.49,
+      "tokens": 3348,
+      "cost_usd": 0.000479,
+      "latency_s": 5.25,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states that office-based employees are not eligible for the coworking allowance because they have access to an office, which fully matches the gold answer.",
+      "verdict_reason": "The candidate correctly states that the employee is not eligible and provides the correct reason (access to an office). It also adds extra correct information about who is eligible and the allowance amount.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -498,7 +487,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "As a full-time employee, you must be available for meetings during core hours, which are from **11:00 to 16:00 Kyiv time**.",
+      "reply": "As a full-time employee, you must be available for meetings during core hours from **11:00 to 16:00 Kyiv time** regardless of your work format, including remote work [remote-work-policy §1.3].",
       "citations": [
         "remote-work-policy §1.3"
       ],
@@ -508,17 +497,17 @@
       "evidence_ids": [
         "remote-work-policy §1.3",
         "remote-work-policy §3.1",
+        "leave-policy §5.2",
         "leave-policy §1.3",
-        "leave-policy §2.2",
-        "onboarding-policy §1.1"
+        "internal-requests-policy §1.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3245,
-      "cost_usd": 0.000447,
-      "latency_s": 3.78,
+      "tokens": 3340,
+      "cost_usd": 0.000467,
+      "latency_s": 4.42,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer correctly identifies the core hours as 11:00 to 16:00 Kyiv time, matching the gold answer exactly.",
       "faithfulness": 1.0,
@@ -532,7 +521,7 @@
       "employee_id": "E016",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You need to complete the information security training within 14 calendar days of your start date, which means by October 29, 2026.",
+      "reply": "You need to complete the information security training within 14 calendar days of your start date, which means by **October 29, 2026**. Access to production systems will only be granted after you complete this training.\n\nSources: [onboarding-policy §2.3]",
       "citations": [
         "onboarding-policy §2.3"
       ],
@@ -544,17 +533,17 @@
         "internal-requests-policy §4.1",
         "internal-requests-policy §2.2",
         "internal-requests-policy §3.1",
-        "code-of-conduct §5.1"
+        "leave-policy §6.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3191,
-      "cost_usd": 0.00044,
-      "latency_s": 3.92,
-      "verdict": "mostly_right",
-      "verdict_reason": "The candidate answer correctly states the 14-day deadline but adds a specific date (October 29, 2026) which is not provided in the gold answer and cannot be verified without additional context. It also misses the condition about production access.",
+      "tokens": 3464,
+      "cost_usd": 0.000488,
+      "latency_s": 4.2,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the 14-day deadline and the condition for production access, matching all key facts in the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -566,7 +555,7 @@
       "employee_id": "E016",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Your onboarding buddy will assist you for the first **3 months** of your employment. They will help you with informal questions, tools, and understanding the company culture.",
+      "reply": "Your onboarding buddy will assist you for the first **3 months** of your employment. They will help you with informal questions, tools, and understanding the company culture.\n\nSources: [onboarding-policy §2.2]",
       "citations": [
         "onboarding-policy §2.2"
       ],
@@ -584,11 +573,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3173,
-      "cost_usd": 0.000441,
-      "latency_s": 3.99,
+      "tokens": 3325,
+      "cost_usd": 0.000464,
+      "latency_s": 4.07,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer accurately describes the buddy's role and duration, matching all key facts in the gold answer.",
+      "verdict_reason": "The candidate answer accurately describes the buddy's role and the duration of the support, matching all key facts in the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -600,11 +589,11 @@
       "employee_id": "E011",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "As a part-time employee in the Lviv office, you are eligible for sport compensation, which covers gym memberships, swimming pools, sport classes, and sport club fees. You can claim this by submitting your receipt through the expense process by the 25th of the month, and the compensation will be paid with your next salary. Note that unused monthly amounts do not accumulate, and you can also use partner gyms near the office at no cost within the same monthly limit.",
+      "reply": "As a part-time employee who has passed your probation, you are eligible for sport compensation of 500 UAH per month. You can claim this by submitting your receipts through the expense process by the 25th of the month, and the compensation will be paid with your next salary. Note that unused amounts do not accumulate.\n\nSources: [benefits-policy §1.1], [benefits-policy §3.1], [benefits-policy §3.2]",
       "citations": [
+        "benefits-policy §1.1",
         "benefits-policy §3.1",
-        "benefits-policy §3.2",
-        "benefits-policy §3.3"
+        "benefits-policy §3.2"
       ],
       "gold_section_ids": [
         "benefits-policy §1.1"
@@ -613,31 +602,33 @@
         "benefits-policy §3.1",
         "benefits-policy §3.2",
         "leave-policy §5.3",
-        "benefits-policy §3.3",
-        "expense-reimbursement-policy §1.2"
+        "benefits-policy §1.1",
+        "benefits-policy §3.3"
       ],
-      "context_hit": false,
+      "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3218,
-      "cost_usd": 0.000477,
-      "latency_s": 5.33,
-      "verdict": "mostly_wrong",
-      "verdict_reason": "The candidate answer does not mention the amount of sport compensation, which is a key fact in the gold answer.",
+      "tokens": 3439,
+      "cost_usd": 0.000497,
+      "latency_s": 5.24,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the compensation amount and the conditions for eligibility, matching all key facts in the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
-      "citation_hit": false,
-      "failing_stage": "retrieval"
+      "citation_hit": true,
+      "failing_stage": null
     },
     {
       "id": "qa30",
       "question": "Can I use the education budget now?",
       "employee_id": "E006",
       "gold_outcome": "answer",
-      "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
-      "citations": [],
+      "route": "answer",
+      "reply": "You cannot use the education budget at this time because you have not yet passed your probation period. According to the benefits policy, full-time employees are eligible for the education budget only after completing their probation period [benefits-policy §1.1].",
+      "citations": [
+        "benefits-policy §1.1"
+      ],
       "gold_section_ids": [
         "benefits-policy §1.1",
         "onboarding-policy §3.3"
@@ -646,17 +637,22 @@
         "benefits-policy §4.1",
         "benefits-policy §4.3",
         "benefits-policy §4.2",
-        "expense-reimbursement-policy §3.1",
-        "benefits-policy §1.1"
+        "benefits-policy §1.1",
+        "expense-reimbursement-policy §3.1"
       ],
       "context_hit": true,
-      "ticket_id": 1,
-      "ticket_category": "benefits",
+      "ticket_id": null,
+      "ticket_category": null,
       "gold_category": null,
-      "tokens": 3861,
-      "cost_usd": 0.000593,
-      "latency_s": 6.46,
-      "failing_stage": "answerer (abstained) -> hr_referral"
+      "tokens": 3399,
+      "cost_usd": 0.00048,
+      "latency_s": 4.25,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that the education budget cannot be used yet due to probation and accurately identifies the condition for eligibility.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
     },
     {
       "id": "qa32",
@@ -675,16 +671,16 @@
         "benefits-policy §4.3",
         "leave-policy §3.4",
         "benefits-policy §4.2",
-        "benefits-policy §4.1",
-        "leave-policy §2.4"
+        "benefits-policy §1.1",
+        "benefits-policy §4.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3190,
-      "cost_usd": 0.000441,
-      "latency_s": 3.8,
+      "tokens": 3452,
+      "cost_usd": 0.00048,
+      "latency_s": 4.34,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer by stating that the education budget is annual and does not carry over.",
       "faithfulness": 1.0,
@@ -697,9 +693,11 @@
       "question": "Do I need approval to buy a 300 USD online course from my education budget?",
       "employee_id": "E003",
       "gold_outcome": "answer",
-      "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
-      "citations": [],
+      "route": "answer",
+      "reply": "Yes, you need prior approval from your team lead to buy the online course since it costs 300 USD, which is over the 100 USD limit for the education budget. This is stated in the benefits policy section regarding approval for education budget spending [benefits-policy §4.2].",
+      "citations": [
+        "benefits-policy §4.2"
+      ],
       "gold_section_ids": [
         "benefits-policy §4.2"
       ],
@@ -711,22 +709,30 @@
         "benefits-policy §1.1"
       ],
       "context_hit": true,
-      "ticket_id": 2,
-      "ticket_category": "benefits",
+      "ticket_id": null,
+      "ticket_category": null,
       "gold_category": null,
-      "tokens": 3880,
-      "cost_usd": 0.000589,
-      "latency_s": 5.8,
-      "failing_stage": "answerer (abstained) -> hr_referral"
+      "tokens": 3457,
+      "cost_usd": 0.000497,
+      "latency_s": 4.63,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that approval is needed, specifies the correct approval threshold of 100 USD, and identifies the team lead as the approver, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
     },
     {
       "id": "qa35",
       "question": "I took a taxi home at 23:00 after working late. Can I get reimbursed?",
       "employee_id": "E003",
       "gold_outcome": "answer",
-      "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
-      "citations": [],
+      "route": "answer",
+      "reply": "Yes, you can get reimbursed for your taxi ride home since you took it after working late, specifically after 22:00. The reimbursement is up to 400 UAH per ride for office-based employees like you. Just make sure to submit your claim through the Expenses form in the HR portal with a receipt within 30 calendar days of the expense.\n\nSources: [expense-reimbursement-policy §4.1], [expense-reimbursement-policy §2.1]",
+      "citations": [
+        "expense-reimbursement-policy §4.1",
+        "expense-reimbursement-policy §2.1"
+      ],
       "gold_section_ids": [
         "expense-reimbursement-policy §4.1"
       ],
@@ -738,13 +744,18 @@
         "expense-reimbursement-policy §1.1"
       ],
       "context_hit": true,
-      "ticket_id": 3,
-      "ticket_category": "compensation",
+      "ticket_id": null,
+      "ticket_category": null,
       "gold_category": null,
-      "tokens": 3844,
-      "cost_usd": 0.000599,
-      "latency_s": 6.01,
-      "failing_stage": "answerer (abstained) -> hr_referral"
+      "tokens": 3407,
+      "cost_usd": 0.0005,
+      "latency_s": 4.99,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the reimbursement eligibility, the maximum amount, and the condition for office-based employees working past 22:00. It also adds correct, non-contradictory information about the submission process.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
     },
     {
       "id": "qa37",
@@ -752,7 +763,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You have **30 calendar days** from the date of the expense to submit a receipt through the Expenses form in the HR portal. Late claims are not accepted.",
+      "reply": "You have **30 calendar days** from the date of the expense to submit a receipt through the Expenses form in the HR portal. Late claims are not accepted [expense-reimbursement-policy §2.1].",
       "citations": [
         "expense-reimbursement-policy §2.1"
       ],
@@ -770,11 +781,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3160,
-      "cost_usd": 0.000434,
-      "latency_s": 3.67,
+      "tokens": 3322,
+      "cost_usd": 0.000463,
+      "latency_s": 4.4,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states the 30-calendar-day deadline and the method of submission (Expenses form). It also adds that late claims are not accepted, which is a reasonable implication of the deadline.",
+      "verdict_reason": "The candidate answer correctly states the 30-calendar-day deadline and the method of submission, aligning perfectly with the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -786,7 +797,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Your laptop is replaced every **3 years**, or earlier if it is broken and cannot be repaired. To request a replacement, you need to go through the IT service desk.",
+      "reply": "Your laptop is replaced every **3 years**, or earlier if it is broken and cannot be repaired. To request a replacement, you need to go through the IT service desk.\n\nSources: [equipment-policy §1.3]",
       "citations": [
         "equipment-policy §1.3"
       ],
@@ -798,17 +809,17 @@
         "equipment-policy §1.1",
         "equipment-policy §1.2",
         "onboarding-policy §1.1",
-        "remote-work-policy §4.1"
+        "equipment-policy §2.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3149,
-      "cost_usd": 0.000433,
-      "latency_s": 3.89,
+      "tokens": 3299,
+      "cost_usd": 0.000456,
+      "latency_s": 4.11,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer, including the replacement frequency and the condition for earlier replacement.",
+      "verdict_reason": "The candidate answer fully matches the gold answer regarding the laptop replacement frequency and conditions.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -819,11 +830,9 @@
       "question": "I lost my company laptop. What should I do?",
       "employee_id": "E003",
       "gold_outcome": "answer",
-      "route": "answer",
-      "reply": "You need to report the loss of your company laptop to IT within 24 hours so they can lock the device remotely. Make sure to do this as soon as possible to protect any sensitive information.",
-      "citations": [
-        "equipment-policy §2.1"
-      ],
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
       "gold_section_ids": [
         "equipment-policy §2.1"
       ],
@@ -835,52 +844,40 @@
         "onboarding-policy §1.1"
       ],
       "context_hit": true,
-      "ticket_id": null,
-      "ticket_category": null,
+      "ticket_id": 2,
+      "ticket_category": "other",
       "gold_category": null,
-      "tokens": 3164,
-      "cost_usd": 0.000439,
-      "latency_s": 4.14,
-      "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by stating the need to report the loss to IT within 24 hours for remote locking.",
-      "faithfulness": 1.0,
-      "unsupported_claims": [],
-      "citation_hit": true,
-      "failing_stage": null
+      "tokens": 3885,
+      "cost_usd": 0.000575,
+      "latency_s": 5.71,
+      "failing_stage": "answerer (abstained) -> hr_referral"
     },
     {
       "id": "qa42",
       "question": "A client wants to give me a gift worth 80 USD. Can I accept it?",
       "employee_id": "E003",
       "gold_outcome": "answer",
-      "route": "answer",
-      "reply": "You cannot accept the gift worth 80 USD from the client, as the policy allows team members to accept gifts only up to 50 USD. Gifts exceeding this amount must be declined or reported to HR according to the Code of Conduct [code-of-conduct §4.1].",
-      "citations": [
-        "code-of-conduct §4.1"
-      ],
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
       "gold_section_ids": [
         "code-of-conduct §4.1"
       ],
       "evidence_ids": [
         "code-of-conduct §4.1",
         "expense-reimbursement-policy §5.1",
-        "internal-requests-policy §3.1",
-        "equipment-policy §3.1",
-        "expense-reimbursement-policy §3.2"
+        "leave-policy §3.4",
+        "leave-policy §4.2",
+        "expense-reimbursement-policy §1.3"
       ],
       "context_hit": true,
-      "ticket_id": null,
-      "ticket_category": null,
+      "ticket_id": 3,
+      "ticket_category": "other",
       "gold_category": null,
-      "tokens": 3240,
-      "cost_usd": 0.000459,
-      "latency_s": 4.77,
-      "verdict": "fully_matches",
-      "verdict_reason": "The candidate correctly states that the gift cannot be accepted, provides the correct limit of 50 USD, and accurately describes the actions for gifts exceeding this amount.",
-      "faithfulness": 1.0,
-      "unsupported_claims": [],
-      "citation_hit": true,
-      "failing_stage": null
+      "tokens": 4005,
+      "cost_usd": 0.000604,
+      "latency_s": 5.92,
+      "failing_stage": "answerer (abstained) -> hr_referral"
     },
     {
       "id": "qa44",
@@ -888,7 +885,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Yes, you can work on a side project on weekends as long as it does not compete with Lumora Tech, does not use company resources, and does not involve company clients. This is in accordance with the Code of Conduct, which allows side projects outside of working hours under these conditions [code-of-conduct §3.2].",
+      "reply": "Yes, you can work on a side project on weekends as long as it does not compete with Lumora Tech, does not use company resources, and does not involve company clients. This is stated in the Code of Conduct under section 3.2 regarding side projects.\n\nSources: [code-of-conduct §3.2]",
       "citations": [
         "code-of-conduct §3.2"
       ],
@@ -906,11 +903,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3201,
-      "cost_usd": 0.000457,
-      "latency_s": 4.49,
+      "tokens": 3339,
+      "cost_usd": 0.000471,
+      "latency_s": 4.67,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches all conditions specified in the gold answer regarding working on a side project.",
+      "verdict_reason": "The candidate answer fully matches all conditions specified in the gold answer.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -922,7 +919,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "It takes HR **2 working days** to issue an employment certificate for full-time employees like you, confirming your position and start date. The certificate can be provided in either Ukrainian or English.",
+      "reply": "As a full-time employee, you can request an employment certificate, and HR will issue it within **2 working days**. The certificate can be provided in either Ukrainian or English.\n\nSources: [internal-requests-policy §1.1]",
       "citations": [
         "internal-requests-policy §1.1"
       ],
@@ -940,9 +937,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3247,
-      "cost_usd": 0.000458,
-      "latency_s": 4.63,
+      "tokens": 3391,
+      "cost_usd": 0.000476,
+      "latency_s": 4.25,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer correctly states the processing time of 2 working days and the available languages (Ukrainian or English), matching all key facts in the gold answer.",
       "faithfulness": 1.0,
@@ -956,7 +953,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You need to report your change of bank account at least **5 working days before payroll** for it to take effect this month. Since today is November 12, you should have reported it by November 7 to ensure your salary goes to the new account this month. If you report it later than that, the change will take effect from next month instead.",
+      "reply": "You need to report your change of bank account at least **5 working days before payroll** for it to take effect this month. If you report it later than that, the change will take effect from the following month. Make sure to submit your update accordingly to ensure your salary goes to the new account on time.\n\nSources: [internal-requests-policy §2.2], [internal-requests-policy §2.1]",
       "citations": [
         "internal-requests-policy §2.2",
         "internal-requests-policy §2.1"
@@ -975,15 +972,13 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3263,
-      "cost_usd": 0.000476,
-      "latency_s": 5.18,
+      "tokens": 3406,
+      "cost_usd": 0.000493,
+      "latency_s": 5.12,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states the 5 working days deadline and the consequence of missing it, which fully matches the gold answer.",
-      "faithfulness": 0.6666666666666666,
-      "unsupported_claims": [
-        "Since today is November 12, you should have reported it by November 7 to ensure your salary goes to the new account this month."
-      ],
+      "verdict_reason": "The candidate answer accurately states the 5 working days deadline and the consequence of missing it, fully matching the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
       "citation_hit": true,
       "failing_stage": null
     },
@@ -1003,9 +998,9 @@
       "ticket_id": 4,
       "ticket_category": "career",
       "gold_category": "compensation",
-      "tokens": 1167,
+      "tokens": 1168,
       "cost_usd": 0.000213,
-      "latency_s": 2.54,
+      "latency_s": 2.36,
       "failing_stage": null
     },
     {
@@ -1013,9 +1008,12 @@
       "question": "I want to work from Spain for 3 months. Is that OK?",
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
-      "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
-      "citations": [],
+      "route": "answer",
+      "reply": "You can only work from abroad for up to 30 calendar days per calendar year as a full-time employee. Since you want to work from Spain for 90 days, this exceeds the allowed duration. For stays longer than 30 days, HR must decide on the implications, so you should contact them directly for guidance on your situation.\n\nSources: [remote-work-policy §3.1], [remote-work-policy §3.2]",
+      "citations": [
+        "remote-work-policy §3.1",
+        "remote-work-policy §3.2"
+      ],
       "gold_section_ids": [
         "remote-work-policy §3.2"
       ],
@@ -1027,13 +1025,13 @@
         "equipment-policy §3.1"
       ],
       "context_hit": true,
-      "ticket_id": 5,
-      "ticket_category": "relocation_and_abroad",
+      "ticket_id": null,
+      "ticket_category": null,
       "gold_category": "relocation_and_abroad",
-      "tokens": 3892,
-      "cost_usd": 0.000616,
-      "latency_s": 6.33,
-      "failing_stage": null
+      "tokens": 3417,
+      "cost_usd": 0.0005,
+      "latency_s": 4.64,
+      "failing_stage": "router/answerer (answered instead of referring)"
     },
     {
       "id": "un05",
@@ -1041,7 +1039,7 @@
       "employee_id": "E011",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "leave-policy §7.1"
@@ -1049,17 +1047,17 @@
       "evidence_ids": [
         "leave-policy §4.1",
         "leave-policy §7.1",
+        "leave-policy §6.1",
         "leave-policy §3.2",
-        "leave-policy §4.2",
-        "leave-policy §2.1"
+        "leave-policy §4.2"
       ],
       "context_hit": true,
-      "ticket_id": 6,
+      "ticket_id": 5,
       "ticket_category": "leave_and_absence",
       "gold_category": "leave_and_absence",
-      "tokens": 3924,
-      "cost_usd": 0.000595,
-      "latency_s": 5.76,
+      "tokens": 4152,
+      "cost_usd": 0.00062,
+      "latency_s": 6.39,
       "failing_stage": null
     },
     {
@@ -1068,7 +1066,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -1079,12 +1077,12 @@
         "remote-work-policy §2.3"
       ],
       "context_hit": null,
-      "ticket_id": 7,
+      "ticket_id": 6,
       "ticket_category": "other",
       "gold_category": "other",
-      "tokens": 3747,
-      "cost_usd": 0.00055,
-      "latency_s": 5.1,
+      "tokens": 3896,
+      "cost_usd": 0.000571,
+      "latency_s": 5.69,
       "failing_stage": null
     },
     {
@@ -1093,26 +1091,27 @@
       "employee_id": "E005",
       "gold_outcome": "hr_referral",
       "route": "answer",
-      "reply": "The company does not cover home internet expenses directly. However, as a fully remote employee, you can claim a one-time home office allowance of **300 USD** for equipment like a monitor or desk after your probation, and you may also claim a coworking allowance of up to **100 USD per month** if you choose to work from a coworking space. Both allowances are claimed through the expense process.",
+      "reply": "As a fully remote employee, you are eligible for a one-time home office allowance of **300 USD** for equipment such as a monitor, chair, or desk, which can be claimed after your probation period. However, the policy does not specify coverage for home internet expenses. You may also claim a coworking allowance of up to **100 USD per month** if you choose to work from a coworking space. Both allowances are claimed through the expense process.\n\nSources: [equipment-policy §3.1], [remote-work-policy §2.1], [remote-work-policy §2.2]",
       "citations": [
         "equipment-policy §3.1",
-        "remote-work-policy §2.1"
+        "remote-work-policy §2.1",
+        "remote-work-policy §2.2"
       ],
       "gold_section_ids": [],
       "evidence_ids": [
         "equipment-policy §3.1",
-        "expense-reimbursement-policy §1.2",
         "remote-work-policy §2.1",
-        "expense-reimbursement-policy §4.1",
-        "equipment-policy §3.2"
+        "equipment-policy §3.2",
+        "remote-work-policy §2.2",
+        "equipment-policy §1.2"
       ],
       "context_hit": null,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": "benefits",
-      "tokens": 3208,
-      "cost_usd": 0.000466,
-      "latency_s": 4.58,
+      "tokens": 3368,
+      "cost_usd": 0.000499,
+      "latency_s": 5.71,
       "failing_stage": "router/answerer (answered instead of referring)"
     },
     {
@@ -1121,19 +1120,19 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #8 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "code-of-conduct §2.2"
       ],
       "evidence_ids": [],
       "context_hit": false,
-      "ticket_id": 8,
+      "ticket_id": 7,
       "ticket_category": "workplace_conduct",
       "gold_category": "workplace_conduct",
-      "tokens": 1187,
-      "cost_usd": 0.000219,
-      "latency_s": 2.1,
+      "tokens": 1183,
+      "cost_usd": 0.000216,
+      "latency_s": 2.24,
       "failing_stage": null
     },
     {
@@ -1142,7 +1141,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #9 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #8 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -1153,12 +1152,12 @@
         "leave-policy §3.2"
       ],
       "context_hit": null,
-      "ticket_id": 9,
+      "ticket_id": 8,
       "ticket_category": "compensation",
       "gold_category": "compensation",
-      "tokens": 3780,
-      "cost_usd": 0.00055,
-      "latency_s": 5.39,
+      "tokens": 3938,
+      "cost_usd": 0.000575,
+      "latency_s": 5.67,
       "failing_stage": null
     },
     {
@@ -1167,7 +1166,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #10 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #9 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -1178,12 +1177,12 @@
         "equipment-policy §3.1"
       ],
       "context_hit": null,
-      "ticket_id": 10,
+      "ticket_id": 9,
       "ticket_category": "other",
       "gold_category": "other",
-      "tokens": 3703,
-      "cost_usd": 0.000532,
-      "latency_s": 4.94,
+      "tokens": 3855,
+      "cost_usd": 0.000555,
+      "latency_s": 4.93,
       "failing_stage": null
     },
     {
@@ -1192,29 +1191,29 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "answer",
-      "reply": "You can stay home to care for your sick child, but you will need a medical certificate for this to be processed by HR. Since you are a full-time employee, you are entitled to 100% of your salary for up to 10 sick days per calendar year. Please contact HR to handle the necessary documentation for your situation.",
+      "reply": "Yes, you can stay home to take care of your sick child and still get paid, but you will need a medical certificate. Caring for a sick family member is processed by HR directly under state rules, and you should inform them about your situation. If your sick leave is for 3 working days or less and you haven't exceeded 10 sick days this year, it will be automatically approved. If it exceeds 3 days, it will require HR review.\n\nSources: [sick-leave-policy §2.1], [sick-leave-policy §3.3], [sick-leave-policy §2.4]",
       "citations": [
-        "sick-leave-policy §3.3",
         "sick-leave-policy §2.1",
-        "sick-leave-policy §1.1"
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §2.4"
       ],
       "gold_section_ids": [
         "sick-leave-policy §3.3"
       ],
       "evidence_ids": [
-        "sick-leave-policy §3.3",
         "sick-leave-policy §2.1",
+        "sick-leave-policy §3.3",
         "sick-leave-policy §1.1",
-        "sick-leave-policy §3.2",
-        "sick-leave-policy §2.4"
+        "sick-leave-policy §2.4",
+        "sick-leave-policy §2.3"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": "leave_and_absence",
-      "tokens": 3376,
-      "cost_usd": 0.000515,
-      "latency_s": 5.32,
+      "tokens": 3507,
+      "cost_usd": 0.000527,
+      "latency_s": 5.41,
       "failing_stage": "router/answerer (answered instead of referring)"
     }
   ]

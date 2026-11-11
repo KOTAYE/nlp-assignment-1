@@ -21,7 +21,9 @@ PDF = ROOT / "docs" / "report.pdf"
 BROWSERS = [
     r"C:\Program Files\Google\Chrome\Application\chrome.exe",
     r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
-    "google-chrome", "chromium", "msedge",
+    "google-chrome",
+    "chromium",
+    "msedge",
 ]
 
 CSS = """
@@ -62,9 +64,19 @@ def main() -> None:
     browser = next((b for b in BROWSERS if Path(b).exists() or shutil.which(b)), None)
     if not browser:
         sys.exit(f"No Chrome/Edge found. Open {HTML} in a browser and print to PDF.")
-    subprocess.run([browser, "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
-                    "--virtual-time-budget=15000", f"--print-to-pdf={PDF}", HTML.as_uri()], check=True,
-                   capture_output=True)
+    subprocess.run(
+        [
+            browser,
+            "--headless=new",
+            "--disable-gpu",
+            "--no-pdf-header-footer",
+            "--virtual-time-budget=15000",
+            f"--print-to-pdf={PDF}",
+            HTML.as_uri(),
+        ],
+        check=True,
+        capture_output=True,
+    )
     print(f"written {PDF.relative_to(ROOT)} ({PDF.stat().st_size // 1024} KB)")
 
 

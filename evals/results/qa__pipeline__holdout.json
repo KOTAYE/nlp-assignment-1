@@ -1,0 +1,607 @@
+{
+  "component": "qa",
+  "variant": "pipeline",
+  "split": "holdout",
+  "n": 18,
+  "metrics": {
+    "answer_rate (answerable questions answered)": 0.857,
+    "correctness_pass_rate (fully/mostly right, of answerable)": 0.857,
+    "correctness_mean_score (answered)": 1.0,
+    "contradiction_rate (answered)": 0.0,
+    "faithfulness_mean (answered)": 0.958,
+    "citation_hit_rate (answered)": 1.0,
+    "answers_with_citation": 1.0,
+    "context_recall@5 (gold section in evidence)": 0.929,
+    "referral_precision": 0.75,
+    "referral_recall": 0.75,
+    "referral_f1": 0.75,
+    "referral_confusion": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 1,
+      "tn": 13
+    },
+    "ticket_category_accuracy": 1.0,
+    "avg_tokens_per_question": 3052,
+    "avg_cost_usd_per_question": 0.00044,
+    "avg_latency_s": 4.98,
+    "failing_stages": {
+      "router -> smalltalk": 1,
+      "answerer (abstained) -> hr_referral": 1,
+      "router/answerer (answered instead of referring)": 1
+    },
+    "errors": [
+      "hq02 'Can I join the English lessons?': route=smalltalk verdict=None stage=router -> smalltalk",
+      "hq07 'Do new joiners get a buddy?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral",
+      "hu01 'Can I get a bigger monitor than the standard one?': route=answer verdict=None stage=router/answerer (answered instead of referring)"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "router": "3",
+    "collector": "7",
+    "rewriter": "2",
+    "answerer": "3",
+    "referral": "2",
+    "judge_correctness": "1",
+    "judge_faithfulness": "1"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T01:30:58",
+  "git_commit": "071bb69",
+  "per_row": [
+    {
+      "id": "hq01",
+      "question": "Is health insurance available to me?",
+      "employee_id": "E019",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "As a part-time employee, you are eligible for health insurance only after passing your probation period. Since you have passed your probation, you can access health insurance from day 1 of your eligibility. The company covers outpatient care, hospitalization, emergency care, and dental treatment up to 10,000 UAH per year [benefits-policy §1.1], [benefits-policy §2.1].",
+      "citations": [
+        "benefits-policy §1.1",
+        "benefits-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §1.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.1",
+        "benefits-policy §2.3",
+        "benefits-policy §1.1",
+        "sick-leave-policy §3.4"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3473,
+      "cost_usd": 0.000511,
+      "latency_s": 14.13,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that health insurance is available, specifies the condition of passing probation, and confirms the user has met this condition. It also adds extra details about coverage which do not contradict the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq02",
+      "question": "Can I join the English lessons?",
+      "employee_id": "E020",
+      "gold_outcome": "answer",
+      "route": "smalltalk",
+      "reply": "Hi! I'm the Lumora Tech HR assistant. I can answer questions about our HR policies (leave, sick leave, benefits, onboarding, remote work, expenses, equipment, documents) with links to the exact policy section, help you request, check or cancel leave, and pass anything else to the HR team.",
+      "citations": [],
+      "gold_section_ids": [
+        "benefits-policy §6.1"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 617,
+      "cost_usd": 0.000105,
+      "latency_s": 1.06,
+      "failing_stage": "router -> smalltalk"
+    },
+    {
+      "id": "hq03",
+      "question": "Can I use the partner gyms near the office?",
+      "employee_id": "E014",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "As a remote employee, you cannot use the partner gyms near the office at no cost. Instead, you are eligible for receipt-based compensation for gym memberships or related expenses, but only within the limits set by the company. This means you would need to submit receipts for reimbursement rather than having direct access to the gyms like office-based employees do.\n\nSources: [benefits-policy §3.3], [benefits-policy §3.1]",
+      "citations": [
+        "benefits-policy §3.3",
+        "benefits-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §3.3"
+      ],
+      "evidence_ids": [
+        "benefits-policy §3.3",
+        "benefits-policy §5.1",
+        "benefits-policy §3.1",
+        "onboarding-policy §2.1",
+        "code-of-conduct §4.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3356,
+      "cost_usd": 0.000483,
+      "latency_s": 5.58,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that remote employees cannot use partner gyms and are eligible for receipt-based compensation, aligning with the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq04",
+      "question": "By when do I need to submit my gym receipt, and when is the sport compensation paid?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "You need to submit your gym receipt by the 25th of the month through the expense process. The sport compensation will be paid with your next salary after you submit the receipt. Remember, unused monthly amounts do not accumulate.\n\nSources: [benefits-policy §3.2]",
+      "citations": [
+        "benefits-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §3.2"
+      ],
+      "evidence_ids": [
+        "benefits-policy §3.2",
+        "benefits-policy §3.3",
+        "benefits-policy §3.1",
+        "leave-policy §5.3",
+        "benefits-policy §1.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3457,
+      "cost_usd": 0.000488,
+      "latency_s": 4.67,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately provides all the key information from the gold answer: the submission deadline, the payment schedule, and the non-accumulation of unused amounts.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq05",
+      "question": "How long do I have to return my laptop after my last working day?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "You must return your laptop within **5 working days** after your last working day with the company, as stated in the equipment policy [equipment-policy §2.3].",
+      "citations": [
+        "equipment-policy §2.3"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §2.3"
+      ],
+      "evidence_ids": [
+        "equipment-policy §2.3",
+        "equipment-policy §1.3",
+        "onboarding-policy §1.1",
+        "internal-requests-policy §2.2",
+        "leave-policy §3.5"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3337,
+      "cost_usd": 0.000463,
+      "latency_s": 4.12,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the deadline for returning the laptop, which is 5 working days after the last working day.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq06",
+      "question": "Can I use my personal laptop to work on company source code?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "No, you cannot use your personal laptop to work on company source code. According to the equipment policy, personal devices may not be used to access company source code or customer data [equipment-policy §4.1].",
+      "citations": [
+        "equipment-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §4.1"
+      ],
+      "evidence_ids": [
+        "equipment-policy §4.1",
+        "equipment-policy §1.1",
+        "equipment-policy §1.2",
+        "code-of-conduct §5.1",
+        "equipment-policy §1.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3338,
+      "cost_usd": 0.000468,
+      "latency_s": 4.88,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, stating that personal laptops cannot be used for company source code and providing the same reason regarding company source code and customer data.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq07",
+      "question": "Do new joiners get a buddy?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "onboarding-policy §2.2"
+      ],
+      "evidence_ids": [
+        "onboarding-policy §2.2",
+        "onboarding-policy §2.1",
+        "onboarding-policy §2.3",
+        "onboarding-policy §4.1",
+        "benefits-policy §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": 1,
+      "ticket_category": "other",
+      "gold_category": null,
+      "tokens": 3970,
+      "cost_usd": 0.000606,
+      "latency_s": 6.36,
+      "failing_stage": "answerer (abstained) -> hr_referral"
+    },
+    {
+      "id": "hq08",
+      "question": "What can happen at the end of probation besides passing?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "At the end of your probation, the possible outcomes are that you can either pass, have your probation extended by up to 1 month, or not pass. This review is conducted by your team lead and HR, and the result is formally recorded during the probation review meeting.\n\nSources: [onboarding-policy §3.2]",
+      "citations": [
+        "onboarding-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "onboarding-policy §3.2"
+      ],
+      "evidence_ids": [
+        "onboarding-policy §3.2",
+        "onboarding-policy §3.1",
+        "onboarding-policy §3.3",
+        "benefits-policy §1.1",
+        "internal-requests-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3431,
+      "cost_usd": 0.000485,
+      "latency_s": 4.86,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by listing all three possible outcomes at the end of probation and does not contradict any information.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq09",
+      "question": "How much can I spend on a hotel during a business trip?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "During a business trip, you can spend up to **120 USD per night** on hotel accommodation, as stated in the expense reimbursement policy [expense-reimbursement-policy §3.2].",
+      "citations": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §3.1",
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3335,
+      "cost_usd": 0.000469,
+      "latency_s": 4.42,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by providing the correct amount of 120 USD per night for hotel accommodation.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq10",
+      "question": "Is a taxi to the airport for a business trip reimbursed?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, taxi rides to the airport for a business trip are reimbursed in full according to the policy. This applies to your situation as a full-time employee who has passed probation and is traveling for business purposes.\n\nSources: [expense-reimbursement-policy §4.2], [expense-reimbursement-policy §1.2]",
+      "citations": [
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §1.2"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §4.2"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §4.1",
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3351,
+      "cost_usd": 0.000477,
+      "latency_s": 4.59,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by confirming that taxi rides to the airport for business trips are reimbursed in full.",
+      "faithfulness": 0.5,
+      "unsupported_claims": [
+        "This applies to your situation as a full-time employee who has passed probation and is traveling for business purposes."
+      ],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq11",
+      "question": "How soon must I tell HR that I moved to a new address?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "You must inform HR about your new address within **10 working days** of the change. This is outlined in the Internal Requests Policy [internal-requests-policy §2.1].",
+      "citations": [
+        "internal-requests-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "internal-requests-policy §2.1"
+      ],
+      "evidence_ids": [
+        "internal-requests-policy §2.1",
+        "internal-requests-policy §2.2",
+        "leave-policy §4.2",
+        "internal-requests-policy §1.1",
+        "internal-requests-policy §1.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3354,
+      "cost_usd": 0.000468,
+      "latency_s": 4.47,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately states the 10 working days deadline, which fully matches the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq12",
+      "question": "I manage a team and my cousin just joined it. Do I need to tell anyone?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you need to disclose this situation to HR since managing a close relative can create a conflict of interest. This is outlined in the Code of Conduct, which requires team members to disclose any personal interests that may conflict with the company's interests, including managing relatives [code-of-conduct §3.1].",
+      "citations": [
+        "code-of-conduct §3.1"
+      ],
+      "gold_section_ids": [
+        "code-of-conduct §3.1"
+      ],
+      "evidence_ids": [
+        "code-of-conduct §3.1",
+        "code-of-conduct §4.1",
+        "code-of-conduct §1.2",
+        "internal-requests-policy §3.2",
+        "internal-requests-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3355,
+      "cost_usd": 0.000479,
+      "latency_s": 4.47,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by correctly stating that the situation needs to be disclosed to HR due to a potential conflict of interest.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq13",
+      "question": "If my illness lasts exactly 3 working days, do I need a medical certificate?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Since your illness lasts exactly 3 working days, you do not need a medical certificate. You only need to register your sick days through the HR assistant, ideally on the first day of illness and no later than 7 calendar days after the first day of illness [sick-leave-policy §2.2].",
+      "citations": [
+        "sick-leave-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §2.2"
+      ],
+      "evidence_ids": [
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.4",
+        "sick-leave-policy §3.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3498,
+      "cost_usd": 0.000518,
+      "latency_s": 6.17,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that a medical certificate is not needed for 3 working days and adds relevant, non-contradictory information about reporting sick days.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hq14",
+      "question": "Is the office open after 9 pm?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "The office is open on working days from 08:00 to 21:00. Therefore, it is not open after 9 pm.\n\nSources: [remote-work-policy §1.2]",
+      "citations": [
+        "remote-work-policy §1.2"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §1.2"
+      ],
+      "evidence_ids": [
+        "remote-work-policy §1.2",
+        "remote-work-policy §1.3",
+        "onboarding-policy §2.1",
+        "expense-reimbursement-policy §4.1",
+        "remote-work-policy §2.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 3327,
+      "cost_usd": 0.00046,
+      "latency_s": 4.13,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating the office hours and correctly concluding that it is not open after 9 pm.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "hu01",
+      "question": "Can I get a bigger monitor than the standard one?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "answer",
+      "reply": "As a full-time employee based in the Lviv office, you receive standard equipment, which includes a monitor. However, if you want a bigger monitor than the standard one, you would need to check with your manager or IT for approval, as the policy does not specify options for upgrading beyond standard equipment. The home office allowance does not apply to office-based employees like you, as stated in the policy [equipment-policy §3.2].\n\nSources: [equipment-policy §1.2]",
+      "citations": [
+        "equipment-policy §3.2",
+        "equipment-policy §1.2"
+      ],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "equipment-policy §3.1",
+        "equipment-policy §1.2",
+        "equipment-policy §3.2",
+        "equipment-policy §1.1",
+        "equipment-policy §1.3"
+      ],
+      "context_hit": null,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": "other",
+      "tokens": 3362,
+      "cost_usd": 0.000493,
+      "latency_s": 4.89,
+      "failing_stage": "router/answerer (answered instead of referring)"
+    },
+    {
+      "id": "hu02",
+      "question": "How is my annual bonus calculated?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [],
+      "context_hit": null,
+      "ticket_id": 2,
+      "ticket_category": "compensation",
+      "gold_category": "compensation",
+      "tokens": 1162,
+      "cost_usd": 0.00021,
+      "latency_s": 2.35,
+      "failing_stage": null
+    },
+    {
+      "id": "hu03",
+      "question": "Can I bring my partner to the company New Year party?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "leave-policy §6.1",
+        "leave-policy §6.2",
+        "onboarding-policy §2.2",
+        "leave-policy §3.1",
+        "leave-policy §2.1"
+      ],
+      "context_hit": null,
+      "ticket_id": 3,
+      "ticket_category": "other",
+      "gold_category": "other",
+      "tokens": 4017,
+      "cost_usd": 0.000588,
+      "latency_s": 5.64,
+      "failing_stage": null
+    },
+    {
+      "id": "hu04",
+      "question": "Will the company pay for my move from Kharkiv to Lviv?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [],
+      "context_hit": null,
+      "ticket_id": 4,
+      "ticket_category": "relocation_and_abroad",
+      "gold_category": "relocation_and_abroad",
+      "tokens": 1189,
+      "cost_usd": 0.000219,
+      "latency_s": 2.78,
+      "failing_stage": null
+    }
+  ]
+}

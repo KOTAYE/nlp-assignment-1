@@ -17,10 +17,10 @@
         "recall@1": 0.777,
         "hit@3": 0.894,
         "recall@3": 0.894,
-        "hit@5": 0.894,
-        "recall@5": 0.894,
-        "mrr@10": 0.845,
-        "ndcg@5": 0.852
+        "hit@5": 0.936,
+        "recall@5": 0.926,
+        "mrr@10": 0.85,
+        "ndcg@5": 0.866
       },
       "fixed_120w": {
         "hit@1": 0.128,
@@ -38,8 +38,8 @@
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:00:12",
-  "git_commit": "eeb724a",
+  "date": "2026-11-12T01:18:13",
+  "git_commit": "071bb69",
   "per_row": [
     {
       "variant": "section_aware",
@@ -111,7 +111,7 @@
       "variant": "section_aware",
       "id": "qa12",
       "hit@5": 0.0,
-      "mrr@10": 0.125
+      "mrr@10": 0.1
     },
     {
       "variant": "section_aware",
@@ -212,14 +212,14 @@
     {
       "variant": "section_aware",
       "id": "qa29",
-      "hit@5": 0.0,
-      "mrr@10": 0.125
+      "hit@5": 1.0,
+      "mrr@10": 0.25
     },
     {
       "variant": "section_aware",
       "id": "qa30",
-      "hit@5": 0.0,
-      "mrr@10": 0.14285714285714285
+      "hit@5": 1.0,
+      "mrr@10": 0.25
     },
     {
       "variant": "section_aware",

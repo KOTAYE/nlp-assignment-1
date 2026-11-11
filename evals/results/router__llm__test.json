@@ -96,8 +96,8 @@
     "router": "3"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:00:59",
-  "git_commit": "eeb724a",
+  "date": "2026-11-12T01:19:00",
+  "git_commit": "071bb69",
   "per_row": [
     {
       "id": "rt02",
@@ -105,7 +105,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the rules regarding sick notes for illness."
+      "reason": "The message asks about the requirement for a sick note, which relates to HR procedures."
     },
     {
       "id": "rt04",
@@ -129,7 +129,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about a specific company policy regarding client dinners."
+      "reason": "The message asks about a specific company policy regarding expenses."
     },
     {
       "id": "rt09",
@@ -137,7 +137,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about company holidays, which falls under HR policies."
+      "reason": "The question is about company holidays, which falls under HR policies."
     },
     {
       "id": "rt10",
@@ -169,7 +169,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question asks about a specific company policy regarding referral bonuses."
+      "reason": "The question is about a company policy regarding referral bonuses."
     },
     {
       "id": "rt17",
@@ -185,7 +185,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question pertains to HR procedures regarding data security while working remotely."
+      "reason": "The question pertains to HR procedures regarding remote work security."
     },
     {
       "id": "rt20",
@@ -209,7 +209,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 1.0,
-      "reason": "The employee wants to book annual leave for specific dates."
+      "reason": "The employee is requesting to book annual leave."
     },
     {
       "id": "rt26",
@@ -217,7 +217,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 1.0,
-      "reason": "The employee is expressing a desire to take leave on a specific day."
+      "reason": "The employee is expressing a desire to take leave for a specific day."
     },
     {
       "id": "rt27",
@@ -273,7 +273,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message indicates a request to decline a specific leave request."
+      "reason": "The message indicates a specific action regarding a leave request."
     },
     {
       "id": "rt39",
@@ -329,7 +329,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message asks about relocation assistance, which is outside company policy."
+      "reason": "The message asks about relocation assistance, which is a topic that must be handled by a person."
     },
     {
       "id": "rt51",
@@ -337,7 +337,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message refers to a personal legal dispute that HR cannot assist with."
+      "reason": "The message refers to a personal legal problem that HR cannot assist with."
     },
     {
       "id": "rt52",
@@ -345,7 +345,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The request involves accessing another employee's data."
+      "reason": "The request involves accessing another employee's data, which is outside company policy."
     },
     {
       "id": "rt54",
@@ -401,7 +401,7 @@
       "gold": "smalltalk",
       "pred": "smalltalk",
       "confidence": 1.0,
-      "reason": "The message is an off-topic request for a joke."
+      "reason": "The message is a request for a joke, which falls under smalltalk."
     },
     {
       "id": "rt67",
@@ -424,7 +424,7 @@
       "message": "hi I need the thing",
       "gold": "unclear",
       "pred": "unclear",
-      "confidence": 0.9,
+      "confidence": 0.5,
       "reason": "The message is too vague to determine a specific intent."
     },
     {

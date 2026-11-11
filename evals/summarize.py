@@ -7,6 +7,7 @@ Usage: python -m evals.summarize
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from evals.common import RESULTS, ROOT
 
@@ -16,6 +17,53 @@ OUT = ROOT / "docs" / "eval-results.md"
 def load(name: str) -> dict | None:
     p = RESULTS / f"{name}.json"
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+
+
+KEY_METRICS = [  # (results file, metric key, label)
+    (
+        "qa__pipeline__{split}",
+        "correctness_pass_rate (fully/mostly right, of answerable)",
+        "Answer correctness (pass rate)",
+    ),
+    ("qa__pipeline__{split}", "faithfulness_mean (answered)", "Faithfulness"),
+    ("qa__pipeline__{split}", "citation_hit_rate (answered)", "Citation hit rate"),
+    ("qa__pipeline__{split}", "referral_precision", "HR referral precision"),
+    ("qa__pipeline__{split}", "referral_recall", "HR referral recall"),
+    ("qa__pipeline__{split}", "answer_rate (answerable questions answered)", "Answer rate"),
+    ("qa__oracle__{split}", "answer_rate_with_gold_context", "Oracle answer rate"),
+    ("leave_agent__k3__{split}", "pass^3 (all 3 runs succeed)", "Leave agent pass^3"),
+    ("e2e__{split}", "scenario_success_rate", "E2E scenario success"),
+]
+
+
+def iteration_comparison() -> list[str]:
+    """Iteration 1 (test) vs iteration 2 (test, holdout). Iteration-1 files are snapshotted in evals/results_iteration1."""
+    snap = ROOT / "evals" / "results_iteration1"
+    if not snap.exists():
+        return []
+
+    def get(folder: Path, file: str, key: str):
+        p = folder / f"{file}.json"
+        return json.loads(p.read_text(encoding="utf-8"))["metrics"].get(key) if p.exists() else None
+
+    rows = []
+    for file, key, label in KEY_METRICS:
+        rows.append(
+            [
+                label,
+                get(snap, file.format(split="test"), key),
+                get(RESULTS, file.format(split="test"), key),
+                get(RESULTS, file.format(split="holdout"), key),
+            ]
+        )
+    return [
+        "## Iteration comparison",
+        "Iteration 1 = after dev tuning; iteration 2 = after error analysis of iteration 1. "
+        "The test split was seen in iteration 1, so the **holdout** set (written before the iteration-2 fixes) is the "
+        "unbiased estimate.\n",
+        table(["metric", "iteration 1 · test", "iteration 2 · test", "iteration 2 · holdout"], rows),
+        "",
+    ]
 
 
 def fmt(v) -> str:
@@ -244,7 +292,7 @@ def main() -> None:
             "",
         ]
 
-    for split in ("dev", "test"):
+    for split in ("dev", "test", "holdout"):
         if d := load(f"qa__pipeline__{split}"):
             m = d["metrics"]
             s += [
@@ -266,7 +314,7 @@ def main() -> None:
                 "",
             ]
 
-    for split, k in (("dev", 1), ("test", 3)):
+    for split, k in (("dev", 1), ("test", 3), ("holdout", 3)):
         if d := load(f"leave_agent__k{k}__{split}"):
             m = d["metrics"]
             s += [
@@ -312,6 +360,7 @@ def main() -> None:
             if m["failures"]:
                 s += ["Failures:"] + [f"- {e}" for e in m["failures"]] + [""]
 
+    s += iteration_comparison()
     OUT.write_text("\n".join(s) + "\n", encoding="utf-8")
     print(f"written {OUT.relative_to(ROOT)}")
 

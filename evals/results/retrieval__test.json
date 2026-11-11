@@ -10,30 +10,30 @@
         "recall@1": 0.732,
         "hit@3": 0.857,
         "recall@3": 0.857,
-        "hit@5": 0.857,
-        "recall@5": 0.857,
-        "mrr@10": 0.818,
-        "ndcg@5": 0.818
+        "hit@5": 0.929,
+        "recall@5": 0.911,
+        "mrr@10": 0.825,
+        "ndcg@5": 0.842
       },
       "dense": {
         "hit@1": 0.75,
         "recall@1": 0.732,
-        "hit@3": 0.893,
-        "recall@3": 0.875,
-        "hit@5": 0.929,
-        "recall@5": 0.929,
+        "hit@3": 0.929,
+        "recall@3": 0.911,
+        "hit@5": 0.964,
+        "recall@5": 0.946,
         "mrr@10": 0.829,
-        "ndcg@5": 0.846
+        "ndcg@5": 0.853
       },
       "hybrid_rrf": {
         "hit@1": 0.821,
         "recall@1": 0.804,
-        "hit@3": 0.857,
-        "recall@3": 0.857,
+        "hit@3": 0.929,
+        "recall@3": 0.929,
         "hit@5": 0.964,
         "recall@5": 0.946,
-        "mrr@10": 0.868,
-        "ndcg@5": 0.882
+        "mrr@10": 0.876,
+        "ndcg@5": 0.889
       },
       "hybrid_rrf+rerank": {
         "hit@1": 0.893,
@@ -53,8 +53,8 @@
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:02:06",
-  "git_commit": "eeb724a",
+  "date": "2026-11-12T01:20:11",
+  "git_commit": "071bb69",
   "per_row": [
     {
       "variant": "bm25",
@@ -65,8 +65,8 @@
       ],
       "top5": [
         "leave-policy §2.2",
-        "benefits-policy §2.3",
         "equipment-policy §1.2",
+        "benefits-policy §2.3",
         "benefits-policy §6.1",
         "onboarding-policy §2.1"
       ],
@@ -134,10 +134,10 @@
       ],
       "top5": [
         "leave-policy §4.1",
-        "leave-policy §6.2",
+        "equipment-policy §1.2",
         "leave-policy §3.3",
-        "leave-policy §6.1",
-        "internal-requests-policy §3.2"
+        "internal-requests-policy §3.2",
+        "onboarding-policy §2.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -161,7 +161,7 @@
         "leave-policy §5.2",
         "leave-policy §5.3",
         "sick-leave-policy §2.2",
-        "leave-policy §2.2"
+        "internal-requests-policy §2.2"
       ],
       "hit@1": 1.0,
       "recall@1": 0.5,
@@ -181,10 +181,10 @@
       ],
       "top5": [
         "leave-policy §6.1",
-        "leave-policy §6.2",
         "leave-policy §2.2",
+        "leave-policy §6.2",
         "equipment-policy §2.1",
-        "leave-policy §2.1"
+        "leave-policy §3.4"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -215,7 +215,7 @@
       "recall@3": 0.0,
       "hit@5": 0.0,
       "recall@5": 0.0,
-      "mrr@10": 0.125,
+      "mrr@10": 0.1,
       "ndcg@5": 0.0
     },
     {
@@ -274,9 +274,9 @@
       "top5": [
         "sick-leave-policy §2.1",
         "sick-leave-policy §2.4",
-        "leave-policy §2.1",
         "sick-leave-policy §1.1",
-        "expense-reimbursement-policy §2.2"
+        "expense-reimbursement-policy §2.2",
+        "leave-policy §2.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -299,7 +299,7 @@
         "sick-leave-policy §1.1",
         "sick-leave-policy §2.4",
         "sick-leave-policy §3.3",
-        "sick-leave-policy §3.2"
+        "sick-leave-policy §2.2"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
@@ -436,17 +436,17 @@
         "benefits-policy §3.1",
         "benefits-policy §3.2",
         "benefits-policy §3.3",
-        "leave-policy §5.3",
-        "expense-reimbursement-policy §1.2"
+        "benefits-policy §1.1",
+        "leave-policy §5.3"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
       "hit@3": 0.0,
       "recall@3": 0.0,
-      "hit@5": 0.0,
-      "recall@5": 0.0,
-      "mrr@10": 0.125,
-      "ndcg@5": 0.0
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 0.25,
+      "ndcg@5": 0.43067655807339306
     },
     {
       "variant": "bm25",
@@ -460,17 +460,17 @@
         "benefits-policy §4.3",
         "benefits-policy §4.1",
         "benefits-policy §4.2",
-        "expense-reimbursement-policy §3.1",
-        "benefits-policy §3.3"
+        "benefits-policy §1.1",
+        "expense-reimbursement-policy §3.1"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
       "hit@3": 0.0,
       "recall@3": 0.0,
-      "hit@5": 0.0,
-      "recall@5": 0.0,
-      "mrr@10": 0.14285714285714285,
-      "ndcg@5": 0.0
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr@10": 0.25,
+      "ndcg@5": 0.2640681225725909
     },
     {
       "variant": "bm25",
@@ -484,7 +484,7 @@
         "leave-policy §3.4",
         "benefits-policy §4.2",
         "benefits-policy §4.1",
-        "benefits-policy §3.2"
+        "benefits-policy §1.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -504,9 +504,9 @@
       ],
       "top5": [
         "benefits-policy §4.2",
-        "benefits-policy §4.3",
-        "expense-reimbursement-policy §3.1",
         "benefits-policy §1.1",
+        "expense-reimbursement-policy §3.1",
+        "benefits-policy §4.3",
         "benefits-policy §4.1"
       ],
       "hit@1": 1.0,
@@ -529,8 +529,8 @@
         "expense-reimbursement-policy §4.1",
         "expense-reimbursement-policy §4.2",
         "equipment-policy §1.2",
-        "expense-reimbursement-policy §1.2",
-        "remote-work-policy §1.3"
+        "remote-work-policy §1.3",
+        "expense-reimbursement-policy §1.2"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -576,7 +576,7 @@
         "equipment-policy §1.1",
         "equipment-policy §1.2",
         "onboarding-policy §1.1",
-        "benefits-policy §3.1"
+        "benefits-policy §1.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -621,7 +621,7 @@
         "code-of-conduct §4.1",
         "expense-reimbursement-policy §5.1",
         "expense-reimbursement-policy §2.1",
-        "expense-reimbursement-policy §3.2",
+        "benefits-policy §1.1",
         "expense-reimbursement-policy §4.2"
       ],
       "hit@1": 1.0,
@@ -710,10 +710,10 @@
         "leave-policy §2.2"
       ],
       "top5": [
+        "leave-policy §6.1",
         "leave-policy §3.4",
         "leave-policy §2.2",
         "leave-policy §6.2",
-        "leave-policy §6.1",
         "leave-policy §2.3"
       ],
       "hit@1": 0.0,
@@ -722,8 +722,8 @@
       "recall@3": 1.0,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "mrr@10": 0.5,
-      "ndcg@5": 0.6309297535714575
+      "mrr@10": 0.3333333333333333,
+      "ndcg@5": 0.5
     },
     {
       "variant": "dense",
@@ -780,10 +780,10 @@
       ],
       "top5": [
         "leave-policy §4.1",
+        "leave-policy §6.1",
         "remote-work-policy §3.1",
         "leave-policy §6.2",
-        "leave-policy §2.1",
-        "leave-policy §3.2"
+        "leave-policy §2.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -876,7 +876,7 @@
         "leave-policy §6.2",
         "leave-policy §3.4",
         "expense-reimbursement-policy §3.1",
-        "benefits-policy §4.2"
+        "leave-policy §6.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1081,18 +1081,18 @@
       "top5": [
         "benefits-policy §3.1",
         "benefits-policy §3.2",
-        "leave-policy §5.3",
         "benefits-policy §1.1",
+        "leave-policy §5.3",
         "benefits-policy §3.3"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
-      "hit@3": 0.0,
-      "recall@3": 0.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "mrr@10": 0.25,
-      "ndcg@5": 0.43067655807339306
+      "mrr@10": 0.3333333333333333,
+      "ndcg@5": 0.5
     },
     {
       "variant": "dense",
@@ -1107,16 +1107,16 @@
         "benefits-policy §4.1",
         "benefits-policy §4.2",
         "expense-reimbursement-policy §3.1",
-        "leave-policy §3.4"
+        "benefits-policy §1.1"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
       "hit@3": 0.0,
       "recall@3": 0.0,
-      "hit@5": 0.0,
-      "recall@5": 0.0,
-      "mrr@10": 0.125,
-      "ndcg@5": 0.0
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr@10": 0.2,
+      "ndcg@5": 0.23719771276929622
     },
     {
       "variant": "dense",
@@ -1291,7 +1291,7 @@
         "leave-policy §1.2",
         "leave-policy §6.2",
         "remote-work-policy §1.2",
-        "remote-work-policy §3.1"
+        "leave-policy §6.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1357,9 +1357,9 @@
       ],
       "top5": [
         "leave-policy §2.2",
+        "leave-policy §6.1",
         "leave-policy §3.4",
         "onboarding-policy §2.1",
-        "benefits-policy §2.3",
         "leave-policy §2.1"
       ],
       "hit@1": 1.0,
@@ -1381,18 +1381,18 @@
       "top5": [
         "leave-policy §3.1",
         "leave-policy §3.3",
-        "remote-work-policy §1.2",
         "leave-policy §3.2",
+        "remote-work-policy §1.2",
         "leave-policy §4.2"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
-      "hit@3": 0.0,
-      "recall@3": 0.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "mrr@10": 0.25,
-      "ndcg@5": 0.43067655807339306
+      "mrr@10": 0.3333333333333333,
+      "ndcg@5": 0.5
     },
     {
       "variant": "hybrid_rrf",
@@ -1426,10 +1426,10 @@
       ],
       "top5": [
         "leave-policy §4.1",
+        "leave-policy §6.1",
         "leave-policy §6.2",
         "leave-policy §3.2",
-        "leave-policy §3.4",
-        "remote-work-policy §3.1"
+        "leave-policy §3.4"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1474,9 +1474,9 @@
       "top5": [
         "leave-policy §6.1",
         "leave-policy §6.2",
+        "leave-policy §3.4",
         "leave-policy §2.2",
-        "leave-policy §2.1",
-        "leave-policy §3.4"
+        "leave-policy §2.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1507,7 +1507,7 @@
       "recall@3": 0.0,
       "hit@5": 0.0,
       "recall@5": 0.0,
-      "mrr@10": 0.16666666666666666,
+      "mrr@10": 0.125,
       "ndcg@5": 0.0
     },
     {
@@ -1566,9 +1566,9 @@
       "top5": [
         "sick-leave-policy §2.1",
         "sick-leave-policy §2.4",
-        "leave-policy §2.1",
         "sick-leave-policy §2.2",
-        "sick-leave-policy §1.1"
+        "sick-leave-policy §1.1",
+        "leave-policy §2.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1682,8 +1682,8 @@
         "onboarding-policy §2.3",
         "internal-requests-policy §4.1",
         "benefits-policy §4.1",
-        "benefits-policy §6.1",
-        "code-of-conduct §5.1"
+        "code-of-conduct §5.1",
+        "benefits-policy §1.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1727,18 +1727,18 @@
       "top5": [
         "benefits-policy §3.1",
         "benefits-policy §3.2",
-        "leave-policy §5.3",
+        "benefits-policy §1.1",
         "benefits-policy §3.3",
-        "benefits-policy §1.1"
+        "leave-policy §5.3"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
-      "hit@3": 0.0,
-      "recall@3": 0.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "mrr@10": 0.2,
-      "ndcg@5": 0.38685280723454163
+      "mrr@10": 0.3333333333333333,
+      "ndcg@5": 0.5
     },
     {
       "variant": "hybrid_rrf",
@@ -1752,8 +1752,8 @@
         "benefits-policy §4.3",
         "benefits-policy §4.1",
         "benefits-policy §4.2",
-        "expense-reimbursement-policy §3.1",
-        "benefits-policy §1.1"
+        "benefits-policy §1.1",
+        "expense-reimbursement-policy §3.1"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
@@ -1761,8 +1761,8 @@
       "recall@3": 0.0,
       "hit@5": 1.0,
       "recall@5": 0.5,
-      "mrr@10": 0.2,
-      "ndcg@5": 0.23719771276929622
+      "mrr@10": 0.25,
+      "ndcg@5": 0.2640681225725909
     },
     {
       "variant": "hybrid_rrf",
@@ -1798,8 +1798,8 @@
         "benefits-policy §4.2",
         "expense-reimbursement-policy §3.1",
         "benefits-policy §4.1",
-        "benefits-policy §4.3",
-        "expense-reimbursement-policy §5.1"
+        "expense-reimbursement-policy §5.1",
+        "benefits-policy §4.3"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1821,8 +1821,8 @@
         "expense-reimbursement-policy §4.1",
         "expense-reimbursement-policy §4.2",
         "expense-reimbursement-policy §1.2",
-        "expense-reimbursement-policy §2.1",
-        "expense-reimbursement-policy §1.3"
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §2.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1935,9 +1935,9 @@
       "top5": [
         "code-of-conduct §3.2",
         "remote-work-policy §1.2",
-        "remote-work-policy §4.1",
         "leave-policy §2.1",
-        "remote-work-policy §3.1"
+        "remote-work-policy §4.1",
+        "leave-policy §6.2"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -1982,8 +1982,8 @@
         "internal-requests-policy §2.1",
         "internal-requests-policy §2.2",
         "benefits-policy §3.2",
-        "internal-requests-policy §1.2",
-        "leave-policy §2.2"
+        "leave-policy §6.1",
+        "internal-requests-policy §1.2"
       ],
       "hit@1": 0.0,
       "recall@1": 0.0,
@@ -2029,7 +2029,7 @@
         "leave-policy §4.2",
         "leave-policy §3.1",
         "leave-policy §5.2",
-        "internal-requests-policy §1.2"
+        "leave-policy §3.3"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -2073,9 +2073,9 @@
       "top5": [
         "leave-policy §4.1",
         "leave-policy §6.2",
+        "leave-policy §6.1",
         "leave-policy §5.1",
-        "leave-policy §2.2",
-        "leave-policy §4.2"
+        "leave-policy §2.2"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -2422,7 +2422,7 @@
         "leave-policy §3.4",
         "benefits-policy §4.2",
         "benefits-policy §4.1",
-        "expense-reimbursement-policy §3.1"
+        "benefits-policy §1.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -2513,8 +2513,8 @@
         "equipment-policy §1.3",
         "equipment-policy §1.1",
         "equipment-policy §2.3",
-        "internal-requests-policy §2.1",
-        "benefits-policy §6.1"
+        "benefits-policy §2.3",
+        "internal-requests-policy §2.1"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,
@@ -2628,8 +2628,8 @@
         "internal-requests-policy §2.2",
         "internal-requests-policy §2.1",
         "benefits-policy §3.2",
-        "leave-policy §2.2",
-        "expense-reimbursement-policy §2.2"
+        "leave-policy §6.1",
+        "leave-policy §2.2"
       ],
       "hit@1": 1.0,
       "recall@1": 1.0,

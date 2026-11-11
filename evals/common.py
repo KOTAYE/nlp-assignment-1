@@ -21,7 +21,12 @@ RESULTS = ROOT / "evals" / "results"
 EVAL_DB_DIR = ROOT / "logs" / "eval_dbs"
 
 
+HOLDOUT_FILES = {"qa": "qa_holdout", "leave_agent": "agent_holdout"}
+
+
 def load(name: str, split: str | None = None) -> list[dict]:
+    if split == "holdout":
+        name = HOLDOUT_FILES[name]
     rows = [
         json.loads(line) for line in (DATASETS / f"{name}.jsonl").read_text(encoding="utf-8").splitlines()
     ]
@@ -161,7 +166,7 @@ def split_arg(default: str = "dev"):
     import argparse
 
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", default=default, choices=["dev", "test", "all"])
+    ap.add_argument("--split", default=default, choices=["dev", "test", "all", "holdout"])
     ap.add_argument("--variant", default=None)
     ap.add_argument("--k", type=int, default=1, help="repetitions for pass^k (agent evals)")
     return ap.parse_args()
