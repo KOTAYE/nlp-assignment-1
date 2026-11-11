@@ -108,5 +108,5 @@ _TODO_
 | # | Date | Phase | Change | Metric before → after |
 |---|---|---|---|---|
 | 0 | 2026-11-12 | Business Understanding | Initial scope draft | — |
-| 2 | 2026-11-12 | Data Understanding | Surveyed HF/GitHub/Kaggle; decided synthetic corpus + reuse of syncora questions + OpenGov structure | — |
 | 1 | 2026-11-12 | Business Understanding | Owner confirmed language (EN), leave rules, full component set, Streamlit UI | — |
+| 2 | 2026-11-12 | Data Understanding | Surveyed HF/GitHub/Kaggle; decided synthetic corpus + reuse of syncora questions + OpenGov structure | — |
