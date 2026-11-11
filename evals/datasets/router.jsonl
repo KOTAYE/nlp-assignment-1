@@ -1,0 +1,78 @@
+{"id": "rt01", "message": "How many vacation days does an employee get per year?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "dev"}
+{"id": "rt02", "message": "Do I need a sick note for a 2-day illness?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt03", "message": "Is the gym covered by the company?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "dev"}
+{"id": "rt04", "message": "What is the per diem for business trips?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt05", "message": "how long is probation", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt06", "message": "Can part-time employees get health insurance?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "dev"}
+{"id": "rt07", "message": "What's the limit for client dinners?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt08", "message": "Who can claim the coworking allowance?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "dev"}
+{"id": "rt09", "message": "What are the company holidays in 2027?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt10", "message": "Can I accept a gift from a client?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt11", "message": "How do I request an employment certificate?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "dev"}
+{"id": "rt12", "message": "What happens if I lose my laptop?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt13", "message": "Can I work from abroad for a couple of weeks?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "dev"}
+{"id": "rt14", "message": "How many days of special leave do I get for a wedding?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt15", "message": "What is the referral bonus?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt16", "message": "Do I need approval to work on a company holiday?", "history": [], "gold_intent": "policy_question", "origin": "manual", "split": "dev"}
+{"id": "rt17", "message": "Can employees share confidential information with anyone inside the company?", "history": [], "gold_intent": "policy_question", "origin": "syncora", "split": "test"}
+{"id": "rt18", "message": "Who should I contact if I'm unsure about accepting a gift at Lumora Tech?", "history": [], "gold_intent": "policy_question", "origin": "syncora", "split": "dev"}
+{"id": "rt19", "message": "How should employees ensure workspace and data security while working from home?", "history": [], "gold_intent": "policy_question", "origin": "syncora", "split": "test"}
+{"id": "rt20", "message": "Does Lumora Tech protect employees who report issues in good faith?", "history": [], "gold_intent": "policy_question", "origin": "syncora", "split": "test"}
+{"id": "rt21", "message": "What is Lumora Tech's overall approach to remote work?", "history": [], "gold_intent": "policy_question", "origin": "syncora", "split": "dev"}
+{"id": "rt22", "message": "and what about contractors?", "history": [{"role": "user", "content": "Is health insurance provided?"}, {"role": "assistant", "content": "Yes, full-time employees are covered from day 1 [benefits-policy §1.1]."}], "gold_intent": "policy_question", "origin": "manual", "split": "test"}
+{"id": "rt23", "message": "How many vacation days do I have left?", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt24", "message": "Book me annual leave from 7 to 11 December", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt25", "message": "I'm sick today, please register it", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt26", "message": "I want to take Friday off", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt27", "message": "Cancel my leave request for next week", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt28", "message": "What's the status of my unpaid leave request?", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt29", "message": "Show me my leave requests", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt30", "message": "I need unpaid leave in February, 1st to 5th", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt31", "message": "Can you register sick days for Monday and Tuesday?", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt32", "message": "I'm getting married on 5 December, I want special leave 1-3 December", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt33", "message": "how many sick days have I used this year", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt34", "message": "Please book vacation 28 Dec - 5 Jan", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt35", "message": "Show pending leave requests", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt36", "message": "Approve request #8, the team lead agreed", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt37", "message": "Decline request 9 please", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt38", "message": "Yes, confirm", "history": [{"role": "user", "content": "Approve request #8"}, {"role": "assistant", "content": "Please confirm: approve request #8 (Nazar Savchenko, sick leave)?"}], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt39", "message": "Change my leave to start on Tuesday instead", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt40", "message": "I won't be able to work tomorrow, I have a fever", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "dev"}
+{"id": "rt41", "message": "Do I have enough days left for a two-week holiday in December?", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt42", "message": "remove my vacation on 23-27 November", "history": [], "gold_intent": "leave_action", "origin": "manual", "split": "test"}
+{"id": "rt43", "message": "What is the salary of a senior engineer?", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "dev"}
+{"id": "rt44", "message": "When will I get a raise?", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt45", "message": "How much does Olena from HR earn?", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "dev"}
+{"id": "rt46", "message": "I want to report harassment by a colleague", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt47", "message": "My manager keeps shouting at me", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt48", "message": "Are there going to be layoffs?", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "dev"}
+{"id": "rt49", "message": "Can the company help me relocate to Germany?", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt50", "message": "I want to discuss a promotion", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "dev"}
+{"id": "rt51", "message": "I have a legal dispute with my landlord, can HR help?", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt52", "message": "Show me Andrii Koval's leave requests and his address", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt53", "message": "Does the company offer stock options?", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "dev"}
+{"id": "rt54", "message": "If I see a coworker breaking the law at work, what should I do?", "history": [], "gold_intent": "hr_referral", "origin": "syncora", "split": "test"}
+{"id": "rt55", "message": "Can the panel's recommendations be challenged or appealed?", "history": [], "gold_intent": "hr_referral", "origin": "syncora", "split": "dev"}
+{"id": "rt56", "message": "I disagree with my performance review", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt57", "message": "Someone from another team is bullying me online", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "test"}
+{"id": "rt58", "message": "I want to negotiate my contract terms", "history": [], "gold_intent": "hr_referral", "origin": "manual", "split": "dev"}
+{"id": "rt59", "message": "Hi!", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "dev"}
+{"id": "rt60", "message": "Thanks, that helps", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "test"}
+{"id": "rt61", "message": "Good morning", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "dev"}
+{"id": "rt62", "message": "What can you do?", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "test"}
+{"id": "rt63", "message": "bye", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "test"}
+{"id": "rt64", "message": "Can you explain the difference between a comet and an asteroid?", "history": [], "gold_intent": "smalltalk", "origin": "syncora", "split": "dev"}
+{"id": "rt65", "message": "Tell me a joke", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "test"}
+{"id": "rt66", "message": "What's the weather in Lviv today?", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "dev"}
+{"id": "rt67", "message": "Hello, who are you?", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "test"}
+{"id": "rt68", "message": "thank you so much!", "history": [], "gold_intent": "smalltalk", "origin": "manual", "split": "test"}
+{"id": "rt69", "message": "leave?", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "dev"}
+{"id": "rt70", "message": "hi I need the thing", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "test"}
+{"id": "rt71", "message": "asdfgh", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "dev"}
+{"id": "rt72", "message": "the form", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "test"}
+{"id": "rt73", "message": "and?", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "test"}
+{"id": "rt74", "message": "it doesn't work", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "dev"}
+{"id": "rt75", "message": "help", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "test"}
+{"id": "rt76", "message": "????", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "dev"}
+{"id": "rt77", "message": "i need it by monday", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "test"}
+{"id": "rt78", "message": "that one", "history": [], "gold_intent": "unclear", "origin": "manual", "split": "test"}
