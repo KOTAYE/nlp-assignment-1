@@ -26,3 +26,7 @@ NLP. Assignment 1*.pdf
 
 # Course lectures (copyrighted course material, local reference only)
 course/
+
+# Packaging
+*.egg-info/
+build/

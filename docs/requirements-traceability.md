@@ -8,7 +8,7 @@ Status: ✅ done · 🟡 in progress / planned with a concrete artifact · ⬜ n
 |---|---|---|---|
 | A1 | Build a small NLP system with an AI coding assistant | Whole repo; workflow in `CLAUDE.md` | 🟡 |
 | A2 | Think through how you manage the assistant: what goes into its context | `CLAUDE.md` §3 (context hygiene), `docs/course-notes.md` (condensed context), lectures kept out of context in `course/` | ✅ |
-| A3 | Agents / convention file to control code quality | `CLAUDE.md` §4 (conventions); enforced by `ruff` + `pytest` config in `pyproject.toml` | 🟡 |
+| A3 | Agents / convention file to control code quality | `CLAUDE.md` §4 (conventions); enforced by `ruff` (lint + format) and `pytest` configured in `pyproject.toml` | ✅ |
 | A4 | Be ready to explain how the system works; purpose of each component | `docs/architecture.md` (diagram, component table, walkthrough) | ✅ |
 | A5 | Evaluate output quality, **at each stage** if there are multiple components | `docs/architecture.md` eval column (every component, incl. indexer, rule engine, tracer, E2E); `evals/` | 🟡 |
 
@@ -30,7 +30,7 @@ Status: ✅ done · 🟡 in progress / planned with a concrete artifact · ⬜ n
 | C3 | **Collect the information needed** to answer each question | Info collector (component 3) | ⬜ |
 | C4 | **Retrieve the relevant policy and identify the source** in the answer | Retriever + reranker + grounded answerer with citations (4a–5) | ⬜ |
 | C5 | Employee requests a leave (any type, defined by us) | Leave agent + `submit_leave` tool; leave types in `docs/crisp-dm.md` §1.4 | ⬜ |
-| C6 | System **tracks** it (approve / decline) | `leave_requests` table with status; rule engine; `decide_leave` for HR | ⬜ |
+| C6 | System **tracks** it (approve / decline) | `leave_requests` table with status ✅; rule engine ✅ (41/41 tests); `decide_leave` tool for HR ⬜ | 🟡 |
 | C7 | **Use a database**, **access it via LLM only** | SQLite reachable only through LLM tool calls (leave agent tools, `create_hr_ticket`); see the database access rule in `docs/architecture.md` | ⬜ |
 | C8 | If the policies do not support an answer, **route to HR** | Sufficiency flag → HR referral (LLM + `create_hr_ticket`) | ⬜ |
 | C9 | Evaluate each component | `evals/run_<component>.py` for every row of the component table | ⬜ |

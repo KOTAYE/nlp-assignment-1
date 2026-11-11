@@ -19,7 +19,7 @@ This policy applies to **full-time and part-time employees**. **Contractors** do
 Lumora Tech pays **100% of salary for up to 10 sick days per calendar year**. Sick days beyond 10 in a calendar year are paid according to state social insurance rules; HR will contact the employee about the documents needed.
 
 ### 2.2 Short illness without a certificate
-An employee may take up to **3 consecutive working days** of sick leave **without a medical certificate**. The employee only needs to register the sick days through the HR assistant, ideally on the first day of illness.
+An employee may take up to **3 consecutive working days** of sick leave **without a medical certificate**. The employee only needs to register the sick days through the HR assistant, ideally on the first day of illness and **no later than 7 calendar days** after the first day of illness.
 
 ### 2.3 Longer illness
 For an illness longer than 3 consecutive working days, a **medical certificate** (electronic sick note) is required. Such requests are registered through the HR assistant and sent for **HR review**; HR confirms the certificate and approves the request.

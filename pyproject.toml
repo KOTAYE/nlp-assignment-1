@@ -1,0 +1,39 @@
+[project]
+name = "hr-assistant"
+version = "0.1.0"
+description = "HR assistant for Lumora Tech: grounded policy Q&A, clarification, leave requests via LLM tools, HR referral"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.40",              # OpenAI-compatible client, used with OpenRouter
+    "pydantic>=2.7",
+    "python-dotenv>=1.0",
+    "rank-bm25>=0.2.2",
+    "sentence-transformers>=3.0",
+    "scikit-learn>=1.5",
+    "numpy>=1.26",
+    "streamlit>=1.38",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+src = ["src", "tests", "evals", "app"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003", "E501"]  # line length is enforced by `ruff format`
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"

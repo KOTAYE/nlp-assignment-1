@@ -25,7 +25,7 @@ Part-time employees receive the same number of leave days as full-time employees
 Eligible employees are entitled to **24 working days** of paid annual leave per calendar year. Weekends and company holidays (see section 6) that fall within a leave period are not deducted from the balance.
 
 ### 2.2 First year of employment
-In the year an employee joins, annual leave accrues at **2 working days per full calendar month** of employment, up to 24 days. For example, an employee who started on 1 September accrues 8 days by the end of December.
+In the year an employee joins, the entitlement is **2 working days per full calendar month** remaining in that year, counted from the start date, and it is available from the first day. A month counts as full only if employment starts on its first day. For example, an employee who started on 1 September is entitled to 8 days for that year, and one who started on 15 September is entitled to 6 days (October–December).
 
 ### 2.3 Using annual leave
 Annual leave can be taken in parts. At least one part of annual leave in a calendar year should be no shorter than 5 consecutive working days, so that employees can rest properly. This is a recommendation, not a condition for approval.
@@ -36,7 +36,7 @@ Employees can check their current balance at any time through the HR assistant. 
 ## 3. Requesting and approving annual leave
 
 ### 3.1 How to request
-Annual leave is requested through the HR assistant by giving the start date and end date. The request is checked automatically against the rules below and receives one of three statuses: **approved**, **declined**, or **pending HR review**.
+Annual leave is requested through the HR assistant by giving the start date and end date. The request is checked automatically against the rules below and receives one of three statuses: **approved**, **declined**, or **pending HR review**. A single request cannot span two calendar years; leave over New Year is submitted as two requests.
 
 ### 3.2 Notice period
 - Leave of **more than 3 working days** must be requested at least **14 calendar days** before the start date.

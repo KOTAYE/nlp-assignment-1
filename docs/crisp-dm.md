@@ -103,8 +103,17 @@ No open dataset provides **a policy corpus + questions with gold section IDs + c
   - An **outdated-version note** (carry-over of 10 → 5 days) is a hallucination trap.
   - **Explicit "handled by HR" sections** (maternity, harassment, stays abroad > 30 days, salary/promotion) give gold labels for HR referral.
 
+### 3.2 Leave database seed (2026-11-12)
+- 30 synthetic employees and 14 historical requests (see `data/README.md`). The seed is designed so that each leave rule has a triggering case.
+- Policy text clarified while encoding the rules: first-year entitlement, no cross-year requests (`leave-policy §2.2, §3.1`), sick-day registration window (`sick-leave-policy §2.2`).
+
 ## 4. Modeling
-_TODO — see `docs/architecture.md` for the component design._
+_See `docs/architecture.md` for the component design._
+
+### 4.1 Rule engine (`src/hr_assistant/rules.py`)
+- Pure functions with no DB and no LLM: working-day calendar, entitlement, carry-over (consumed first, valid until 31 March), and `decide()` returning `{status, code, message, working_days}` with the policy reference in the message.
+- Malformed requests raise `InvalidRequest(code, message, hint)`. This lets the LLM tool layer return **instructive errors** (AI Agents lecture).
+- **Evaluation:** `tests/test_rules.py`, 41 tests covering every rule in §1.4 plus a consistency test (holidays in code == table in `leave-policy §6.1`). **Result: 41/41 pass.** The first run found a real bug (phantom carry-over from untracked 2025), which was fixed by `FIRST_TRACKED_YEAR`.
 
 ## 5. Evaluation
 _TODO_
@@ -122,3 +131,4 @@ _TODO_
 | 2 | 2026-11-12 | Data Understanding | Surveyed HF/GitHub/Kaggle; decided synthetic corpus + reuse of syncora questions + OpenGov structure | — |
 | 3 | 2026-11-12 | Data Preparation | Wrote 9-document policy corpus (98 sections); refined leave rules to match corpus (notice → decline, sick yearly cap, contractors declined) | — |
 | 4 | 2026-11-12 | Business Understanding (re-check) | Compliance audit against the brief: HR referral now writes to DB only via an LLM tool call; LLM vs tool calls marked in the diagram; every component (incl. rewriter, indexer, tracer, E2E) has an eval; traceability matrix added | — |
+| 5 | 2026-11-12 | Data Preparation + Modeling | DB seed (30 employees, 14 requests); rule engine + 41 unit tests | rule tests: 40/41 → 41/41 (fixed phantom carry-over) |
