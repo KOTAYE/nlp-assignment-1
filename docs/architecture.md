@@ -1,4 +1,4 @@
-# Architecture — HR Assistant [proposed]
+# Architecture — HR Assistant [confirmed]
 
 ## Data flow
 

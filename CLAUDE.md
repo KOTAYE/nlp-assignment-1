@@ -24,6 +24,7 @@ The cycle is iterative. If an evaluation shows a weakness, go back to the releva
 
 ## 3. Rules for the agent
 
+- **Use the project skills** (`.claude/skills/`): `crisp-dm-step` at the start and end of every task, `add-component` for any component work, `build-eval-dataset` before building or tuning a component, and `run-evals` before reporting any number.
 - **Plan before coding.** For any non-trivial change, state the plan (files, components, eval impact) and wait for approval.
 - **Do not decide scope alone.** Business logic, metric targets and model choice are the user's decisions. Propose options with a recommendation.
 - **Every component ships with its eval.** A component counts as done only when it has: an eval dataset with gold labels, an eval script, and a recorded metric in `evals/results/`.
@@ -66,11 +67,24 @@ The cycle is iterative. If an evaluation shows a weakness, go back to the releva
 ## 7. Repository map (keep updated)
 
 ```
-CLAUDE.md            agent instructions (this file)
-.claude/skills/      reusable workflows for the agent
-docs/                crisp-dm.md, architecture diagram, course-notes.md, report
-data/                policies corpus + data README
-src/                 application code (components, prompts, tools, LLM client)
-evals/               datasets, eval scripts, results
-app/                 UI entry point
+CLAUDE.md                     agent instructions (this file)
+.claude/skills/               reusable workflows (crisp-dm-step, add-component, build-eval-dataset, run-evals)
+docs/                         crisp-dm.md (phase log), architecture.md, course-notes.md, report
+data/policies/                policy corpus (markdown, numbered sections)
+data/README.md                data card: sources, generation method, statistics
+src/hr_assistant/
+  config.py                   settings from .env (single source)
+  llm.py                      LLM client wrapper + tracer (all model calls go here)
+  schemas.py                  Pydantic models for structured LLM outputs
+  prompts/<component>.md      one prompt file per LLM component
+  components/<component>.py   guard, router, collector, rewriter, retriever, reranker, answerer, leave_agent, referral
+  tools/                      tool schemas + implementations (the only DB access)
+  rules.py                    deterministic leave rule engine
+  db.py                       SQLite schema + seed
+  pipeline.py                 orchestration: one message in → reply + trace out
+evals/datasets/<component>.jsonl   gold data, each row has "split": "dev" | "test"
+evals/run_<component>.py      eval script per component
+evals/results/<component>.json     metrics + model + date + git commit
+tests/                        pytest unit tests (rules, tools, chunking)
+app/streamlit_app.py          UI entry point
 ```

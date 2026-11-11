@@ -16,11 +16,11 @@ In a mid-size company, HR receives many repetitive questions (How many vacation 
 3. lets employees **file and track leave requests**, decided by transparent business rules and stored in a database reachable **only through the LLM's tools**;
 4. **routes to HR** (creates a ticket) when the policies do not cover the question, instead of guessing.
 
-### 1.2 Fictional setting [proposed]
+### 1.2 Fictional setting [confirmed]
 - **Company:** *Lumora Tech*, a fictional IT company with ~250 employees and offices in Lviv and Kyiv plus remote staff.
 - **Corpus:** 8–10 policy documents with numbered sections: Leave, Sick Leave, Remote Work, Onboarding, Benefits (health, sport, education budget), Expense Reimbursement, Equipment, Code of Conduct, Internal Requests.
 - **Policies are deliberately conditional**, so that collecting information is actually needed. Answers depend on **employment type** (full-time / part-time / contractor), **tenure**, and sometimes **office location**.
-- **Language:** English for the corpus, UI and code. *[open question: should the assistant also accept Ukrainian queries?]*
+- **Language:** English for the corpus, UI, answers and code. [confirmed]
 
 ### 1.3 Users and use cases
 | Actor | Use case |
@@ -31,7 +31,7 @@ In a mid-size company, HR receives many repetitive questions (How many vacation 
 | Employee | Ask something the policies do not cover → the question is routed to HR with a ticket ID |
 | HR manager | Review requests the rules left in `pending_hr`; approve or decline through the chat (tools) |
 
-### 1.4 Leave business rules [proposed]
+### 1.4 Leave business rules [confirmed]
 These are deterministic, so they are checked in code. The LLM collects the inputs, calls the tool, and explains the decision.
 
 | Leave type | Allowance | Auto-decision |
@@ -64,6 +64,8 @@ Recall on HR referral matters more than precision. A wrong confident answer abou
 ### 1.7 Resources and constraints
 - LLM: `openai/gpt-4o-mini` via OpenRouter ($2.30 budget limit on the key). A stronger model is used only as the judge, if calibration shows it is needed.
 - Retrieval runs locally (BM25 + Sentence-Transformers embeddings), so it needs no API cost.
+- UI: Streamlit (chat + employee selector + trace panel). [confirmed]
+- Components: the full set from `docs/architecture.md`. [confirmed]
 - Deliverables: GitHub repo, report, diagrams, eval results, ≤ 10-minute demo video.
 
 ---
@@ -89,3 +91,4 @@ _TODO_
 | # | Date | Phase | Change | Metric before → after |
 |---|---|---|---|---|
 | 0 | 2026-11-12 | Business Understanding | Initial scope draft | — |
+| 1 | 2026-11-12 | Business Understanding | Owner confirmed language (EN), leave rules, full component set, Streamlit UI | — |
