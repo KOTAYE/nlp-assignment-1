@@ -30,7 +30,9 @@ The cycle is iterative. If an evaluation shows a weakness, go back to the releva
 - **Small steps.** One component or one concern per change. Do not refactor unrelated code.
 - **Do not invent results.** Never write metric numbers into docs unless they came from an actual eval run. Report failures honestly.
 - **Explainability.** The user must be able to explain each component in a demo video. Prefer simple, readable designs over clever ones.
-- **Context hygiene.** Do not load whole lecture files or large datasets into context. Use `docs/course-notes.md` (condensed lecture notes) and sample a few rows of data.
+- **Context hygiene.** Do not load whole lecture files or large datasets into context. Use `docs/course-notes.md` (condensed lecture notes) and sample a few rows of data. Open a specific lecture in `course/` only for a specific question.
+- **Lowest sufficient autonomy.** If the code can decide a step (a workflow), do not hand it to an agent loop. Use the LLM agent only where steps depend on observations (the leave-request flow, agentic retrieval).
+- **Tools are typed contracts.** Use JSON-schema tools with enums and defaults, instructive errors (`retryable`, `hint`) and native function calling. Never regex-parse model output. Irreversible actions (approve/decline leave) go behind a confirmation gate.
 
 ## 4. Code conventions
 
@@ -48,7 +50,11 @@ The cycle is iterative. If an evaluation shows a weakness, go back to the releva
 - Eval data: `evals/datasets/<component>.jsonl`, hand-checked gold labels.
 - Eval scripts: `evals/run_<component>.py`. Results go to `evals/results/<component>.json` together with model name, date and git commit.
 - Required metric areas (from the brief): **information collection, retrieval success, answer correctness, source support (groundedness/citations), correct referral to HR**, plus the leave-request flow.
-- Prefer deterministic metrics (accuracy, precision/recall/F1, Recall@k, MRR, exact-match of tool calls). Use LLM-as-judge only where needed, with a written rubric and a small human-checked calibration sample.
+- Use the course's terminology and the metric map in `docs/course-notes.md` §8. Report both **intrinsic** (per component) and **extrinsic** (end-to-end scenarios) results.
+- **"Assertions beat judges"**: whatever can be checked in code must be checked in code (confusion matrix / F1 / MCC, Hit@k / Recall@k / MRR, DB-state assertions, tool-call sequence). LLM-as-judge (Faithfulness, Answer Relevancy) only where meaning matters, with a written rubric and a small human-labelled calibration sample ("a benchmark for the judge").
+- Measure retrieval and generation **separately**. When quality is low, find the **first stage that loses evidence** (parse → chunk → retrieve → rank → assemble → generate) before touching prompts.
+- Keep a **dev/test split**: tune prompts and parameters on dev, report final numbers on test. Change one factor at a time and log the prompt version.
+- Agents: evaluate the **trajectory, not just the answer** (outcome, process, efficiency, safety, communication). Use at least 20–50 end-to-end tasks, success rate split by stop reason, and pass^k for consistency.
 - Each result needs an interpretation: what counts as a good or bad score, why the score is what it is, and the next improvement.
 
 ## 6. Git
