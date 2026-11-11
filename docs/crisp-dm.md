@@ -71,7 +71,24 @@ Recall on HR referral matters more than precision. A wrong confident answer abou
 ---
 
 ## 2. Data Understanding
-_TODO: survey existing HR-policy / HR-QA datasets first, then decide whether to adapt or generate synthetic data._
+### 2.1 Survey of existing data (2026-11-12)
+| Source | What it is | License | Verdict |
+|---|---|---|---|
+| [syncora/hr-policies-qa-dataset](https://huggingface.co/datasets/syncora/hr-policies-qa-dataset) (HF) | 644 synthetic chat Q&A pairs about generic HR policy | MIT | **Partial reuse.** Answers are not grounded in any document, so it is useless as a corpus or as answer gold. Its **questions** are realistic employee phrasing → sampled as router inputs and as out-of-scope probes for HR referral, **relabelled by hand** against our corpus. |
+| [opengovfoundation/hr-manual](https://github.com/opengovfoundation/hr-manual) (GitHub) | Real HR policy manual of a non-profit, markdown, ~2.9k words | CC0-1.0 | **Structural reference.** Gives a realistic section structure (conduct, benefits, reimbursements, vacation, sick days). Its wording may be adapted (public domain), but its rules are too thin and unconditional for our clarification use case. |
+| Other HF sets (adarsh-08/hr-policy-dataset, EmbraceCoder/HR_Policy, ai-training-datasets/hr) | Small instruction / chat sets | various | Rejected: not document-grounded, no section IDs. |
+| IEEE DataPort "RAG pipeline evaluation" | Employee data + policy docs | subscription | Rejected: not openly accessible. |
+| Kaggle | — | — | No relevant HR-policy corpus found. |
+
+### 2.2 Decision
+No open dataset provides **a policy corpus + questions with gold section IDs + conditional rules + leave records**, and our evals need all of these. Therefore:
+1. **Policy corpus:** synthetic *Lumora Tech* policies, written for this project. The structure follows the OpenGov manual. Rules are deliberately conditional (employment type, tenure, location), and every section has a stable ID (`leave-policy §3.4`).
+2. **Employee and leave DB:** synthetic seed (~30 employees across teams, types and tenures, plus existing leave requests that create overlap and balance edge cases).
+3. **Eval questions:** a mix of hand-written questions, LLM-drafted questions checked by hand, and **sampled syncora questions** (realistic phrasing; many are out of scope for our corpus, so they make good HR-referral probes).
+
+### 2.3 Data risks
+- Synthetic corpus is cleaner than real handbooks. Mitigation: add some realistic noise (cross-references, exceptions, a table, one outdated-version note).
+- Questions written by the same author as the corpus may overlap lexically with it, which inflates BM25. Mitigation: syncora phrasing, paraphrase rows, and a check of the lexical-overlap distribution.
 
 ## 3. Data Preparation
 _TODO_
@@ -91,4 +108,5 @@ _TODO_
 | # | Date | Phase | Change | Metric before → after |
 |---|---|---|---|---|
 | 0 | 2026-11-12 | Business Understanding | Initial scope draft | — |
+| 2 | 2026-11-12 | Data Understanding | Surveyed HF/GitHub/Kaggle; decided synthetic corpus + reuse of syncora questions + OpenGov structure | — |
 | 1 | 2026-11-12 | Business Understanding | Owner confirmed language (EN), leave rules, full component set, Streamlit UI | — |
