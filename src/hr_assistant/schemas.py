@@ -24,7 +24,6 @@ SITUATIONAL_FACTS: tuple[str, ...] = (
     "has_medical_certificate",
     "days_abroad",
     "expense_category",
-    "life_event",
     "document_type",
 )
 FactName = Literal[
@@ -35,7 +34,6 @@ FactName = Literal[
     "has_medical_certificate",
     "days_abroad",
     "expense_category",
-    "life_event",
     "document_type",
 ]
 

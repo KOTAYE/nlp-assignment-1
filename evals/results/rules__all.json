@@ -1,0 +1,183 @@
+{
+  "component": "rules",
+  "variant": null,
+  "split": "all",
+  "n": 41,
+  "metrics": {
+    "tests": 41,
+    "passed": 41,
+    "pass_rate": 1.0
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {},
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T00:45:07",
+  "git_commit": "d81e0ca",
+  "per_row": [
+    {
+      "test": "test_working_days_skip_weekends_and_holidays",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_holidays_match_policy_table",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_entitlement[E003-2026-24]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_entitlement[E007-2026-0]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_entitlement[E006-2026-8]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_entitlement[E016-2026-4]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_entitlement[E024-2026-8]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_entitlement[E006-2025-0]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_entitlement[E011-2026-24]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_policy_examples_for_first_year",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_carry_over_into_2027[E003-5]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_carry_over_into_2027[E013-0]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_carry_over_into_2027[E021-2]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_balance_2027_includes_carry_over",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_carry_over_usable_before_31_march",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_carry_over_not_usable_after_31_march",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_annual_approved",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_long_leave_needs_14_days_notice",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_short_leave_needs_2_working_days_notice",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_insufficient_balance",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_team_overlap_goes_to_hr",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_overlap_with_own_request_declined",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_first_year_joiner_limited_balance",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_contractor_declined[annual]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_contractor_declined[sick]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_contractor_declined[unpaid]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_sick_short_approved",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_sick_long_needs_certificate",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_sick_yearly_cap",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_sick_registration_window",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_sick_never_declined_for_notice",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_unpaid_always_hr",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_unpaid_yearly_limit",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_special_within_limit",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_special_over_limit",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_special_outside_event_window",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_invalid_requests[args0-spans_years]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_invalid_requests[args1-no_working_days]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_invalid_requests[args2-start_in_past]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_invalid_requests[args3-end_before_start]",
+      "outcome": "PASSED"
+    },
+    {
+      "test": "test_invalid_requests[args4-special_missing_event]",
+      "outcome": "PASSED"
+    }
+  ]
+}

@@ -37,7 +37,9 @@ def get_settings() -> Settings:
         llm_api_key=os.getenv("LLM_API_KEY", ""),
         llm_base_url=os.getenv("LLM_BASE_URL", "https://openrouter.ai/api/v1"),
         llm_model=os.getenv("LLM_MODEL", "openai/gpt-4o-mini"),
-        judge_model=os.getenv("JUDGE_MODEL", os.getenv("LLM_MODEL", "openai/gpt-4o-mini")),
+        judge_model=os.getenv(
+            "JUDGE_MODEL", "google/gemini-2.5-flash"
+        ),  # different family than the generator
         db_path=Path(os.getenv("HR_DB_PATH", ROOT / "data" / "hr.db")),
         policies_dir=ROOT / "data" / "policies",
         traces_dir=ROOT / "logs" / "traces",

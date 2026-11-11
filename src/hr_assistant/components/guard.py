@@ -13,6 +13,9 @@ MAX_CHARS = 2000
 INJECTION_PATTERNS = [
     r"ignore (all |the |any )?(previous|prior|above|earlier) (instructions|rules|prompts?)",
     r"disregard (all |the |your )?(previous|prior|above|system) (instructions|rules|prompts?)",
+    r"(ignore|disregard|override) (all |the |any |your )?(instructions|rules|prompts?) (above|before)",
+    r"\b(as|be|like) dan\b",
+    r"\b(ai|assistant|model|bot) without (any )?(rules|restrictions|limits|filters)",
     r"forget (all |your )?(previous |prior )?(instructions|rules)",
     r"(reveal|show|print|repeat) (me )?(your|the) (system )?(prompt|instructions)",
     r"you are now (a|an|in) ",
@@ -23,9 +26,9 @@ INJECTION_PATTERNS = [
     r"\bsystem\s*:\s",
 ]
 
-PII_PATTERNS = {
-    "CARD": r"\b(?:\d[ -]?){13,19}\b",
+PII_PATTERNS = {  # order matters: IBAN before CARD (an IBAN contains a long digit run)
     "IBAN": r"\bUA\d{2}[ ]?(?:\d[ ]?){25}\b",
+    "CARD": r"\b(?:\d[ -]?){13,19}\b",
     "PHONE": r"(?<!\d)\+?380[ -]?\(?\d{2}\)?[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}(?!\d)",
     "EMAIL": r"\b[\w.+-]+@(?!lumora\.example)[\w-]+\.[\w.]+\b",
 }

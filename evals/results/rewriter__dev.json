@@ -1,0 +1,361 @@
+{
+  "component": "rewriter",
+  "variant": null,
+  "split": "dev",
+  "n": 8,
+  "metrics": {
+    "key_term_coverage": 1.0,
+    "avg_query_words": 5.9,
+    "retrieval_ablation": {
+      "raw_followup": {
+        "hit@1": 0.5,
+        "recall@1": 0.5,
+        "hit@3": 0.875,
+        "recall@3": 0.875,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "mrr@10": 0.698,
+        "ndcg@5": 0.774
+      },
+      "concat_previous_turn": {
+        "hit@1": 0.875,
+        "recall@1": 0.875,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "mrr@10": 0.938,
+        "ndcg@5": 0.954
+      },
+      "llm_rewrite": {
+        "hit@1": 0.875,
+        "recall@1": 0.875,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "mrr@10": 0.938,
+        "ndcg@5": 0.954
+      }
+    }
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "rewriter": "2"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T00:48:47",
+  "git_commit": "d81e0ca",
+  "per_row": [
+    {
+      "id": "rw01",
+      "followup": "And can I move the unused ones to next year?",
+      "rewrite": "vacation days carry-over unused next year",
+      "term_groups_ok": [
+        true
+      ],
+      "gold": [
+        "leave-policy §3.4"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "leave-policy §3.4",
+          "benefits-policy §4.3",
+          "benefits-policy §3.2"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "leave-policy §3.4",
+          "leave-policy §5.1",
+          "leave-policy §2.1"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "leave-policy §3.4",
+          "benefits-policy §4.3",
+          "leave-policy §2.4"
+        ]
+      }
+    },
+    {
+      "id": "rw03",
+      "followup": "and the hotel?",
+      "rewrite": "business trip accommodation hotel per night limit",
+      "term_groups_ok": [
+        true
+      ],
+      "gold": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 0.5,
+        "top3": [
+          "benefits-policy §4.2",
+          "expense-reimbursement-policy §3.2",
+          "expense-reimbursement-policy §1.2"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "expense-reimbursement-policy §3.2",
+          "expense-reimbursement-policy §3.1",
+          "expense-reimbursement-policy §4.2"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "expense-reimbursement-policy §3.2",
+          "expense-reimbursement-policy §3.1",
+          "expense-reimbursement-policy §4.2"
+        ]
+      }
+    },
+    {
+      "id": "rw06",
+      "followup": "What if it's longer than that?",
+      "rewrite": "working from abroad longer than 30 days",
+      "term_groups_ok": [
+        true,
+        true
+      ],
+      "gold": [
+        "remote-work-policy §3.2"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 0.3333333333333333,
+        "top3": [
+          "leave-policy §2.3",
+          "sick-leave-policy §2.3",
+          "remote-work-policy §3.2"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "remote-work-policy §3.2",
+          "remote-work-policy §3.1",
+          "remote-work-policy §3.3"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "remote-work-policy §3.2",
+          "remote-work-policy §3.1",
+          "leave-policy §6.2"
+        ]
+      }
+    },
+    {
+      "id": "rw08",
+      "followup": "Does it roll over?",
+      "rewrite": "education budget carry-over rollover",
+      "term_groups_ok": [
+        true,
+        true
+      ],
+      "gold": [
+        "benefits-policy §4.3"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 0.5,
+        "top3": [
+          "leave-policy §3.4",
+          "benefits-policy §4.3",
+          "leave-policy §3.1"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "benefits-policy §4.3",
+          "benefits-policy §4.1",
+          "benefits-policy §4.2"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "benefits-policy §4.3",
+          "leave-policy §3.4",
+          "benefits-policy §4.2"
+        ]
+      }
+    },
+    {
+      "id": "rw11",
+      "followup": "What about an income statement?",
+      "rewrite": "income statement employment certificate request process",
+      "term_groups_ok": [
+        true
+      ],
+      "gold": [
+        "internal-requests-policy §1.2"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "internal-requests-policy §1.2",
+          "benefits-policy §3.2",
+          "expense-reimbursement-policy §2.2"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 0.5,
+        "top3": [
+          "internal-requests-policy §1.1",
+          "internal-requests-policy §1.2",
+          "benefits-policy §3.2"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 0.5,
+        "top3": [
+          "internal-requests-policy §1.1",
+          "internal-requests-policy §1.2",
+          "leave-policy §3.3"
+        ]
+      }
+    },
+    {
+      "id": "rw13",
+      "followup": "What if I have to work on one of them?",
+      "rewrite": "company holidays working on holidays compensation",
+      "term_groups_ok": [
+        true,
+        true
+      ],
+      "gold": [
+        "leave-policy §6.2"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 0.25,
+        "top3": [
+          "remote-work-policy §3.3",
+          "code-of-conduct §3.2",
+          "remote-work-policy §4.1"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "leave-policy §6.2",
+          "leave-policy §6.1",
+          "leave-policy §2.1"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "leave-policy §6.2",
+          "leave-policy §6.1",
+          "leave-policy §2.1"
+        ]
+      }
+    },
+    {
+      "id": "rw16",
+      "followup": "When will it be replaced?",
+      "rewrite": "laptop replacement schedule equipment policy",
+      "term_groups_ok": [
+        true,
+        true
+      ],
+      "gold": [
+        "equipment-policy §1.3"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "equipment-policy §1.3",
+          "equipment-policy §2.3",
+          "leave-policy §3.4"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "equipment-policy §1.3",
+          "equipment-policy §1.1",
+          "equipment-policy §1.2"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "equipment-policy §1.3",
+          "equipment-policy §1.1",
+          "equipment-policy §1.2"
+        ]
+      }
+    },
+    {
+      "id": "rw18",
+      "followup": "Can I get it if I hire someone into my own team as their manager?",
+      "rewrite": "referral bonus hiring own team manager",
+      "term_groups_ok": [
+        true,
+        true
+      ],
+      "gold": [
+        "internal-requests-policy §3.2"
+      ],
+      "raw_followup": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "internal-requests-policy §3.2",
+          "internal-requests-policy §3.1",
+          "code-of-conduct §3.1"
+        ]
+      },
+      "concat_previous_turn": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "internal-requests-policy §3.2",
+          "internal-requests-policy §3.1",
+          "benefits-policy §6.1"
+        ]
+      },
+      "llm_rewrite": {
+        "hit@5": 1.0,
+        "mrr@10": 1.0,
+        "top3": [
+          "internal-requests-policy §3.2",
+          "internal-requests-policy §3.1",
+          "leave-policy §3.3"
+        ]
+      }
+    }
+  ]
+}
