@@ -25,11 +25,11 @@
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "collector": "4"
+    "collector": "6"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T00:48:18",
-  "git_commit": "d81e0ca",
+  "date": "2026-11-12T00:59:49",
+  "git_commit": "d214702",
   "per_row": [
     {
       "id": "co01",

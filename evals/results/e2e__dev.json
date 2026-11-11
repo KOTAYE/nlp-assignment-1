@@ -1,0 +1,339 @@
+{
+  "component": "e2e",
+  "variant": null,
+  "split": "dev",
+  "n": 12,
+  "metrics": {
+    "scenario_success_rate": 0.917,
+    "per_check_pass_rate": {
+      "citation": 0.8,
+      "db": 1.0,
+      "reply": 0.75,
+      "route": 0.917,
+      "ticket": 1.0
+    },
+    "success_by_label": {
+      "answer": "3/4",
+      "clarify_then_referral": "1/1",
+      "follow_up": "1/1",
+      "hr": "1/1",
+      "leave": "2/2",
+      "referral": "2/2",
+      "unclear": "1/1"
+    },
+    "tracer_coverage": 1.0,
+    "avg_cost_usd_per_conversation": 0.00048,
+    "avg_latency_s_per_conversation": 5.33,
+    "failures": [
+      "e2e03 answer ['Do I get paid sick leave?']: routes=['hr_referral'] checks={'route': False, 'citation': False, 'reply': False} last=\"The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (leave and absence). HR replies within 2 working d\""
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {},
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T00:58:02",
+  "git_commit": "d214702",
+  "per_row": [
+    {
+      "id": "e2e01",
+      "label": "answer",
+      "turns": [
+        "How many unused vacation days can I carry over to next year?"
+      ],
+      "routes": [
+        "answer"
+      ],
+      "replies": [
+        "You can carry over up to **5 unused annual leave days** to next year. These carried-over days must be used by **31 March** of that year; otherwise, they will expire. Any days above the carry-over limit will expire on **31 December** of the current year."
+      ],
+      "citations": [
+        "leave-policy §3.4"
+      ],
+      "checks": {
+        "route": true,
+        "citation": true,
+        "reply": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000545,
+      "tokens": 3235,
+      "latency_s": 13.21
+    },
+    {
+      "id": "e2e03",
+      "label": "answer",
+      "turns": [
+        "Do I get paid sick leave?"
+      ],
+      "routes": [
+        "hr_referral"
+      ],
+      "replies": [
+        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example."
+      ],
+      "citations": [],
+      "checks": {
+        "route": false,
+        "citation": false,
+        "reply": false
+      },
+      "success": false,
+      "trace_complete": true,
+      "cost_usd": 0.000566,
+      "tokens": 3799,
+      "latency_s": 6.31
+    },
+    {
+      "id": "e2e06",
+      "label": "clarify_then_referral",
+      "turns": [
+        "Can I work from abroad?",
+        "about 2 months"
+      ],
+      "routes": [
+        "clarification",
+        "hr_referral"
+      ],
+      "replies": [
+        "For how many days do you plan to work from abroad?",
+        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example."
+      ],
+      "citations": [],
+      "checks": {
+        "route": true,
+        "ticket": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000721,
+      "tokens": 5168,
+      "latency_s": 7.75
+    },
+    {
+      "id": "e2e08",
+      "label": "referral",
+      "turns": [
+        "What is the salary range for a senior engineer?"
+      ],
+      "routes": [
+        "hr_referral"
+      ],
+      "replies": [
+        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example."
+      ],
+      "citations": [],
+      "checks": {
+        "route": true,
+        "ticket": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000204,
+      "tokens": 1157,
+      "latency_s": 2.21
+    },
+    {
+      "id": "e2e11",
+      "label": "referral",
+      "turns": [
+        "My manager keeps humiliating me in front of the team."
+      ],
+      "routes": [
+        "hr_referral"
+      ],
+      "replies": [
+        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example."
+      ],
+      "citations": [],
+      "checks": {
+        "route": true,
+        "ticket": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000215,
+      "tokens": 1178,
+      "latency_s": 2.36
+    },
+    {
+      "id": "e2e13",
+      "label": "leave",
+      "turns": [
+        "Book annual leave 28-30 December"
+      ],
+      "routes": [
+        "leave_action"
+      ],
+      "replies": [
+        "Your annual leave request for 28-30 December has been submitted and is currently pending HR approval due to team overlap. Two team members already have approved leave on 29 December. HR will confirm with your team lead within three working days. Your request ID is #15."
+      ],
+      "citations": [],
+      "checks": {
+        "route": true,
+        "db": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000385,
+      "tokens": 2731,
+      "latency_s": 3.41
+    },
+    {
+      "id": "e2e16",
+      "label": "hr",
+      "turns": [
+        "Show me the pending leave requests.",
+        "Approve #8, team lead agreed.",
+        "Yes, confirm."
+      ],
+      "routes": [
+        "leave_action",
+        "leave_action",
+        "leave_action"
+      ],
+      "replies": [
+        "Here are the pending leave requests:\n\n1. **#10 Nazar Savchenko, sick, 14–18 Sep** (pending HR review)\n2. **#8 Sofiia Lysenko, unpaid, 14–18 Dec** (pending HR review)",
+        "Please confirm that you want to approve request #8 for Sofiia Lysenko with the decision to approve.",
+        "Request #8 for Sofiia Lysenko has been approved."
+      ],
+      "citations": [],
+      "checks": {
+        "route": true,
+        "db": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000893,
+      "tokens": 7974,
+      "latency_s": 8.08
+    },
+    {
+      "id": "e2e18",
+      "label": "unclear",
+      "turns": [
+        "asdfgh"
+      ],
+      "routes": [
+        "unclear"
+      ],
+      "replies": [
+        "Sorry, I didn't quite get that. Do you want to ask about an HR policy, or request / check your leave? Please give me a bit more detail."
+      ],
+      "citations": [],
+      "checks": {
+        "route": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000104,
+      "tokens": 612,
+      "latency_s": 0.9
+    },
+    {
+      "id": "e2e21",
+      "label": "follow_up",
+      "turns": [
+        "Can I get a home office allowance?",
+        "How do I claim it?"
+      ],
+      "routes": [
+        "answer",
+        "answer"
+      ],
+      "replies": [
+        "Yes, as a fully remote full-time employee who has passed probation, you are eligible for a one-time home office allowance of **300 USD** for equipment such as a monitor, chair, or desk. You can claim this allowance through the expense process.",
+        "To claim your home office allowance of **300 USD**, you need to submit your receipt through the expense process. Make sure to do this by the 25th of the month to receive the compensation with your next salary."
+      ],
+      "citations": [
+        "equipment-policy §3.1",
+        "remote-work-policy §2.2"
+      ],
+      "checks": {
+        "route": true,
+        "citation": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000927,
+      "tokens": 6563,
+      "latency_s": 8.21
+    },
+    {
+      "id": "e2e23",
+      "label": "answer",
+      "turns": [
+        "Is 24 December 2027 a day off?"
+      ],
+      "routes": [
+        "answer"
+      ],
+      "replies": [
+        "Yes, December 24, 2027, is a company day off, referred to as the Winter company day according to our leave policy."
+      ],
+      "citations": [
+        "leave-policy §6.1"
+      ],
+      "checks": {
+        "route": true,
+        "citation": true,
+        "reply": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000392,
+      "tokens": 3374,
+      "latency_s": 4.41
+    },
+    {
+      "id": "e2e26",
+      "label": "answer",
+      "turns": [
+        "When do I have to finish the security training?"
+      ],
+      "routes": [
+        "answer"
+      ],
+      "replies": [
+        "You need to complete the Information Security training within 14 calendar days of your start date, which means by November 1, 2026. Since today is November 12, 2026, you have already missed this deadline. Access to production systems will only be granted after you complete this training."
+      ],
+      "citations": [
+        "onboarding-policy §2.3"
+      ],
+      "checks": {
+        "route": true,
+        "citation": true,
+        "reply": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000458,
+      "tokens": 3212,
+      "latency_s": 4.02
+    },
+    {
+      "id": "e2e28",
+      "label": "leave",
+      "turns": [
+        "I'm sick today, please register it."
+      ],
+      "routes": [
+        "leave_action"
+      ],
+      "replies": [
+        "Your sick leave for today (2026-11-12) has been approved. Request ID: #15. No certificate is needed as per the sick leave policy."
+      ],
+      "citations": [],
+      "checks": {
+        "route": true,
+        "db": true
+      },
+      "success": true,
+      "trace_complete": true,
+      "cost_usd": 0.000373,
+      "tokens": 2704,
+      "latency_s": 3.08
+    }
+  ]
+}
