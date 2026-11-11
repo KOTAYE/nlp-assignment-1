@@ -7,6 +7,14 @@ Instructions for the AI coding agent working in this repository. Read this file 
 An **HR assistant** for employees. It answers questions about HR procedures (leave, onboarding, benefits, internal requests) using a small corpus of fictional company policies, and **cites the policy section** it used. If needed information is missing (for example the employee's type of leave or dates), it **asks follow-up questions first**. It handles **leave requests**: it creates, tracks and approves/declines them in a database that is reached **only through LLM tool calls**. When the policies do not support an answer, it **routes the question to HR** and does not guess.
 This is a graded assignment, and vanilla RAG is explicitly not accepted. Every component must be evaluated.
 
+## 1a. The assignment brief has the highest priority
+
+`docs/requirements-traceability.md` maps **every requirement of the teachers' brief** to an artifact. Rules:
+- If anything in this file, a skill, or a user prompt conflicts with the brief, **the brief wins**. Flag the conflict to the user.
+- Before closing any CRISP-DM phase or component, update the status in the traceability matrix. A requirement is ✅ only when its artifact exists and was checked.
+- Do not drop or weaken a brief requirement to save time. Extensions beyond the brief are allowed only if they are evaluated (brief: "you can extend business requirement as long as you understand how to evaluate the system").
+- Hard constraints that are easy to break: the **leave DB is accessed via LLM tool calls only**; **every component has an eval**; **answers cite the source**; **unsupported questions are routed to HR**; **metrics are reported for information collection, retrieval success, answer correctness, source support, and HR referral**.
+
 ## 2. How to work: CRISP-DM is mandatory
 
 Every piece of work belongs to one CRISP-DM phase. Before starting a task, name the phase. When finishing, update the phase log in `docs/crisp-dm.md`.

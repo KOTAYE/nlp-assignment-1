@@ -9,7 +9,7 @@ flowchart TD
 
     R -->|policy_question| C1[3. Info collector<br/>slot filling: employment type,<br/>tenure, location]
     R -->|leave_action| A[6. Leave agent<br/>LLM + native tool calling]
-    R -->|out_of_scope / sensitive| H[7. HR referral<br/>create_hr_ticket]
+    R -->|out_of_scope / sensitive| H[7. HR referral<br/>LLM summarises + calls tool]
     R -->|unclear| Q[Clarifying question]
 
     C1 -->|missing slot| Q
@@ -20,10 +20,11 @@ flowchart TD
     GEN -->|insufficient evidence| H
     GEN -->|supported| OUT([Answer with sources])
 
-    A <-->|tools| T[[Tool layer<br/>get_balance · list_requests ·<br/>submit_leave · cancel_leave ·<br/>decide_leave HR only]]
+    A <-->|tool calls| T[[Tool layer<br/>get_balance · list_requests ·<br/>submit_leave · cancel_leave ·<br/>decide_leave HR only]]
+    H <-->|tool call| TT[[create_hr_ticket]]
     T <--> RULES[Rule engine<br/>working days, balance,<br/>notice, overlap]
     T <--> DB[(SQLite<br/>employees · leave_requests ·<br/>hr_tickets)]
-    H --> DB
+    TT <--> DB
     A --> OUT
     H --> OUT
     Q --> U
@@ -35,7 +36,21 @@ flowchart TD
     QR -.-> TR
     GEN -.-> TR
     A -.-> TR
+    H -.-> TR
+
+    classDef llm fill:#e8dcff,stroke:#6b3fd4,color:#000
+    classDef tool fill:#ffe4c4,stroke:#d97706,color:#000
+    classDef local fill:#dff3e4,stroke:#2f855a,color:#000
+    classDef data fill:#e2e8f0,stroke:#475569,color:#000
+    class R,C1,QR,GEN,A,H llm
+    class T,TT tool
+    class G,RET,RR,RULES,IDX local
+    class DB,POL data
 ```
+
+**Legend.** 🟪 **LLM call** (OpenRouter API). 🟧 **Tool call** requested by the LLM via native function calling, the **only** path to the database. 🟩 Local code or local model (no API). ⬜ Data store.
+
+**Database access rule (from the brief: "use a database… and access it via LLM only").** Every read or write to SQLite happens inside a tool that an LLM decided to call: the leave agent's tools and the HR referral's `create_hr_ticket`. The UI and the pipeline code never query the DB directly. (Eval scripts inspect the DB state after a run to score outcomes; they are not part of the application.)
 
 ## Components
 
@@ -44,14 +59,16 @@ flowchart TD
 | 1 | Input guard | Block injection attempts, mask PII before it reaches the LLM | raw text → clean text / block | none (rules) | red-team slice: block rate, false-block rate |
 | 2 | Intent router | Pick the processing path | message + short history → `{intent, confidence}` | **LLM** (JSON schema); classical baseline for comparison | confusion matrix, macro-F1, MCC, recall(out_of_scope) |
 | 3 | Info collector | Detect which facts a question depends on and ask for missing ones | question + employee profile → slots / clarifying question | **LLM** (JSON schema) | slot P/R/F1, clarification precision/recall |
-| 4a | Query rewriter | Turn a conversational turn into a standalone search query | history + question → query | **LLM** | measured indirectly via retrieval (with vs without rewriting) |
+| 4a | Query rewriter | Turn a conversational turn into a standalone search query | history + question → query | **LLM** | direct: standalone-ness and key-term preservation vs gold rewrites; ablation: Recall@5 with vs without rewriting |
+| 4 | Indexer / chunker | Split policies into citable, structure-preserving chunks | markdown docs → chunks with `doc_id`, `§`, title, table rows kept intact | none (local code) | section integrity (every gold section maps to exactly one chunk, no table split) + chunking-variant ablation on Recall@5 |
 | 4b | Hybrid retriever | Find candidate policy sections | query → top-20 chunks | BM25 + Sentence-Transformers (local) | Hit@k, Recall@k, MRR: BM25 vs dense vs hybrid |
 | 4c | Reranker | Reorder candidates precisely | query + 20 chunks → top-5 | cross-encoder (local) | MRR / nDCG@5 before vs after |
 | 5 | Grounded answerer | Answer only from evidence, cite sections, flag insufficiency | query + slots + top-5 → `{answer, citations[], sufficient}` | **LLM** (JSON schema) | correctness (judge), Faithfulness, citation accuracy |
 | 6 | Leave agent | Run leave actions through tools | message + employee → tool calls → reply | **LLM** + **tools** | DB-state outcome, tool-sequence correctness, pass^k |
-| 7 | HR referral | Escalate unsupported or sensitive questions | question → ticket ID | **tool** `create_hr_ticket` | referral precision/recall |
-| — | Rule engine | Deterministic leave decisions | request + DB state → approve / decline / pending_hr + reason | none (code) | unit tests (100% expected) |
-| — | Tracer | Observability for the demo and debugging | every call → JSONL trace | none | — |
+| 7 | HR referral | Escalate unsupported or sensitive questions | question → ticket summary + category → ticket ID | **LLM** + **tool** `create_hr_ticket` | referral precision/recall (decision); ticket category accuracy and summary completeness (content) |
+| — | Rule engine | Deterministic leave decisions | request + DB state → approve / decline / pending_hr + reason | none (code) | unit-test suite covering every rule in `docs/crisp-dm.md` §1.4: pass rate (100% expected) |
+| — | Tracer | Observability for the demo and debugging | every call → JSONL trace | none | coverage check: every LLM and tool call in the e2e suite appears in the trace with tokens and latency |
+| E2E | Whole system | Extrinsic evaluation | scripted multi-turn scenarios → final reply + DB state | all | scenario success rate split by stop reason; cost and latency per completed task |
 
 ## Why not vanilla RAG
 - **Routing** sends each message to the right source: documents → retrieval, live state → DB tools, unknown → human.

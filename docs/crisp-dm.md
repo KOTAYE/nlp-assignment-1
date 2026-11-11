@@ -121,3 +121,4 @@ _TODO_
 | 1 | 2026-11-12 | Business Understanding | Owner confirmed language (EN), leave rules, full component set, Streamlit UI | — |
 | 2 | 2026-11-12 | Data Understanding | Surveyed HF/GitHub/Kaggle; decided synthetic corpus + reuse of syncora questions + OpenGov structure | — |
 | 3 | 2026-11-12 | Data Preparation | Wrote 9-document policy corpus (98 sections); refined leave rules to match corpus (notice → decline, sick yearly cap, contractors declined) | — |
+| 4 | 2026-11-12 | Business Understanding (re-check) | Compliance audit against the brief: HR referral now writes to DB only via an LLM tool call; LLM vs tool calls marked in the diagram; every component (incl. rewriter, indexer, tracer, E2E) has an eval; traceability matrix added | — |
