@@ -1,0 +1,183 @@
+{
+  "component": "judge_calibration",
+  "variant": null,
+  "split": "all",
+  "n": 19,
+  "metrics": {
+    "exact_agreement": 0.947,
+    "within_one_level": 1.0,
+    "pass_fail_accuracy": 1.0,
+    "pass_fail_mcc": 1.0,
+    "contradiction_recall": 1.0,
+    "contradiction_precision": 1.0,
+    "confusion": {
+      "fully_matches->fully_matches": 6,
+      "mostly_wrong->mostly_wrong": 4,
+      "contradicts->contradicts": 6,
+      "mostly_right->mostly_right": 2,
+      "mostly_right->fully_matches": 1
+    }
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "judge_correctness": "1"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T01:02:20",
+  "git_commit": "eeb724a",
+  "per_row": [
+    {
+      "id": "cal01",
+      "expected": "fully_matches",
+      "judge": "fully_matches",
+      "reason": "The candidate answer accurately states the number of carry-over days and the deadline for using them, matching all key facts in the gold answer.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal02",
+      "expected": "mostly_wrong",
+      "judge": "mostly_wrong",
+      "reason": "The candidate answer is too vague and does not provide the key information about the number of days or the expiration date.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal03",
+      "expected": "contradicts",
+      "judge": "contradicts",
+      "reason": "The candidate answer states 10 days can be carried over, which contradicts the gold answer's limit of 5 days.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal04",
+      "expected": "mostly_right",
+      "judge": "mostly_right",
+      "reason": "The candidate answer correctly states the number of days that can be carried over but misses the crucial detail about the expiration date.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal05",
+      "expected": "fully_matches",
+      "judge": "fully_matches",
+      "reason": "The candidate answer accurately states the number of paid sick days and the condition for beyond that, matching the gold answer exactly.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal06",
+      "expected": "mostly_right",
+      "judge": "fully_matches",
+      "reason": "The candidate answer correctly states the number of fully paid sick days per year, which is the main fact from the gold answer.",
+      "exact": false,
+      "adjacent": true
+    },
+    {
+      "id": "cal07",
+      "expected": "contradicts",
+      "judge": "contradicts",
+      "reason": "The candidate answer incorrectly states there is no limit to 100% paid sick days, directly contradicting the gold answer's limit of 10 days.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal08",
+      "expected": "mostly_wrong",
+      "judge": "mostly_wrong",
+      "reason": "The candidate answer does not provide the number of paid sick days, which is the main fact requested in the question.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal09",
+      "expected": "fully_matches",
+      "judge": "fully_matches",
+      "reason": "The candidate correctly states that office-based employees are not eligible for the coworking allowance and provides the correct reason.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal10",
+      "expected": "contradicts",
+      "judge": "contradicts",
+      "reason": "The candidate answer directly contradicts the gold answer regarding eligibility for the coworking allowance.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal11",
+      "expected": "mostly_wrong",
+      "judge": "mostly_wrong",
+      "reason": "The candidate answer is too vague and does not directly answer the question regarding eligibility for office-based employees, nor does it state that office-based employees are not eligible.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal12",
+      "expected": "fully_matches",
+      "judge": "fully_matches",
+      "reason": "The candidate answer fully matches the gold answer, providing the correct per diem for meals and the accommodation limit.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal13",
+      "expected": "mostly_right",
+      "judge": "mostly_right",
+      "reason": "The candidate answer correctly states the meal per diem but omits the accommodation per diem.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal14",
+      "expected": "contradicts",
+      "judge": "contradicts",
+      "reason": "The candidate answer provides a single per diem amount that contradicts the gold answer's breakdown of meal and accommodation allowances.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal15",
+      "expected": "fully_matches",
+      "judge": "fully_matches",
+      "reason": "The candidate answer fully matches the gold answer, providing the correct amount and conditions.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal16",
+      "expected": "contradicts",
+      "judge": "contradicts",
+      "reason": "The candidate answer states 1,000 UAH per month, which contradicts the gold answer of 500 UAH per month.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal17",
+      "expected": "mostly_wrong",
+      "judge": "mostly_wrong",
+      "reason": "The candidate answer is missing the amount of sport compensation.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal18",
+      "expected": "fully_matches",
+      "judge": "fully_matches",
+      "reason": "The candidate answer correctly states the 14-calendar-day requirement and the condition for leave longer than 3 working days, matching the gold answer.",
+      "exact": true,
+      "adjacent": true
+    },
+    {
+      "id": "cal19",
+      "expected": "contradicts",
+      "judge": "contradicts",
+      "reason": "The candidate answer states 2 working days, which contradicts the gold answer's 14 calendar days for leave longer than 3 working days.",
+      "exact": true,
+      "adjacent": true
+    }
+  ]
+}

@@ -115,6 +115,18 @@ _See `docs/architecture.md` for the component design._
 - Malformed requests raise `InvalidRequest(code, message, hint)`. This lets the LLM tool layer return **instructive errors** (AI Agents lecture).
 - **Evaluation:** `tests/test_rules.py`, 41 tests covering every rule in §1.4 plus a consistency test (holidays in code == table in `leave-policy §6.1`). **Result: 41/41 pass.** The first run found a real bug (phantom carry-over from untracked 2025), which was fixed by `FIRST_TRACKED_YEAR`.
 
+### 4.2 LLM components and tools (2026-11-12)
+- **Model:** `openai/gpt-4o-mini` via OpenRouter, temperature 0, structured outputs (JSON schema + Pydantic validation with one instructive retry). Chosen because it is cheap (whole development ≈ $0.10) and reliable at tool calling. **Judge:** `google/gemini-2.5-flash`, a different model family, to reduce self-preference bias.
+- **One LLM wrapper** (`llm.py`) traces every call: component, prompt version, messages, output, tokens, cost, latency. Tools log their arguments and results into the same trace.
+- **Identity vs data:** the employee profile comes from the directory (identity-provider stand-in). Leave data is reachable **only** through LLM tool calls (`tools.py`). The UI never queries the DB.
+- **Tools** are typed contracts: enums, instructive errors with `hint` / `retryable`, least privilege (HR tools offered only to HR), the employee ID injected by the harness, and a confirmation gate for HR decisions.
+- **Leave agent:** ReAct loop with native function calling, max 6 steps, repeated-call detection, stop reasons.
+- **Retrieval:** section-aware chunks (one per `§`, with metadata), BM25 + `BAAI/bge-small-en-v1.5` dense retrieval, fused with RRF (k=60), then reranked with the `cross-encoder/ms-marco-MiniLM-L-6-v2` cross-encoder (top-20 → top-5). All local, on CPU.
+- **Pipeline** is a workflow: code chooses the path from the router output. Only the leave flow is an agent (AI Agents lecture: lowest sufficient autonomy).
+
+### 4.3 Development iterations driven by smoke tests and dev evals
+See the iteration log. Every prompt change bumped its `version:` header, which is recorded with each result.
+
 ## 5. Evaluation
 _TODO_
 

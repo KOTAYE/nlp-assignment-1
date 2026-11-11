@@ -1,0 +1,367 @@
+{
+  "component": "collector",
+  "variant": null,
+  "split": "test",
+  "n": 25,
+  "metrics": {
+    "facts_precision": 1.0,
+    "facts_recall": 1.0,
+    "facts_f1": 1.0,
+    "value_extraction_accuracy": 1.0,
+    "clarification_precision": 1.0,
+    "clarification_recall": 1.0,
+    "clarification_f1": 1.0,
+    "clarification_accuracy": 1.0,
+    "clarification_confusion": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "tn": 19
+    },
+    "errors": []
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "collector": "6"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T01:01:21",
+  "git_commit": "eeb724a",
+  "per_row": [
+    {
+      "id": "co03",
+      "question": "Do I need a sick note if I'm ill from Monday to Thursday?",
+      "gold_required": [
+        "illness_duration_days"
+      ],
+      "pred_required": [
+        "illness_duration_days"
+      ],
+      "values": {
+        "illness_duration_days": {
+          "gold": "4",
+          "pred": "4",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co04",
+      "question": "Can I get my vacation days back if I got sick during my holiday?",
+      "gold_required": [
+        "has_medical_certificate"
+      ],
+      "pred_required": [
+        "has_medical_certificate"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "Do you have a medical certificate for your illness?"
+    },
+    {
+      "id": "co07",
+      "question": "I'd like to work from Italy for 10 days in March. Is that fine?",
+      "gold_required": [
+        "days_abroad"
+      ],
+      "pred_required": [
+        "days_abroad"
+      ],
+      "values": {
+        "days_abroad": {
+          "gold": "10",
+          "pred": "10",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co08",
+      "question": "Can I get reimbursed for this?",
+      "gold_required": [
+        "expense_category"
+      ],
+      "pred_required": [
+        "expense_category"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "What was the expense for?"
+    },
+    {
+      "id": "co09",
+      "question": "Can I get reimbursed for a taxi I took after working late?",
+      "gold_required": [
+        "expense_category"
+      ],
+      "pred_required": [
+        "expense_category"
+      ],
+      "values": {
+        "expense_category": {
+          "gold": "taxi",
+          "pred": "taxi",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co11",
+      "question": "How many days off do I get for my wedding?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co12",
+      "question": "How long does HR take to prepare a document for me?",
+      "gold_required": [
+        "document_type"
+      ],
+      "pred_required": [
+        "document_type"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "What type of document do you need?"
+    },
+    {
+      "id": "co14",
+      "question": "What are the company holidays in 2027?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co15",
+      "question": "Who do I report harassment to?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co17",
+      "question": "Do I get sport compensation?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co19",
+      "question": "What is the per diem for business travel?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co20",
+      "question": "What is the notice period for annual leave?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co22",
+      "question": "Can I work from abroad?",
+      "gold_required": [
+        "days_abroad"
+      ],
+      "pred_required": [
+        "days_abroad"
+      ],
+      "values": {
+        "days_abroad": {
+          "gold": "42",
+          "pred": "42",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co24",
+      "question": "We just had a baby! Do I get any days off?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co25",
+      "question": "I need an employment certificate in English. How long will it take?",
+      "gold_required": [
+        "document_type"
+      ],
+      "pred_required": [
+        "document_type"
+      ],
+      "values": {
+        "document_type": {
+          "gold": "employment certificate",
+          "pred": "employment certificate",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co27",
+      "question": "Is my laptop going to be replaced soon?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co30",
+      "question": "Is the gym covered by the company?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co31",
+      "question": "Can my wife be added to my health insurance?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co33",
+      "question": "Do I need approval for a client dinner?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co35",
+      "question": "I'm going to Poland to work remotely. What do I need to do?",
+      "gold_required": [
+        "days_abroad"
+      ],
+      "pred_required": [
+        "days_abroad"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "How many days will you be working from Poland?"
+    },
+    {
+      "id": "co36",
+      "question": "How long is probation?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co37",
+      "question": "Can I get reimbursed?",
+      "gold_required": [
+        "expense_category"
+      ],
+      "pred_required": [
+        "expense_category"
+      ],
+      "values": {
+        "expense_category": {
+          "gold": "taxi",
+          "pred": "taxi",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co39",
+      "question": "How many days do I get for bereavement leave?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co42",
+      "question": "I'm planning to work from another country next month. Do I need permission?",
+      "gold_required": [
+        "days_abroad"
+      ],
+      "pred_required": [
+        "days_abroad"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "How many days do you plan to work from abroad?"
+    },
+    {
+      "id": "co43",
+      "question": "Do I need to bring a doctor's note when I'm back?",
+      "gold_required": [
+        "illness_duration_days"
+      ],
+      "pred_required": [
+        "illness_duration_days"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "How many working days have you been (or will you be) ill?"
+    }
+  ]
+}

@@ -1,0 +1,1810 @@
+{
+  "component": "retrieval",
+  "variant": null,
+  "split": "dev",
+  "n": 76,
+  "metrics": {
+    "by_variant": {
+      "bm25": {
+        "hit@1": 0.842,
+        "recall@1": 0.842,
+        "hit@3": 0.947,
+        "recall@3": 0.947,
+        "hit@5": 0.947,
+        "recall@5": 0.947,
+        "mrr@10": 0.886,
+        "ndcg@5": 0.902
+      },
+      "dense": {
+        "hit@1": 0.947,
+        "recall@1": 0.947,
+        "hit@3": 0.947,
+        "recall@3": 0.947,
+        "hit@5": 0.947,
+        "recall@5": 0.947,
+        "mrr@10": 0.947,
+        "ndcg@5": 0.947
+      },
+      "hybrid_rrf": {
+        "hit@1": 0.895,
+        "recall@1": 0.895,
+        "hit@3": 0.947,
+        "recall@3": 0.947,
+        "hit@5": 0.947,
+        "recall@5": 0.947,
+        "mrr@10": 0.912,
+        "ndcg@5": 0.921
+      },
+      "hybrid_rrf+rerank": {
+        "hit@1": 0.947,
+        "recall@1": 0.947,
+        "hit@3": 0.947,
+        "recall@3": 0.947,
+        "hit@5": 0.947,
+        "recall@5": 0.947,
+        "mrr@10": 0.947,
+        "ndcg@5": 0.947
+      }
+    },
+    "production_variant": "hybrid_rrf+rerank",
+    "misses_at_5": [
+      "qa23 'I want to work from Portugal for 2 weeks. Is that allowed?' gold=['remote-work-policy §3.1'] top5=['remote-work-policy §3.2', 'leave-policy §6.2', 'leave-policy §3.2', 'leave-policy §2.2', 'internal-requests-policy §1.1']"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {},
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T00:45:24",
+  "git_commit": "d81e0ca",
+  "per_row": [
+    {
+      "variant": "bm25",
+      "id": "qa01",
+      "question": "How many annual leave days do I get per year?",
+      "gold": [
+        "leave-policy §2.1"
+      ],
+      "top5": [
+        "leave-policy §2.1",
+        "leave-policy §2.2",
+        "leave-policy §2.3",
+        "leave-policy §3.4",
+        "leave-policy §5.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa03",
+      "question": "How many unused vacation days can I carry over to next year, and until when do I have to use them?",
+      "gold": [
+        "leave-policy §3.4"
+      ],
+      "top5": [
+        "benefits-policy §4.3",
+        "leave-policy §3.4",
+        "benefits-policy §3.2",
+        "benefits-policy §3.3",
+        "leave-policy §3.1"
+      ],
+      "hit@1": 0.0,
+      "recall@1": 0.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 0.5,
+      "ndcg@5": 0.6309297535714575
+    },
+    {
+      "variant": "bm25",
+      "id": "qa06",
+      "question": "What happens if two people from my team are already on vacation on the days I want?",
+      "gold": [
+        "leave-policy §3.3"
+      ],
+      "top5": [
+        "leave-policy §3.3",
+        "leave-policy §3.1",
+        "leave-policy §2.4",
+        "leave-policy §3.5",
+        "sick-leave-policy §3.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa08",
+      "question": "How many days off do I get if a close family member dies?",
+      "gold": [
+        "leave-policy §4.1"
+      ],
+      "top5": [
+        "leave-policy §4.1",
+        "sick-leave-policy §3.3",
+        "benefits-policy §2.2",
+        "code-of-conduct §3.1",
+        "benefits-policy §2.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa11",
+      "question": "What happens if I have to work on a company holiday?",
+      "gold": [
+        "leave-policy §6.2"
+      ],
+      "top5": [
+        "leave-policy §6.2",
+        "leave-policy §2.1",
+        "leave-policy §6.1",
+        "remote-work-policy §4.1",
+        "equipment-policy §2.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa13",
+      "question": "Do I get fewer vacation days because I work part-time?",
+      "gold": [
+        "leave-policy §1.3"
+      ],
+      "top5": [
+        "leave-policy §1.3",
+        "internal-requests-policy §1.1",
+        "remote-work-policy §3.1",
+        "onboarding-policy §3.1",
+        "expense-reimbursement-policy §1.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa16",
+      "question": "I'm going to be ill for 5 days. Do I need a sick note?",
+      "gold": [
+        "sick-leave-policy §2.3"
+      ],
+      "top5": [
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.1",
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "leave-policy §3.4"
+      ],
+      "hit@1": 0.0,
+      "recall@1": 0.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 0.3333333333333333,
+      "ndcg@5": 0.5
+    },
+    {
+      "variant": "bm25",
+      "id": "qa18",
+      "question": "I got sick during my vacation and I have a medical certificate. Do I get those vacation days back?",
+      "gold": [
+        "sick-leave-policy §3.2"
+      ],
+      "top5": [
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §2.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa21",
+      "question": "Can I get money for a coworking space?",
+      "gold": [
+        "remote-work-policy §2.1"
+      ],
+      "top5": [
+        "remote-work-policy §2.1",
+        "equipment-policy §1.2",
+        "expense-reimbursement-policy §1.2",
+        "onboarding-policy §2.1",
+        "benefits-policy §3.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa23",
+      "question": "I want to work from Portugal for 2 weeks. Is that allowed?",
+      "gold": [
+        "remote-work-policy §3.1"
+      ],
+      "top5": [
+        "remote-work-policy §1.2",
+        "leave-policy §6.2",
+        "code-of-conduct §3.2",
+        "onboarding-policy §2.2",
+        "remote-work-policy §4.1"
+      ],
+      "hit@1": 0.0,
+      "recall@1": 0.0,
+      "hit@3": 0.0,
+      "recall@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr@10": 0.0,
+      "ndcg@5": 0.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa26",
+      "question": "How long is the probation period?",
+      "gold": [
+        "onboarding-policy §3.1"
+      ],
+      "top5": [
+        "onboarding-policy §3.1",
+        "benefits-policy §1.1",
+        "onboarding-policy §3.2",
+        "onboarding-policy §3.3",
+        "leave-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa28",
+      "question": "Does the company pay for my family's health insurance?",
+      "gold": [
+        "benefits-policy §2.2"
+      ],
+      "top5": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.1",
+        "benefits-policy §2.3",
+        "leave-policy §6.1",
+        "sick-leave-policy §3.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa31",
+      "question": "Does the sport compensation cover buying sports equipment?",
+      "gold": [
+        "benefits-policy §3.1"
+      ],
+      "top5": [
+        "benefits-policy §3.1",
+        "benefits-policy §3.2",
+        "benefits-policy §3.3",
+        "leave-policy §5.3",
+        "expense-reimbursement-policy §1.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa33",
+      "question": "How many sessions with a psychologist does the company pay for?",
+      "gold": [
+        "benefits-policy §5.1"
+      ],
+      "top5": [
+        "benefits-policy §5.1",
+        "benefits-policy §5.2",
+        "leave-policy §1.3",
+        "benefits-policy §1.1",
+        "leave-policy §6.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa36",
+      "question": "What is the per diem on business trips?",
+      "gold": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §3.1",
+        "code-of-conduct §1.2",
+        "code-of-conduct §3.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa38",
+      "question": "What is the spending limit for a client dinner?",
+      "gold": [
+        "expense-reimbursement-policy §5.1"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §5.1",
+        "benefits-policy §4.2",
+        "leave-policy §4.2",
+        "code-of-conduct §4.1",
+        "leave-policy §3.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa41",
+      "question": "Can I get money for a chair for my home office?",
+      "gold": [
+        "equipment-policy §3.1"
+      ],
+      "top5": [
+        "equipment-policy §3.1",
+        "equipment-policy §1.2",
+        "equipment-policy §3.2",
+        "remote-work-policy §2.2",
+        "onboarding-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa43",
+      "question": "Where can I report harassment anonymously?",
+      "gold": [
+        "code-of-conduct §2.2"
+      ],
+      "top5": [
+        "code-of-conduct §2.2",
+        "code-of-conduct §2.3",
+        "code-of-conduct §2.1",
+        "internal-requests-policy §2.1",
+        "equipment-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "bm25",
+      "id": "qa46",
+      "question": "How much is the referral bonus and when is it paid?",
+      "gold": [
+        "internal-requests-policy §3.1"
+      ],
+      "top5": [
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §3.2",
+        "leave-policy §1.1",
+        "sick-leave-policy §2.1",
+        "expense-reimbursement-policy §2.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa01",
+      "question": "How many annual leave days do I get per year?",
+      "gold": [
+        "leave-policy §2.1"
+      ],
+      "top5": [
+        "leave-policy §2.1",
+        "leave-policy §2.3",
+        "leave-policy §2.2",
+        "leave-policy §3.4",
+        "leave-policy §5.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa03",
+      "question": "How many unused vacation days can I carry over to next year, and until when do I have to use them?",
+      "gold": [
+        "leave-policy §3.4"
+      ],
+      "top5": [
+        "leave-policy §3.4",
+        "leave-policy §2.3",
+        "leave-policy §6.2",
+        "benefits-policy §4.3",
+        "leave-policy §6.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa06",
+      "question": "What happens if two people from my team are already on vacation on the days I want?",
+      "gold": [
+        "leave-policy §3.3"
+      ],
+      "top5": [
+        "leave-policy §6.2",
+        "leave-policy §3.5",
+        "sick-leave-policy §3.1",
+        "onboarding-policy §2.1",
+        "leave-policy §1.2"
+      ],
+      "hit@1": 0.0,
+      "recall@1": 0.0,
+      "hit@3": 0.0,
+      "recall@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr@10": 0.0,
+      "ndcg@5": 0.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa08",
+      "question": "How many days off do I get if a close family member dies?",
+      "gold": [
+        "leave-policy §4.1"
+      ],
+      "top5": [
+        "leave-policy §4.1",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §2.3",
+        "benefits-policy §2.3",
+        "sick-leave-policy §2.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa11",
+      "question": "What happens if I have to work on a company holiday?",
+      "gold": [
+        "leave-policy §6.2"
+      ],
+      "top5": [
+        "leave-policy §6.2",
+        "leave-policy §6.1",
+        "leave-policy §2.1",
+        "remote-work-policy §3.1",
+        "leave-policy §2.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa13",
+      "question": "Do I get fewer vacation days because I work part-time?",
+      "gold": [
+        "leave-policy §1.3"
+      ],
+      "top5": [
+        "leave-policy §1.3",
+        "remote-work-policy §3.1",
+        "leave-policy §6.2",
+        "leave-policy §2.3",
+        "leave-policy §1.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa16",
+      "question": "I'm going to be ill for 5 days. Do I need a sick note?",
+      "gold": [
+        "sick-leave-policy §2.3"
+      ],
+      "top5": [
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §2.4",
+        "sick-leave-policy §3.1",
+        "sick-leave-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa18",
+      "question": "I got sick during my vacation and I have a medical certificate. Do I get those vacation days back?",
+      "gold": [
+        "sick-leave-policy §3.2"
+      ],
+      "top5": [
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.1",
+        "sick-leave-policy §3.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa21",
+      "question": "Can I get money for a coworking space?",
+      "gold": [
+        "remote-work-policy §2.1"
+      ],
+      "top5": [
+        "remote-work-policy §2.1",
+        "benefits-policy §3.3",
+        "remote-work-policy §2.3",
+        "equipment-policy §3.1",
+        "remote-work-policy §1.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa23",
+      "question": "I want to work from Portugal for 2 weeks. Is that allowed?",
+      "gold": [
+        "remote-work-policy §3.1"
+      ],
+      "top5": [
+        "remote-work-policy §3.1",
+        "remote-work-policy §3.2",
+        "leave-policy §6.2",
+        "leave-policy §3.2",
+        "remote-work-policy §1.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa26",
+      "question": "How long is the probation period?",
+      "gold": [
+        "onboarding-policy §3.1"
+      ],
+      "top5": [
+        "onboarding-policy §3.1",
+        "onboarding-policy §3.2",
+        "benefits-policy §1.1",
+        "leave-policy §5.1",
+        "onboarding-policy §3.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa28",
+      "question": "Does the company pay for my family's health insurance?",
+      "gold": [
+        "benefits-policy §2.2"
+      ],
+      "top5": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.1",
+        "benefits-policy §2.3",
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §1.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa31",
+      "question": "Does the sport compensation cover buying sports equipment?",
+      "gold": [
+        "benefits-policy §3.1"
+      ],
+      "top5": [
+        "benefits-policy §3.1",
+        "benefits-policy §3.2",
+        "benefits-policy §3.3",
+        "leave-policy §5.3",
+        "equipment-policy §3.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa33",
+      "question": "How many sessions with a psychologist does the company pay for?",
+      "gold": [
+        "benefits-policy §5.1"
+      ],
+      "top5": [
+        "benefits-policy §5.1",
+        "benefits-policy §5.2",
+        "internal-requests-policy §3.1",
+        "expense-reimbursement-policy §3.2",
+        "benefits-policy §6.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa36",
+      "question": "What is the per diem on business trips?",
+      "gold": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §3.1",
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §5.1",
+        "benefits-policy §4.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa38",
+      "question": "What is the spending limit for a client dinner?",
+      "gold": [
+        "expense-reimbursement-policy §5.1"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §5.1",
+        "expense-reimbursement-policy §3.2",
+        "benefits-policy §4.2",
+        "code-of-conduct §4.1",
+        "expense-reimbursement-policy §1.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa41",
+      "question": "Can I get money for a chair for my home office?",
+      "gold": [
+        "equipment-policy §3.1"
+      ],
+      "top5": [
+        "equipment-policy §3.1",
+        "equipment-policy §1.2",
+        "equipment-policy §3.2",
+        "remote-work-policy §2.2",
+        "benefits-policy §3.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa43",
+      "question": "Where can I report harassment anonymously?",
+      "gold": [
+        "code-of-conduct §2.2"
+      ],
+      "top5": [
+        "code-of-conduct §2.2",
+        "code-of-conduct §2.3",
+        "code-of-conduct §2.1",
+        "code-of-conduct §5.1",
+        "internal-requests-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "dense",
+      "id": "qa46",
+      "question": "How much is the referral bonus and when is it paid?",
+      "gold": [
+        "internal-requests-policy §3.1"
+      ],
+      "top5": [
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §3.2",
+        "benefits-policy §3.2",
+        "remote-work-policy §2.1",
+        "leave-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa01",
+      "question": "How many annual leave days do I get per year?",
+      "gold": [
+        "leave-policy §2.1"
+      ],
+      "top5": [
+        "leave-policy §2.1",
+        "leave-policy §2.2",
+        "leave-policy §2.3",
+        "leave-policy §3.4",
+        "leave-policy §5.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa03",
+      "question": "How many unused vacation days can I carry over to next year, and until when do I have to use them?",
+      "gold": [
+        "leave-policy §3.4"
+      ],
+      "top5": [
+        "leave-policy §3.4",
+        "benefits-policy §4.3",
+        "leave-policy §3.1",
+        "leave-policy §2.2",
+        "leave-policy §6.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa06",
+      "question": "What happens if two people from my team are already on vacation on the days I want?",
+      "gold": [
+        "leave-policy §3.3"
+      ],
+      "top5": [
+        "leave-policy §3.5",
+        "sick-leave-policy §3.1",
+        "leave-policy §3.3",
+        "leave-policy §2.4",
+        "remote-work-policy §1.2"
+      ],
+      "hit@1": 0.0,
+      "recall@1": 0.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 0.3333333333333333,
+      "ndcg@5": 0.5
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa08",
+      "question": "How many days off do I get if a close family member dies?",
+      "gold": [
+        "leave-policy §4.1"
+      ],
+      "top5": [
+        "leave-policy §4.1",
+        "sick-leave-policy §3.3",
+        "benefits-policy §2.3",
+        "leave-policy §6.2",
+        "sick-leave-policy §2.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa11",
+      "question": "What happens if I have to work on a company holiday?",
+      "gold": [
+        "leave-policy §6.2"
+      ],
+      "top5": [
+        "leave-policy §6.2",
+        "leave-policy §2.1",
+        "leave-policy §6.1",
+        "remote-work-policy §3.1",
+        "equipment-policy §2.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa13",
+      "question": "Do I get fewer vacation days because I work part-time?",
+      "gold": [
+        "leave-policy §1.3"
+      ],
+      "top5": [
+        "leave-policy §1.3",
+        "remote-work-policy §3.1",
+        "leave-policy §1.2",
+        "onboarding-policy §3.1",
+        "leave-policy §2.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa16",
+      "question": "I'm going to be ill for 5 days. Do I need a sick note?",
+      "gold": [
+        "sick-leave-policy §2.3"
+      ],
+      "top5": [
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §2.4",
+        "sick-leave-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa18",
+      "question": "I got sick during my vacation and I have a medical certificate. Do I get those vacation days back?",
+      "gold": [
+        "sick-leave-policy §3.2"
+      ],
+      "top5": [
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §3.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa21",
+      "question": "Can I get money for a coworking space?",
+      "gold": [
+        "remote-work-policy §2.1"
+      ],
+      "top5": [
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §1.2",
+        "onboarding-policy §2.1",
+        "benefits-policy §3.3",
+        "equipment-policy §1.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa23",
+      "question": "I want to work from Portugal for 2 weeks. Is that allowed?",
+      "gold": [
+        "remote-work-policy §3.1"
+      ],
+      "top5": [
+        "leave-policy §6.2",
+        "remote-work-policy §1.2",
+        "remote-work-policy §3.2",
+        "leave-policy §3.4",
+        "remote-work-policy §2.3"
+      ],
+      "hit@1": 0.0,
+      "recall@1": 0.0,
+      "hit@3": 0.0,
+      "recall@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr@10": 0.0,
+      "ndcg@5": 0.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa26",
+      "question": "How long is the probation period?",
+      "gold": [
+        "onboarding-policy §3.1"
+      ],
+      "top5": [
+        "onboarding-policy §3.1",
+        "benefits-policy §1.1",
+        "onboarding-policy §3.2",
+        "onboarding-policy §3.3",
+        "leave-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa28",
+      "question": "Does the company pay for my family's health insurance?",
+      "gold": [
+        "benefits-policy §2.2"
+      ],
+      "top5": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.1",
+        "benefits-policy §2.3",
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §3.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa31",
+      "question": "Does the sport compensation cover buying sports equipment?",
+      "gold": [
+        "benefits-policy §3.1"
+      ],
+      "top5": [
+        "benefits-policy §3.1",
+        "benefits-policy §3.2",
+        "benefits-policy §3.3",
+        "leave-policy §5.3",
+        "benefits-policy §1.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa33",
+      "question": "How many sessions with a psychologist does the company pay for?",
+      "gold": [
+        "benefits-policy §5.1"
+      ],
+      "top5": [
+        "benefits-policy §5.1",
+        "benefits-policy §5.2",
+        "benefits-policy §1.1",
+        "leave-policy §6.2",
+        "expense-reimbursement-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa36",
+      "question": "What is the per diem on business trips?",
+      "gold": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §3.1",
+        "expense-reimbursement-policy §5.1",
+        "expense-reimbursement-policy §1.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa38",
+      "question": "What is the spending limit for a client dinner?",
+      "gold": [
+        "expense-reimbursement-policy §5.1"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §5.1",
+        "benefits-policy §4.2",
+        "code-of-conduct §4.1",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §4.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa41",
+      "question": "Can I get money for a chair for my home office?",
+      "gold": [
+        "equipment-policy §3.1"
+      ],
+      "top5": [
+        "equipment-policy §3.1",
+        "equipment-policy §1.2",
+        "equipment-policy §3.2",
+        "remote-work-policy §2.2",
+        "remote-work-policy §2.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa43",
+      "question": "Where can I report harassment anonymously?",
+      "gold": [
+        "code-of-conduct §2.2"
+      ],
+      "top5": [
+        "code-of-conduct §2.2",
+        "code-of-conduct §2.3",
+        "code-of-conduct §2.1",
+        "internal-requests-policy §2.1",
+        "code-of-conduct §5.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf",
+      "id": "qa46",
+      "question": "How much is the referral bonus and when is it paid?",
+      "gold": [
+        "internal-requests-policy §3.1"
+      ],
+      "top5": [
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §3.2",
+        "benefits-policy §3.2",
+        "leave-policy §2.1",
+        "sick-leave-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa01",
+      "question": "How many annual leave days do I get per year?",
+      "gold": [
+        "leave-policy §2.1"
+      ],
+      "top5": [
+        "leave-policy §2.1",
+        "leave-policy §2.2",
+        "leave-policy §2.3",
+        "leave-policy §5.1",
+        "leave-policy §3.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa03",
+      "question": "How many unused vacation days can I carry over to next year, and until when do I have to use them?",
+      "gold": [
+        "leave-policy §3.4"
+      ],
+      "top5": [
+        "leave-policy §3.4",
+        "benefits-policy §4.3",
+        "leave-policy §2.3",
+        "leave-policy §5.1",
+        "leave-policy §2.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa06",
+      "question": "What happens if two people from my team are already on vacation on the days I want?",
+      "gold": [
+        "leave-policy §3.3"
+      ],
+      "top5": [
+        "leave-policy §3.3",
+        "leave-policy §6.2",
+        "sick-leave-policy §3.1",
+        "onboarding-policy §2.2",
+        "onboarding-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa08",
+      "question": "How many days off do I get if a close family member dies?",
+      "gold": [
+        "leave-policy §4.1"
+      ],
+      "top5": [
+        "leave-policy §4.1",
+        "benefits-policy §2.3",
+        "leave-policy §6.2",
+        "leave-policy §5.1",
+        "leave-policy §2.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa11",
+      "question": "What happens if I have to work on a company holiday?",
+      "gold": [
+        "leave-policy §6.2"
+      ],
+      "top5": [
+        "leave-policy §6.2",
+        "leave-policy §6.1",
+        "leave-policy §2.1",
+        "equipment-policy §2.3",
+        "leave-policy §2.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa13",
+      "question": "Do I get fewer vacation days because I work part-time?",
+      "gold": [
+        "leave-policy §1.3"
+      ],
+      "top5": [
+        "leave-policy §1.3",
+        "remote-work-policy §3.1",
+        "leave-policy §2.3",
+        "leave-policy §6.2",
+        "onboarding-policy §3.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa16",
+      "question": "I'm going to be ill for 5 days. Do I need a sick note?",
+      "gold": [
+        "sick-leave-policy §2.3"
+      ],
+      "top5": [
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §2.4",
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §3.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa18",
+      "question": "I got sick during my vacation and I have a medical certificate. Do I get those vacation days back?",
+      "gold": [
+        "sick-leave-policy §3.2"
+      ],
+      "top5": [
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §3.4"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa21",
+      "question": "Can I get money for a coworking space?",
+      "gold": [
+        "remote-work-policy §2.1"
+      ],
+      "top5": [
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §1.2",
+        "equipment-policy §3.1",
+        "onboarding-policy §2.1",
+        "expense-reimbursement-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa23",
+      "question": "I want to work from Portugal for 2 weeks. Is that allowed?",
+      "gold": [
+        "remote-work-policy §3.1"
+      ],
+      "top5": [
+        "remote-work-policy §3.2",
+        "leave-policy §6.2",
+        "leave-policy §3.2",
+        "leave-policy §2.2",
+        "internal-requests-policy §1.1"
+      ],
+      "hit@1": 0.0,
+      "recall@1": 0.0,
+      "hit@3": 0.0,
+      "recall@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr@10": 0.0,
+      "ndcg@5": 0.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa26",
+      "question": "How long is the probation period?",
+      "gold": [
+        "onboarding-policy §3.1"
+      ],
+      "top5": [
+        "onboarding-policy §3.1",
+        "onboarding-policy §3.2",
+        "benefits-policy §1.1",
+        "internal-requests-policy §3.1",
+        "onboarding-policy §3.3"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa28",
+      "question": "Does the company pay for my family's health insurance?",
+      "gold": [
+        "benefits-policy §2.2"
+      ],
+      "top5": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.1",
+        "benefits-policy §2.3",
+        "expense-reimbursement-policy §3.2",
+        "sick-leave-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa31",
+      "question": "Does the sport compensation cover buying sports equipment?",
+      "gold": [
+        "benefits-policy §3.1"
+      ],
+      "top5": [
+        "benefits-policy §3.1",
+        "benefits-policy §3.2",
+        "benefits-policy §3.3",
+        "leave-policy §5.3",
+        "expense-reimbursement-policy §1.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa33",
+      "question": "How many sessions with a psychologist does the company pay for?",
+      "gold": [
+        "benefits-policy §5.1"
+      ],
+      "top5": [
+        "benefits-policy §5.1",
+        "benefits-policy §5.2",
+        "benefits-policy §1.1",
+        "benefits-policy §2.1",
+        "expense-reimbursement-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa36",
+      "question": "What is the per diem on business trips?",
+      "gold": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §3.1",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §4.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa38",
+      "question": "What is the spending limit for a client dinner?",
+      "gold": [
+        "expense-reimbursement-policy §5.1"
+      ],
+      "top5": [
+        "expense-reimbursement-policy §5.1",
+        "code-of-conduct §4.1",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa41",
+      "question": "Can I get money for a chair for my home office?",
+      "gold": [
+        "equipment-policy §3.1"
+      ],
+      "top5": [
+        "equipment-policy §3.1",
+        "equipment-policy §3.2",
+        "equipment-policy §1.2",
+        "remote-work-policy §2.2",
+        "expense-reimbursement-policy §4.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa43",
+      "question": "Where can I report harassment anonymously?",
+      "gold": [
+        "code-of-conduct §2.2"
+      ],
+      "top5": [
+        "code-of-conduct §2.2",
+        "code-of-conduct §2.3",
+        "code-of-conduct §2.1",
+        "code-of-conduct §3.1",
+        "internal-requests-policy §2.1"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    },
+    {
+      "variant": "hybrid_rrf+rerank",
+      "id": "qa46",
+      "question": "How much is the referral bonus and when is it paid?",
+      "gold": [
+        "internal-requests-policy §3.1"
+      ],
+      "top5": [
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §3.2",
+        "equipment-policy §3.1",
+        "expense-reimbursement-policy §3.2",
+        "benefits-policy §3.2"
+      ],
+      "hit@1": 1.0,
+      "recall@1": 1.0,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr@10": 1.0,
+      "ndcg@5": 1.0
+    }
+  ]
+}

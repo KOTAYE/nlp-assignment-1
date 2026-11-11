@@ -1,0 +1,305 @@
+{
+  "component": "collector",
+  "variant": null,
+  "split": "dev",
+  "n": 19,
+  "metrics": {
+    "facts_precision": 1.0,
+    "facts_recall": 1.0,
+    "facts_f1": 1.0,
+    "value_extraction_accuracy": 1.0,
+    "clarification_precision": 1.0,
+    "clarification_recall": 0.8,
+    "clarification_f1": 0.889,
+    "clarification_accuracy": 0.947,
+    "clarification_confusion": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "tn": 14
+    },
+    "errors": [
+      "'How quickly can HR give me a confirmation letter?': gold=['document_type'] pred=['document_type'] ask True->False"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "collector": "6"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T00:59:49",
+  "git_commit": "d214702",
+  "per_row": [
+    {
+      "id": "co01",
+      "question": "Do I need a sick note?",
+      "gold_required": [
+        "illness_duration_days"
+      ],
+      "pred_required": [
+        "illness_duration_days"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "How many working days have you been (or will you be) ill?"
+    },
+    {
+      "id": "co02",
+      "question": "I've been sick for 2 days, do I need a medical certificate?",
+      "gold_required": [
+        "illness_duration_days"
+      ],
+      "pred_required": [
+        "illness_duration_days"
+      ],
+      "values": {
+        "illness_duration_days": {
+          "gold": "2",
+          "pred": "2",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co05",
+      "question": "I fell ill during my vacation and I have a doctor's certificate. Do I get the days back?",
+      "gold_required": [
+        "has_medical_certificate"
+      ],
+      "pred_required": [
+        "has_medical_certificate"
+      ],
+      "values": {
+        "has_medical_certificate": {
+          "gold": "yes",
+          "pred": "yes",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co06",
+      "question": "Can I work from abroad?",
+      "gold_required": [
+        "days_abroad"
+      ],
+      "pred_required": [
+        "days_abroad"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "For how many days do you plan to work from abroad?"
+    },
+    {
+      "id": "co10",
+      "question": "How many days of special leave do I get?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co13",
+      "question": "How long does it take to get an income statement for my visa?",
+      "gold_required": [
+        "document_type"
+      ],
+      "pred_required": [
+        "document_type"
+      ],
+      "values": {
+        "document_type": {
+          "gold": "income statement",
+          "pred": "income statement",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co16",
+      "question": "How many vacation days do I get per year?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co18",
+      "question": "Can I get a home office allowance?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co21",
+      "question": "Do I need a sick note?",
+      "gold_required": [
+        "illness_duration_days"
+      ],
+      "pred_required": [
+        "illness_duration_days"
+      ],
+      "values": {
+        "illness_duration_days": {
+          "gold": "3",
+          "pred": "3",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co23",
+      "question": "My father passed away. How many days can I take off?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co26",
+      "question": "How do I claim my expenses?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co28",
+      "question": "Can I take unpaid leave?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co29",
+      "question": "I'm sick, what should I do?",
+      "gold_required": [
+        "illness_duration_days"
+      ],
+      "pred_required": [
+        "illness_duration_days"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "How many working days have you been (or will you be) ill?"
+    },
+    {
+      "id": "co32",
+      "question": "How much is the referral bonus?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co34",
+      "question": "Can I expense an online course I'm taking?",
+      "gold_required": [
+        "expense_category"
+      ],
+      "pred_required": [
+        "expense_category"
+      ],
+      "values": {
+        "expense_category": {
+          "gold": "course",
+          "pred": "course",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co38",
+      "question": "Do I need a certificate for 1 day of sickness?",
+      "gold_required": [
+        "illness_duration_days"
+      ],
+      "pred_required": [
+        "illness_duration_days"
+      ],
+      "values": {
+        "illness_duration_days": {
+          "gold": "1",
+          "pred": "1",
+          "ok": true
+        }
+      },
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co40",
+      "question": "What do I need to do to get special leave?",
+      "gold_required": [],
+      "pred_required": [],
+      "values": {},
+      "gold_ask": false,
+      "pred_ask": false,
+      "clarifying_question": null
+    },
+    {
+      "id": "co41",
+      "question": "Can I get money back for something I bought for work?",
+      "gold_required": [
+        "expense_category"
+      ],
+      "pred_required": [
+        "expense_category"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": true,
+      "clarifying_question": "What did you buy for work?"
+    },
+    {
+      "id": "co44",
+      "question": "How quickly can HR give me a confirmation letter?",
+      "gold_required": [
+        "document_type"
+      ],
+      "pred_required": [
+        "document_type"
+      ],
+      "values": {},
+      "gold_ask": true,
+      "pred_ask": false,
+      "clarifying_question": null
+    }
+  ]
+}

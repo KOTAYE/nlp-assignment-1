@@ -1035,9 +1035,11 @@ def build_agent() -> list[dict]:
     )
     add(
         "E001",
-        ["Decline request #9 because the medical certificate is missing.", "Yes, confirm."],
+        ["Decline request #10 because the medical certificate is missing.", "Yes, confirm."],
         "hr_decide",
-        status_changes={"9": "declined"},
+        status_changes={
+            "10": "declined"
+        },  # gold fixed in iteration 2: #9 is already approved, #10 is pending
         tools_required=["decide_leave_request"],
     )
     add(
@@ -1450,6 +1452,202 @@ def build_calibration() -> list[dict]:
     return rows
 
 
+# ====================================================================================== HOLDOUT (written after the
+# first test run and BEFORE the iteration-2 fixes; never used for tuning). Fresh questions on mostly new sections.
+HOLDOUT_QA = [
+    (
+        "E019",
+        "Is health insurance available to me?",
+        ["benefits-policy §1.1"],
+        "Yes: part-time employees get health insurance after probation, which you have passed.",
+    ),
+    (
+        "E020",
+        "Can I join the English lessons?",
+        ["benefits-policy §6.1"],
+        "Yes, all team members including contractors can join free group English lessons after a placement test.",
+    ),
+    (
+        "E014",
+        "Can I use the partner gyms near the office?",
+        ["benefits-policy §3.3"],
+        "No: partner gyms are for Lviv and Kyiv office employees; remote employees use receipt-based compensation only.",
+    ),
+    (
+        "E003",
+        "By when do I need to submit my gym receipt, and when is the sport compensation paid?",
+        ["benefits-policy §3.2"],
+        "Submit the receipt by the 25th of the month; it is paid with the next salary; unused amounts do not accumulate.",
+    ),
+    (
+        "E003",
+        "How long do I have to return my laptop after my last working day?",
+        ["equipment-policy §2.3"],
+        "Within 5 working days after the last working day.",
+    ),
+    (
+        "E003",
+        "Can I use my personal laptop to work on company source code?",
+        ["equipment-policy §4.1"],
+        "No, personal devices may not be used to access company source code or customer data.",
+    ),
+    (
+        "E003",
+        "Do new joiners get a buddy?",
+        ["onboarding-policy §2.2"],
+        "Yes, every new joiner gets a buddy from a neighbouring team for the first 3 months.",
+    ),
+    (
+        "E003",
+        "What can happen at the end of probation besides passing?",
+        ["onboarding-policy §3.2"],
+        "Probation can be passed, extended by up to 1 month, or not passed.",
+    ),
+    (
+        "E003",
+        "How much can I spend on a hotel during a business trip?",
+        ["expense-reimbursement-policy §3.2"],
+        "Up to 120 USD per night.",
+    ),
+    (
+        "E003",
+        "Is a taxi to the airport for a business trip reimbursed?",
+        ["expense-reimbursement-policy §4.2"],
+        "Yes, taxi rides to the airport for a business trip are reimbursed in full.",
+    ),
+    (
+        "E003",
+        "How soon must I tell HR that I moved to a new address?",
+        ["internal-requests-policy §2.1"],
+        "Within 10 working days of the change.",
+    ),
+    (
+        "E003",
+        "I manage a team and my cousin just joined it. Do I need to tell anyone?",
+        ["code-of-conduct §3.1"],
+        "Yes, disclose it to HR as a potential conflict of interest (managing a close relative).",
+    ),
+    (
+        "E003",
+        "If my illness lasts exactly 3 working days, do I need a medical certificate?",
+        ["sick-leave-policy §2.2"],
+        "No, up to 3 consecutive working days do not require a certificate.",
+    ),
+    (
+        "E003",
+        "Is the office open after 9 pm?",
+        ["remote-work-policy §1.2"],
+        "No, the office is open on working days from 08:00 to 21:00.",
+    ),
+]
+HOLDOUT_UNSUPPORTED = [
+    ("E003", "Can I get a bigger monitor than the standard one?", [], "other"),
+    ("E003", "How is my annual bonus calculated?", [], "compensation"),
+    ("E003", "Can I bring my partner to the company New Year party?", [], "other"),
+    ("E003", "Will the company pay for my move from Kharkiv to Lviv?", [], "relocation_and_abroad"),
+]
+
+
+def build_holdout_qa() -> list[dict]:
+    rows = []
+    for i, (emp, q, secs, ans) in enumerate(HOLDOUT_QA, 1):
+        rows.append(
+            {
+                "id": f"hq{i:02d}",
+                "employee_id": emp,
+                "question": q,
+                "gold_section_ids": secs,
+                "gold_answer": ans,
+                "gold_outcome": "answer",
+                "gold_category": None,
+                "origin": "manual",
+                "split": "holdout",
+            }
+        )
+    for i, (emp, q, secs, cat) in enumerate(HOLDOUT_UNSUPPORTED, 1):
+        rows.append(
+            {
+                "id": f"hu{i:02d}",
+                "employee_id": emp,
+                "question": q,
+                "gold_section_ids": secs,
+                "gold_answer": None,
+                "gold_outcome": "hr_referral",
+                "gold_category": cat,
+                "origin": "manual",
+                "split": "holdout",
+            }
+        )
+    return rows
+
+
+def build_holdout_agent() -> list[dict]:
+    S = []
+
+    def add(emp, turns, label, **expect):
+        S.append(
+            {
+                "id": f"ha{len(S) + 1:02d}",
+                "employee_id": emp,
+                "turns": turns,
+                "label": label,
+                "split": "holdout",
+                "expect": {
+                    "new": expect.get("new", []),
+                    "status_changes": expect.get("status_changes", {}),
+                    "tools_required": expect.get("tools_required", []),
+                    "tools_forbidden": expect.get("tools_forbidden", []),
+                    "reply_any": expect.get("reply_any", []),
+                    "reply_regex": expect.get("reply_regex"),
+                },
+            }
+        )
+
+    add(
+        "E022",
+        ["I'd like a day of annual leave on Wednesday 25 November."],
+        "submit",
+        new=[{"type": "annual", "days": wd("2026-11-25", "2026-11-25"), "status": "approved"}],
+    )
+    add(
+        "E014",
+        ["Please register sick leave for yesterday and today."],
+        "submit",
+        new=[{"type": "sick", "days": wd("2026-11-11", "2026-11-12"), "status": "approved"}],
+    )
+    add(
+        "E009",
+        ["Book vacation from 29 to 31 December."],
+        "submit",
+        new=[{"type": "annual", "days": wd("2026-12-29", "2026-12-31"), "status": "declined"}],
+    )
+    add(
+        "E024",
+        ["Book annual leave from 14 to 23 December."],
+        "submit",
+        new=[{"type": "annual", "days": wd("2026-12-14", "2026-12-23"), "status": "approved"}],
+    )
+    add(
+        "E027",
+        ["Book annual leave from 4 to 8 January 2027."],
+        "submit",
+        new=[{"type": "annual", "days": wd("2027-01-04", "2027-01-08"), "status": "approved"}],
+    )
+    add(
+        "E002",
+        [
+            "Which leave requests are waiting for HR?",
+            "Decline #8, the manager did not agree.",
+            "Yes, I confirm.",
+        ],
+        "hr_decide",
+        status_changes={"8": "declined"},
+        tools_required=["decide_leave_request"],
+    )
+    add("E030", ["Cancel request 14."], "cancel_refused", status_changes={}, tools_forbidden=[])
+    return S
+
+
 def main() -> None:
     write("qa", build_qa(), "gold_outcome")
     write("router", build_router(), "gold_intent")
@@ -1459,6 +1657,8 @@ def main() -> None:
     write("guard", build_guard(), "gold_blocked")
     write("e2e", build_e2e(), None)
     write("judge_calibration", build_calibration(), None)
+    write("qa_holdout", build_holdout_qa(), None)
+    write("agent_holdout", build_holdout_agent(), None)
 
 
 if __name__ == "__main__":

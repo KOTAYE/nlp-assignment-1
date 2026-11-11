@@ -24,8 +24,8 @@
     "judge_correctness": "1"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T00:44:03",
-  "git_commit": "d81e0ca",
+  "date": "2026-11-12T01:02:20",
+  "git_commit": "eeb724a",
   "per_row": [
     {
       "id": "cal01",
@@ -47,7 +47,7 @@
       "id": "cal03",
       "expected": "contradicts",
       "judge": "contradicts",
-      "reason": "The candidate answer states that 10 days can be carried over, which contradicts the gold answer's limit of 5 days.",
+      "reason": "The candidate answer states 10 days can be carried over, which contradicts the gold answer's limit of 5 days.",
       "exact": true,
       "adjacent": true
     },
@@ -111,7 +111,7 @@
       "id": "cal11",
       "expected": "mostly_wrong",
       "judge": "mostly_wrong",
-      "reason": "The candidate answer is too vague and does not directly answer the question with a 'no' for office-based employees, making it mostly wrong.",
+      "reason": "The candidate answer is too vague and does not directly answer the question regarding eligibility for office-based employees, nor does it state that office-based employees are not eligible.",
       "exact": true,
       "adjacent": true
     },
@@ -143,7 +143,7 @@
       "id": "cal15",
       "expected": "fully_matches",
       "judge": "fully_matches",
-      "reason": "The candidate answer correctly states the sport compensation amount of 500 UAH per month for part-time employees, matching the gold answer.",
+      "reason": "The candidate answer fully matches the gold answer, providing the correct amount and conditions.",
       "exact": true,
       "adjacent": true
     },

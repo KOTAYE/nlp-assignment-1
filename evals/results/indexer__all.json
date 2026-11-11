@@ -38,8 +38,8 @@
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T00:45:09",
-  "git_commit": "d81e0ca",
+  "date": "2026-11-12T01:00:12",
+  "git_commit": "eeb724a",
   "per_row": [
     {
       "variant": "section_aware",
