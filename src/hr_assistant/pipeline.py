@@ -51,6 +51,15 @@ class Reply:
     details: dict[str, Any] = field(default_factory=dict)
 
 
+def with_sources(text: str, citations: list[str]) -> str:
+    """Brief: the assistant must "identify the source in its answer". Guarantee it in code: every cited section
+    appears in the reply text; if the model did not put it inline, append a Sources line."""
+    missing = [c for c in citations if c not in text]
+    if not missing:
+        return text
+    return f"{text}\n\nSources: " + ", ".join(f"[{c}]" for c in missing)
+
+
 def _finish(session: Session, user_text: str, reply: Reply) -> Reply:
     session.history += [{"role": "user", "content": user_text}, {"role": "assistant", "content": reply.text}]
     trace_event(
@@ -179,7 +188,7 @@ def handle(session: Session, message: str) -> Reply:
         session,
         message,
         Reply(
-            ans.answer,
+            with_sources(ans.answer, ans.citations),
             "answer",
             trace,
             citations=ans.citations,

@@ -6,6 +6,7 @@ a confirmation gate (enforced inside the tool).
 
 from __future__ import annotations
 
+import datetime as dt
 import json
 from dataclasses import dataclass, field
 
@@ -26,10 +27,14 @@ class AgentResult:
 def run(message: str, history: list[dict], ctx: ToolContext) -> AgentResult:
     version, template = load_prompt("leave_agent")
     profile = {k: v for k, v in ctx.profile.facts(ctx.today).items() if k != "today"}
+    calendar = ", ".join(
+        f"{(ctx.today + dt.timedelta(days=i)).strftime('%a %d %b %Y')}" for i in range(-7, 50)
+    )
     system = template.format(
         today=ctx.today.isoformat(),
         weekday=ctx.today.strftime("%A"),
         profile=json.dumps(profile, ensure_ascii=False),
+        calendar=calendar,
     )
     messages: list[dict] = [
         {"role": "system", "content": system},

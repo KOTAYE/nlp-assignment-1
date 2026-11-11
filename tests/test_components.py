@@ -105,3 +105,13 @@ def test_invalid_dates_give_instructive_error(ctx):
 def test_cannot_cancel_someone_elses_request(ctx):
     r = execute(ctx("E005"), "cancel_leave_request", {"request_id": 11}, "test")  # #11 belongs to E017
     assert r["error"] == "not_found"
+
+
+def test_answer_always_names_its_sources():
+    from hr_assistant.pipeline import with_sources
+
+    assert (
+        with_sources("Up to 5 days [leave-policy §3.4].", ["leave-policy §3.4"])
+        == "Up to 5 days [leave-policy §3.4]."
+    )
+    assert with_sources("Up to 5 days.", ["leave-policy §3.4"]).endswith("Sources: [leave-policy §3.4]")

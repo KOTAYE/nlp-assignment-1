@@ -174,17 +174,52 @@ def tokenize(text: str) -> list[str]:
     return out
 
 
+def index_units(chunk: Chunk) -> list[str]:
+    """Searchable texts for one section: the whole section, plus one unit per TABLE ROW that repeats the
+    section metadata and the table header (RAG lecture / Docling: "a value needs its row, column and source").
+    All units map back to the same citable section, so a value hidden in a large table can still be found."""
+    units = [chunk.text]
+    rows = [ln for ln in chunk.body.splitlines() if ln.startswith("|")]
+    if len(rows) > 2:
+        header = rows[0]
+        for row in rows[2:]:  # skip the |---| separator
+            units.append(f"[{chunk.id}] {chunk.doc_title} > {chunk.heading}\n{header}\n{row}")
+    return units
+
+
+def _expand(chunks: tuple[Chunk, ...]) -> tuple[list[int], list[str]]:
+    owner, texts = [], []
+    for i, c in enumerate(chunks):
+        for u in index_units(c):
+            owner.append(i)
+            texts.append(u)
+    return owner, texts
+
+
+def _dedupe(
+    chunks: tuple[Chunk, ...], owner: list[int], scores: np.ndarray, k: int
+) -> list[tuple[Chunk, float]]:
+    out, seen = [], set()
+    for j in np.argsort(-scores):
+        i = owner[j]
+        if i not in seen:
+            seen.add(i)
+            out.append((chunks[i], float(scores[j])))
+            if len(out) == k:
+                break
+    return out
+
+
 class BM25Retriever:
     name = "bm25"
 
     def __init__(self, chunks: tuple[Chunk, ...]):
         self.chunks = chunks
-        self.bm25 = BM25Okapi([tokenize(c.text) for c in chunks])
+        self.owner, texts = _expand(chunks)
+        self.bm25 = BM25Okapi([tokenize(x) for x in texts])
 
     def search(self, query: str, k: int = 20) -> list[tuple[Chunk, float]]:
-        scores = self.bm25.get_scores(tokenize(query))
-        order = np.argsort(-scores)[:k]
-        return [(self.chunks[i], float(scores[i])) for i in order]
+        return _dedupe(self.chunks, self.owner, self.bm25.get_scores(tokenize(query)), k)
 
 
 @lru_cache(maxsize=2)
@@ -200,13 +235,12 @@ class DenseRetriever:
     def __init__(self, chunks: tuple[Chunk, ...], model_name: str = DENSE_MODEL):
         self.chunks = chunks
         self.model = _sentence_model(model_name)
-        self.emb = self.model.encode([c.text for c in chunks], normalize_embeddings=True, batch_size=32)
+        self.owner, texts = _expand(chunks)
+        self.emb = self.model.encode(texts, normalize_embeddings=True, batch_size=32)
 
     def search(self, query: str, k: int = 20) -> list[tuple[Chunk, float]]:
         q = self.model.encode([DENSE_QUERY_PREFIX + query], normalize_embeddings=True)[0]
-        scores = self.emb @ q
-        order = np.argsort(-scores)[:k]
-        return [(self.chunks[i], float(scores[i])) for i in order]
+        return _dedupe(self.chunks, self.owner, self.emb @ q, k)
 
 
 class HybridRetriever:
@@ -246,9 +280,18 @@ class Reranker:
     ) -> list[tuple[Chunk, float]]:
         if not candidates:
             return []
-        scores = self.model.predict([(query, c.text) for c, _ in candidates])
-        order = np.argsort(-np.asarray(scores))[:k]
-        return [(candidates[i][0], float(scores[i])) for i in order]
+        # a section's score is its best unit (whole section or one table row with header)
+        pairs, owner = [], []
+        for i, (c, _) in enumerate(candidates):
+            for u in index_units(c):
+                pairs.append((query, u))
+                owner.append(i)
+        unit_scores = np.asarray(self.model.predict(pairs))
+        best = np.full(len(candidates), -np.inf)
+        for j, i in enumerate(owner):
+            best[i] = max(best[i], unit_scores[j])
+        order = np.argsort(-best)[:k]
+        return [(candidates[i][0], float(best[i])) for i in order]
 
 
 @dataclass
