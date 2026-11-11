@@ -31,17 +31,18 @@ In a mid-size company, HR receives many repetitive questions (How many vacation 
 | Employee | Ask something the policies do not cover → the question is routed to HR with a ticket ID |
 | HR manager | Review requests the rules left in `pending_hr`; approve or decline through the chat (tools) |
 
-### 1.4 Leave business rules [confirmed]
-These are deterministic, so they are checked in code. The LLM collects the inputs, calls the tool, and explains the decision.
+### 1.4 Leave business rules [confirmed, refined in Data Preparation]
+These rules are deterministic and are checked in code (`rules.py`). The LLM only collects the inputs, calls the tool and explains the decision. The **policy corpus is the source of truth** (`leave-policy §3.3, §4.2, §5.2`, `sick-leave-policy §2.4`).
 
 | Leave type | Allowance | Auto-decision |
 |---|---|---|
-| Annual | 24 working days / year (pro-rated in the first year; contractors are not eligible) | **approve** if balance is sufficient, notice ≥ 14 days for > 3 days of leave (≥ 2 days otherwise), and no overlap with the employee's own requests; **decline** if balance is insufficient or the employee is ineligible; **pending_hr** if ≥ 2 teammates are already off on those dates |
-| Sick | Up to 3 consecutive days without a certificate; 10 paid days / year | **approve** if ≤ 3 days; **pending_hr** if > 3 days (certificate required) |
-| Unpaid | Up to 20 days / year | always **pending_hr** (requires manager approval) |
-| Special (wedding, bereavement, childbirth) | 3 days per event | **approve** if within the limit; **pending_hr** otherwise |
+| Annual | 24 working days / year; 2 days per full month in the first year; carry-over ≤ 5 days, valid until 31 March | **approve** if balance is sufficient + notice met (≥ 14 calendar days for > 3 working days, ≥ 2 working days otherwise) + no overlap with own requests; **decline** if any of these fails; **pending_hr** if ≥ 2 teammates already have approved leave on any requested day |
+| Sick | ≤ 3 consecutive working days without a certificate; 10 paid days / year | **approve** if ≤ 3 days and the yearly total stays ≤ 10; **pending_hr** otherwise; never declined for notice |
+| Unpaid | ≤ 20 working days / year | **pending_hr** (manager approval); **decline** if the yearly limit would be exceeded |
+| Special (wedding, bereavement, childbirth) | 3 working days per event | **approve** if within the limit; **pending_hr** otherwise |
+| Any type, contractor | not covered (`leave-policy §1.2`, `sick-leave-policy §1.1`) | **decline** with an explanation |
 
-Working-day arithmetic is done in code (weekends and public holidays from a fixed calendar), never by the LLM.
+Working days exclude weekends and company holidays (`leave-policy §6.1`). The arithmetic is done in code.
 
 ### 1.5 Scope
 **In scope:** policy Q&A with citations; clarification; leave CRUD with rule-based decisions; HR referral tickets; HR-manager decision flow; tracing; per-component evals; a local web UI.
@@ -91,7 +92,16 @@ No open dataset provides **a policy corpus + questions with gold section IDs + c
 - Questions written by the same author as the corpus may overlap lexically with it, which inflates BM25. Mitigation: syncora phrasing, paraphrase rows, and a check of the lexical-overlap distribution.
 
 ## 3. Data Preparation
-_TODO_
+
+### 3.1 Policy corpus (2026-11-12)
+- 9 markdown documents in `data/policies/`, **98 numbered sections**, ~4,000 words. See the data card in `data/README.md`.
+- Each document has front matter (`doc_id`, version, effective date). Each `### N.M` heading is a citable section (`leave-policy §3.4`).
+- Designed for the evals:
+  - **Conditional rules** (employment type × probation × location) make clarification necessary.
+  - **Cross-references** between documents make multi-hop questions possible.
+  - **Tables** (benefits matrix, holidays, special leave) test structure-preserving chunking.
+  - An **outdated-version note** (carry-over of 10 → 5 days) is a hallucination trap.
+  - **Explicit "handled by HR" sections** (maternity, harassment, stays abroad > 30 days, salary/promotion) give gold labels for HR referral.
 
 ## 4. Modeling
 _TODO — see `docs/architecture.md` for the component design._
@@ -110,3 +120,4 @@ _TODO_
 | 0 | 2026-11-12 | Business Understanding | Initial scope draft | — |
 | 1 | 2026-11-12 | Business Understanding | Owner confirmed language (EN), leave rules, full component set, Streamlit UI | — |
 | 2 | 2026-11-12 | Data Understanding | Surveyed HF/GitHub/Kaggle; decided synthetic corpus + reuse of syncora questions + OpenGov structure | — |
+| 3 | 2026-11-12 | Data Preparation | Wrote 9-document policy corpus (98 sections); refined leave rules to match corpus (notice → decline, sick yearly cap, contractors declined) | — |
