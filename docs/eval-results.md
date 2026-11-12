@@ -48,7 +48,7 @@ Chunking ablation (BM25, all answerable QA questions):
 | unclear | 0.800 | 1.000 | 0.889 | 4 |
 
 ## Router (test)
-*split=test, n=46, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:19:00*
+*split=test, n=46, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:02:14*
 | variant | accuracy | macro-F1 | MCC | recall(hr_referral) |
 |---|---|---|---|---|
 | llm | 0.978 | 0.981 | 0.973 | 0.889 |
@@ -114,6 +114,13 @@ Misses at 5 (production variant): none
 | hybrid_rrf+rerank | 0.893 | 0.929 | 1.000 | 0.982 | 0.925 | 0.938 |
 Misses at 5 (production variant): none
 
+## Output guard: claim verifier (controlled examples)
+*split=all, n=17, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T09:58:03, prompts: verifier v1*
+| unsupported caught (recall) | precision | F1 | accuracy | false-rejection rate |
+|---|---|---|---|---|
+| 0.889 | 1.000 | 0.941 | 0.941 | 0.000 |
+Errors: ["ve13 'No, birthdays are not company days off.': gold_supported=False pred=True"]
+
 ## Judge calibration (controlled examples)
 *split=all, n=19, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:20:25, prompts: judge_correctness v1*
 | exact agreement | within one level | pass/fail accuracy | pass/fail MCC | contradiction recall | contradiction precision |
@@ -121,14 +128,14 @@ Misses at 5 (production variant): none
 | 0.947 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 
 ## QA system: answer correctness, source support, HR referral (dev)
-*split=dev, n=25, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:16:33, prompts: router v3, collector v7, rewriter v2, answerer v3, referral v2, judge_correctness v1, judge_faithfulness v1*
+*split=dev, n=25, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:05:16, prompts: router v4, collector v7, rewriter v2, answerer v3, referral v2, judge_correctness v1, judge_faithfulness v1*
 | metric | value |
 |---|---|
 | answer_rate (answerable questions answered) | 1.000 |
 | correctness_pass_rate (fully/mostly right, of answerable) | 1.000 |
 | correctness_mean_score (answered) | 1.000 |
 | contradiction_rate (answered) | 0.000 |
-| faithfulness_mean (answered) | 0.982 |
+| faithfulness_mean (answered) | 0.965 |
 | citation_hit_rate (answered) | 1.000 |
 | answers_with_citation | 1.000 |
 | context_recall@5 (gold section in evidence) | 1.000 |
@@ -136,42 +143,39 @@ Misses at 5 (production variant): none
 | referral_recall | 1.000 |
 | referral_f1 | 1.000 |
 | ticket_category_accuracy | 1.000 |
-| avg_tokens_per_question | 3095 |
-| avg_cost_usd_per_question | 0.000 |
-| avg_latency_s | 4.660 |
+| avg_tokens_per_question | 3904 |
+| avg_cost_usd_per_question | 0.001 |
+| avg_latency_s | 5.810 |
 
 Referral confusion: {'tp': 6, 'fp': 0, 'fn': 0, 'tn': 19}. Failing stages: none.
 
 ## QA system: answer correctness, source support, HR referral (test)
-*split=test, n=37, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:24:07, prompts: router v3, collector v7, rewriter v2, answerer v3, referral v2, judge_correctness v1, judge_faithfulness v1*
+*split=test, n=37, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:11:20, prompts: router v4, collector v7, rewriter v2, answerer v3, referral v2, judge_correctness v1, judge_faithfulness v1*
 | metric | value |
 |---|---|
-| answer_rate (answerable questions answered) | 0.857 |
-| correctness_pass_rate (fully/mostly right, of answerable) | 0.857 |
+| answer_rate (answerable questions answered) | 0.893 |
+| correctness_pass_rate (fully/mostly right, of answerable) | 0.893 |
 | correctness_mean_score (answered) | 1.000 |
 | contradiction_rate (answered) | 0.000 |
 | faithfulness_mean (answered) | 1.000 |
 | citation_hit_rate (answered) | 1.000 |
 | answers_with_citation | 1.000 |
 | context_recall@5 (gold section in evidence) | 0.929 |
-| referral_precision | 0.667 |
-| referral_recall | 0.667 |
-| referral_f1 | 0.667 |
-| ticket_category_accuracy | 0.833 |
-| avg_tokens_per_question | 3411 |
-| avg_cost_usd_per_question | 0.000 |
-| avg_latency_s | 4.970 |
+| referral_precision | 0.800 |
+| referral_recall | 0.889 |
+| referral_f1 | 0.842 |
+| ticket_category_accuracy | 0.875 |
+| avg_tokens_per_question | 4042 |
+| avg_cost_usd_per_question | 0.001 |
+| avg_latency_s | 5.680 |
 
-Referral confusion: {'tp': 6, 'fp': 3, 'fn': 3, 'tn': 25}. Failing stages: {'router/answerer (answered instead of referring)': 3, 'retrieval (gold section not in top-5) -> false referral': 1, 'router -> leave_action': 1, 'answerer (abstained) -> hr_referral': 2}.
+Referral confusion: {'tp': 8, 'fp': 2, 'fn': 1, 'tn': 26}. Failing stages: {'router -> leave_action': 1, 'retrieval (gold section not in top-5) -> false referral': 1, 'router/answerer (answered instead of referring)': 1, 'answerer (abstained) -> hr_referral': 1}.
 
 Errors:
 - qa12 'Can I request annual leave through the HR assistant?': route=hr_referral verdict=None stage=retrieval (gold section not in top-5) -> false referral
 - qa14 'Can I cancel a vacation that I already booked?': route=leave_action verdict=None stage=router -> leave_action
 - qa40 'I lost my company laptop. What should I do?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral
-- qa42 'A client wants to give me a gift worth 80 USD. Can I accept it?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral
-- un04 'I want to work from Spain for 3 months. Is that OK?': route=answer verdict=None stage=router/answerer (answered instead of referring)
 - un09 'Will the company pay for my home internet?': route=answer verdict=None stage=router/answerer (answered instead of referring)
-- un15 'My child is sick. Can I stay home to take care of them and still get paid?': route=answer verdict=None stage=router/answerer (answered instead of referring)
 
 ## Answerer with gold context (oracle, test)
 *split=test, n=28, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:25:32, prompts: answerer v3, judge_correctness v1, judge_faithfulness v1*
@@ -185,30 +189,29 @@ Errors:
 Verdicts: {'fully_matches': 28, 'mostly_right': 0, 'mostly_wrong': 0, 'contradicts': 0}
 
 ## QA system: answer correctness, source support, HR referral (holdout)
-*split=holdout, n=18, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:30:58, prompts: router v3, collector v7, rewriter v2, answerer v3, referral v2, judge_correctness v1, judge_faithfulness v1*
+*split=holdout, n=18, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:16:49, prompts: router v4, collector v7, rewriter v2, answerer v3, referral v2, judge_correctness v1, judge_faithfulness v1*
 | metric | value |
 |---|---|
-| answer_rate (answerable questions answered) | 0.857 |
-| correctness_pass_rate (fully/mostly right, of answerable) | 0.857 |
+| answer_rate (answerable questions answered) | 0.929 |
+| correctness_pass_rate (fully/mostly right, of answerable) | 0.929 |
 | correctness_mean_score (answered) | 1.000 |
 | contradiction_rate (answered) | 0.000 |
-| faithfulness_mean (answered) | 0.958 |
+| faithfulness_mean (answered) | 0.923 |
 | citation_hit_rate (answered) | 1.000 |
 | answers_with_citation | 1.000 |
 | context_recall@5 (gold section in evidence) | 0.929 |
-| referral_precision | 0.750 |
+| referral_precision | 1.000 |
 | referral_recall | 0.750 |
-| referral_f1 | 0.750 |
+| referral_f1 | 0.857 |
 | ticket_category_accuracy | 1.000 |
-| avg_tokens_per_question | 3052 |
-| avg_cost_usd_per_question | 0.000 |
-| avg_latency_s | 4.980 |
+| avg_tokens_per_question | 4127 |
+| avg_cost_usd_per_question | 0.001 |
+| avg_latency_s | 6.110 |
 
-Referral confusion: {'tp': 3, 'fp': 1, 'fn': 1, 'tn': 13}. Failing stages: {'router -> smalltalk': 1, 'answerer (abstained) -> hr_referral': 1, 'router/answerer (answered instead of referring)': 1}.
+Referral confusion: {'tp': 3, 'fp': 0, 'fn': 1, 'tn': 14}. Failing stages: {'collector (unnecessary clarification)': 1, 'router/answerer (answered instead of referring)': 1}.
 
 Errors:
-- hq02 'Can I join the English lessons?': route=smalltalk verdict=None stage=router -> smalltalk
-- hq07 'Do new joiners get a buddy?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral
+- hq09 'How much can I spend on a hotel during a business trip?': route=clarification verdict=None stage=collector (unnecessary clarification)
 - hu01 'Can I get a bigger monitor than the standard one?': route=answer verdict=None stage=router/answerer (answered instead of referring)
 
 ## Answerer with gold context (oracle, holdout)
@@ -222,139 +225,165 @@ Errors:
 
 Verdicts: {'fully_matches': 13, 'mostly_right': 0, 'mostly_wrong': 0, 'contradicts': 1}
 
-## Leave agent (dev, k=1)
-*split=dev, n=11, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:17:07, prompts: leave_agent v4*
+## QA system: answer correctness, source support, HR referral (holdout2)
+*split=holdout2, n=22, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:00:26, prompts: router v4, collector v7, rewriter v2, answerer v3, referral v2, judge_correctness v1, judge_faithfulness v1*
 | metric | value |
 |---|---|
-| success_rate (all checks, run 1) | 0.909 |
-| outcome_db_state_accuracy | 0.909 |
+| answer_rate (answerable questions answered) | 0.917 |
+| correctness_pass_rate (fully/mostly right, of answerable) | 0.917 |
+| correctness_mean_score (answered) | 1.000 |
+| contradiction_rate (answered) | 0.000 |
+| faithfulness_mean (answered) | 1.000 |
+| citation_hit_rate (answered) | 1.000 |
+| answers_with_citation | 1.000 |
+| context_recall@5 (gold section in evidence) | 0.917 |
+| referral_precision | 0.900 |
+| referral_recall | 0.900 |
+| referral_f1 | 0.900 |
+| ticket_category_accuracy | 0.778 |
+| avg_tokens_per_question | 3747 |
+| avg_cost_usd_per_question | 0.001 |
+| avg_latency_s | 5.680 |
+
+Referral confusion: {'tp': 9, 'fp': 1, 'fn': 1, 'tn': 11}. Failing stages: {'route=leave_action': 1, 'router (referred directly)': 1}.
+
+Errors:
+- h2q12 'Will my manager find out that I see the company psychologist?': route=hr_referral verdict=None stage=router (referred directly)
+- h2u03 'My mother is in hospital. Can I take paid days off to look after her?': route=leave_action verdict=None stage=route=leave_action
+
+## Leave agent (dev, k=1)
+*split=dev, n=11, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:22:18, prompts: leave_agent v4*
+| metric | value |
+|---|---|
+| success_rate (all checks, run 1) | 1.000 |
+| outcome_db_state_accuracy | 1.000 |
 | process_required_tools | 1.000 |
 | safety_no_forbidden_tools | 1.000 |
 | communication_reply_check | 1.000 |
-| pass^1 (all 1 runs succeed) | 0.909 |
-| pass@1 averaged over runs | 0.909 |
+| pass^1 (all 1 runs succeed) | 1.000 |
+| pass@1 averaged over runs | 1.000 |
 | avg_steps | 2.180 |
-| avg_tokens_per_task | 3566 |
+| avg_tokens_per_task | 3609 |
 | avg_cost_usd_per_task | 0.000 |
 
 Stop reasons: {'answered': 11, 'max_steps': 0}
 
-Failures:
-- ag16 submit 'Book annual leave from 1 to 11 December.': outcome=False process=True safety=True comm=True new=[{'leave_type': 'annual', 'start_date': '2026-12-01', 'end_date': '2026-12-31', 'status': 'declined'}, {'leave_type': 'annual', 'start_date': '2027-12-01', 'end_date': '2027-12-11', 'status': 'approved'}] reply='Your leave requests have been processed:\n\n1. **Request ID #15**: Annual leave from **1 to 31 December 2026** was **decli'
-
 ## Leave agent (test, k=3)
-*split=test, n=45, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:27:21, prompts: leave_agent v4*
+*split=test, n=45, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:20:56, prompts: leave_agent v4*
 | metric | value |
 |---|---|
-| success_rate (all checks, run 1) | 0.933 |
+| success_rate (all checks, run 1) | 1.000 |
 | outcome_db_state_accuracy | 1.000 |
 | process_required_tools | 1.000 |
 | safety_no_forbidden_tools | 1.000 |
-| communication_reply_check | 0.933 |
-| pass^3 (all 3 runs succeed) | 0.933 |
-| pass@1 averaged over runs | 0.933 |
+| communication_reply_check | 1.000 |
+| pass^3 (all 3 runs succeed) | 1.000 |
+| pass@1 averaged over runs | 1.000 |
 | avg_steps | 2.130 |
-| avg_tokens_per_task | 3408 |
+| avg_tokens_per_task | 3436 |
 | avg_cost_usd_per_task | 0.000 |
 
 Stop reasons: {'answered': 15, 'max_steps': 0}
 
-Failures:
-- ag25 invalid 'Register a sick day for 2 November please.': outcome=True process=True safety=True comm=False new=[] reply='The date you provided, 2 November, is in the past. Please provide a new date for your sick leave request.'
-- ag25 invalid 'Register a sick day for 2 November please.': outcome=True process=True safety=True comm=False new=[] reply='The date you provided, 2 November, is in the past. Please provide a new date for your sick leave request.'
-- ag25 invalid 'Register a sick day for 2 November please.': outcome=True process=True safety=True comm=False new=[] reply='The date you provided, 2 November, is in the past. Sick leave requests must be submitted for future dates. Please provid'
-
 ## Leave agent (holdout, k=3)
-*split=holdout, n=21, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:32:41, prompts: leave_agent v4*
+*split=holdout, n=21, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:23:23, prompts: leave_agent v4*
 | metric | value |
 |---|---|
-| success_rate (all checks, run 1) | 0.857 |
-| outcome_db_state_accuracy | 0.857 |
+| success_rate (all checks, run 1) | 1.000 |
+| outcome_db_state_accuracy | 1.000 |
 | process_required_tools | 1.000 |
 | safety_no_forbidden_tools | 1.000 |
 | communication_reply_check | 1.000 |
-| pass^3 (all 3 runs succeed) | 0.857 |
-| pass@1 averaged over runs | 0.857 |
-| avg_steps | 2.570 |
-| avg_tokens_per_task | 4220 |
-| avg_cost_usd_per_task | 0.001 |
+| pass^3 (all 3 runs succeed) | 1.000 |
+| pass@1 averaged over runs | 1.000 |
+| avg_steps | 2.710 |
+| avg_tokens_per_task | 4500 |
+| avg_cost_usd_per_task | 0.000 |
 
 Stop reasons: {'answered': 7, 'max_steps': 0}
 
-Failures:
-- ha01 submit "I'd like a day of annual leave on Wednesday 25 November.": outcome=False process=True safety=True comm=True new=[] reply='Wednesday 25 November is actually in the next year (2026). Could you please confirm if you meant Wednesday, 25 November '
-- ha01 submit "I'd like a day of annual leave on Wednesday 25 November.": outcome=False process=True safety=True comm=True new=[] reply='Wednesday 25 November is actually in the next year (2026). Would you like to take your annual leave on Wednesday, Novemb'
-- ha01 submit "I'd like a day of annual leave on Wednesday 25 November.": outcome=False process=True safety=True comm=True new=[] reply='Wednesday 25 November is actually in the next year (2026). Would you like to confirm your annual leave request for that '
+## Leave agent (holdout2, k=3)
+*split=holdout2, n=18, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:21:43, prompts: leave_agent v4*
+| metric | value |
+|---|---|
+| success_rate (all checks, run 1) | 1.000 |
+| outcome_db_state_accuracy | 1.000 |
+| process_required_tools | 1.000 |
+| safety_no_forbidden_tools | 1.000 |
+| communication_reply_check | 1.000 |
+| pass^3 (all 3 runs succeed) | 1.000 |
+| pass@1 averaged over runs | 1.000 |
+| avg_steps | 2.000 |
+| avg_tokens_per_task | 3253 |
+| avg_cost_usd_per_task | 0.000 |
+
+Stop reasons: {'answered': 6, 'max_steps': 0}
 
 ## End-to-end scenarios (dev)
-*split=dev, n=12, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:18:10*
+*split=dev, n=12, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:07:08*
 | success rate | tracer coverage | avg cost / conversation (USD) | avg latency / conversation (s) |
 |---|---|---|---|
-| 0.917 | 1.000 | 0.001 | 5.130 |
+| 1.000 | 1.000 | 0.001 | 6.290 |
 
 | check | pass rate |
 |---|---|
 | citation | 1.000 |
 | db | 1.000 |
 | reply | 1.000 |
-| route | 0.917 |
-| ticket | 0.667 |
+| route | 1.000 |
+| ticket | 1.000 |
 
 | scenario type | passed |
 |---|---|
 | answer | 4/4 |
-| clarify_then_referral | 0/1 |
+| clarify_then_referral | 1/1 |
 | follow_up | 1/1 |
 | hr | 1/1 |
 | leave | 2/2 |
 | referral | 2/2 |
 | unclear | 1/1 |
 
-Failures:
-- e2e06 clarify_then_referral ['Can I work from abroad?', 'about 2 months']: routes=['clarification', 'answer'] checks={'route': False, 'ticket': False} last='As a full-time employee, you can work from abroad for up to 30 calendar days per calendar year. Since you plan to work for about 2 months (approximate'
-
 ## End-to-end scenarios (test)
-*split=test, n=18, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=071bb69, 2026-11-12T01:28:46*
+*split=test, n=18, model=openai/gpt-4o-mini, judge=google/gemini-2.5-flash, commit=6a2a717, 2026-11-12T10:25:13*
 | success rate | tracer coverage | avg cost / conversation (USD) | avg latency / conversation (s) |
 |---|---|---|---|
-| 0.833 | 1.000 | 0.000 | 4.710 |
+| 0.889 | 1.000 | 0.001 | 5.470 |
 
 | check | pass rate |
 |---|---|
 | citation | 0.875 |
 | db | 1.000 |
 | reply | 0.889 |
-| route | 0.833 |
-| ticket | 0.500 |
+| route | 0.889 |
+| ticket | 0.750 |
 
 | scenario type | passed |
 |---|---|
-| answer | 3/4 |
-| clarify_then_answer | 3/3 |
+| answer | 4/4 |
+| clarify_then_answer | 2/3 |
 | follow_up | 1/1 |
 | guard | 1/1 |
 | leave | 2/2 |
 | leave_multi | 1/1 |
-| referral | 2/4 |
+| referral | 3/4 |
 | smalltalk | 2/2 |
 
 Failures:
+- e2e05 clarify_then_answer ['Can I work from abroad?', 'Three weeks in Croatia']: routes=['clarification', 'hr_referral'] checks={'route': False, 'citation': False, 'reply': False} last="The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (relocation and abroad). HR replies within 2 worki"
 - e2e25 referral ['Will the company pay for my home internet?']: routes=['answer'] checks={'route': False, 'ticket': False} last='As a full-time employee based in the Lviv office, you are considered an office-based employee. According to the policy, office-based employees are not'
-- e2e29 answer ['How much is the referral bonus?']: routes=['hr_referral'] checks={'route': False, 'citation': False, 'reply': False} last="The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (compensation). HR replies within 2 working days, "
-- e2e30 referral ['Can I take care of my sick child and still get paid?']: routes=['answer'] checks={'route': False, 'ticket': False} last='You can take care of your sick child, but you will need a medical certificate, and this situation is processed directly by HR. For paid sick days, Lum'
 
 ## Iteration comparison
-Iteration 1 = after dev tuning; iteration 2 = after error analysis of iteration 1. The test split was seen in iteration 1, so the **holdout** set (written before the iteration-2 fixes) is the unbiased estimate.
+Iteration 1 = after dev tuning; iteration 2 = after error analysis of iteration 1 (holdout written before it); iteration 3 = output guard + code date resolution (holdout-2 written before it). The **last column** is the unbiased estimate of the final system; earlier sets were seen during development.
 
-| metric | iteration 1 · test | iteration 2 · test | iteration 2 · holdout |
-|---|---|---|---|
-| Answer correctness (pass rate) | 0.786 | 0.857 | 0.857 |
-| Faithfulness | 0.986 | 1.000 | 0.958 |
-| Citation hit rate | 0.917 | 1.000 | 1.000 |
-| HR referral precision | 0.700 | 0.667 | 0.750 |
-| HR referral recall | 0.778 | 0.667 | 0.750 |
-| Answer rate | 0.857 | 0.857 | 0.857 |
-| Oracle answer rate | 0.714 | 1.000 | 1.000 |
-| Leave agent pass^3 | 0.800 | 0.933 | 0.857 |
-| E2E scenario success | 0.722 | 0.833 | — |
+| metric | iter 1 · test | iter 2 · test | iter 3 · test | iter 2 · holdout | iter 3 · holdout | iter 2 · holdout-2 | **iter 3 · holdout-2** |
+|---|---|---|---|---|---|---|---|
+| Answer correctness (pass rate) | 0.786 | 0.857 | 0.893 | 0.857 | 0.929 | 0.833 | 0.917 |
+| Faithfulness | 0.986 | 1.000 | 1.000 | 0.958 | 0.923 | 0.975 | 1.000 |
+| Citation hit rate | 0.917 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| HR referral precision | 0.700 | 0.667 | 0.800 | 0.750 | 1.000 | 0.818 | 0.900 |
+| HR referral recall | 0.778 | 0.667 | 0.889 | 0.750 | 0.750 | 0.900 | 0.900 |
+| Answer rate | 0.857 | 0.857 | 0.893 | 0.857 | 0.929 | 0.833 | 0.917 |
+| Oracle answer rate | 0.714 | 1.000 | 1.000 | — | 1.000 | — | — |
+| Leave agent pass^3 | 0.800 | 0.933 | 1.000 | 0.857 | 1.000 | 0.333 | 1.000 |
+| E2E scenario success | 0.722 | 0.833 | 0.889 | — | — | — | — |
 

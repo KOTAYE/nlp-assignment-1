@@ -25,9 +25,10 @@ class AgentResult:
     steps: int = 0
 
 
-def with_dates(message: str, today) -> str:
+def with_dates(message: str, today, history: list[dict] | None = None) -> str:
     """Append the code-resolved dates (iteration 3: LLMs mis-compute weekdays and years)."""
-    note = annotate(message, today)
+    context = " ".join(m["content"] for m in (history or []) if m["role"] == "user")
+    note = annotate(message, today, context)
     return f"{message}\n\n{note}" if note else message
 
 
@@ -46,7 +47,7 @@ def run(message: str, history: list[dict], ctx: ToolContext) -> AgentResult:
     messages: list[dict] = [
         {"role": "system", "content": system},
         *history[-8:],
-        {"role": "user", "content": with_dates(message, ctx.today)},
+        {"role": "user", "content": with_dates(message, ctx.today, history)},
     ]
     tools = tools_for(ctx)
     calls: list[dict] = []

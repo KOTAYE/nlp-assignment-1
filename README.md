@@ -56,7 +56,7 @@ To reset the demo data: `python scripts/reset_db.py`.
 
 ### Run tests and evaluations
 ```bash
-pytest                                   # 55 unit tests (rule engine, tools, guard, chunker)
+pytest                                   # 58 unit tests (rule engine, tools, guard, chunker, dates, output guard)
 python -m evals.build_datasets           # rebuild gold datasets (deterministic)
 python -m evals.run_all --split test     # every component eval on the test split (~5 min, ~$0.10)
 python -m evals.run_qa --split dev       # or a single component on the dev split
@@ -68,8 +68,9 @@ Results are saved to `evals/results/<component>__<variant>__<split>.json`, toget
 ```
 message → guard → router ─┬─ policy_question → collector (clarify?) → rewriter → hybrid retrieval (BM25+dense, RRF)
                           │                     → cross-encoder rerank → grounded answerer (citations, sufficiency)
-                          │                                                     └─ insufficient → HR referral (LLM → create_hr_ticket)
-                          ├─ leave_action ───→ leave agent (LLM + tools → rule engine → SQLite)
+                          │                     → output guard (HR-delegation rule + claim verifier)
+                          │                                                     └─ insufficient / unsupported → HR referral (LLM → create_hr_ticket)
+                          ├─ leave_action ───→ date resolver → leave agent (LLM + tools → rule engine → SQLite)
                           ├─ hr_referral ────→ HR referral (LLM → create_hr_ticket)
                           └─ smalltalk / unclear → canned reply
 ```

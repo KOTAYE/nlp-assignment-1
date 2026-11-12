@@ -66,8 +66,10 @@ def _with_year(day: int, month: int, today: dt.date, year: int | None) -> dt.dat
         return None
 
 
-def resolve(text: str, today: dt.date) -> list[tuple[str, dt.date]]:
-    """Return (expression, date) pairs for the date expressions found in `text`."""
+def resolve(text: str, today: dt.date, context: str = "") -> list[tuple[str, dt.date]]:
+    """Return (expression, date) pairs for the date expressions found in `text`.
+    `context` = earlier user turns: if they name a month, a bare "the 14th" is left to the agent (it belongs to
+    that month), instead of being resolved to the next 14th (regression found in iteration 3)."""
     found: list[tuple[str, dt.date]] = []
     low = text.lower()
     for word, delta in (("today", 0), ("tomorrow", 1), ("yesterday", -1)):
@@ -92,8 +94,9 @@ def resolve(text: str, today: dt.date) -> list[tuple[str, dt.date]]:
         month = MONTHS[m.group(1).lower()[:3]]
         if d := _with_year(int(m.group(2)), month, today, int(m.group(3)) if m.group(3) else None):
             found.append((m.group(0), d))
+    month_in_context = re.search(rf"\b{_MON}\b", context, re.I) is not None
     for m in _BARE_DAY.finditer(text):
-        if inside(m):
+        if inside(m) or month_in_context:
             continue
         day = int(m.group(1))
         cand = today
@@ -125,9 +128,9 @@ def resolve(text: str, today: dt.date) -> list[tuple[str, dt.date]]:
     return out
 
 
-def annotate(text: str, today: dt.date) -> str:
+def annotate(text: str, today: dt.date, context: str = "") -> str:
     """A note for the agent, or '' when no date expression was recognised."""
-    pairs = resolve(text, today)
+    pairs = resolve(text, today, context)
     if not pairs:
         return ""
     items = "; ".join(f"'{e}' = {d.strftime('%a')} {d.isoformat()}" for e, d in pairs)

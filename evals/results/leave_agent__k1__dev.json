@@ -4,23 +4,21 @@
   "split": "dev",
   "n": 11,
   "metrics": {
-    "success_rate (all checks, run 1)": 0.909,
-    "outcome_db_state_accuracy": 0.909,
+    "success_rate (all checks, run 1)": 1.0,
+    "outcome_db_state_accuracy": 1.0,
     "process_required_tools": 1.0,
     "safety_no_forbidden_tools": 1.0,
     "communication_reply_check": 1.0,
-    "pass^1 (all 1 runs succeed)": 0.909,
-    "pass@1 averaged over runs": 0.909,
+    "pass^1 (all 1 runs succeed)": 1.0,
+    "pass@1 averaged over runs": 1.0,
     "avg_steps": 2.18,
-    "avg_tokens_per_task": 3566,
-    "avg_cost_usd_per_task": 0.00046,
+    "avg_tokens_per_task": 3609,
+    "avg_cost_usd_per_task": 0.00043,
     "stop_reasons": {
       "answered": 11,
       "max_steps": 0
     },
-    "failures": [
-      "ag16 submit 'Book annual leave from 1 to 11 December.': outcome=False process=True safety=True comm=True new=[{'leave_type': 'annual', 'start_date': '2026-12-01', 'end_date': '2026-12-31', 'status': 'declined'}, {'leave_type': 'annual', 'start_date': '2027-12-01', 'end_date': '2027-12-11', 'status': 'approved'}] reply='Your leave requests have been processed:\\n\\n1. **Request ID #15**: Annual leave from **1 to 31 December 2026** was **decli'"
-    ]
+    "failures": []
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
@@ -28,8 +26,8 @@
     "leave_agent": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:17:07",
-  "git_commit": "071bb69",
+  "date": "2026-11-12T10:22:18",
+  "git_commit": "6a2a717",
   "per_row": [
     {
       "id": "ag01",
@@ -37,7 +35,7 @@
       "turns": [
         "Please book annual leave from 7 to 11 December."
       ],
-      "reply": "Your annual leave from December 7 to December 11 has been approved. You have 19 days remaining for 2026.",
+      "reply": "Your annual leave from December 7 to December 11, 2026, has been approved. You have 19 days remaining for 2026.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -59,8 +57,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3137,
-      "cost_usd": 0.000393
+      "tokens": 3242,
+      "cost_usd": 0.000296
     },
     {
       "id": "ag03",
@@ -68,7 +66,7 @@
       "turns": [
         "Book annual leave from 28 to 30 December."
       ],
-      "reply": "Your annual leave request from 28 to 30 December has been submitted and is currently pending HR approval. The reason for the pending status is that two members of your team already have approved leave on 29 December. HR will confirm with your team lead within 3 working days (leave-policy §3.3).",
+      "reply": "Your annual leave request from December 28 to December 30, 2026, has been submitted and is currently pending HR approval (#15). The reason for the pending status is that two team members already have approved leave on December 29, and HR will confirm with your team lead within three working days (leave-policy §3.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -90,8 +88,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3181,
-      "cost_usd": 0.000417
+      "tokens": 3287,
+      "cost_usd": 0.000426
     },
     {
       "id": "ag06",
@@ -99,7 +97,7 @@
       "turns": [
         "I need unpaid leave from 1 to 5 February 2027."
       ],
-      "reply": "Your unpaid leave request from February 1 to February 5, 2027, has been submitted and is currently pending HR approval (#15). Unpaid leave requires manager approval, and HR will review it as per the leave policy.",
+      "reply": "Your unpaid leave request from February 1 to February 5, 2027, has been submitted and is currently pending HR approval. Unpaid leave requires manager approval, and HR will review it (leave policy §5.2). Your request ID is #15.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -121,8 +119,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3164,
-      "cost_usd": 0.000407
+      "tokens": 3283,
+      "cost_usd": 0.000419
     },
     {
       "id": "ag08",
@@ -130,7 +128,7 @@
       "turns": [
         "Book me annual leave from 7 to 11 December."
       ],
-      "reply": "Your annual leave request from 7 to 11 December has been declined. The reason is that contractors are not covered by the leave policies, and you should agree on time off with your manager under your service agreement (leave-policy §1.2, sick-leave-policy §1.1).",
+      "reply": "Your annual leave request from December 7 to December 11 has been declined. The reason is that contractors are not covered by the leave policies, and you should agree on time off with your manager under your service agreement (leave-policy §1.2, sick-leave-policy §1.1).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -152,8 +150,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3197,
-      "cost_usd": 0.000417
+      "tokens": 3298,
+      "cost_usd": 0.000423
     },
     {
       "id": "ag11",
@@ -161,7 +159,7 @@
       "turns": [
         "How many vacation days do I have left?"
       ],
-      "reply": "You have 2 vacation days left for this year.",
+      "reply": "You have 2 vacation days left for the year 2026.",
       "tool_calls": [
         "get_leave_balance"
       ],
@@ -176,8 +174,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3095,
-      "cost_usd": 0.000369
+      "tokens": 3098,
+      "cost_usd": 0.000265
     },
     {
       "id": "ag13",
@@ -209,37 +207,30 @@
       "turns": [
         "Book annual leave from 1 to 11 December."
       ],
-      "reply": "Your leave requests have been processed:\n\n1. **Request ID #15**: Annual leave from **1 to 31 December 2026** was **declined** due to insufficient balance. You requested 21 working days, but you only have 8 annual leave days available for 2026 (leave-policy §2.1, §3.3).\n   \n2. **Request ID #16**: Annual leave from **1 to 11 December 2027** was **approved** for 8 working days; you have 21 days remaining for 2027 (leave-policy §3.3).\n\nIf you would like to adjust your request for 2026 or need further assistance, please let me know!",
+      "reply": "Your request for annual leave from December 1 to December 11 has been declined. You requested 9 working days, but you only have 8 annual leave days available for 2026 (leave-policy §2.1, §3.3).",
       "tool_calls": [
-        "submit_leave_request",
         "submit_leave_request"
       ],
       "new_requests": [
         {
           "leave_type": "annual",
           "start_date": "2026-12-01",
-          "end_date": "2026-12-31",
+          "end_date": "2026-12-11",
           "status": "declined"
-        },
-        {
-          "leave_type": "annual",
-          "start_date": "2027-12-01",
-          "end_date": "2027-12-11",
-          "status": "approved"
         }
       ],
       "status_changes": {},
-      "outcome_ok": false,
+      "outcome_ok": true,
       "process_ok": true,
       "safety_ok": true,
       "communication_ok": true,
-      "success": false,
+      "success": true,
       "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3579,
-      "cost_usd": 0.000561
+      "tokens": 3270,
+      "cost_usd": 0.000415
     },
     {
       "id": "ag18",
@@ -249,7 +240,7 @@
         "Approve request #8, the team lead agreed.",
         "Yes, I confirm."
       ],
-      "reply": "Request #8 for Sofiia Lysenko's unpaid leave from 14 to 18 December has been approved.",
+      "reply": "Request #8 for Sofiia Lysenko (unpaid leave, 14–18 Dec 2026) has been approved.",
       "tool_calls": [
         "list_pending_requests",
         "decide_leave_request"
@@ -269,8 +260,8 @@
         "answered",
         "answered"
       ],
-      "tokens": 8622,
-      "cost_usd": 0.000997
+      "tokens": 8659,
+      "cost_usd": 0.001008
     },
     {
       "id": "ag21",
@@ -278,7 +269,7 @@
       "turns": [
         "Book me some leave from 30 November to 2 December."
       ],
-      "reply": "What type of leave would you like to request: annual, sick, unpaid, or special?",
+      "reply": "What type of leave would you like to request for these dates: annual, sick, unpaid, or special?",
       "tool_calls": [],
       "new_requests": [],
       "status_changes": {},
@@ -291,8 +282,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 1503,
-      "cost_usd": 0.000234
+      "tokens": 1550,
+      "cost_usd": 0.000137
     },
     {
       "id": "ag23",
@@ -300,7 +291,7 @@
       "turns": [
         "Book annual leave from 4 January to 5 February 2027."
       ],
-      "reply": "The first request for annual leave from 4 January to 31 December 2026 failed because the end date is before the start date. However, the second request for annual leave from 1 January to 5 February 2027 has been approved for 25 working days, leaving you with 4 days remaining for 2027.\n\nPlease confirm the correct dates for the first request so I can submit it again.",
+      "reply": "The first request for annual leave from 4 January to 31 December 2026 was declined because the start date is in the past. However, the second request for annual leave from 1 January to 5 February 2027 has been approved. \n\nYou have 4 days remaining for annual leave in 2027. \n\nWould you like to adjust the first request or submit a different leave request?",
       "tool_calls": [
         "submit_leave_request",
         "submit_leave_request"
@@ -323,8 +314,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3469,
-      "cost_usd": 0.000511
+      "tokens": 3680,
+      "cost_usd": 0.000557
     },
     {
       "id": "ag26",
@@ -332,7 +323,7 @@
       "turns": [
         "Can you book 7 December off as annual leave?"
       ],
-      "reply": "Your request for annual leave on 7 December 2026 has been declined due to insufficient balance; you have 0 annual leave days available for this year (leave-policy §2.1, §3.3).",
+      "reply": "Your request for annual leave on 7 December 2026 has been declined due to insufficient balance. You have 0 annual leave days available for this year (leave policy §2.1, §3.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -354,8 +345,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3165,
-      "cost_usd": 0.000406
+      "tokens": 3225,
+      "cost_usd": 0.000415
     }
   ]
 }

@@ -37,31 +37,35 @@ KEY_METRICS = [  # (results file, metric key, label)
 
 
 def iteration_comparison() -> list[str]:
-    """Iteration 1 (test) vs iteration 2 (test, holdout). Iteration-1 files are snapshotted in evals/results_iteration1."""
-    snap = ROOT / "evals" / "results_iteration1"
-    if not snap.exists():
+    """Key metrics across iterations. Snapshots: evals/results_iteration1, evals/results_iteration2; current = iteration 3.
+    Each holdout was written before the fixes of the iteration it first measures."""
+    it1, it2 = ROOT / "evals" / "results_iteration1", ROOT / "evals" / "results_iteration2"
+    if not it1.exists():
         return []
 
     def get(folder: Path, file: str, key: str):
         p = folder / f"{file}.json"
         return json.loads(p.read_text(encoding="utf-8"))["metrics"].get(key) if p.exists() else None
 
-    rows = []
-    for file, key, label in KEY_METRICS:
-        rows.append(
-            [
-                label,
-                get(snap, file.format(split="test"), key),
-                get(RESULTS, file.format(split="test"), key),
-                get(RESULTS, file.format(split="holdout"), key),
-            ]
-        )
+    cols = [
+        ("iter 1 · test", it1, "test"),
+        ("iter 2 · test", it2, "test"),
+        ("iter 3 · test", RESULTS, "test"),
+        ("iter 2 · holdout", it2, "holdout"),
+        ("iter 3 · holdout", RESULTS, "holdout"),
+        ("iter 2 · holdout-2", it2, "holdout2"),
+        ("**iter 3 · holdout-2**", RESULTS, "holdout2"),
+    ]
+    rows = [
+        [label] + [get(folder, file.format(split=sp), key) for _, folder, sp in cols]
+        for file, key, label in KEY_METRICS
+    ]
     return [
         "## Iteration comparison",
-        "Iteration 1 = after dev tuning; iteration 2 = after error analysis of iteration 1. "
-        "The test split was seen in iteration 1, so the **holdout** set (written before the iteration-2 fixes) is the "
-        "unbiased estimate.\n",
-        table(["metric", "iteration 1 · test", "iteration 2 · test", "iteration 2 · holdout"], rows),
+        "Iteration 1 = after dev tuning; iteration 2 = after error analysis of iteration 1 (holdout written before it); "
+        "iteration 3 = output guard + code date resolution (holdout-2 written before it). The **last column** is the "
+        "unbiased estimate of the final system; earlier sets were seen during development.\n",
+        table(["metric"] + [c[0] for c in cols], rows),
         "",
     ]
 
@@ -264,6 +268,27 @@ def main() -> None:
                 "",
             ]
 
+    if d := load("verifier__all"):
+        m = d["metrics"]
+        s += [
+            "## Output guard: claim verifier (controlled examples)",
+            meta(d),
+            table(
+                ["unsupported caught (recall)", "precision", "F1", "accuracy", "false-rejection rate"],
+                [
+                    [
+                        m["unsupported_recall (caught)"],
+                        m["unsupported_precision"],
+                        m["f1"],
+                        m["accuracy"],
+                        m["false_rejection_rate (supported flagged)"],
+                    ]
+                ],
+            ),
+            f"Errors: {m['errors'] or 'none'}",
+            "",
+        ]
+
     if d := load("judge_calibration__all"):
         m = d["metrics"]
         s += [
@@ -292,7 +317,7 @@ def main() -> None:
             "",
         ]
 
-    for split in ("dev", "test", "holdout"):
+    for split in ("dev", "test", "holdout", "holdout2"):
         if d := load(f"qa__pipeline__{split}"):
             m = d["metrics"]
             s += [
@@ -314,7 +339,7 @@ def main() -> None:
                 "",
             ]
 
-    for split, k in (("dev", 1), ("test", 3), ("holdout", 3)):
+    for split, k in (("dev", 1), ("test", 3), ("holdout", 3), ("holdout2", 3)):
         if d := load(f"leave_agent__k{k}__{split}"):
             m = d["metrics"]
             s += [

@@ -93,11 +93,11 @@
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "router": "3"
+    "router": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:19:00",
-  "git_commit": "071bb69",
+  "date": "2026-11-12T10:02:14",
+  "git_commit": "6a2a717",
   "per_row": [
     {
       "id": "rt02",
@@ -113,7 +113,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question is about the rules regarding per diem for business trips."
+      "reason": "The question asks about the company's policy regarding per diem for business trips."
     },
     {
       "id": "rt05",
@@ -121,7 +121,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question is about HR procedures regarding the duration of probation."
+      "reason": "The question is about the duration of the probation period, which is a company policy."
     },
     {
       "id": "rt07",
@@ -129,7 +129,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about a specific company policy regarding expenses."
+      "reason": "The question asks about the rules regarding expenses for client dinners."
     },
     {
       "id": "rt09",
@@ -137,7 +137,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question is about company holidays, which falls under HR policies."
+      "reason": "The question asks about company holidays, which falls under HR policies."
     },
     {
       "id": "rt10",
@@ -145,7 +145,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question pertains to company policy regarding accepting gifts."
+      "reason": "The question asks about company policy regarding accepting gifts."
     },
     {
       "id": "rt12",
@@ -169,7 +169,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question is about a company policy regarding referral bonuses."
+      "reason": "The question asks about a company policy regarding referral bonuses."
     },
     {
       "id": "rt17",
@@ -177,7 +177,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question pertains to company policy regarding sharing confidential information."
+      "reason": "The question asks about company rules regarding sharing confidential information."
     },
     {
       "id": "rt19",
@@ -185,7 +185,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question pertains to HR procedures regarding remote work security."
+      "reason": "The question asks about company policies regarding workspace and data security for remote work."
     },
     {
       "id": "rt20",
@@ -193,7 +193,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question pertains to company policy regarding protection for employees reporting issues."
+      "reason": "The question asks about company policy regarding protection for employees reporting issues."
     },
     {
       "id": "rt22",
@@ -201,7 +201,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question is about the health insurance policy for contractors, which falls under HR procedures."
+      "reason": "The question asks about the benefits provided to contractors, which falls under company policy."
     },
     {
       "id": "rt24",
@@ -209,7 +209,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 1.0,
-      "reason": "The employee is requesting to book annual leave."
+      "reason": "The employee wants to book annual leave for specific dates."
     },
     {
       "id": "rt26",
@@ -217,7 +217,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 1.0,
-      "reason": "The employee is expressing a desire to take leave for a specific day."
+      "reason": "The employee is requesting to take a specific day off."
     },
     {
       "id": "rt27",
@@ -232,7 +232,7 @@
       "message": "Show me my leave requests",
       "gold": "leave_action",
       "pred": "leave_action",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The employee wants to see their own leave requests."
     },
     {
@@ -240,7 +240,7 @@
       "message": "Can you register sick days for Monday and Tuesday?",
       "gold": "leave_action",
       "pred": "leave_action",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The employee wants to register sick days."
     },
     {
@@ -249,14 +249,14 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The employee is requesting special leave for specific dates."
+      "reason": "The employee wants to request special leave for specific dates."
     },
     {
       "id": "rt34",
       "message": "Please book vacation 28 Dec - 5 Jan",
       "gold": "leave_action",
       "pred": "leave_action",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The employee is requesting to book vacation days."
     },
     {
@@ -273,7 +273,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message indicates a specific action regarding a leave request."
+      "reason": "The message indicates a request to decline a specific leave request."
     },
     {
       "id": "rt39",
@@ -305,7 +305,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message asks about a salary raise, which is outside company policy and should be handled by HR."
+      "reason": "The message asks about a personal salary raise, which is outside company policy."
     },
     {
       "id": "rt46",
@@ -321,7 +321,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message reports a concrete incident involving a manager."
+      "reason": "The message reports a concrete incident involving the manager."
     },
     {
       "id": "rt49",
@@ -329,7 +329,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message asks about relocation assistance, which is a topic that must be handled by a person."
+      "reason": "The message asks about relocation assistance, which is a personal request that falls outside company policy."
     },
     {
       "id": "rt51",
@@ -337,7 +337,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message refers to a personal legal problem that HR cannot assist with."
+      "reason": "The message involves a personal legal problem that HR cannot assist with."
     },
     {
       "id": "rt52",
@@ -345,7 +345,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The request involves accessing another employee's data, which is outside company policy."
+      "reason": "The request involves accessing another employee's data."
     },
     {
       "id": "rt54",
@@ -361,7 +361,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message reports a dispute regarding a performance review, which is a topic that must be handled by HR."
+      "reason": "The message reports a dispute regarding a performance review, which should be handled by HR."
     },
     {
       "id": "rt57",
@@ -376,8 +376,8 @@
       "message": "Thanks, that helps",
       "gold": "smalltalk",
       "pred": "smalltalk",
-      "confidence": 1.0,
-      "reason": "The message expresses gratitude and is off-topic."
+      "confidence": 0.9,
+      "reason": "The message expresses gratitude and does not pertain to HR-related topics."
     },
     {
       "id": "rt62",
@@ -385,7 +385,7 @@
       "gold": "smalltalk",
       "pred": "smalltalk",
       "confidence": 1.0,
-      "reason": "The message is an off-topic question asking about the assistant's capabilities."
+      "reason": "The message is an off-topic question about the assistant's capabilities."
     },
     {
       "id": "rt63",
@@ -401,14 +401,14 @@
       "gold": "smalltalk",
       "pred": "smalltalk",
       "confidence": 1.0,
-      "reason": "The message is a request for a joke, which falls under smalltalk."
+      "reason": "The message is an off-topic request for a joke."
     },
     {
       "id": "rt67",
       "message": "Hello, who are you?",
       "gold": "smalltalk",
       "pred": "smalltalk",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The message is a greeting and an off-topic question."
     },
     {

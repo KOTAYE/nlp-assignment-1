@@ -10,7 +10,7 @@ Status: ✅ done · 🟡 in progress / planned with a concrete artifact · ⬜ n
 | A2 | Think through how you manage the assistant: what goes into its context | `CLAUDE.md` §3 (context hygiene), `docs/course-notes.md` (condensed context), lectures kept out of context in `course/` | ✅ |
 | A3 | Agents / convention file to control code quality | `CLAUDE.md` §4 (conventions); enforced by `ruff` (lint + format) and `pytest` configured in `pyproject.toml` | ✅ |
 | A4 | Be ready to explain how the system works; purpose of each component | `docs/architecture.md` (diagram, component table, walkthrough) | ✅ |
-| A5 | Evaluate output quality, **at each stage** if there are multiple components | Every component has an eval (`evals/run_*.py`) incl. indexer, rule engine, tracer coverage, E2E; results in `docs/report.md` §5 | ✅ |
+| A5 | Evaluate output quality, **at each stage** if there are multiple components | Every component has an eval (`evals/run_*.py`) incl. indexer, rule engine, output guard (verifier), date resolver (unit tests + agent holdout-2), tracer coverage, E2E; results in `docs/report.md` §5 | ✅ |
 
 ## B. Task
 | ID | Requirement | Where | Status |

@@ -59,7 +59,7 @@ flowchart TD
     G --> R{2. Intent router<br/>LLM structured output<br/>baseline: TF-IDF + LogReg}
 
     R -->|policy_question| C1[3. Info collector<br/>slot filling: employment type,<br/>tenure, location]
-    R -->|leave_action| A[6. Leave agent<br/>LLM + native tool calling]
+    R -->|leave_action| DT[Date resolver<br/>code: '25 Nov', 'next Friday' → ISO] --> A[6. Leave agent<br/>LLM + native tool calling]
     R -->|out_of_scope / sensitive| H[7. HR referral<br/>LLM summarises + calls tool]
     R -->|unclear| Q[Clarifying question]
 
@@ -69,7 +69,9 @@ flowchart TD
     RET --> RR[4c. Reranker<br/>cross-encoder, top-k]
     RR --> GEN[5. Grounded answerer<br/>LLM: answer + citations +<br/>sufficiency flag]
     GEN -->|insufficient evidence| H
-    GEN -->|supported| OUT([Answer with sources])
+    GEN -->|sufficient| VER{5b. Output guard<br/>HR-delegation rule + LLM claim verifier}
+    VER -->|delegated / unsupported| H
+    VER -->|supported| OUT([Answer with sources])
 
     A <-->|tool calls| T[[Tool layer<br/>get_balance · list_requests ·<br/>submit_leave · cancel_leave ·<br/>decide_leave HR only]]
     H <-->|tool call| TT[[create_hr_ticket]]
@@ -86,6 +88,7 @@ flowchart TD
     R -.-> TR
     QR -.-> TR
     GEN -.-> TR
+    VER -.-> TR
     A -.-> TR
     H -.-> TR
 
@@ -93,9 +96,9 @@ flowchart TD
     classDef tool fill:#ffe4c4,stroke:#d97706,color:#000
     classDef local fill:#dff3e4,stroke:#2f855a,color:#000
     classDef data fill:#e2e8f0,stroke:#475569,color:#000
-    class R,C1,QR,GEN,A,H llm
+    class R,C1,QR,GEN,VER,A,H llm
     class T,TT tool
-    class G,RET,RR,RULES,IDX local
+    class G,RET,RR,RULES,IDX,DT local
     class DB,POL data
 ```
 
@@ -111,6 +114,8 @@ flowchart TD
 | 4b | Hybrid retriever | Candidate sections | query → top-20 | BM25 + `bge-small` dense, RRF |
 | 4c | Reranker | Precise ordering | query + 20 → top-5 | cross-encoder (local) |
 | 5 | Grounded answerer | Answer from evidence, cite, flag sufficiency | question + facts + top-5 → `{answer, citations, sufficient}` | LLM (JSON schema) |
+| 5b | Output guard | Stop answers the policy delegates to HR or that rely on the policy being silent | answer + cited sections → pass / route to HR | code rule + LLM verifier |
+| — | Date resolver | Natural date phrases → ISO dates for the agent | message → annotated message | code |
 | 6 | Leave agent | Leave actions | message → tool calls → reply | LLM + tools |
 | 7 | HR referral | Create a ticket | question → category + summary → ticket ID | LLM + tool |
 | — | Rule engine | Leave decisions | request + DB state → status + reason + § | code |
@@ -160,6 +165,11 @@ The iteration log in `crisp-dm.md` records every change with its metric **before
    - narrower collector scope;
    - code-guaranteed sources in the reply.
 5. **Holdout,** written *before* the iteration-2 fixes (see the git history), to keep an unbiased estimate.
+6. **Iteration 3:** a new **holdout-2** focused on the remaining weak spots (answer vs refer, natural dates) was written and committed first, and the iteration-2 system was measured on it as a baseline. Only then were the planned fixes applied:
+   - an output guard: a code rule for sections that delegate to HR plus an LLM claim verifier (the Ethics lecture's "hallucination guard");
+   - code-based date resolution for the agent;
+   - a general router rule.
+7. **Regression check:** iteration 3 introduced a date-context regression; it was caught on test, fixed with a unit test, and re-measured.
 
 ## 5. Evaluation
 
@@ -186,25 +196,27 @@ The same principle applies to every component: **what can be checked in code is 
 | End-to-end | scenario success rate (multi-turn, automatic checks), per-check pass rates, tracer coverage, cost and latency per conversation | Extrinsic evaluation: do the components work together in real conversations (clarification turns, follow-ups, HR approval flow)? | Component metrics can be high while hand-offs fail; this catches it |
 
 ### 5.2 Setup
-- **Splits:**
-  - prompts and parameters were tuned on **dev** only;
-  - **test** was used once to measure iteration 1;
-  - a fresh **holdout** set (written *before* the iteration-2 fixes) gives the unbiased estimate after iteration 2.
+- **Splits and how each was used:**
+  - prompts and parameters were tuned on **dev**;
+  - **test** was used first to measure iteration 1;
+  - **holdout** was written before the iteration-2 fixes;
+  - **holdout-2** (boundary cases: answer vs refer, natural dates) was written before the iteration-3 fixes and first used to measure the *unchanged* iteration-2 system as a baseline.
+  - The final system is therefore estimated without bias on **holdout-2**. Earlier sets were seen during development and are reported for completeness.
 - **Business date** fixed at 2026-11-12. Every result file stores the model, judge, prompt versions, date and git commit. **All tables are generated from the results files** in [`docs/eval-results.md`](eval-results.md) (`python -m evals.summarize`); the numbers below are copied from there.
 - **Models:** generator `openai/gpt-4o-mini`; judge `google/gemini-2.5-flash`, a different family to avoid self-preference.
-- **Cost:** the whole development, including all eval runs, cost about $0.3. One question costs ≈ $0.0005 and takes ≈ 5 s.
+- **Cost:** the whole development, including all eval runs of three iterations, cost under $0.5. One question costs ≈ $0.0006 and takes ≈ 5–6 s, which includes the output-guard call.
 
-### 5.3 Results for the metrics required by the brief (final system, iteration 2)
+### 5.3 Results for the metrics required by the brief (final system, iteration 3)
 
-| Brief metric | How measured | Test | Holdout | Target (§1.6) |
-|---|---|---|---|---|
-| **Information collection** | collector situational-fact F1 / clarification accuracy | 1.000 / 1.000 | — | ≥ 0.90 / ≥ 0.85 |
-| **Retrieval success** | Hit@5 / MRR@10 (hybrid + rerank); context recall@5 inside the pipeline | 1.000 / 0.925; 0.929 | context recall@5 0.929 | ≥ 0.90 / ≥ 0.75 |
-| **Answer correctness** | judge pass rate (fully or mostly right) over all answerable questions; contradiction rate | 0.857; 0.000 | 0.857; 0.000 | ≥ 0.85 |
-| **Source support** | faithfulness (supported claims / claims); citation hit rate | 1.000; 1.000 | 0.958; 1.000 | ≥ 0.90; ≥ 0.90 |
-| **Correct referral to HR** | precision / recall / F1 of "routed to HR" | 0.667 / 0.667 / 0.667 | 0.750 / 0.750 / 0.750 | ≥ 0.85 / ≥ 0.95 |
+| Brief metric | How measured | Test | Holdout | **Holdout-2 (unbiased)** | Target (§1.6) |
+|---|---|---|---|---|---|
+| **Information collection** | collector situational-fact F1 / clarification accuracy | 1.000 / 1.000 | — | — | ≥ 0.90 / ≥ 0.85 |
+| **Retrieval success** | Hit@5 / MRR@10 (hybrid + rerank); context recall@5 inside the pipeline | 1.000 / 0.925; 0.929 | 0.929 | 0.917 | ≥ 0.90 / ≥ 0.75 |
+| **Answer correctness** | judge pass rate (fully or mostly right) over all answerable questions; contradiction rate | 0.893; 0.000 | 0.929; 0.000 | **0.917; 0.000** | ≥ 0.85 |
+| **Source support** | faithfulness (supported claims / claims); citation hit rate | 1.000; 1.000 | 0.923; 1.000 | **1.000; 1.000** | ≥ 0.90; ≥ 0.90 |
+| **Correct referral to HR** | precision / recall / F1 of "routed to HR" | 0.800 / 0.889 / 0.842 | 1.000 / 0.750 / 0.857 | **0.900 / 0.900 / 0.900** | ≥ 0.85 / ≥ 0.95 |
 
-Every target is met except **HR referral**. It is analysed in §5.5.
+All targets are met on holdout-2 except **referral recall** (0.90 vs ≥ 0.95, one missed case out of 10, see §5.5). Referral precision (0.90) is above target.
 
 ### 5.4 Results per component
 
@@ -213,49 +225,49 @@ Every target is met except **HR referral**. It is analysed in §5.5.
 | Rule engine | 41/41 tests pass | The first run found a real bug (phantom carry-over from untracked 2025): 40 → 41 |
 | Input guard | attack block rate **0.70**, false-block rate **0.00**, PII masking **1.00** (dev after tuning: 1.00 / 0.00 / 1.00) | High precision, limited recall: the regexes generalise poorly to unseen phrasings (leetspeak "Ign0re", role-play "let's play a game", "repeat the text above"). These test misses were seen in an early combined run and deliberately **not** patched, so test stays honest |
 | Indexer | 98 sections → 98 chunks, tables intact, metadata present. Ablation (BM25): section-aware **MRR 0.850 / Hit@1 0.787** vs fixed 120-word windows **0.416 / 0.128** | Structure-aware chunking roughly doubles MRR. Fixed windows cut sections and mix their IDs |
-| Router | LLM: accuracy **0.978**, macro-F1 **0.981**, MCC **0.973**, recall(hr_referral) **0.889**. TF-IDF + LogReg baseline (trained on 32 dev rows): 0.391 / 0.275 / 0.201 / 0.222 | The LLM wins by a wide margin with few labels. Its one error ("coworker breaking the law" → policy_question) is a borderline case between reporting and asking how to report |
-| Info collector | facts P/R/F1 **1.0/1.0/1.0**, value extraction **1.0**, clarification P/R **1.0/1.0** (6 asks, 19 non-asks) | Dev went 0.72 → 1.0 F1 after few-shot examples. The test set is small (25 rows), so 1.0 means "no observed errors", not perfection |
-| Query rewriter | key-term coverage **1.0**. Retrieval on follow-ups (MRR@10): raw **0.413**, concat-previous-turn **0.819**, LLM rewrite **0.917** | v1 of the rewriter *lost* to concatenation on dev (0.619 vs 0.938) because it added noise ("Lumora Tech HR policies"). v2 restricted it to topic words and wins on test |
-| Retrieval | Hit@5 / MRR@10: BM25 0.929 / 0.825 · dense 0.964 / 0.829 · hybrid RRF 0.964 / 0.876 · **+ reranker 1.000 / 0.925** | Each stage adds value: RRF fixes ranking where either retriever alone fails; the reranker puts the gold section first more often |
-| Judge | controlled examples: exact level **0.947**, pass/fail accuracy **1.000**, contradiction recall **1.000** | The judge can be trusted to separate correct, partial and wrong answers. Its single miss rated a "mostly right" answer as "fully" |
+| Router | LLM: accuracy **0.978**, macro-F1 **0.981**, MCC **0.973**, recall(hr_referral) **0.889**. TF-IDF + LogReg baseline (trained on 32 dev rows): 0.391 / 0.275 / 0.201 / 0.222 | The LLM wins by a wide margin with few labels. Its one test error ("coworker breaking the law" → policy_question) is a borderline case between reporting and asking how to report |
+| Info collector | facts P/R/F1 **1.0/1.0/1.0**, value extraction **1.0**, clarification P/R **1.0/1.0** (6 asks, 19 non-asks) | Dev went 0.72 → 1.0 F1 after few-shot examples. The test set is small (25 rows), so 1.0 means "no observed errors". One unnecessary clarification appeared in the holdout pipeline run |
+| Query rewriter | key-term coverage **1.0**. Retrieval on follow-ups (MRR@10): raw **0.413**, concat-previous-turn **0.819**, LLM rewrite **0.917** | v1 of the rewriter *lost* to concatenation on dev (0.619 vs 0.938) because it added noise. v2 restricted it to topic words and wins on test |
+| Retrieval | Hit@5 / MRR@10: BM25 0.929 / 0.825 · dense 0.964 / 0.829 · hybrid RRF 0.964 / 0.876 · **+ reranker 1.000 / 0.925** | Each stage adds value: RRF fixes ranking where either retriever alone fails; the reranker puts the gold section first more often. Table-row units (iteration 2) make values hidden in tables retrievable |
 | Answerer (oracle context) | answer rate with gold sections: iteration 1 **0.714** → iteration 2 **1.000**; correctness 1.000 | Isolates generation: iteration 1 abstained too often even with perfect evidence |
-| HR referral | P/R test 0.667/0.667, holdout 0.750/0.750; ticket category accuracy 0.833 (test), 1.000 (holdout) | See §5.5 |
-| Leave agent | test pass^3 **0.933** (outcome 1.000, process 1.000, **safety 1.000**, communication 0.933), 2.1 steps, $0.0004/task; holdout pass^3 **0.857** | No forbidden tool was ever called, and no permission or confirmation was bypassed. Failures are communication and date reading (below) |
-| End-to-end | test success **0.833** (15/18), tracer coverage **1.000**, $0.0005 and 4.7 s per conversation | All clarification, follow-up, leave, guard and small-talk scenarios pass; 3 failures are referral cases |
+| Output guard (iteration 3) | controlled set: unsupported claims caught **0.889** (8/9), precision **1.000**, false-rejection rate **0.000** | It never blocks a supported answer. Its one miss ("birthdays are not company days off" with the holiday table as evidence) is a plausible reading of an exhaustive list. The 5 delegating sections are detected in code (unit test) |
+| HR referral | P/R/F1: test 0.800/0.889/0.842, holdout 1.000/0.750/0.857, **holdout-2 0.900/0.900/0.900**; ticket category accuracy 0.875 / 1.000 / 0.778 | See §5.5 |
+| Date resolver (iteration 3) | unit tests on natural phrases; effect: agent pass^3 on natural-date scenarios (holdout-2) **0.333 → 1.000** | LLMs mis-compute weekdays and years; code resolves them |
+| Leave agent | pass^3 **1.000** on dev, test, holdout and holdout-2 (outcome, process, **safety** and communication all 1.000), 2.1 steps and $0.0003 per task on test | No forbidden tool was ever called, and no permission or confirmation was bypassed |
+| Judge | controlled examples: exact level **0.947**, pass/fail accuracy **1.000**, contradiction recall **1.000** | The judge can be trusted to separate correct, partial and wrong answers |
+| End-to-end | test success **0.889** (16/18), tracer coverage **1.000**, $0.0006 per conversation | All clarification, follow-up, leave, HR, guard and small-talk scenarios pass except the 2 failures in §5.5 |
 
 ### 5.5 Why the scores are not higher, and what would fix them
 
-Errors are classified by the **first stage that loses the answer** (RAG lecture).
+Errors are classified by the **first stage that loses the answer** (RAG lecture). Remaining errors in the final system:
 
-1. **HR referral, the weakest metric (F1 0.67 test, 0.75 holdout).** Two opposite error types:
-   - **Under-referral, the dominant error after iteration 2:** "Spain for 3 months", "my sick child", "home internet". The evidence *says* the case is decided by HR (`remote-work-policy §3.2`, `sick-leave-policy §3.3`) or says nothing at all, but the answerer still writes a helpful answer with `sufficient=true`. Iteration 2 reduced over-abstention (oracle answer rate 0.714 → 1.0), but the prompt alone cannot hold both directions.
-     - *Next fix (not applied, because no unseen data is left to measure it):* a deterministic rule. If a cited section contains an explicit "handled / decided by HR" marker, route to HR. For questions about items no section mentions, a separate verifier call should check whether the answer's main claim is stated in the evidence.
-   - **Over-referral:** "gift worth 80 USD", "lost laptop", "referral bonus" (e2e), "buddy" (holdout). The answerer abstains although the rule is in the evidence. This is LLM non-determinism around the sufficiency boundary: the same question passes in other runs.
-2. **Answer correctness 0.857 = answer rate.** Whenever the system answers, the answer is correct (mean judge score 1.0, no contradictions). Every miss is a routing or abstention miss from point 1, plus two router misses ("Can I cancel a vacation I booked?" → leave agent; "Can I join the English lessons?" → small talk). Better router examples for "rule vs action" questions would fix both.
-3. **Guard recall 0.70.** Rules cannot cover paraphrased attacks. *Next:* a small learned injection classifier. Its impact is already limited by defence in depth: HR tools are not offered to employees, decisions need confirmation, and DB writes go only through validated tools.
-4. **Leave agent (holdout pass^3 0.857).**
-   - In one holdout scenario the model misread "Wednesday 25 November" as next year, even with an explicit calendar in the prompt. *Next:* parse dates in code (a tool that resolves dates).
-   - The agent sometimes refuses a past sick date itself instead of letting the tool explain the 7-day rule. Outcome is still correct; communication is weaker.
-5. **Small eval sets.** With 9 referral cases in test, one error moves recall by 0.11. Metrics are point estimates. The holdout adds a second sample that agrees in direction (correctness 0.857 on both).
+1. **Router edge cases** (holdout-2, test). "Will my manager find out that I see the company psychologist?" is sent straight to HR (privacy plus manager reads as sensitive), although `benefits-policy §5.2` answers it. "My mother is in hospital, can I take paid days off?" goes to the leave agent (it sounds like an action) instead of HR. "Can I cancel a vacation I booked?" is ambiguous between rule and action.
+   - *Next:* when the router's confidence is low, run both the policy path and the referral path and let the output guard decide; add more contrastive router examples.
+2. **Silence-based answers still slip through** (test: "home internet"). The answerer says office-based employees are not eligible for remote allowances, which is true, and the verifier accepts it as supported because it applies a stated rule. The question, though, was about a cost the policies never mention.
+   - *Next:* add a verifier check that the answer addresses the asked item itself (not a neighbouring rule).
+3. **Over-referral after the output guard** (e2e: "three weeks in Croatia" → HR). `remote-work-policy §3.2` (longer stays, "decided by HR individually") was cited together with §3.1, so the code rule triggered although §3.1 answers a 21-day stay.
+   - *Next:* apply the delegation rule only when the delegating section is the one the answer relies on (e.g. the top citation or a verifier-identified source).
+4. **Guard recall 0.70.** Rules cannot cover paraphrased attacks. *Next:* a small learned injection classifier. Its impact is already limited by defence in depth: HR tools are not offered to employees, decisions need confirmation, and DB writes go only through validated tools.
+5. **Small eval sets.** With 9–10 referral cases per set, one error moves recall by about 0.1. Metrics are point estimates. Three independent sets (test, holdout, holdout-2) agree in direction, which makes the improvement credible.
 
 ### 5.6 Iteration comparison
 
-| metric | iteration 1 · test | iteration 2 · test | iteration 2 · holdout |
-|---|---|---|---|
-| Answer correctness (pass rate) | 0.786 | 0.857 | 0.857 |
-| Faithfulness | 0.986 | 1.000 | 0.958 |
-| Citation hit rate | 0.917 | 1.000 | 1.000 |
-| HR referral precision | 0.700 | 0.667 | 0.750 |
-| HR referral recall | 0.778 | 0.667 | 0.750 |
-| Oracle answer rate | 0.714 | 1.000 | 1.000 |
-| Leave agent pass^3 | 0.800 | 0.933 | 0.857 |
-| E2E scenario success | 0.722 | 0.833 | — |
+| metric | iter 1 · test | iter 2 · test | iter 3 · test | iter 2 · holdout | iter 3 · holdout | iter 2 · holdout-2 | **iter 3 · holdout-2** |
+|---|---|---|---|---|---|---|---|
+| Answer correctness (pass rate) | 0.786 | 0.857 | 0.893 | 0.857 | 0.929 | 0.833 | **0.917** |
+| Faithfulness | 0.986 | 1.000 | 1.000 | 0.958 | 0.923 | 0.975 | **1.000** |
+| Citation hit rate | 0.917 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | **1.000** |
+| HR referral precision | 0.700 | 0.667 | 0.800 | 0.750 | 1.000 | 0.818 | **0.900** |
+| HR referral recall | 0.778 | 0.667 | 0.889 | 0.750 | 0.750 | 0.900 | **0.900** |
+| Oracle answer rate | 0.714 | 1.000 | 1.000 | — | 1.000 | — | — |
+| Leave agent pass^3 | 0.800 | 0.933 | 1.000 | 0.857 | 1.000 | 0.333 | **1.000** |
+| E2E scenario success | 0.722 | 0.833 | 0.889 | — | — | — | — |
 
 **Reading the table:**
-- Iteration 1 showed **dev overfitting**: dev was 1.0 almost everywhere, while test was clearly lower.
-- Iteration 2 fixed the over-abstention and retrieval-from-tables failure types and raised correctness, source support and agent reliability. The holdout confirms the gains are not test overfitting (correctness 0.857 on both).
-- The trade-off moved referral recall down: the answerer now answers more, including some cases it should refer. That is the next iteration's target (§5.5.1).
-
+- **Iteration 1 → 2.** Test showed dev overfitting. Fixing over-abstention (oracle answer rate 0.714 → 1.0) and table retrieval raised correctness, but referral recall fell: the answerer now answered some cases it should refer.
+- **Iteration 2 → 3.** The output guard (code delegation rule + LLM claim verifier) restored referral quality while keeping the gains. The date resolver fixed the agent's calendar errors.
+- **Effect on unseen data.** On **holdout-2**, written before iteration 3 and run against both versions, correctness went 0.833 → 0.917, referral precision 0.818 → 0.900, faithfulness 0.975 → 1.000, and agent pass^3 0.333 → 1.000. This is the cleanest evidence that the changes generalise.
+- **Regression caught and fixed.** One regression was introduced by iteration 3 and caught on test: in a multi-turn dialogue a bare "the 14th" was resolved to November although the user had said December. It was fixed by using months named earlier in the conversation, with a unit test; agent pass^3 on test went 0.867 → 1.000.
 
 ## 6. AI coding assistant: how it was managed
 
@@ -274,7 +286,7 @@ Errors are classified by the **first stage that loses the answer** (RAG lecture)
   - the course lectures were condensed once into `docs/course-notes.md` and never loaded whole;
   - datasets were sampled, not dumped;
   - results are summarised by `evals/summarize.py`.
-- **Quality gates:** `ruff` (lint + format), `pytest` (55 tests), eval results stored with prompt versions, model and git commit.
+- **Quality gates:** `ruff` (lint + format), `pytest` (58 tests), eval results stored with prompt versions, model and git commit.
 - **What the rules caught or prevented:**
   - a component writing to the DB without the LLM (fixed after the compliance audit);
   - a test-set example about to leak into a prompt;
@@ -283,6 +295,7 @@ Errors are classified by the **first stage that loses the answer** (RAG lecture)
 
 ## 7. Limitations and next steps
 
+- Router edge cases (privacy questions read as sensitive; "can I take days off to care for…" read as an action) and silence-based answers that apply a neighbouring rule remain. See §5.5 for the next fixes (dual-path on low router confidence; a verifier check that the answer addresses the asked item).
 - The guard is rule-based. It does not generalise to new attack phrasings, so a learned classifier is the next step. Defence in depth already limits the impact: tools enforce permissions, and HR decisions need confirmation.
 - The eval sets are small (tens of rows per component), so differences of one or two rows matter. The next step is more data, including real employee phrasing.
 - The synthetic corpus is cleaner than real handbooks (no scanned PDFs, no conflicting versions across documents).

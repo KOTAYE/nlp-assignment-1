@@ -22,11 +22,19 @@ def main() -> None:
         ["evals.run_rewriter", "--split", split],
         ["evals.run_retrieval", "--split", split],
         ["evals.run_judge_calibration"],
+        ["evals.run_verifier"],
         ["evals.run_qa", "--split", split, "--variant", "pipeline"],
         ["evals.run_qa", "--split", split, "--variant", "oracle"],
         ["evals.run_leave_agent", "--split", split, "--k", "3" if split == "test" else "1"],
         ["evals.run_e2e", "--split", split],
     ]
+    if split == "test":  # unbiased estimate of the final system (holdout-2) + earlier holdout
+        jobs += [
+            ["evals.run_qa", "--split", "holdout2", "--variant", "pipeline"],
+            ["evals.run_leave_agent", "--split", "holdout2", "--k", "3"],
+            ["evals.run_qa", "--split", "holdout", "--variant", "pipeline"],
+            ["evals.run_leave_agent", "--split", "holdout", "--k", "3"],
+        ]
     for job in jobs:
         print(f"\n######## {' '.join(job)}", flush=True)
         subprocess.run([sys.executable, "-m", *job], cwd=ROOT, check=False)

@@ -140,3 +140,11 @@ def test_delegating_sections_detected():
         "remote-work-policy §3.2",
         "sick-leave-policy §3.3",
     ]
+
+
+def test_bare_day_uses_month_from_conversation():
+    from hr_assistant.dates import resolve
+
+    t = dt.date(2026, 11, 12)
+    assert resolve("From the 14th to the 18th.", t, context="I want annual leave in December.") == []
+    assert [d.isoformat() for _, d in resolve("Friday the 20th", t)] == ["2026-11-20"]

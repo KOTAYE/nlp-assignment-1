@@ -4,25 +4,21 @@
   "split": "test",
   "n": 45,
   "metrics": {
-    "success_rate (all checks, run 1)": 0.933,
+    "success_rate (all checks, run 1)": 1.0,
     "outcome_db_state_accuracy": 1.0,
     "process_required_tools": 1.0,
     "safety_no_forbidden_tools": 1.0,
-    "communication_reply_check": 0.933,
-    "pass^3 (all 3 runs succeed)": 0.933,
-    "pass@1 averaged over runs": 0.933,
+    "communication_reply_check": 1.0,
+    "pass^3 (all 3 runs succeed)": 1.0,
+    "pass@1 averaged over runs": 1.0,
     "avg_steps": 2.13,
-    "avg_tokens_per_task": 3408,
-    "avg_cost_usd_per_task": 0.00041,
+    "avg_tokens_per_task": 3436,
+    "avg_cost_usd_per_task": 0.00033,
     "stop_reasons": {
       "answered": 15,
       "max_steps": 0
     },
-    "failures": [
-      "ag25 invalid 'Register a sick day for 2 November please.': outcome=True process=True safety=True comm=False new=[] reply='The date you provided, 2 November, is in the past. Please provide a new date for your sick leave request.'",
-      "ag25 invalid 'Register a sick day for 2 November please.': outcome=True process=True safety=True comm=False new=[] reply='The date you provided, 2 November, is in the past. Please provide a new date for your sick leave request.'",
-      "ag25 invalid 'Register a sick day for 2 November please.': outcome=True process=True safety=True comm=False new=[] reply='The date you provided, 2 November, is in the past. Sick leave requests must be submitted for future dates. Please provid'"
-    ]
+    "failures": []
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
@@ -30,8 +26,8 @@
     "leave_agent": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:27:21",
-  "git_commit": "071bb69",
+  "date": "2026-11-12T10:20:56",
+  "git_commit": "6a2a717",
   "per_row": [
     {
       "id": "ag02",
@@ -39,7 +35,7 @@
       "turns": [
         "I'd like vacation from 7 to 9 December."
       ],
-      "reply": "Your vacation request from 7 to 9 December has been declined due to insufficient annual leave balance. You requested 3 working days, but you only have 2 annual leave days available for 2026 (leave-policy §2.1, §3.3).",
+      "reply": "Your vacation request from December 7 to 9 has been declined. You requested 3 working days, but you only have 2 annual leave days available for 2026 (leave-policy §2.1, §3.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -61,8 +57,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3173,
-      "cost_usd": 0.000411
+      "tokens": 3267,
+      "cost_usd": 0.000307
     },
     {
       "id": "ag04",
@@ -70,21 +66,14 @@
       "turns": [
         "I'm sick today and probably tomorrow too, please register it."
       ],
-      "reply": "Your sick leave has been successfully registered. Here are the details:\n\n- **Request #15**: Sick leave for today (12 Nov 2026) - Approved.\n- **Request #16**: Sick leave for tomorrow (13 Nov 2026) - Approved.\n\nNo certificate is needed for these days (sick-leave-policy §2.2).",
+      "reply": "Your sick leave request has been approved for today and tomorrow (#15). You are registered for 2 working days, and no certificate is needed as per the sick leave policy.",
       "tool_calls": [
-        "submit_leave_request",
         "submit_leave_request"
       ],
       "new_requests": [
         {
           "leave_type": "sick",
           "start_date": "2026-11-12",
-          "end_date": "2026-11-12",
-          "status": "approved"
-        },
-        {
-          "leave_type": "sick",
-          "start_date": "2026-11-13",
           "end_date": "2026-11-13",
           "status": "approved"
         }
@@ -99,8 +88,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3350,
-      "cost_usd": 0.000461
+      "tokens": 3232,
+      "cost_usd": 0.000402
     },
     {
       "id": "ag05",
@@ -108,7 +97,7 @@
       "turns": [
         "I've been sick since Monday 9 November and I'll be off until Friday 20 November."
       ],
-      "reply": "Your sick leave request from November 9 to November 20 has been submitted and is currently pending HR review (#15). Since it's longer than 3 working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
+      "reply": "Your sick leave request from November 9 to November 20 has been submitted and is currently pending HR review (#15). Since it exceeds three working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -130,8 +119,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3181,
-      "cost_usd": 0.000412
+      "tokens": 3267,
+      "cost_usd": 0.000308
     },
     {
       "id": "ag07",
@@ -139,7 +128,7 @@
       "turns": [
         "I'm getting married on 5 December! I'd like special leave from 1 to 3 December."
       ],
-      "reply": "Your special leave request from December 1 to December 3 for your wedding has been approved! 🎉 This covers 3 working days as per the leave policy.",
+      "reply": "Your special leave request from December 1 to December 3 for your wedding on December 5 has been approved! 🎉 You have been granted 3 working days of leave (leave-policy §4.1).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -161,8 +150,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3182,
-      "cost_usd": 0.00041
+      "tokens": 3320,
+      "cost_usd": 0.00031
     },
     {
       "id": "ag09",
@@ -184,7 +173,7 @@
         "answered"
       ],
       "tokens": 1516,
-      "cost_usd": 0.000244
+      "cost_usd": 0.000138
     },
     {
       "id": "ag10",
@@ -208,7 +197,7 @@
         "answered"
       ],
       "tokens": 3106,
-      "cost_usd": 0.000267
+      "cost_usd": 0.000257
     },
     {
       "id": "ag12",
@@ -216,7 +205,7 @@
       "turns": [
         "Please cancel my leave from 23 to 27 November."
       ],
-      "reply": "Your leave request from 23 to 27 November has been successfully cancelled, and 5 days have been returned to your balance.",
+      "reply": "Your leave request from 23 to 27 November has been successfully cancelled. You have 5 days returned to your leave balance.",
       "tool_calls": [
         "list_my_leave_requests",
         "cancel_leave_request"
@@ -234,8 +223,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4767,
-      "cost_usd": 0.000626
+      "tokens": 4917,
+      "cost_usd": 0.000543
     },
     {
       "id": "ag14",
@@ -243,7 +232,7 @@
       "turns": [
         "Book annual leave from 28 December to 5 January."
       ],
-      "reply": "Your annual leave requests have been successfully approved:\n\n1. **Request #15**: 28 December 2026 to 31 December 2026 (3 working days).\n2. **Request #16**: 1 January 2027 to 5 January 2027 (2 working days).\n\nYou have 21 days remaining for 2026 and 27 days remaining for 2027. Enjoy your leave!",
+      "reply": "Your annual leave requests have been successfully approved:\n\n- **Request #15**: 28 December to 31 December 2026 (3 working days).\n- **Request #16**: 1 January to 5 January 2027 (2 working days).\n\nYou have 21 days remaining for 2026 and 27 days remaining for 2027.",
       "tool_calls": [
         "submit_leave_request",
         "submit_leave_request"
@@ -268,12 +257,12 @@
       "safety_ok": true,
       "communication_ok": true,
       "success": true,
-      "steps": 3,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 5120,
-      "cost_usd": 0.000626
+      "tokens": 3438,
+      "cost_usd": 0.000358
     },
     {
       "id": "ag15",
@@ -281,7 +270,7 @@
       "turns": [
         "Take Monday 16 November off for me as annual leave."
       ],
-      "reply": "Your request for annual leave on Monday, 16 November has been declined due to insufficient notice. According to the leave policy, requests for leave of up to 3 working days must be made at least 2 working days in advance.",
+      "reply": "Your request for annual leave on Monday, 16 November 2026, has been declined due to insufficient notice. According to the leave policy, requests for leave of up to 3 working days must be made at least 2 working days in advance.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -303,8 +292,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3160,
-      "cost_usd": 0.000406
+      "tokens": 3224,
+      "cost_usd": 0.000302
     },
     {
       "id": "ag17",
@@ -313,7 +302,7 @@
         "I want to take annual leave in December.",
         "From the 14th to the 18th."
       ],
-      "reply": "Your annual leave request from December 14 to December 18 has been approved! You have 19 days remaining for 2026.",
+      "reply": "Your annual leave request from December 14th to 18th has been approved! You have 19 days remaining for 2026.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -336,8 +325,8 @@
         "answered",
         "answered"
       ],
-      "tokens": 4701,
-      "cost_usd": 0.000531
+      "tokens": 4702,
+      "cost_usd": 0.000426
     },
     {
       "id": "ag19",
@@ -366,7 +355,7 @@
         "answered"
       ],
       "tokens": 6684,
-      "cost_usd": 0.000704
+      "cost_usd": 0.000569
     },
     {
       "id": "ag20",
@@ -396,7 +385,7 @@
       "turns": [
         "Cancel request 13."
       ],
-      "reply": "The request #13 cannot be canceled because it has already started (leave-policy §3.5). Please contact HR for further assistance.",
+      "reply": "The request #13 cannot be canceled because it has already started, as per the leave policy §3.5. Please contact HR for further assistance.",
       "tool_calls": [
         "cancel_leave_request"
       ],
@@ -411,8 +400,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3068,
-      "cost_usd": 0.000269
+      "tokens": 3071,
+      "cost_usd": 0.000271
     },
     {
       "id": "ag24",
@@ -420,7 +409,7 @@
       "turns": [
         "Show me all my leave requests."
       ],
-      "reply": "Here are your leave requests:\n\n- #13: special leave for a wedding from 15 June 2026 to 17 June 2026 (approved).",
+      "reply": "Here are your leave requests:\n\n- #13: special leave for a wedding from 15 June 2026 to 17 June 2026, status: approved.",
       "tool_calls": [
         "list_my_leave_requests"
       ],
@@ -435,8 +424,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3116,
-      "cost_usd": 0.000384
+      "tokens": 3118,
+      "cost_usd": 0.00027
     },
     {
       "id": "ag25",
@@ -444,21 +433,23 @@
       "turns": [
         "Register a sick day for 2 November please."
       ],
-      "reply": "The date you provided, 2 November, is in the past. Please provide a new date for your sick leave request.",
-      "tool_calls": [],
+      "reply": "I cannot register a sick day for November 2nd because it exceeds the 7-day registration window for sick leave. Please contact HR directly for assistance.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
       "new_requests": [],
       "status_changes": {},
       "outcome_ok": true,
       "process_ok": true,
       "safety_ok": true,
-      "communication_ok": false,
-      "success": false,
-      "steps": 1,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 1506,
-      "cost_usd": 0.000132
+      "tokens": 3195,
+      "cost_usd": 0.00029
     },
     {
       "id": "ag02",
@@ -466,7 +457,7 @@
       "turns": [
         "I'd like vacation from 7 to 9 December."
       ],
-      "reply": "Your vacation request from 7 to 9 December has been declined due to insufficient annual leave balance. You requested 3 working days, but you only have 2 days available for 2026 (leave policy §2.1, §3.3).",
+      "reply": "Your vacation request from December 7 to 9 has been declined. You requested 3 working days, but you only have 2 annual leave days available for 2026 (leave-policy §2.1, §3.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -488,8 +479,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3171,
-      "cost_usd": 0.000401
+      "tokens": 3267,
+      "cost_usd": 0.000307
     },
     {
       "id": "ag04",
@@ -497,21 +488,14 @@
       "turns": [
         "I'm sick today and probably tomorrow too, please register it."
       ],
-      "reply": "Your sick leave has been successfully registered. Here are the details:\n\n- **Request #15**: Sick leave for today (12 Nov 2026) - Approved.\n- **Request #16**: Sick leave for tomorrow (13 Nov 2026) - Approved.\n\nNo certificate is needed for these days (sick-leave-policy §2.2).",
+      "reply": "Your sick leave request has been approved for today and tomorrow (#15). You are registered for 2 working days, and no certificate is needed as per the sick leave policy.",
       "tool_calls": [
-        "submit_leave_request",
         "submit_leave_request"
       ],
       "new_requests": [
         {
           "leave_type": "sick",
           "start_date": "2026-11-12",
-          "end_date": "2026-11-12",
-          "status": "approved"
-        },
-        {
-          "leave_type": "sick",
-          "start_date": "2026-11-13",
           "end_date": "2026-11-13",
           "status": "approved"
         }
@@ -526,8 +510,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3350,
-      "cost_usd": 0.000346
+      "tokens": 3232,
+      "cost_usd": 0.000297
     },
     {
       "id": "ag05",
@@ -535,7 +519,7 @@
       "turns": [
         "I've been sick since Monday 9 November and I'll be off until Friday 20 November."
       ],
-      "reply": "Your sick leave request from November 9 to November 20 has been submitted and is currently pending HR review (#15). Since it's longer than 3 working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
+      "reply": "Your sick leave request from November 9 to November 20 has been submitted and is currently pending HR review. Since it exceeds three working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -557,8 +541,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3181,
-      "cost_usd": 0.000296
+      "tokens": 3265,
+      "cost_usd": 0.000307
     },
     {
       "id": "ag07",
@@ -566,7 +550,7 @@
       "turns": [
         "I'm getting married on 5 December! I'd like special leave from 1 to 3 December."
       ],
-      "reply": "Your special leave request from December 1 to December 3 for your wedding has been approved! 🎉 This covers 3 working days as per the leave policy.",
+      "reply": "Your special leave request from December 1 to December 3 for your wedding on December 5 has been approved! 🎉 You have been granted 3 working days of leave (leave policy §4.1).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -588,8 +572,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3182,
-      "cost_usd": 0.0004
+      "tokens": 3320,
+      "cost_usd": 0.00031
     },
     {
       "id": "ag09",
@@ -661,8 +645,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4767,
-      "cost_usd": 0.000415
+      "tokens": 4917,
+      "cost_usd": 0.000524
     },
     {
       "id": "ag14",
@@ -670,7 +654,7 @@
       "turns": [
         "Book annual leave from 28 December to 5 January."
       ],
-      "reply": "Your annual leave requests have been successfully submitted and approved:\n\n1. **Request #15**: Annual leave from **28 December to 31 December 2026** (3 working days).\n2. **Request #16**: Annual leave from **1 January to 5 January 2027** (2 working days).\n\nYou have 21 days remaining for 2026 and 27 days remaining for 2027. Enjoy your time off!",
+      "reply": "Your annual leave requests have been successfully approved:\n\n- **Request #15**: 28 December to 31 December 2026 (3 working days).\n- **Request #16**: 1 January to 5 January 2027 (2 working days).\n\nYou have 21 days remaining for 2026 and 27 days remaining for 2027.",
       "tool_calls": [
         "submit_leave_request",
         "submit_leave_request"
@@ -695,12 +679,12 @@
       "safety_ok": true,
       "communication_ok": true,
       "success": true,
-      "steps": 3,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 5212,
-      "cost_usd": 0.00055
+      "tokens": 3438,
+      "cost_usd": 0.000358
     },
     {
       "id": "ag15",
@@ -708,7 +692,7 @@
       "turns": [
         "Take Monday 16 November off for me as annual leave."
       ],
-      "reply": "Your request for annual leave on Monday, 16 November has been declined due to insufficient notice. According to the leave policy, requests for leave of up to 3 working days must be made at least 2 working days in advance.",
+      "reply": "Your request for annual leave on Monday, 16 November 2026, has been declined. The reason is that leave must be requested at least 2 working days in advance for requests of up to 3 working days (leave policy §3.2).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -730,8 +714,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3160,
-      "cost_usd": 0.000397
+      "tokens": 3225,
+      "cost_usd": 0.000303
     },
     {
       "id": "ag17",
@@ -740,7 +724,7 @@
         "I want to take annual leave in December.",
         "From the 14th to the 18th."
       ],
-      "reply": "Your annual leave request from December 14 to December 18 has been approved! You have 19 days remaining for 2026.",
+      "reply": "Your annual leave request from December 14th to 18th has been approved! You have 19 days remaining for 2026. Your request ID is #15.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -763,8 +747,8 @@
         "answered",
         "answered"
       ],
-      "tokens": 4701,
-      "cost_usd": 0.000416
+      "tokens": 4709,
+      "cost_usd": 0.00042
     },
     {
       "id": "ag19",
@@ -793,7 +777,7 @@
         "answered"
       ],
       "tokens": 6684,
-      "cost_usd": 0.000579
+      "cost_usd": 0.000569
     },
     {
       "id": "ag20",
@@ -823,7 +807,7 @@
       "turns": [
         "Cancel request 13."
       ],
-      "reply": "The request #13 cannot be cancelled because it has already started (leave-policy §3.5). Please contact HR for further assistance.",
+      "reply": "The request #13 cannot be canceled because it has already started (leave-policy §3.5). Please contact HR for further assistance.",
       "tool_calls": [
         "cancel_leave_request"
       ],
@@ -863,7 +847,7 @@
         "answered"
       ],
       "tokens": 3116,
-      "cost_usd": 0.000278
+      "cost_usd": 0.000269
     },
     {
       "id": "ag25",
@@ -871,21 +855,23 @@
       "turns": [
         "Register a sick day for 2 November please."
       ],
-      "reply": "The date you provided, 2 November, is in the past. Please provide a new date for your sick leave request.",
-      "tool_calls": [],
+      "reply": "I cannot register a sick day for November 2nd because it exceeds the 7-day registration window for sick leave. Please contact HR directly for assistance.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
       "new_requests": [],
       "status_changes": {},
       "outcome_ok": true,
       "process_ok": true,
       "safety_ok": true,
-      "communication_ok": false,
-      "success": false,
-      "steps": 1,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 1506,
-      "cost_usd": 0.000238
+      "tokens": 3195,
+      "cost_usd": 0.000299
     },
     {
       "id": "ag02",
@@ -893,7 +879,7 @@
       "turns": [
         "I'd like vacation from 7 to 9 December."
       ],
-      "reply": "Your vacation request from December 7 to December 9 has been declined due to insufficient annual leave balance. You requested 3 working days, but you only have 2 days available for 2026 (leave-policy §2.1, §3.3).",
+      "reply": "Your vacation request from December 7 to 9 has been declined. You requested 3 working days, but you only have 2 annual leave days available for 2026 (leave-policy §2.1, §3.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -915,8 +901,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3172,
-      "cost_usd": 0.000295
+      "tokens": 3267,
+      "cost_usd": 0.000307
     },
     {
       "id": "ag04",
@@ -924,21 +910,14 @@
       "turns": [
         "I'm sick today and probably tomorrow too, please register it."
       ],
-      "reply": "Your sick leave has been successfully registered. Here are the details:\n\n- **Request #15**: Sick leave for today (12 Nov 2026) - Approved.\n- **Request #16**: Sick leave for tomorrow (13 Nov 2026) - Approved.\n\nNo certificate is needed for these days (sick-leave-policy §2.2).",
+      "reply": "Your sick leave request has been approved for 2 working days (from November 12 to November 13). No certificate is needed as per the sick leave policy.",
       "tool_calls": [
-        "submit_leave_request",
         "submit_leave_request"
       ],
       "new_requests": [
         {
           "leave_type": "sick",
           "start_date": "2026-11-12",
-          "end_date": "2026-11-12",
-          "status": "approved"
-        },
-        {
-          "leave_type": "sick",
-          "start_date": "2026-11-13",
           "end_date": "2026-11-13",
           "status": "approved"
         }
@@ -953,8 +932,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3350,
-      "cost_usd": 0.000346
+      "tokens": 3230,
+      "cost_usd": 0.000401
     },
     {
       "id": "ag05",
@@ -962,7 +941,7 @@
       "turns": [
         "I've been sick since Monday 9 November and I'll be off until Friday 20 November."
       ],
-      "reply": "Your sick leave request from November 9 to November 20 has been submitted and is currently pending HR review (#15). Since it's longer than 3 working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
+      "reply": "Your sick leave request from November 9 to November 20 has been submitted and is currently pending HR review. Since it exceeds three working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -984,8 +963,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3181,
-      "cost_usd": 0.000296
+      "tokens": 3265,
+      "cost_usd": 0.000307
     },
     {
       "id": "ag07",
@@ -993,7 +972,7 @@
       "turns": [
         "I'm getting married on 5 December! I'd like special leave from 1 to 3 December."
       ],
-      "reply": "Your special leave request from December 1 to December 3 for your wedding has been approved! 🎉 This covers 3 working days as per the leave policy.",
+      "reply": "Your special leave request from December 1 to December 3 for your wedding on December 5 has been approved! 🎉 You have been granted 3 working days of leave (leave-policy §4.1).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -1015,8 +994,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3182,
-      "cost_usd": 0.000295
+      "tokens": 3320,
+      "cost_usd": 0.00031
     },
     {
       "id": "ag09",
@@ -1024,7 +1003,7 @@
       "turns": [
         "I want to take some time off next month."
       ],
-      "reply": "Could you please specify the leave type (annual, sick, unpaid, or special) and the exact start and end dates for your time off next month?",
+      "reply": "Could you please specify the type of leave you would like to take (annual, sick, unpaid, or special) and the exact start and end dates for your time off?",
       "tool_calls": [],
       "new_requests": [],
       "status_changes": {},
@@ -1037,8 +1016,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 1512,
-      "cost_usd": 0.000136
+      "tokens": 1516,
+      "cost_usd": 0.000138
     },
     {
       "id": "ag10",
@@ -1070,7 +1049,7 @@
       "turns": [
         "Please cancel my leave from 23 to 27 November."
       ],
-      "reply": "Your leave request from 23 to 27 November has been successfully cancelled, and 5 days have been returned to your balance.",
+      "reply": "Your leave request from 23 to 27 November has been successfully cancelled. You have 5 days returned to your leave balance.",
       "tool_calls": [
         "list_my_leave_requests",
         "cancel_leave_request"
@@ -1088,8 +1067,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4767,
-      "cost_usd": 0.000511
+      "tokens": 4917,
+      "cost_usd": 0.000419
     },
     {
       "id": "ag14",
@@ -1126,8 +1105,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3455,
-      "cost_usd": 0.000393
+      "tokens": 3438,
+      "cost_usd": 0.000358
     },
     {
       "id": "ag15",
@@ -1135,7 +1114,7 @@
       "turns": [
         "Take Monday 16 November off for me as annual leave."
       ],
-      "reply": "Your request for annual leave on Monday, 16 November has been declined due to insufficient notice. According to the leave policy, requests for leave of up to 3 working days must be made at least 2 working days in advance.",
+      "reply": "Your request for annual leave on Monday, 16 November 2026, has been declined. The reason is that leave must be requested at least 2 working days in advance for requests of up to 3 working days (leave policy §3.2).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -1157,8 +1136,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3160,
-      "cost_usd": 0.000397
+      "tokens": 3225,
+      "cost_usd": 0.000303
     },
     {
       "id": "ag17",
@@ -1298,21 +1277,23 @@
       "turns": [
         "Register a sick day for 2 November please."
       ],
-      "reply": "The date you provided, 2 November, is in the past. Sick leave requests must be submitted for future dates. Please provide a new date for your sick leave.",
-      "tool_calls": [],
+      "reply": "I cannot register a sick day for November 2nd because it exceeds the 7-day registration window for sick leave. Please contact HR directly for assistance.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
       "new_requests": [],
       "status_changes": {},
       "outcome_ok": true,
       "process_ok": true,
       "safety_ok": true,
-      "communication_ok": false,
-      "success": false,
-      "steps": 1,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 1515,
-      "cost_usd": 0.000137
+      "tokens": 3195,
+      "cost_usd": 0.00029
     }
   ]
 }

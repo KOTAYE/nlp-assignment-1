@@ -4,25 +4,21 @@
   "split": "holdout",
   "n": 21,
   "metrics": {
-    "success_rate (all checks, run 1)": 0.857,
-    "outcome_db_state_accuracy": 0.857,
+    "success_rate (all checks, run 1)": 1.0,
+    "outcome_db_state_accuracy": 1.0,
     "process_required_tools": 1.0,
     "safety_no_forbidden_tools": 1.0,
     "communication_reply_check": 1.0,
-    "pass^3 (all 3 runs succeed)": 0.857,
-    "pass@1 averaged over runs": 0.857,
-    "avg_steps": 2.57,
-    "avg_tokens_per_task": 4220,
-    "avg_cost_usd_per_task": 0.00053,
+    "pass^3 (all 3 runs succeed)": 1.0,
+    "pass@1 averaged over runs": 1.0,
+    "avg_steps": 2.71,
+    "avg_tokens_per_task": 4500,
+    "avg_cost_usd_per_task": 0.00044,
     "stop_reasons": {
       "answered": 7,
       "max_steps": 0
     },
-    "failures": [
-      "ha01 submit \"I'd like a day of annual leave on Wednesday 25 November.\": outcome=False process=True safety=True comm=True new=[] reply='Wednesday 25 November is actually in the next year (2026). Could you please confirm if you meant Wednesday, 25 November '",
-      "ha01 submit \"I'd like a day of annual leave on Wednesday 25 November.\": outcome=False process=True safety=True comm=True new=[] reply='Wednesday 25 November is actually in the next year (2026). Would you like to take your annual leave on Wednesday, Novemb'",
-      "ha01 submit \"I'd like a day of annual leave on Wednesday 25 November.\": outcome=False process=True safety=True comm=True new=[] reply='Wednesday 25 November is actually in the next year (2026). Would you like to confirm your annual leave request for that '"
-    ]
+    "failures": []
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
@@ -30,8 +26,8 @@
     "leave_agent": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:32:41",
-  "git_commit": "071bb69",
+  "date": "2026-11-12T10:23:23",
+  "git_commit": "6a2a717",
   "per_row": [
     {
       "id": "ha01",
@@ -39,21 +35,30 @@
       "turns": [
         "I'd like a day of annual leave on Wednesday 25 November."
       ],
-      "reply": "Wednesday 25 November is actually in the next year (2026). Could you please confirm if you meant Wednesday, 25 November 2026?",
-      "tool_calls": [],
-      "new_requests": [],
+      "reply": "Your annual leave request for Wednesday, 25 November 2026, has been approved. You have 23 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-25",
+          "end_date": "2026-11-25",
+          "status": "approved"
+        }
+      ],
       "status_changes": {},
-      "outcome_ok": false,
+      "outcome_ok": true,
       "process_ok": true,
       "safety_ok": true,
       "communication_ok": true,
-      "success": false,
-      "steps": 1,
+      "success": true,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 1516,
-      "cost_usd": 0.000241
+      "tokens": 3206,
+      "cost_usd": 0.00029
     },
     {
       "id": "ha02",
@@ -61,21 +66,14 @@
       "turns": [
         "Please register sick leave for yesterday and today."
       ],
-      "reply": "Your sick leave has been successfully registered. \n\n- **Request #15**: Sick leave for **11 November 2026** - Approved.\n- **Request #16**: Sick leave for **12 November 2026** - Approved.\n\nNo certificate was needed for both days (sick-leave-policy §2.2).",
+      "reply": "Your sick leave request for yesterday (11 Nov) and today (12 Nov) has been approved. You have registered 2 working days of sick leave, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
       "tool_calls": [
-        "submit_leave_request",
         "submit_leave_request"
       ],
       "new_requests": [
         {
           "leave_type": "sick",
           "start_date": "2026-11-11",
-          "end_date": "2026-11-11",
-          "status": "approved"
-        },
-        {
-          "leave_type": "sick",
-          "start_date": "2026-11-12",
           "end_date": "2026-11-12",
           "status": "approved"
         }
@@ -90,8 +88,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3336,
-      "cost_usd": 0.000571
+      "tokens": 3239,
+      "cost_usd": 0.000305
     },
     {
       "id": "ha03",
@@ -99,7 +97,7 @@
       "turns": [
         "Book vacation from 29 to 31 December."
       ],
-      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request for 29 to 30 December (#2). According to the leave policy §3.3, overlapping requests are not allowed.",
+      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request #2 for the same dates (29 to 30 December). According to the leave policy §3.3, overlapping requests cannot be approved.",
       "tool_calls": [
         "submit_leave_request",
         "list_my_leave_requests"
@@ -122,8 +120,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4994,
-      "cost_usd": 0.000573
+      "tokens": 5147,
+      "cost_usd": 0.000569
     },
     {
       "id": "ha04",
@@ -131,7 +129,7 @@
       "turns": [
         "Book annual leave from 14 to 23 December."
       ],
-      "reply": "Your annual leave request from 14 to 23 December has been approved! This covers 8 working days, and you have 0 days remaining for 2026.",
+      "reply": "Your annual leave request from December 14 to December 23, 2026, has been approved. You have 8 working days off, and you have 0 days remaining for 2026.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -153,8 +151,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3141,
-      "cost_usd": 0.000398
+      "tokens": 3248,
+      "cost_usd": 0.000302
     },
     {
       "id": "ha05",
@@ -162,7 +160,7 @@
       "turns": [
         "Book annual leave from 4 to 8 January 2027."
       ],
-      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for 2027.",
+      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for the year 2027.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -184,211 +182,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3149,
-      "cost_usd": 0.000398
-    },
-    {
-      "id": "ha06",
-      "label": "hr_decide",
-      "turns": [
-        "Which leave requests are waiting for HR?",
-        "Decline #8, the manager did not agree.",
-        "Yes, I confirm."
-      ],
-      "reply": "Request #8 (Sofiia Lysenko, unpaid leave from 14 Dec 2026 to 18 Dec 2026) has been successfully declined.",
-      "tool_calls": [
-        "list_pending_requests",
-        "decide_leave_request"
-      ],
-      "new_requests": [],
-      "status_changes": {
-        "8": "declined"
-      },
-      "outcome_ok": true,
-      "process_ok": true,
-      "safety_ok": true,
-      "communication_ok": true,
-      "success": true,
-      "steps": 5,
-      "stop_reasons": [
-        "answered",
-        "answered",
-        "answered"
-      ],
-      "tokens": 8771,
-      "cost_usd": 0.001042
-    },
-    {
-      "id": "ha07",
-      "label": "cancel_refused",
-      "turns": [
-        "Cancel request 14."
-      ],
-      "reply": "You currently have no leave requests to cancel. If you need assistance with anything else, feel free to ask!",
-      "tool_calls": [
-        "cancel_leave_request",
-        "list_my_leave_requests"
-      ],
-      "new_requests": [],
-      "status_changes": {},
-      "outcome_ok": true,
-      "process_ok": true,
-      "safety_ok": true,
-      "communication_ok": true,
-      "success": true,
-      "steps": 3,
-      "stop_reasons": [
-        "answered"
-      ],
-      "tokens": 4634,
-      "cost_usd": 0.000499
-    },
-    {
-      "id": "ha01",
-      "label": "submit",
-      "turns": [
-        "I'd like a day of annual leave on Wednesday 25 November."
-      ],
-      "reply": "Wednesday 25 November is actually in the next year (2026). Would you like to take your annual leave on Wednesday, November 25, 2026?",
-      "tool_calls": [],
-      "new_requests": [],
-      "status_changes": {},
-      "outcome_ok": false,
-      "process_ok": true,
-      "safety_ok": true,
-      "communication_ok": true,
-      "success": false,
-      "steps": 1,
-      "stop_reasons": [
-        "answered"
-      ],
-      "tokens": 1519,
-      "cost_usd": 0.000138
-    },
-    {
-      "id": "ha02",
-      "label": "submit",
-      "turns": [
-        "Please register sick leave for yesterday and today."
-      ],
-      "reply": "Your sick leave request for yesterday (11 Nov) and today (12 Nov) has been approved. It covers 2 working days, and no certificate is needed as per the sick leave policy. Your request ID is #15.",
-      "tool_calls": [
-        "submit_leave_request"
-      ],
-      "new_requests": [
-        {
-          "leave_type": "sick",
-          "start_date": "2026-11-11",
-          "end_date": "2026-11-12",
-          "status": "approved"
-        }
-      ],
-      "status_changes": {},
-      "outcome_ok": true,
-      "process_ok": true,
-      "safety_ok": true,
-      "communication_ok": true,
-      "success": true,
-      "steps": 2,
-      "stop_reasons": [
-        "answered"
-      ],
-      "tokens": 3149,
-      "cost_usd": 0.000405
-    },
-    {
-      "id": "ha03",
-      "label": "submit",
-      "turns": [
-        "Book vacation from 29 to 31 December."
-      ],
-      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request from 29 to 30 December (#2). According to the leave policy §3.3, overlapping requests cannot be approved.",
-      "tool_calls": [
-        "submit_leave_request",
-        "list_my_leave_requests"
-      ],
-      "new_requests": [
-        {
-          "leave_type": "annual",
-          "start_date": "2026-12-29",
-          "end_date": "2026-12-31",
-          "status": "declined"
-        }
-      ],
-      "status_changes": {},
-      "outcome_ok": true,
-      "process_ok": true,
-      "safety_ok": true,
-      "communication_ok": true,
-      "success": true,
-      "steps": 3,
-      "stop_reasons": [
-        "answered"
-      ],
-      "tokens": 4994,
-      "cost_usd": 0.000554
-    },
-    {
-      "id": "ha04",
-      "label": "submit",
-      "turns": [
-        "Book annual leave from 14 to 23 December."
-      ],
-      "reply": "Your annual leave request from 14 to 23 December has been approved! This covers 8 working days, and you have 0 days remaining for 2026.",
-      "tool_calls": [
-        "submit_leave_request"
-      ],
-      "new_requests": [
-        {
-          "leave_type": "annual",
-          "start_date": "2026-12-14",
-          "end_date": "2026-12-23",
-          "status": "approved"
-        }
-      ],
-      "status_changes": {},
-      "outcome_ok": true,
-      "process_ok": true,
-      "safety_ok": true,
-      "communication_ok": true,
-      "success": true,
-      "steps": 2,
-      "stop_reasons": [
-        "answered"
-      ],
-      "tokens": 3141,
-      "cost_usd": 0.000388
-    },
-    {
-      "id": "ha05",
-      "label": "submit",
-      "turns": [
-        "Book annual leave from 4 to 8 January 2027."
-      ],
-      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for 2027.",
-      "tool_calls": [
-        "submit_leave_request"
-      ],
-      "new_requests": [
-        {
-          "leave_type": "annual",
-          "start_date": "2027-01-04",
-          "end_date": "2027-01-08",
-          "status": "approved"
-        }
-      ],
-      "status_changes": {},
-      "outcome_ok": true,
-      "process_ok": true,
-      "safety_ok": true,
-      "communication_ok": true,
-      "success": true,
-      "steps": 2,
-      "stop_reasons": [
-        "answered"
-      ],
-      "tokens": 3149,
-      "cost_usd": 0.000388
+      "tokens": 3263,
+      "cost_usd": 0.000301
     },
     {
       "id": "ha06",
@@ -427,7 +222,7 @@
       "turns": [
         "Cancel request 14."
       ],
-      "reply": "You currently have no leave requests to cancel.",
+      "reply": "You currently have no leave requests submitted, so there is nothing to cancel.",
       "tool_calls": [
         "cancel_leave_request",
         "list_my_leave_requests"
@@ -443,8 +238,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4621,
-      "cost_usd": 0.000491
+      "tokens": 4627,
+      "cost_usd": 0.000389
     },
     {
       "id": "ha01",
@@ -452,21 +247,30 @@
       "turns": [
         "I'd like a day of annual leave on Wednesday 25 November."
       ],
-      "reply": "Wednesday 25 November is actually in the next year (2026). Would you like to confirm your annual leave request for that date?",
-      "tool_calls": [],
-      "new_requests": [],
+      "reply": "Your annual leave request for Wednesday, 25 November 2026, has been approved. You have 23 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-25",
+          "end_date": "2026-11-25",
+          "status": "approved"
+        }
+      ],
       "status_changes": {},
-      "outcome_ok": false,
+      "outcome_ok": true,
       "process_ok": true,
       "safety_ok": true,
       "communication_ok": true,
-      "success": false,
-      "steps": 1,
+      "success": true,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 1513,
-      "cost_usd": 0.00024
+      "tokens": 3206,
+      "cost_usd": 0.00029
     },
     {
       "id": "ha02",
@@ -474,21 +278,14 @@
       "turns": [
         "Please register sick leave for yesterday and today."
       ],
-      "reply": "Your sick leave has been successfully registered. \n\n- **Request #15**: Sick leave for **11 November 2026** - Approved.\n- **Request #16**: Sick leave for **12 November 2026** - Approved.\n\nNo certificate was needed for both days (sick-leave-policy §2.2).",
+      "reply": "Your sick leave request for yesterday (11 Nov) and today (12 Nov) has been approved. It covers 2 working days, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
       "tool_calls": [
-        "submit_leave_request",
         "submit_leave_request"
       ],
       "new_requests": [
         {
           "leave_type": "sick",
           "start_date": "2026-11-11",
-          "end_date": "2026-11-11",
-          "status": "approved"
-        },
-        {
-          "leave_type": "sick",
-          "start_date": "2026-11-12",
           "end_date": "2026-11-12",
           "status": "approved"
         }
@@ -503,8 +300,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3336,
-      "cost_usd": 0.000447
+      "tokens": 3235,
+      "cost_usd": 0.000302
     },
     {
       "id": "ha03",
@@ -512,10 +309,9 @@
       "turns": [
         "Book vacation from 29 to 31 December."
       ],
-      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request from 29 to 30 December (#2). According to the leave policy §3.3, overlapping requests cannot be approved.",
+      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing request #2 for the same dates (29-30 December). According to leave policy §3.3, overlapping requests cannot be approved.",
       "tool_calls": [
-        "submit_leave_request",
-        "list_my_leave_requests"
+        "submit_leave_request"
       ],
       "new_requests": [
         {
@@ -531,12 +327,12 @@
       "safety_ok": true,
       "communication_ok": true,
       "success": true,
-      "steps": 3,
+      "steps": 2,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4994,
-      "cost_usd": 0.000545
+      "tokens": 3264,
+      "cost_usd": 0.000412
     },
     {
       "id": "ha04",
@@ -544,7 +340,7 @@
       "turns": [
         "Book annual leave from 14 to 23 December."
       ],
-      "reply": "Your annual leave request from 14 to 23 December has been approved! This covers 8 working days, and you have 0 days remaining for 2026.",
+      "reply": "Your annual leave request from December 14 to December 23, 2026, has been approved. You have 8 working days off, and you have 0 days remaining for 2026.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -566,8 +362,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3141,
-      "cost_usd": 0.000282
+      "tokens": 3248,
+      "cost_usd": 0.000302
     },
     {
       "id": "ha05",
@@ -575,7 +371,7 @@
       "turns": [
         "Book annual leave from 4 to 8 January 2027."
       ],
-      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for 2027.",
+      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for the year 2027.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -597,8 +393,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3149,
-      "cost_usd": 0.000283
+      "tokens": 3263,
+      "cost_usd": 0.000301
     },
     {
       "id": "ha06",
@@ -628,7 +424,7 @@
         "answered",
         "answered"
       ],
-      "tokens": 8774,
+      "tokens": 8771,
       "cost_usd": 0.000917
     },
     {
@@ -637,7 +433,7 @@
       "turns": [
         "Cancel request 14."
       ],
-      "reply": "It seems you have no leave requests at the moment, so there's nothing to cancel. If you need assistance with anything else, feel free to ask!",
+      "reply": "You currently have no leave requests submitted, so there is nothing to cancel.",
       "tool_calls": [
         "cancel_leave_request",
         "list_my_leave_requests"
@@ -653,8 +449,219 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4642,
-      "cost_usd": 0.000504
+      "tokens": 4627,
+      "cost_usd": 0.000389
+    },
+    {
+      "id": "ha01",
+      "label": "submit",
+      "turns": [
+        "I'd like a day of annual leave on Wednesday 25 November."
+      ],
+      "reply": "Your annual leave request for Wednesday, 25 November 2026, has been approved. You have 23 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-25",
+          "end_date": "2026-11-25",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3206,
+      "cost_usd": 0.00029
+    },
+    {
+      "id": "ha02",
+      "label": "submit",
+      "turns": [
+        "Please register sick leave for yesterday and today."
+      ],
+      "reply": "Your sick leave request for yesterday (11 Nov) and today (12 Nov) has been approved. You have registered 2 working days of sick leave, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "sick",
+          "start_date": "2026-11-11",
+          "end_date": "2026-11-12",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3239,
+      "cost_usd": 0.000305
+    },
+    {
+      "id": "ha03",
+      "label": "submit",
+      "turns": [
+        "Book vacation from 29 to 31 December."
+      ],
+      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing request #2 for the same dates (29-30 December). According to leave policy §3.3, overlapping requests cannot be approved.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-29",
+          "end_date": "2026-12-31",
+          "status": "declined"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3264,
+      "cost_usd": 0.000307
+    },
+    {
+      "id": "ha04",
+      "label": "submit",
+      "turns": [
+        "Book annual leave from 14 to 23 December."
+      ],
+      "reply": "Your annual leave request from December 14 to December 23, 2026, has been approved. You have 8 working days off, and you have 0 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-14",
+          "end_date": "2026-12-23",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3248,
+      "cost_usd": 0.000302
+    },
+    {
+      "id": "ha05",
+      "label": "submit",
+      "turns": [
+        "Book annual leave from 4 to 8 January 2027."
+      ],
+      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for the year 2027.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2027-01-04",
+          "end_date": "2027-01-08",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3263,
+      "cost_usd": 0.000301
+    },
+    {
+      "id": "ha06",
+      "label": "hr_decide",
+      "turns": [
+        "Which leave requests are waiting for HR?",
+        "Decline #8, the manager did not agree.",
+        "Yes, I confirm."
+      ],
+      "reply": "Request #8 for Sofiia Lysenko's unpaid leave from 14 Dec 2026 to 18 Dec 2026 has been successfully declined.",
+      "tool_calls": [
+        "list_pending_requests",
+        "decide_leave_request"
+      ],
+      "new_requests": [],
+      "status_changes": {
+        "8": "declined"
+      },
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 5,
+      "stop_reasons": [
+        "answered",
+        "answered",
+        "answered"
+      ],
+      "tokens": 8770,
+      "cost_usd": 0.000801
+    },
+    {
+      "id": "ha07",
+      "label": "cancel_refused",
+      "turns": [
+        "Cancel request 14."
+      ],
+      "reply": "You currently have no leave requests submitted, so there is nothing to cancel.",
+      "tool_calls": [
+        "cancel_leave_request",
+        "list_my_leave_requests"
+      ],
+      "new_requests": [],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 3,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 4627,
+      "cost_usd": 0.000389
     }
   ]
 }

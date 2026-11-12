@@ -136,10 +136,15 @@ Full analysis is in [`docs/report.md`](report.md) §5. Auto-generated tables are
   - answer correctness 0.857 (test and holdout), with no contradictions;
   - faithfulness 1.0 / 0.958;
   - citation hit 1.0;
-  - HR referral F1 0.667 (test) / 0.75 (holdout), the only metric below target;
+  - HR referral F1 0.667 (test) / 0.75 (holdout), the only metric below target (improved in iteration 3, see below);
   - leave agent pass^3 0.933 / 0.857;
   - E2E 0.833.
-- **Next iteration:** a deterministic HR-delegation rule plus a claim verifier for referral; date parsing in code for the agent; a learned injection classifier.
+- **Iteration 3** (measured on holdout-2, written before it):
+  - correctness 0.917;
+  - faithfulness 1.0;
+  - HR referral P/R 0.90/0.90 (F1 0.90);
+  - leave agent pass^3 1.0.
+- **Next:** dual-path routing on low router confidence; a verifier check that the answer addresses the asked item; a learned injection classifier.
 
 ## 6. Deployment
 - **Local deployment** (the brief: deployment optional, the app must be runnable for the demo): `streamlit run app/streamlit_app.py`. Setup steps are in `README.md`.
@@ -171,3 +176,6 @@ Full analysis is in [`docs/report.md`](report.md) §5. Auto-generated tables are
 | 11 | 2026-11-12 | Evaluation (test, iteration 1) | First test run: dev overfitting visible | test correctness 0.786, referral F1 0.737, agent pass^3 0.80, E2E 0.722 |
 | 12 | 2026-11-12 | Data Preparation | Holdout sets written before iteration-2 fixes; gold label ag19 fixed (#9 → #10) | — |
 | 13 | 2026-11-12 | Modeling (iteration 2) | Table-row index units + best-unit reranking; answerer v3 (two-sided sufficiency); agent v4 (calendar, no pre-validation); collector v7; sources guaranteed in the reply | test correctness 0.786 → 0.857 (holdout 0.857); oracle answer rate 0.714 → 1.00; citation hit 0.917 → 1.00; agent pass^3 0.80 → 0.933; E2E 0.722 → 0.833; referral F1 0.737 → 0.667 (trade-off) |
+| 14 | 2026-11-12 | Data Preparation | Holdout-2 (22 QA on the answer-vs-refer boundary + 6 natural-date agent scenarios) written and committed before iteration 3; the iteration-2 system was measured on it as a baseline | baseline holdout-2: correctness 0.833, referral P/R 0.818/0.900, agent pass^3 0.333 |
+| 15 | 2026-11-12 | Modeling (iteration 3) | Output guard (code HR-delegation rule + LLM claim verifier, eval on a controlled set); code date resolver for the agent; router v4 general rule | holdout-2: correctness 0.833 → 0.917; referral precision 0.818 → 0.900; faithfulness 0.975 → 1.000; agent pass^3 0.333 → 1.000 (after #16). Test referral F1 0.667 → 0.842; E2E 0.833 → 0.889 |
+| 16 | 2026-11-12 | Evaluation (regression) | Test caught a regression from #15: a bare "the 14th" was resolved to the wrong month in multi-turn dialogue → the resolver now defers to months named earlier in the conversation (+ unit test) | agent pass^3 on test 0.867 → 1.000 |

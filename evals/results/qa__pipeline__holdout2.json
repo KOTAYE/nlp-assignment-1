@@ -4,33 +4,32 @@
   "split": "holdout2",
   "n": 22,
   "metrics": {
-    "answer_rate (answerable questions answered)": 0.833,
-    "correctness_pass_rate (fully/mostly right, of answerable)": 0.833,
+    "answer_rate (answerable questions answered)": 0.917,
+    "correctness_pass_rate (fully/mostly right, of answerable)": 0.917,
     "correctness_mean_score (answered)": 1.0,
     "contradiction_rate (answered)": 0.0,
-    "faithfulness_mean (answered)": 0.975,
+    "faithfulness_mean (answered)": 1.0,
     "citation_hit_rate (answered)": 1.0,
     "answers_with_citation": 1.0,
-    "context_recall@5 (gold section in evidence)": 0.833,
-    "referral_precision": 0.818,
+    "context_recall@5 (gold section in evidence)": 0.917,
+    "referral_precision": 0.9,
     "referral_recall": 0.9,
-    "referral_f1": 0.857,
+    "referral_f1": 0.9,
     "referral_confusion": {
       "tp": 9,
-      "fp": 2,
+      "fp": 1,
       "fn": 1,
-      "tn": 10
+      "tn": 11
     },
-    "ticket_category_accuracy": 0.889,
-    "avg_tokens_per_question": 3148,
-    "avg_cost_usd_per_question": 0.00048,
-    "avg_latency_s": 5.21,
+    "ticket_category_accuracy": 0.778,
+    "avg_tokens_per_question": 3747,
+    "avg_cost_usd_per_question": 0.00054,
+    "avg_latency_s": 5.68,
     "failing_stages": {
       "route=leave_action": 1,
-      "router (referred directly)": 2
+      "router (referred directly)": 1
     },
     "errors": [
-      "h2q10 'If the person I recommended joins as a contractor, do I still get the referral bonus?': route=hr_referral verdict=None stage=router (referred directly)",
       "h2q12 'Will my manager find out that I see the company psychologist?': route=hr_referral verdict=None stage=router (referred directly)",
       "h2u03 'My mother is in hospital. Can I take paid days off to look after her?': route=leave_action verdict=None stage=route=leave_action"
     ]
@@ -38,7 +37,7 @@
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "router": "3",
+    "router": "4",
     "collector": "7",
     "rewriter": "2",
     "answerer": "3",
@@ -47,8 +46,8 @@
     "judge_faithfulness": "1"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T09:54:22",
-  "git_commit": "9e2434c",
+  "date": "2026-11-12T10:00:26",
+  "git_commit": "6a2a717",
   "per_row": [
     {
       "id": "h2q01",
@@ -74,9 +73,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3516,
-      "cost_usd": 0.000604,
-      "latency_s": 24.32,
+      "tokens": 4453,
+      "cost_usd": 0.000596,
+      "latency_s": 15.92,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer correctly states that contractors are not eligible for the education budget, matching the gold answer exactly.",
       "faithfulness": 1.0,
@@ -110,9 +109,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3324,
-      "cost_usd": 0.000474,
-      "latency_s": 4.54,
+      "tokens": 4141,
+      "cost_usd": 0.000614,
+      "latency_s": 5.04,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer correctly states that the employee is not eligible for the home office allowance because they are office-based and the allowance is only for fully remote employees.",
       "faithfulness": 1.0,
@@ -144,11 +143,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3382,
-      "cost_usd": 0.000481,
-      "latency_s": 4.39,
+      "tokens": 4249,
+      "cost_usd": 0.000635,
+      "latency_s": 5.08,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by confirming the need for team lead agreement and correctly stating the maximum number of remote days per week.",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that team lead agreement is needed and correctly mentioning the limit of up to 3 remote days per week.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -160,7 +159,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Any vacation days you have above the carry-over limit of 5 days will expire on December 31. Therefore, if you do not use those excess days by the end of the year, you will lose them.\n\nSources: [leave-policy §3.4]",
+      "reply": "Any vacation days you have above the carry-over limit of 5 days will expire on December 31. Therefore, if you do not use those days by the end of the year, they will not be available for you to use in the following year.\n\nSources: [leave-policy §3.4]",
       "citations": [
         "leave-policy §3.4"
       ],
@@ -178,9 +177,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3421,
-      "cost_usd": 0.000482,
-      "latency_s": 4.62,
+      "tokens": 4318,
+      "cost_usd": 0.000565,
+      "latency_s": 5.51,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer accurately states that vacation days above the 5-day carry-over limit expire on December 31st, which fully matches the gold answer.",
       "faithfulness": 1.0,
@@ -194,7 +193,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You cannot take your wedding leave two months after the wedding. According to the policy, special leave for your wedding must be taken within 30 days of the event [leave-policy §4.2].",
+      "reply": "You cannot take your wedding leave two months after the wedding. According to the leave policy, special leave for your wedding must be taken within 30 days of the event [leave-policy §4.2].",
       "citations": [
         "leave-policy §4.2"
       ],
@@ -204,17 +203,17 @@
       "evidence_ids": [
         "leave-policy §4.1",
         "leave-policy §4.2",
-        "leave-policy §6.1",
         "leave-policy §2.2",
+        "leave-policy §6.1",
         "leave-policy §3.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3600,
-      "cost_usd": 0.000506,
-      "latency_s": 3.9,
+      "tokens": 4693,
+      "cost_usd": 0.00069,
+      "latency_s": 5.3,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate correctly states that the leave cannot be taken two months after the wedding and provides the correct timeframe of 30 days from the event.",
       "faithfulness": 1.0,
@@ -246,11 +245,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3507,
-      "cost_usd": 0.0005,
-      "latency_s": 4.38,
+      "tokens": 4519,
+      "cost_usd": 0.000607,
+      "latency_s": 6.19,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer, providing all the required information about informing the team lead and registering sick days.",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing all the required information without any contradictions.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -262,7 +261,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Yes, alcohol at a client dinner is reimbursed as long as the meal is approved in advance by your team lead. The reimbursement is subject to the limit of 40 USD per person for the meal, which includes alcohol as part of the approved expenses for client meals [expense-reimbursement-policy §1.3], [expense-reimbursement-policy §5.1].",
+      "reply": "Yes, alcohol at a client dinner is reimbursed as long as the meal is approved in advance by your team lead. The general rule states that alcohol is not reimbursed except at approved client meals, which means you can include it in your reimbursement request for that specific occasion, provided you follow the approval process and limits set for client meals.\n\nSources: [expense-reimbursement-policy §1.3], [expense-reimbursement-policy §5.1]",
       "citations": [
         "expense-reimbursement-policy §1.3",
         "expense-reimbursement-policy §5.1"
@@ -281,11 +280,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3368,
-      "cost_usd": 0.000495,
-      "latency_s": 4.74,
+      "tokens": 4208,
+      "cost_usd": 0.000642,
+      "latency_s": 5.73,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states that alcohol is reimbursed only at approved client meals and adds a relevant detail about the per-person limit, which does not contradict the gold answer.",
+      "verdict_reason": "The candidate answer correctly states that alcohol is reimbursed only at approved client meals, aligning with the gold answer's condition.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -315,9 +314,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3297,
-      "cost_usd": 0.000461,
-      "latency_s": 3.99,
+      "tokens": 4087,
+      "cost_usd": 0.000595,
+      "latency_s": 5.35,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer and adds a relevant, non-contradictory detail about repeated damage due to negligence.",
       "faithfulness": 1.0,
@@ -331,7 +330,7 @@
       "employee_id": "E016",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Your probation review will happen near the end of your 3-month probation period, which means it will take place around January 15, 2027. The review meeting will be conducted by your team lead and HR, and the outcome will be recorded as passed, extended, or not passed [onboarding-policy §3.1][onboarding-policy §3.2].",
+      "reply": "Your probation review will happen near the end of your 3-month probation period, which means it will take place around January 15, 2027. The review meeting will be conducted by your team lead and HR, and the outcome will be recorded as passed, extended (by up to 1 month), or not passed [onboarding-policy §3.1][onboarding-policy §3.2].",
       "citations": [
         "onboarding-policy §3.1",
         "onboarding-policy §3.2"
@@ -350,15 +349,13 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3469,
-      "cost_usd": 0.000508,
-      "latency_s": 4.51,
+      "tokens": 4460,
+      "cost_usd": 0.000616,
+      "latency_s": 6.2,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly identifies the timing of the review (near the end of probation) and the participants (team lead and HR). It also adds extra correct details about the probation length and possible outcomes.",
-      "faithfulness": 0.75,
-      "unsupported_claims": [
-        "it will take place around January 15, 2027"
-      ],
+      "verdict_reason": "The candidate answer correctly identifies when the review happens and who takes part, aligning with the gold answer. The additional details provided do not contradict the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
       "citation_hit": true,
       "failing_stage": null
     },
@@ -367,21 +364,34 @@
       "question": "If the person I recommended joins as a contractor, do I still get the referral bonus?",
       "employee_id": "E003",
       "gold_outcome": "answer",
-      "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
-      "citations": [],
+      "route": "answer",
+      "reply": "Yes, you will receive a referral bonus of **1,000 USD** after the contractor you recommended has completed **3 months of cooperation** with the company. This applies to contractor hires as stated in the referral program policy [internal-requests-policy §3.1].",
+      "citations": [
+        "internal-requests-policy §3.1"
+      ],
       "gold_section_ids": [
         "internal-requests-policy §3.1"
       ],
-      "evidence_ids": [],
-      "context_hit": false,
-      "ticket_id": 1,
-      "ticket_category": "compensation",
+      "evidence_ids": [
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §3.2",
+        "leave-policy §1.2",
+        "benefits-policy §1.1",
+        "onboarding-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
       "gold_category": null,
-      "tokens": 1201,
-      "cost_usd": 0.000223,
-      "latency_s": 2.03,
-      "failing_stage": "router (referred directly)"
+      "tokens": 4464,
+      "cost_usd": 0.00067,
+      "latency_s": 5.51,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that a bonus is given after 3 months of cooperation, which fully matches the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
     },
     {
       "id": "h2q11",
@@ -389,7 +399,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You need to be available for meetings during core hours, which are from **11:00 to 16:00 Kyiv time**. This applies to all employees, regardless of their work format.\n\nSources: [remote-work-policy §1.3]",
+      "reply": "You need to be available for meetings during core hours, which are from **11:00 to 16:00 Kyiv time**. This applies to all employees, including full-time staff like yourself.\n\nSources: [remote-work-policy §1.3]",
       "citations": [
         "remote-work-policy §1.3"
       ],
@@ -398,20 +408,20 @@
       ],
       "evidence_ids": [
         "remote-work-policy §1.3",
-        "remote-work-policy §1.2",
         "leave-policy §3.2",
-        "remote-work-policy §3.1",
-        "code-of-conduct §3.2"
+        "onboarding-policy §2.1",
+        "equipment-policy §2.1",
+        "sick-leave-policy §2.3"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 3398,
-      "cost_usd": 0.000473,
-      "latency_s": 3.97,
+      "tokens": 4271,
+      "cost_usd": 0.000633,
+      "latency_s": 6.29,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly identifies the core hours for meetings as 11:00 to 16:00 Kyiv time, matching the gold answer exactly.",
+      "verdict_reason": "The candidate answer correctly identifies the core hours and time zone for meeting availability, matching the gold answer exactly.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -423,19 +433,19 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "benefits-policy §5.2"
       ],
       "evidence_ids": [],
       "context_hit": false,
-      "ticket_id": 2,
+      "ticket_id": 1,
       "ticket_category": "other",
       "gold_category": null,
-      "tokens": 1177,
-      "cost_usd": 0.000214,
-      "latency_s": 2.31,
+      "tokens": 1255,
+      "cost_usd": 0.000228,
+      "latency_s": 3.57,
       "failing_stage": "router (referred directly)"
     },
     {
@@ -444,7 +454,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "leave-policy §7.1"
@@ -457,12 +467,12 @@
         "leave-policy §6.1"
       ],
       "context_hit": true,
-      "ticket_id": 3,
+      "ticket_id": 2,
       "ticket_category": "leave_and_absence",
       "gold_category": "leave_and_absence",
-      "tokens": 4184,
-      "cost_usd": 0.000714,
-      "latency_s": 5.71,
+      "tokens": 4257,
+      "cost_usd": 0.000553,
+      "latency_s": 6.02,
       "failing_stage": null
     },
     {
@@ -471,7 +481,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "remote-work-policy §3.2"
@@ -484,12 +494,12 @@
         "leave-policy §2.2"
       ],
       "context_hit": true,
-      "ticket_id": 4,
+      "ticket_id": 3,
       "ticket_category": "relocation_and_abroad",
       "gold_category": "relocation_and_abroad",
-      "tokens": 4129,
-      "cost_usd": 0.000666,
-      "latency_s": 6.63,
+      "tokens": 4169,
+      "cost_usd": 0.000581,
+      "latency_s": 6.42,
       "failing_stage": null
     },
     {
@@ -508,9 +518,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": "leave_and_absence",
-      "tokens": 2173,
-      "cost_usd": 0.000366,
-      "latency_s": 2.31,
+      "tokens": 2246,
+      "cost_usd": 0.000271,
+      "latency_s": 2.28,
       "failing_stage": "route=leave_action"
     },
     {
@@ -519,19 +529,19 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (career). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "internal-requests-policy §5.1"
       ],
       "evidence_ids": [],
       "context_hit": false,
-      "ticket_id": 5,
-      "ticket_category": "compensation",
+      "ticket_id": 4,
+      "ticket_category": "career",
       "gold_category": "compensation",
-      "tokens": 1192,
-      "cost_usd": 0.000222,
-      "latency_s": 2.41,
+      "tokens": 1262,
+      "cost_usd": 0.000231,
+      "latency_s": 2.33,
       "failing_stage": null
     },
     {
@@ -540,19 +550,19 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "code-of-conduct §2.3"
       ],
       "evidence_ids": [],
       "context_hit": false,
-      "ticket_id": 6,
+      "ticket_id": 5,
       "ticket_category": "workplace_conduct",
       "gold_category": "workplace_conduct",
-      "tokens": 1179,
-      "cost_usd": 0.000214,
-      "latency_s": 2.35,
+      "tokens": 1250,
+      "cost_usd": 0.000224,
+      "latency_s": 2.07,
       "failing_stage": null
     },
     {
@@ -561,7 +571,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -572,12 +582,12 @@
         "expense-reimbursement-policy §4.2"
       ],
       "context_hit": null,
-      "ticket_id": 7,
+      "ticket_id": 6,
       "ticket_category": "benefits",
       "gold_category": "benefits",
-      "tokens": 3908,
-      "cost_usd": 0.000592,
-      "latency_s": 5.74,
+      "tokens": 3979,
+      "cost_usd": 0.000602,
+      "latency_s": 5.52,
       "failing_stage": null
     },
     {
@@ -586,7 +596,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #8 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -597,12 +607,12 @@
         "expense-reimbursement-policy §3.2"
       ],
       "context_hit": null,
-      "ticket_id": 8,
+      "ticket_id": 7,
       "ticket_category": "other",
       "gold_category": "benefits",
-      "tokens": 3877,
-      "cost_usd": 0.000569,
-      "latency_s": 5.0,
+      "tokens": 3952,
+      "cost_usd": 0.000582,
+      "latency_s": 5.81,
       "failing_stage": null
     },
     {
@@ -611,7 +621,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #9 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #8 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -622,12 +632,12 @@
         "remote-work-policy §2.1"
       ],
       "context_hit": null,
-      "ticket_id": 9,
+      "ticket_id": 8,
       "ticket_category": "benefits",
       "gold_category": "benefits",
-      "tokens": 3933,
-      "cost_usd": 0.000585,
-      "latency_s": 5.48,
+      "tokens": 4043,
+      "cost_usd": 0.000618,
+      "latency_s": 6.52,
       "failing_stage": null
     },
     {
@@ -636,7 +646,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #10 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #9 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -647,12 +657,12 @@
         "leave-policy §5.1"
       ],
       "context_hit": null,
-      "ticket_id": 10,
+      "ticket_id": 9,
       "ticket_category": "leave_and_absence",
       "gold_category": "leave_and_absence",
-      "tokens": 4041,
-      "cost_usd": 0.000691,
-      "latency_s": 5.59,
+      "tokens": 4112,
+      "cost_usd": 0.000537,
+      "latency_s": 5.68,
       "failing_stage": null
     },
     {
@@ -661,7 +671,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #11 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #10 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -672,12 +682,12 @@
         "remote-work-policy §2.1"
       ],
       "context_hit": null,
-      "ticket_id": 11,
+      "ticket_id": 10,
       "ticket_category": "benefits",
       "gold_category": "benefits",
-      "tokens": 3971,
-      "cost_usd": 0.000581,
-      "latency_s": 5.62,
+      "tokens": 4047,
+      "cost_usd": 0.000517,
+      "latency_s": 6.65,
       "failing_stage": null
     }
   ]
