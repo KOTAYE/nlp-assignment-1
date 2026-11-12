@@ -57,6 +57,7 @@ Open `docs/report.md` §5 (or the PDF):
   - the LLM rewriter first lost to simple concatenation;
   - first failing stage analysis.
 - Improvements, and the iteration log (before → after).
+- **Honest evaluation (key point):** each holdout set was committed *before* the fixes of its iteration (show the git log). Report §5.6: holdout-4 before → after (correctness 0.583 → 1.000, referral precision 0.600 → 1.000, agent pass^3 0.667 → 1.000). Regressions that evals caught: the one-day rule in the agent prompt broke multi-day requests and was moved into code. The leakage check (§5.2) and the remaining errors (§5.5) are disclosed.
 
 ## 5. Agentic coding setup (E5e) · 8:45–10:00
 - `CLAUDE.md`:
