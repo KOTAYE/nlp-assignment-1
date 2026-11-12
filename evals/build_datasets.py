@@ -1876,3 +1876,151 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# ====================================================================================== verifier (output guard)
+# Controlled examples, like the judge calibration: label known by construction.
+VERIFIER = [
+    # supported: gold answers with their gold sections
+    (
+        "E003",
+        "How many unused vacation days can I carry over?",
+        "Up to 5 days, to be used by 31 March.",
+        ["leave-policy §3.4"],
+        True,
+    ),
+    (
+        "E011",
+        "How much sport compensation do I get?",
+        "500 UAH per month.",
+        ["benefits-policy §1.1", "benefits-policy §3.1"],
+        True,
+    ),
+    (
+        "E003",
+        "Can I claim the coworking allowance?",
+        "No, office-based employees are not eligible.",
+        ["remote-work-policy §2.1"],
+        True,
+    ),
+    (
+        "E003",
+        "What is the per diem on business trips?",
+        "50 USD per day plus hotel up to 120 USD per night.",
+        ["expense-reimbursement-policy §3.2"],
+        True,
+    ),
+    (
+        "E007",
+        "Do I get paid sick leave?",
+        "No, contractors do not receive paid sick leave.",
+        ["sick-leave-policy §1.1"],
+        True,
+    ),
+    (
+        "E003",
+        "A client offers a gift worth 80 USD. Can I accept?",
+        "No, the limit is 50 USD; decline it or report it to HR.",
+        ["code-of-conduct §4.1"],
+        True,
+    ),
+    (
+        "E003",
+        "How long does an employment certificate take?",
+        "2 working days.",
+        ["internal-requests-policy §1.1"],
+        True,
+    ),
+    (
+        "E003",
+        "Do I need a certificate for 2 sick days?",
+        "No, up to 3 consecutive working days need no certificate.",
+        ["sick-leave-policy §2.2"],
+        True,
+    ),
+    # unsupported: wrong facts
+    (
+        "E003",
+        "How many unused vacation days can I carry over?",
+        "Up to 10 days.",
+        ["leave-policy §3.4"],
+        False,
+    ),
+    (
+        "E003",
+        "What is the per diem on business trips?",
+        "80 USD per day.",
+        ["expense-reimbursement-policy §3.2"],
+        False,
+    ),
+    (
+        "E003",
+        "How long does an employment certificate take?",
+        "5 working days.",
+        ["internal-requests-policy §1.1"],
+        False,
+    ),
+    # unsupported: conclusions from silence
+    (
+        "E003",
+        "Will the company pay for my home internet?",
+        "No, internet bills are not reimbursed.",
+        ["remote-work-policy §2.1", "expense-reimbursement-policy §1.2", "equipment-policy §3.1"],
+        False,
+    ),
+    (
+        "E003",
+        "Do we get a day off on our birthday?",
+        "No, birthdays are not company days off.",
+        ["leave-policy §6.1"],
+        False,
+    ),
+    (
+        "E003",
+        "Does health insurance cover glasses?",
+        "No, glasses are not covered by the insurance.",
+        ["benefits-policy §2.1"],
+        False,
+    ),
+    (
+        "E003",
+        "Can I bring my dog to the office?",
+        "No, pets are not allowed in the office.",
+        ["code-of-conduct §1.2", "remote-work-policy §1.2"],
+        False,
+    ),
+    # unsupported: delegated to HR
+    (
+        "E003",
+        "Can I work from Spain for 3 months?",
+        "Yes, just notify HR 10 working days before.",
+        ["remote-work-policy §3.1", "remote-work-policy §3.2"],
+        False,
+    ),
+    (
+        "E003",
+        "Can I stay home with my sick child and be paid?",
+        "Yes, you can use your paid sick days for that.",
+        ["sick-leave-policy §3.3", "sick-leave-policy §2.1"],
+        False,
+    ),
+]
+
+
+def build_verifier() -> list[dict]:
+    return [
+        {
+            "id": f"ve{i:02d}",
+            "employee_id": e,
+            "question": q,
+            "answer": a,
+            "evidence_ids": ev,
+            "gold_supported": s,
+            "origin": "controlled",
+        }
+        for i, (e, q, a, ev, s) in enumerate(VERIFIER, 1)
+    ]
+
+
+if __name__ == "__main__":
+    write("verifier", build_verifier(), "gold_supported")

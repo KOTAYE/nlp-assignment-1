@@ -10,6 +10,7 @@ import datetime as dt
 import json
 from dataclasses import dataclass, field
 
+from ..dates import annotate
 from ..llm import chat_with_tools, load_prompt
 from ..tools import ToolContext, execute, tools_for
 
@@ -22,6 +23,12 @@ class AgentResult:
     stop_reason: str  # "answered" | "max_steps" | "repeated_call"
     tool_calls: list[dict] = field(default_factory=list)
     steps: int = 0
+
+
+def with_dates(message: str, today) -> str:
+    """Append the code-resolved dates (iteration 3: LLMs mis-compute weekdays and years)."""
+    note = annotate(message, today)
+    return f"{message}\n\n{note}" if note else message
 
 
 def run(message: str, history: list[dict], ctx: ToolContext) -> AgentResult:
@@ -39,7 +46,7 @@ def run(message: str, history: list[dict], ctx: ToolContext) -> AgentResult:
     messages: list[dict] = [
         {"role": "system", "content": system},
         *history[-8:],
-        {"role": "user", "content": message},
+        {"role": "user", "content": with_dates(message, ctx.today)},
     ]
     tools = tools_for(ctx)
     calls: list[dict] = []

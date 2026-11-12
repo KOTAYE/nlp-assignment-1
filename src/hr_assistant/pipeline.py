@@ -11,7 +11,7 @@ import sqlite3
 from dataclasses import dataclass, field
 from typing import Any
 
-from .components import answerer, collector, guard, leave_agent, referral, rewriter, router
+from .components import answerer, collector, guard, leave_agent, referral, rewriter, router, verifier
 from .directory import Profile
 from .llm import Trace, start_trace, trace_event
 from .retrieval import get_stack
@@ -163,6 +163,17 @@ def handle(session: Session, message: str) -> Reply:
 
     ans = answerer.answer(question, history_for_llm, col.facts, profile_facts, evidence)
     ev = [{"id": c.id, "text": c.text} for c in evidence]
+    if ans.sufficient:  # output guard (iteration 3): delegation rule in code, then claim verification
+        cited = [c for c in evidence if c.id in ans.citations]
+        if delegated := verifier.delegating_sections(cited):
+            ans.sufficient = False
+            ans.missing_info = f"the policy says this case is handled by HR ({', '.join(delegated)})"
+        else:
+            v = verifier.verify(question, ans.answer, evidence, profile_facts)
+            if not v.supported:
+                ans.sufficient = False
+                ans.missing_info = f"main claim not stated in the policies: {v.reason}"
+        trace_event("verifier", "verifier", sufficient=ans.sufficient, reason=ans.missing_info)
     if not ans.sufficient:
         ref = referral.refer(
             question, f"policies do not support an answer: {ans.missing_info}", ctx, profile_facts

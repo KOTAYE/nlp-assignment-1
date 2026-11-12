@@ -115,3 +115,28 @@ def test_answer_always_names_its_sources():
         == "Up to 5 days [leave-policy §3.4]."
     )
     assert with_sources("Up to 5 days.", ["leave-policy §3.4"]).endswith("Sources: [leave-policy §3.4]")
+
+
+def test_dates_resolved_in_code():
+    from hr_assistant.dates import resolve
+
+    t = dt.date(2026, 11, 12)  # Thursday
+    got = lambda s: [d.isoformat() for _, d in resolve(s, t)]  # noqa: E731
+    assert got("Book Friday the 20th") == ["2026-11-20"]
+    assert got("from Monday 21 to Wednesday 23 December") == ["2026-12-21", "2026-12-23"]
+    assert got("the 1st to the 4th of February") == ["2027-02-01", "2027-02-04"]
+    assert got("Thursday and Friday next week") == ["2026-11-19", "2026-11-20"]
+    assert got("sick since Tuesday until tomorrow") == ["2026-11-13", "2026-11-10"]
+
+
+def test_delegating_sections_detected():
+    from hr_assistant.components.verifier import delegating_sections
+
+    chunks = load_chunks()
+    assert sorted(delegating_sections(list(chunks))) == [
+        "code-of-conduct §2.3",
+        "internal-requests-policy §5.1",
+        "leave-policy §7.1",
+        "remote-work-policy §3.2",
+        "sick-leave-policy §3.3",
+    ]
