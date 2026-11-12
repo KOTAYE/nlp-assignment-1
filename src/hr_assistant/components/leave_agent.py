@@ -8,13 +8,15 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import re
 from dataclasses import dataclass, field
 
-from ..dates import annotate
+from ..dates import annotate, resolve
 from ..llm import chat_with_tools, load_prompt
 from ..tools import ToolContext, execute, tools_for
 
 MAX_STEPS = 6
+_RANGE = re.compile(r"\b(?:to|until|till|through|thru|from|week|weeks|days|for)\b|[-–]", re.I)
 
 
 @dataclass
@@ -29,6 +31,12 @@ def with_dates(message: str, today, history: list[dict] | None = None) -> str:
     """Append the code-resolved dates (iteration 3: LLMs mis-compute weekdays and years)."""
     context = " ".join(m["content"] for m in (history or []) if m["role"] == "user")
     note = annotate(message, today, context)
+    # Iteration 5: exactly ONE date, no range words, no dates earlier in the conversation = a one-day request,
+    # stated by code (the agent used to ask for an end date; a prompt rule broke multi-day requests instead).
+    pairs = resolve(message, today, context)
+    if len(pairs) == 1 and not _RANGE.search(message) and not resolve(context, today):
+        d = pairs[0][1].isoformat()
+        note += f" [One date only: a one-day request, start_date = end_date = {d}.]"
     return f"{message}\n\n{note}" if note else message
 
 

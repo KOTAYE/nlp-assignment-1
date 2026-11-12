@@ -94,11 +94,11 @@
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "router": "5"
+    "router": "6"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:58:56",
-  "git_commit": "52682fd",
+  "date": "2026-11-12T11:26:13",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "rt02",
@@ -106,7 +106,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the requirement for a sick note, which is a question about company policy."
+      "reason": "The message asks about the requirement for a sick note, which is a question about policy."
     },
     {
       "id": "rt04",
@@ -146,7 +146,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the rules regarding accepting gifts from clients."
+      "reason": "The message asks whether accepting a gift from a client is allowed, which is a question about company rules."
     },
     {
       "id": "rt12",
@@ -154,7 +154,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the rules or consequences related to losing a company laptop."
+      "reason": "The message asks about the rules or procedures regarding lost equipment."
     },
     {
       "id": "rt14",
@@ -186,7 +186,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about rules regarding workspace and data security for remote work."
+      "reason": "The message asks about the rules for ensuring workspace and data security, which falls under company policies."
     },
     {
       "id": "rt20",
@@ -194,7 +194,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the company's policy on protecting employees who report issues."
+      "reason": "The message asks about the company's rules regarding protection for employees reporting issues."
     },
     {
       "id": "rt22",
@@ -209,7 +209,7 @@
       "message": "Book me annual leave from 7 to 11 December",
       "gold": "leave_action",
       "pred": "leave_action",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The message is an explicit request to book annual leave for specific dates."
     },
     {
@@ -225,7 +225,7 @@
       "message": "Cancel my leave request for next week",
       "gold": "leave_action",
       "pred": "leave_action",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The message is an explicit request to cancel a leave request."
     },
     {
@@ -250,7 +250,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message is an explicit request to take special leave on specific dates."
+      "reason": "The message is an explicit request to take leave on specific dates."
     },
     {
       "id": "rt34",
@@ -282,7 +282,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message is a clear request to change the start date of leave."
+      "reason": "The message is an explicit request to change the start date of leave."
     },
     {
       "id": "rt41",
@@ -298,7 +298,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message is an explicit request to remove a vacation."
+      "reason": "The message is an explicit request to remove a booked vacation."
     },
     {
       "id": "rt44",
@@ -306,7 +306,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The question is about a personal decision regarding the employee's raise."
+      "reason": "The employee is asking about a personal decision regarding their raise."
     },
     {
       "id": "rt46",
@@ -322,7 +322,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "This message reports a personal sensitive case of conflict with a manager."
+      "reason": "The message reports a personal sensitive case of mistreatment by the manager."
     },
     {
       "id": "rt49",
@@ -338,7 +338,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message refers to a personal sensitive case involving a legal dispute."
+      "reason": "The employee is asking for help with a personal legal dispute, which is a sensitive case."
     },
     {
       "id": "rt52",
@@ -346,7 +346,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message requests personal sensitive information about another employee."
+      "reason": "The request involves accessing another person's personal data."
     },
     {
       "id": "rt54",
@@ -354,7 +354,7 @@
       "gold": "hr_referral",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the appropriate action regarding a coworker breaking the law, which relates to company policies."
+      "reason": "The message asks for guidance on what to do in a specific situation, which relates to company policy."
     },
     {
       "id": "rt56",
@@ -369,15 +369,15 @@
       "message": "Someone from another team is bullying me online",
       "gold": "hr_referral",
       "pred": "hr_referral",
-      "confidence": 1.0,
-      "reason": "The message reports a concrete incident of bullying."
+      "confidence": 0.9,
+      "reason": "The message reports a concrete incident of bullying happening to the employee."
     },
     {
       "id": "rt60",
       "message": "Thanks, that helps",
       "gold": "smalltalk",
       "pred": "smalltalk",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The message expresses gratitude and does not relate to HR or policy questions."
     },
     {
@@ -418,7 +418,7 @@
       "gold": "smalltalk",
       "pred": "smalltalk",
       "confidence": 1.0,
-      "reason": "The message is a expression of gratitude, which falls under smalltalk."
+      "reason": "The message is a simple expression of gratitude."
     },
     {
       "id": "rt70",
@@ -458,7 +458,7 @@
       "gold": "unclear",
       "pred": "unclear",
       "confidence": 0.5,
-      "reason": "The message is too vague to determine the specific intent."
+      "reason": "The message is too vague to determine the specific request or question."
     },
     {
       "id": "rt78",

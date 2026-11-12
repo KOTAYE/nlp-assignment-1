@@ -1,0 +1,482 @@
+{
+  "component": "qa",
+  "variant": "oracle",
+  "split": "test",
+  "n": 28,
+  "metrics": {
+    "answer_rate_with_gold_context": 1.0,
+    "correctness_mean_score": 1.0,
+    "correctness_pass_rate (of all)": 1.0,
+    "faithfulness_mean": 1.0,
+    "verdicts": {
+      "fully_matches": 28,
+      "mostly_right": 0,
+      "mostly_wrong": 0,
+      "contradicts": 0
+    }
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "answerer": "3",
+    "judge_correctness": "1",
+    "judge_faithfulness": "1"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T01:25:32",
+  "git_commit": "071bb69",
+  "per_row": [
+    {
+      "id": "qa02",
+      "question": "I joined on 1 September. How many vacation days do I get this year?",
+      "reply": "Since you joined on September 1, 2026, you are entitled to 8 vacation days for this year. This is calculated as 2 working days for each full calendar month remaining in the year (September, October, November, December).",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §2.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the number of vacation days and the calculation method, matching the gold answer exactly.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa04",
+      "question": "How far in advance do I need to request a two-week vacation?",
+      "reply": "For a two-week vacation, you need to request it at least 14 calendar days before the start date, as it is more than 3 working days. Requests that do not meet this notice period will be declined automatically.",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §3.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the notice period and the condition for that notice period.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa05",
+      "question": "How much notice do I need to give for a single day of annual leave?",
+      "reply": "For a single day of annual leave, you need to give at least 2 working days' notice before the start date of your leave. Requests that do not meet this notice period will be declined automatically, so make sure to submit your request on time.",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §3.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the required notice period of 2 working days before the start date.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa07",
+      "question": "How many days off do I get for my own wedding?",
+      "reply": "For your own wedding, you are entitled to 3 working days of paid special leave. This leave is not deducted from your annual leave balance.",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "leave-policy §4.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately provides all the key facts from the gold answer: 3 working days, paid special leave, and not deducted from annual leave.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa09",
+      "question": "How many days of unpaid leave can I take in a year?",
+      "reply": "As a full-time employee, you can take up to **20 working days** of unpaid leave per calendar year for personal reasons, subject to manager approval and HR review [leave-policy §5.1].",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §5.1",
+        "leave-policy §5.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §5.1",
+        "leave-policy §5.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the maximum number of unpaid leave days and the conditions for approval, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa10",
+      "question": "Is 24 December 2027 a day off?",
+      "reply": "Yes, December 24, 2027, is a day off as it is designated as a Winter company day according to the leave policy.",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §6.1"
+      ],
+      "gold_section_ids": [
+        "leave-policy §6.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, stating that December 24, 2027, is a company day off due to it being a Winter company day.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa12",
+      "question": "Can I request annual leave through the HR assistant?",
+      "reply": "As a contractor, you are not covered by the annual leave policy. Your time off is governed by your service agreement, and you should discuss any absences directly with your manager. Therefore, you cannot request annual leave through the HR assistant.",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §1.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §1.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that contractors are not covered by the leave policy, should agree on time off with their manager, and cannot request annual leave through the HR assistant.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa14",
+      "question": "Can I cancel a vacation that I already booked?",
+      "reply": "Yes, you can cancel a vacation that you already booked as long as it hasn't started yet. You need to do this through the HR assistant, and the cancelled days will be returned to your leave balance. If the leave has already started, you would need to contact HR directly for assistance.",
+      "sufficient": true,
+      "citations": [
+        "leave-policy §3.5"
+      ],
+      "gold_section_ids": [
+        "leave-policy §3.5"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that a vacation can be cancelled before it starts and that the days return to the balance.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa15",
+      "question": "I've been sick for 2 days. Do I need a medical certificate?",
+      "reply": "Since you have been sick for 2 days, you do not need a medical certificate. You can take up to 3 consecutive working days of sick leave without one. Just make sure to register your sick days with the HR assistant, ideally on the first day of illness and no later than 7 calendar days after the first day of illness.",
+      "sufficient": true,
+      "citations": [
+        "sick-leave-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §2.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that a medical certificate is not needed for 2 days of sickness and accurately reflects the 3-day limit. It also includes the correct procedure for registering sick days.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa17",
+      "question": "How many sick days per year are paid at 100% of salary?",
+      "reply": "At Lumora Tech, you are paid 100% of your salary for up to 10 sick days per calendar year. Any sick days beyond that are paid according to state social insurance rules.",
+      "sufficient": true,
+      "citations": [
+        "sick-leave-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §2.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing the correct number of paid sick days and the policy for additional days.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa19",
+      "question": "Do I get paid sick leave?",
+      "reply": "As a contractor, you do not receive paid sick leave from Lumora Tech. You should inform your manager about any absence according to your service agreement.",
+      "sufficient": true,
+      "citations": [
+        "sick-leave-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §1.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that contractors do not receive paid sick leave and advises informing the manager according to the service agreement, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa20",
+      "question": "How many days per week can I work from home?",
+      "reply": "As a full-time employee in the Lviv office, you can work from home **up to 3 days per week**, provided you have an agreement with your team lead. Additionally, your team may establish one common office day each week.",
+      "sufficient": true,
+      "citations": [
+        "remote-work-policy §1.2"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §1.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the maximum number of work-from-home days and the condition of team lead agreement, and adds extra information that does not contradict the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa22",
+      "question": "Can I claim the coworking allowance?",
+      "reply": "As a full-time employee based in the Lviv office, you are not eligible to claim the coworking allowance. The policy states that only fully remote employees can claim this allowance, while office-based employees have access to an office and therefore do not qualify for it [remote-work-policy §2.1].",
+      "sufficient": true,
+      "citations": [
+        "remote-work-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §2.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that office-based employees are not eligible for the coworking allowance and provides the correct reason.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa24",
+      "question": "What are the core hours when I must be available?",
+      "reply": "As a full-time employee, you must be available for meetings during core hours from **11:00 to 16:00 Kyiv time** regardless of your work format.",
+      "sufficient": true,
+      "citations": [
+        "remote-work-policy §1.3"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §1.3"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly identifies the core hours as 11:00 to 16:00 Kyiv time, matching the gold answer exactly.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa25",
+      "question": "When do I have to complete the information security training?",
+      "reply": "You need to complete the information security training within 14 calendar days of your start date, which means by October 29, 2026. Since your start date was October 15, 2026, you have already missed this deadline.",
+      "sufficient": true,
+      "citations": [
+        "onboarding-policy §2.3"
+      ],
+      "gold_section_ids": [
+        "onboarding-policy §2.3"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the 14-day deadline and the condition for production access, and also correctly calculates the deadline based on the provided start date.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa27",
+      "question": "What does my onboarding buddy do and for how long?",
+      "reply": "Your onboarding buddy will assist you for the first 3 months. They are there to help with informal questions, tools, and understanding the company culture.",
+      "sufficient": true,
+      "citations": [
+        "onboarding-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "onboarding-policy §2.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately describes the buddy's role and duration, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa29",
+      "question": "How much sport compensation do I get?",
+      "reply": "As a part-time employee who has passed your probation, you are eligible for sport compensation of 500 UAH per month after probation.",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §1.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately states the sport compensation amount, the part-time condition, and the post-probation eligibility, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa30",
+      "question": "Can I use the education budget now?",
+      "reply": "You cannot use the education budget at this time because it is only available after you have passed your probation period. Since you have not yet passed probation, you will need to wait until that is completed to access the education budget of 600 USD per year for full-time employees [benefits-policy §1.1][onboarding-policy §3.3].",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §1.1",
+        "onboarding-policy §3.3"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §1.1",
+        "onboarding-policy §3.3"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that the education budget cannot be used yet, specifies the condition (after probation), and includes the correct amount (600 USD per year for full-time).",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa32",
+      "question": "Can I carry over unused education budget to next year?",
+      "reply": "No, the unused education budget does not carry over to the next year as stated in the policy.",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §4.3"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §4.3"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that the education budget does not carry over to the next year, matching the gold answer exactly.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa34",
+      "question": "Do I need approval to buy a 300 USD online course from my education budget?",
+      "reply": "Yes, you need prior approval from your team lead to buy the online course since it costs 300 USD, which is over the 100 USD limit for the education budget spending.",
+      "sufficient": true,
+      "citations": [
+        "benefits-policy §4.2"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §4.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly identifies that approval is needed, specifies the correct approver (team lead), and accurately states the threshold (100 USD) that triggers the need for approval.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa35",
+      "question": "I took a taxi home at 23:00 after working late. Can I get reimbursed?",
+      "reply": "Yes, you can get reimbursed for your taxi ride home since you worked late and took a taxi after 22:00. The reimbursement is up to 400 UAH per ride for office-based employees like you.",
+      "sufficient": true,
+      "citations": [
+        "expense-reimbursement-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §4.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the eligibility criteria (working past 22:00, office-based employees) and the reimbursement limit (400 UAH per ride).",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa37",
+      "question": "How long do I have to submit a receipt for an expense?",
+      "reply": "You have to submit a receipt for an expense within 30 calendar days of the expense. Late claims are not accepted.",
+      "sufficient": true,
+      "citations": [
+        "expense-reimbursement-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §2.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the 30-day deadline for submitting receipts, which is the main fact from the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa39",
+      "question": "How often is my laptop replaced?",
+      "reply": "Your laptop is replaced every **3 years**, or earlier if it is broken and cannot be repaired. To request a replacement, you need to go through the IT service desk.",
+      "sufficient": true,
+      "citations": [
+        "equipment-policy §1.3"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §1.3"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately states the laptop replacement policy, including the timeframe and the condition for earlier replacement, and adds a relevant detail about the replacement process.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa40",
+      "question": "I lost my company laptop. What should I do?",
+      "reply": "You need to report the loss of your company laptop to IT within 24 hours so they can lock the device remotely.",
+      "sufficient": true,
+      "citations": [
+        "equipment-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §2.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the reporting timeframe and the reason for reporting.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa42",
+      "question": "A client wants to give me a gift worth 80 USD. Can I accept it?",
+      "reply": "According to our Code of Conduct, you may accept gifts from clients or partners worth up to 50 USD. Since the gift you mentioned is worth 80 USD, you must decline it or report it to HR instead.",
+      "sufficient": true,
+      "citations": [
+        "code-of-conduct §4.1"
+      ],
+      "gold_section_ids": [
+        "code-of-conduct §4.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly identifies the gift limit and the necessary actions for a gift exceeding that limit.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa44",
+      "question": "Can I work on a side project on weekends?",
+      "reply": "Yes, you can work on a side project on weekends as long as it does not compete with Lumora Tech, does not use company resources, and does not involve company clients.",
+      "sufficient": true,
+      "citations": [
+        "code-of-conduct §3.2"
+      ],
+      "gold_section_ids": [
+        "code-of-conduct §3.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches all the conditions specified in the gold answer for working on a side project.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa45",
+      "question": "How long does it take to get an employment certificate?",
+      "reply": "As a full-time employee, you can request an employment certificate, and HR will issue it within **2 working days**. The certificate will confirm your position and start date and can be provided in either Ukrainian or English.",
+      "sufficient": true,
+      "citations": [
+        "internal-requests-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "internal-requests-policy §1.1"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately states the 2 working days timeframe and the availability in Ukrainian or English, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    },
+    {
+      "id": "qa47",
+      "question": "I changed my bank account. When do I have to report it so this month's salary goes to the new account?",
+      "reply": "You need to report your new bank account details at least 5 working days before payroll for this month's salary to go to the new account. If you report it later than that, the change will take effect from the following month.",
+      "sufficient": true,
+      "citations": [
+        "internal-requests-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "internal-requests-policy §2.2"
+      ],
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing all the key facts about the deadline and the consequence of missing it.",
+      "faithfulness": 1.0,
+      "unsupported_claims": []
+    }
+  ]
+}

@@ -10,7 +10,7 @@ Status: ✅ done · 🟡 in progress / planned with a concrete artifact · ⬜ n
 | A2 | Think through how you manage the assistant: what goes into its context | `CLAUDE.md` §3 (context hygiene), `docs/course-notes.md` (condensed context), lectures kept out of context in `course/` | ✅ |
 | A3 | Agents / convention file to control code quality | `CLAUDE.md` §4 (conventions); enforced by `ruff` (lint + format) and `pytest` configured in `pyproject.toml` | ✅ |
 | A4 | Be ready to explain how the system works; purpose of each component | `docs/architecture.md` (diagram, component table, walkthrough) | ✅ |
-| A5 | Evaluate output quality, **at each stage** if there are multiple components | Every component has an eval (`evals/run_*.py`) incl. indexer, rule engine, output guard (verifier), date resolver (unit tests + agent holdout-2), tracer coverage, E2E; results in `docs/report.md` §5 | ✅ |
+| A5 | Evaluate output quality, **at each stage** if there are multiple components | Every component has an eval (`evals/run_*.py`) incl. indexer, rule engine, output guard (verifier), date resolver (unit tests + agent holdout-2 and holdout-4), prompt/eval leakage check, tracer coverage, E2E; results in `docs/report.md` §5 | ✅ |
 
 ## B. Task
 | ID | Requirement | Where | Status |
@@ -18,7 +18,7 @@ Status: ✅ done · 🟡 in progress / planned with a concrete artifact · ⬜ n
 | B1 | Working prototype that accepts input and produces useful output | `app/streamlit_app.py` + `src/hr_assistant/pipeline.py`; UI smoke-tested with Streamlit AppTest; E2E scenarios | ✅ |
 | B2 | Select tools, model, interface (simple web UI is fine) | `docs/crisp-dm.md` §1.7: gpt-4o-mini via OpenRouter, local BM25 + embeddings + reranker, Streamlit | ✅ |
 | B3 | App must be possible to run (for the demo video) | `README.md` quick start; `scripts/reset_db.py`; `HR_TODAY` for a reproducible demo | ✅ |
-| B4 | Follow the CRISP-DM cycle, reflected in the report | `docs/crisp-dm.md` (phase log + 13-row iteration log), report §4 | ✅ |
+| B4 | Follow the CRISP-DM cycle, reflected in the report | `docs/crisp-dm.md` (phase log + 23-row iteration log, five iterations, four holdouts written before their fixes), report §4 | ✅ |
 | B5 | Create SKILLS for the agentic development flow | `.claude/skills/` (crisp-dm-step, add-component, build-eval-dataset, run-evals) | ✅ |
 | B6 | Not vanilla RAG | `docs/architecture.md` "Why not vanilla RAG" | ✅ (design) |
 

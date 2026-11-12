@@ -1,0 +1,844 @@
+{
+  "component": "qa",
+  "variant": "pipeline",
+  "split": "dev",
+  "n": 25,
+  "metrics": {
+    "answer_rate (answerable questions answered)": 0.947,
+    "correctness_pass_rate (fully/mostly right, of answerable)": 0.947,
+    "correctness_mean_score (answered)": 1.0,
+    "contradiction_rate (answered)": 0.0,
+    "faithfulness_mean (answered)": 0.981,
+    "citation_hit_rate (answered)": 1.0,
+    "answers_with_citation": 1.0,
+    "context_recall@5 (gold section in evidence)": 0.947,
+    "referral_precision": 0.857,
+    "referral_recall": 1.0,
+    "referral_f1": 0.923,
+    "referral_confusion": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 0,
+      "tn": 18
+    },
+    "ticket_category_accuracy": 1.0,
+    "avg_tokens_per_question": 4227,
+    "avg_cost_usd_per_question": 0.00064,
+    "avg_latency_s": 6.2,
+    "failing_stages": {
+      "router (referred directly)": 1
+    },
+    "errors": [
+      "qa43 'Where can I report harassment anonymously?': route=hr_referral verdict=None stage=router (referred directly)"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "router": "5",
+    "collector": "7",
+    "rewriter": "2",
+    "answerer": "3",
+    "referral": "2",
+    "judge_correctness": "1",
+    "judge_faithfulness": "1"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T11:02:05",
+  "git_commit": "52682fd",
+  "per_row": [
+    {
+      "id": "qa01",
+      "question": "How many annual leave days do I get per year?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "As a full-time employee at Lumora Tech, you are entitled to **24 working days** of paid annual leave per calendar year, as stated in the leave policy [leave-policy §2.1].",
+      "citations": [
+        "leave-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "leave-policy §2.1"
+      ],
+      "evidence_ids": [
+        "leave-policy §2.1",
+        "leave-policy §2.2",
+        "leave-policy §5.1",
+        "leave-policy §2.4",
+        "leave-policy §3.4"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4452,
+      "cost_usd": 0.000662,
+      "latency_s": 13.84,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately states the number of annual leave days and the period, matching the gold answer exactly.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa03",
+      "question": "How many unused vacation days can I carry over to next year, and until when do I have to use them?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "As a full-time employee, you can carry over up to **5 unused annual leave days** to the next calendar year. These carried-over days must be used by **31 March** of that year; otherwise, they will expire. Any unused days beyond the carry-over limit will expire on **31 December** of the current year.\n\nSources: [leave-policy §3.4]",
+      "citations": [
+        "leave-policy §3.4"
+      ],
+      "gold_section_ids": [
+        "leave-policy §3.4"
+      ],
+      "evidence_ids": [
+        "leave-policy §3.4",
+        "leave-policy §2.4",
+        "leave-policy §6.2",
+        "benefits-policy §4.3",
+        "leave-policy §2.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4433,
+      "cost_usd": 0.000677,
+      "latency_s": 5.76,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the number of carry-over days and the deadline for using them, and adds extra correct information about days beyond the carry-over limit.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa06",
+      "question": "What happens if two people from my team are already on vacation on the days I want?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "If two members of your team already have approved leave on the days you want, your request will be sent for HR review. HR will confirm with your team lead and make the final decision within 3 working days. This is outlined in the leave policy under section 3.3.\n\nSources: [leave-policy §3.3]",
+      "citations": [
+        "leave-policy §3.3"
+      ],
+      "gold_section_ids": [
+        "leave-policy §3.3"
+      ],
+      "evidence_ids": [
+        "leave-policy §3.3",
+        "leave-policy §3.1",
+        "leave-policy §4.2",
+        "leave-policy §3.5",
+        "leave-policy §3.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4771,
+      "cost_usd": 0.000724,
+      "latency_s": 8.11,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately reflects all the key facts from the gold answer regarding the process for vacation requests when two team members are already on leave.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa08",
+      "question": "How many days off do I get if a close family member dies?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "If a close family member dies, you are entitled to 3 working days of paid special leave for bereavement. This leave is not deducted from your annual leave balance.\n\nSources: [leave-policy §4.1]",
+      "citations": [
+        "leave-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "leave-policy §4.1"
+      ],
+      "evidence_ids": [
+        "leave-policy §4.1",
+        "leave-policy §6.1",
+        "sick-leave-policy §3.3",
+        "leave-policy §6.2",
+        "leave-policy §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4523,
+      "cost_usd": 0.000671,
+      "latency_s": 6.25,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating 3 working days of paid special leave for bereavement.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa11",
+      "question": "What happens if I have to work on a company holiday?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "If you have to work on a company holiday, you need prior approval from your manager. In return, you will be compensated with another day off within 30 days of working that holiday.\n\nSources: [leave-policy §6.2]",
+      "citations": [
+        "leave-policy §6.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §6.2"
+      ],
+      "evidence_ids": [
+        "leave-policy §6.2",
+        "leave-policy §2.1",
+        "leave-policy §6.1",
+        "leave-policy §5.3",
+        "expense-reimbursement-policy §3.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4494,
+      "cost_usd": 0.000667,
+      "latency_s": 5.72,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the need for prior manager approval and the compensation of another day off within 30 days.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa13",
+      "question": "Do I get fewer vacation days because I work part-time?",
+      "employee_id": "E011",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "No, as a part-time employee, you receive the same number of leave days as full-time employees. However, your leave pay will be calculated based on your contracted hours, which means the actual pay for your leave may differ depending on how many hours you work compared to a full-time schedule. You are entitled to 24 working days of paid annual leave per calendar year, just like full-time employees, but the pay will be proportional to your part-time hours [leave-policy §1.3][leave-policy §2.1].",
+      "citations": [
+        "leave-policy §1.3",
+        "leave-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "leave-policy §1.3"
+      ],
+      "evidence_ids": [
+        "leave-policy §1.3",
+        "leave-policy §2.2",
+        "leave-policy §2.1",
+        "leave-policy §5.1",
+        "leave-policy §2.4"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4480,
+      "cost_usd": 0.000698,
+      "latency_s": 6.96,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that part-time employees receive the same 24 vacation days and that leave pay is proportional to contracted hours.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa16",
+      "question": "I'm going to be ill for 5 days. Do I need a sick note?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Since your illness will last for 5 days, you will need to provide a medical certificate (electronic sick note). This request must be registered through the HR assistant and will be sent for HR review for confirmation and approval, as per the policy for illnesses longer than 3 consecutive working days [sick-leave-policy §2.3].",
+      "citations": [
+        "sick-leave-policy §2.3"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §2.3"
+      ],
+      "evidence_ids": [
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §2.4"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4559,
+      "cost_usd": 0.000704,
+      "latency_s": 5.62,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that a medical certificate is needed for more than 3 consecutive working days and that HR reviews and approves the request, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa18",
+      "question": "I got sick during my vacation and I have a medical certificate. Do I get those vacation days back?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, since you have a medical certificate for your illness during your vacation, the overlapping vacation days will be returned to your balance. You need to contact HR with the certificate for processing.\n\nSources: [sick-leave-policy §3.2]",
+      "citations": [
+        "sick-leave-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §3.2"
+      ],
+      "evidence_ids": [
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §3.2",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §3.3",
+        "sick-leave-policy §3.4"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4442,
+      "cost_usd": 0.000669,
+      "latency_s": 8.31,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by confirming that vacation days are returned with a medical certificate and that HR should be contacted.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa21",
+      "question": "Can I get money for a coworking space?",
+      "employee_id": "E005",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, as a fully remote employee, you can claim a coworking allowance of up to 100 USD per month through the expense process. This is outlined in the Remote Work Policy and is applicable to you since you are a full-time remote employee who has passed probation.\n\nSources: [remote-work-policy §2.1], [expense-reimbursement-policy §1.1]",
+      "citations": [
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §2.1"
+      ],
+      "evidence_ids": [
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.1",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §3.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4379,
+      "cost_usd": 0.000666,
+      "latency_s": 6.2,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing all the correct information about the coworking allowance.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa23",
+      "question": "I want to work from Portugal for 2 weeks. Is that allowed?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you can work from Portugal for 2 weeks (14 calendar days) since it is within the allowed limit of up to 30 calendar days per calendar year for full-time employees. However, you must notify HR at least 10 working days before your departure and confirm that the country is not under sanctions and that you have a stable internet connection.\n\nSources: [remote-work-policy §3.1]",
+      "citations": [
+        "remote-work-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §3.1"
+      ],
+      "evidence_ids": [
+        "remote-work-policy §3.1",
+        "remote-work-policy §3.2",
+        "leave-policy §3.2",
+        "leave-policy §2.2",
+        "leave-policy §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4609,
+      "cost_usd": 0.000712,
+      "latency_s": 5.9,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the duration, notification period, and conditions.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa26",
+      "question": "How long is the probation period?",
+      "employee_id": "E016",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "The probation period for full-time employees, like yourself, is **3 months** according to the onboarding policy [onboarding-policy §3.1].",
+      "citations": [
+        "onboarding-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "onboarding-policy §3.1"
+      ],
+      "evidence_ids": [
+        "onboarding-policy §3.1",
+        "onboarding-policy §3.2",
+        "benefits-policy §1.1",
+        "internal-requests-policy §3.1",
+        "onboarding-policy §3.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4417,
+      "cost_usd": 0.000649,
+      "latency_s": 5.02,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states the probation period is 3 months, matching the gold answer exactly.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa28",
+      "question": "Does the company pay for my family's health insurance?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, the company pays for your family's health insurance. You can add your spouse and children to the insurance, and the company covers 50% of the cost for family members, with the remaining 50% deducted from your salary. You can add family members within 30 days of eligibility or once per year in January by contacting HR.\n\nSources: [benefits-policy §2.2], [benefits-policy §2.3], [benefits-policy §1.1]",
+      "citations": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.3",
+        "benefits-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §2.2"
+      ],
+      "evidence_ids": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.3",
+        "benefits-policy §2.1",
+        "benefits-policy §1.1",
+        "sick-leave-policy §3.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4538,
+      "cost_usd": 0.000698,
+      "latency_s": 6.76,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that the company covers 50% of the cost for family members and that the remaining 50% is deducted from salary, which fully matches the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa31",
+      "question": "Does the sport compensation cover buying sports equipment?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "The sport compensation does not cover buying sports equipment. It specifically covers gym memberships, swimming pools, sport classes, and sport club fees only, as stated in the benefits policy [benefits-policy §3.1].",
+      "citations": [
+        "benefits-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §3.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §3.1",
+        "expense-reimbursement-policy §1.2",
+        "benefits-policy §3.2",
+        "benefits-policy §3.3",
+        "benefits-policy §1.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4489,
+      "cost_usd": 0.000672,
+      "latency_s": 6.28,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that sports equipment purchases are not covered.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa33",
+      "question": "How many sessions with a psychologist does the company pay for?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "As a full-time employee, you can attend up to **6 sessions per year** with psychologists from the partner platform, fully paid by the company [benefits-policy §5.1].\n\nSources: [benefits-policy §1.1]",
+      "citations": [
+        "benefits-policy §5.1",
+        "benefits-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §5.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §5.1",
+        "benefits-policy §5.2",
+        "benefits-policy §1.1",
+        "expense-reimbursement-policy §5.1",
+        "internal-requests-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4471,
+      "cost_usd": 0.000671,
+      "latency_s": 6.02,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the number of sessions and that they are fully paid, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa36",
+      "question": "What is the per diem on business trips?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "The per diem for business trips is **50 USD per day** for meals, plus accommodation up to **120 USD per night**. Flights and trains are booked by the office manager unless otherwise agreed upon.\n\nSources: [expense-reimbursement-policy §3.2]",
+      "citations": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §1.2",
+        "equipment-policy §3.1",
+        "expense-reimbursement-policy §3.1",
+        "expense-reimbursement-policy §4.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4305,
+      "cost_usd": 0.000641,
+      "latency_s": 5.21,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately provides all the key facts from the gold answer regarding the per diem for business trips, including the meal allowance and accommodation limit. The additional information about flights and trains does not contradict the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa38",
+      "question": "What is the spending limit for a client dinner?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "The spending limit for a client dinner is **40 USD per person**, but it must be approved in advance by your team lead [expense-reimbursement-policy §5.1].",
+      "citations": [
+        "expense-reimbursement-policy §5.1"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §5.1"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §5.1",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §3.2",
+        "code-of-conduct §4.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4263,
+      "cost_usd": 0.000627,
+      "latency_s": 5.77,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the spending limit and the condition for approval, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa41",
+      "question": "Can I get money for a chair for my home office?",
+      "employee_id": "E005",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, as a fully remote full-time employee, you are eligible for a one-time home office allowance of **300 USD** for items like a chair. Since you have passed your probation, you can claim this allowance through the expense process.\n\nSources: [equipment-policy §3.1], [remote-work-policy §2.2]",
+      "citations": [
+        "equipment-policy §3.1",
+        "remote-work-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §3.1"
+      ],
+      "evidence_ids": [
+        "equipment-policy §3.1",
+        "equipment-policy §3.2",
+        "equipment-policy §1.2",
+        "remote-work-policy §2.2",
+        "remote-work-policy §2.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4311,
+      "cost_usd": 0.000657,
+      "latency_s": 5.55,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately states the eligibility, amount, and process for the home office allowance, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "qa43",
+      "question": "Where can I report harassment anonymously?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "code-of-conduct §2.2"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": 1,
+      "ticket_category": "workplace_conduct",
+      "gold_category": null,
+      "tokens": 1258,
+      "cost_usd": 0.000218,
+      "latency_s": 2.04,
+      "failing_stage": "router (referred directly)"
+    },
+    {
+      "id": "qa46",
+      "question": "How much is the referral bonus and when is it paid?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "The referral bonus is **1,000 USD** and it is paid after the new hire passes probation. Since you have passed your probation, you would be eligible for this bonus once your referral's probation is completed.\n\nSources: [internal-requests-policy §3.1]",
+      "citations": [
+        "internal-requests-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "internal-requests-policy §3.1"
+      ],
+      "evidence_ids": [
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §3.2",
+        "equipment-policy §3.1",
+        "expense-reimbursement-policy §2.2",
+        "benefits-policy §3.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4305,
+      "cost_usd": 0.000644,
+      "latency_s": 5.73,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the bonus amount and the payment condition, matching all key facts in the gold answer.",
+      "faithfulness": 0.6666666666666666,
+      "unsupported_claims": [
+        "Since you have passed your probation, you would be eligible for this bonus once your referral's probation is completed"
+      ],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "un01",
+      "question": "What is the salary range for a senior QA engineer?",
+      "employee_id": "E022",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "equipment-policy §3.1",
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §5.1",
+        "sick-leave-policy §2.1",
+        "code-of-conduct §5.1"
+      ],
+      "context_hit": null,
+      "ticket_id": 2,
+      "ticket_category": "compensation",
+      "gold_category": "compensation",
+      "tokens": 4072,
+      "cost_usd": 0.000612,
+      "latency_s": 5.65,
+      "failing_stage": null
+    },
+    {
+      "id": "un03",
+      "question": "Can the company help me relocate to Poland permanently?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "internal-requests-policy §5.1"
+      ],
+      "evidence_ids": [
+        "internal-requests-policy §5.1",
+        "benefits-policy §3.3",
+        "expense-reimbursement-policy §5.1",
+        "equipment-policy §2.3",
+        "benefits-policy §3.2"
+      ],
+      "context_hit": true,
+      "ticket_id": 3,
+      "ticket_category": "relocation_and_abroad",
+      "gold_category": "relocation_and_abroad",
+      "tokens": 4018,
+      "cost_usd": 0.000602,
+      "latency_s": 5.86,
+      "failing_stage": null
+    },
+    {
+      "id": "un06",
+      "question": "Does the company offer stock options?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "benefits-policy §2.2",
+        "benefits-policy §2.3",
+        "benefits-policy §5.1",
+        "benefits-policy §4.1",
+        "benefits-policy §3.3"
+      ],
+      "context_hit": null,
+      "ticket_id": 4,
+      "ticket_category": "compensation",
+      "gold_category": "compensation",
+      "tokens": 3945,
+      "cost_usd": 0.000571,
+      "latency_s": 5.62,
+      "failing_stage": null
+    },
+    {
+      "id": "un08",
+      "question": "Is there a parking spot for me at the Kyiv office?",
+      "employee_id": "E009",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "remote-work-policy §2.3",
+        "benefits-policy §3.3",
+        "remote-work-policy §1.3",
+        "remote-work-policy §1.1",
+        "internal-requests-policy §1.1"
+      ],
+      "context_hit": null,
+      "ticket_id": 5,
+      "ticket_category": "other",
+      "gold_category": "other",
+      "tokens": 4004,
+      "cost_usd": 0.00059,
+      "latency_s": 5.58,
+      "failing_stage": null
+    },
+    {
+      "id": "un11",
+      "question": "Are there going to be layoffs next year?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (career). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "leave-policy §3.4",
+        "leave-policy §2.2",
+        "leave-policy §6.1",
+        "leave-policy §5.2",
+        "leave-policy §5.1"
+      ],
+      "context_hit": null,
+      "ticket_id": 6,
+      "ticket_category": "career",
+      "gold_category": "career",
+      "tokens": 4167,
+      "cost_usd": 0.000608,
+      "latency_s": 5.36,
+      "failing_stage": null
+    },
+    {
+      "id": "un13",
+      "question": "Can I get a company mobile phone?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "equipment-policy §3.2",
+        "remote-work-policy §2.1",
+        "equipment-policy §3.1",
+        "leave-policy §2.1",
+        "remote-work-policy §2.2"
+      ],
+      "context_hit": null,
+      "ticket_id": 7,
+      "ticket_category": "other",
+      "gold_category": "other",
+      "tokens": 3982,
+      "cost_usd": 0.000589,
+      "latency_s": 5.91,
+      "failing_stage": null
+    }
+  ]
+}

@@ -13,7 +13,7 @@
     "pass@1 averaged over runs": 1.0,
     "avg_steps": 2.0,
     "avg_tokens_per_task": 3253,
-    "avg_cost_usd_per_task": 0.00038,
+    "avg_cost_usd_per_task": 0.00039,
     "stop_reasons": {
       "answered": 6,
       "max_steps": 0
@@ -26,8 +26,8 @@
     "leave_agent": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:21:43",
-  "git_commit": "6a2a717",
+  "date": "2026-11-12T11:58:48",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "h2a01",
@@ -66,7 +66,7 @@
       "turns": [
         "I'll be on vacation the whole week starting Monday 7 December, please book it."
       ],
-      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved. You have 19 days remaining for 2026. Enjoy your vacation!",
+      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved! You have 19 days remaining for 2026. Enjoy your vacation! #15",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -88,8 +88,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3290,
-      "cost_usd": 0.000322
+      "tokens": 3292,
+      "cost_usd": 0.000429
     },
     {
       "id": "h2a03",
@@ -97,7 +97,7 @@
       "turns": [
         "I've been sick since Tuesday, please register it until tomorrow."
       ],
-      "reply": "Your sick leave request from November 10 to November 13 has been submitted and is currently pending HR approval. Since it exceeds three working days, a medical certificate is required for review (sick-leave-policy §2.3).",
+      "reply": "Your sick leave request from November 10 to November 13 has been submitted and is currently pending HR review (#15). Since it exceeds three working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -119,8 +119,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3251,
-      "cost_usd": 0.000305
+      "tokens": 3253,
+      "cost_usd": 0.000306
     },
     {
       "id": "h2a04",
@@ -128,7 +128,7 @@
       "turns": [
         "Please book annual leave from the 1st to the 4th of February."
       ],
-      "reply": "Your annual leave from February 1 to February 4, 2027, has been approved. You have 25 days remaining for 2027.",
+      "reply": "Your annual leave from February 1st to February 4th, 2027, has been approved. You have 25 days remaining for the year.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -150,7 +150,7 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3276,
+      "tokens": 3277,
       "cost_usd": 0.000407
     },
     {
@@ -190,7 +190,7 @@
       "turns": [
         "Book annual leave from Monday 21 to Wednesday 23 December."
       ],
-      "reply": "Your annual leave from Monday, December 21 to Wednesday, December 23, 2026, has been approved. You have 21 days remaining for 2026.",
+      "reply": "Your annual leave request from Monday, December 21 to Wednesday, December 23 has been approved. You have 21 days remaining for 2026.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -212,8 +212,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3256,
-      "cost_usd": 0.000406
+      "tokens": 3252,
+      "cost_usd": 0.000403
     },
     {
       "id": "h2a01",
@@ -221,7 +221,7 @@
       "turns": [
         "Book annual leave for Friday the 20th."
       ],
-      "reply": "Your annual leave for Friday, November 20, 2026, has been approved. You have 23 days remaining for 2026.",
+      "reply": "Your annual leave for Friday, November 20, 2026, has been approved. This leave is for 1 working day, and you have 23 days remaining for 2026.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -243,8 +243,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3202,
-      "cost_usd": 0.000395
+      "tokens": 3212,
+      "cost_usd": 0.000401
     },
     {
       "id": "h2a02",
@@ -252,7 +252,7 @@
       "turns": [
         "I'll be on vacation the whole week starting Monday 7 December, please book it."
       ],
-      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved! You have 19 days remaining for 2026. Enjoy your vacation!",
+      "reply": "Your vacation request from December 7 to December 13 has been approved. You have 19 annual leave days remaining for 2026. Enjoy your time off!",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -274,8 +274,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3312,
-      "cost_usd": 0.000436
+      "tokens": 3212,
+      "cost_usd": 0.000398
     },
     {
       "id": "h2a03",
@@ -283,7 +283,7 @@
       "turns": [
         "I've been sick since Tuesday, please register it until tomorrow."
       ],
-      "reply": "Your sick leave request from November 10 to November 13 has been submitted and is currently pending HR approval. Since it exceeds three working days, a medical certificate is required for review (sick-leave-policy §2.3).",
+      "reply": "Your sick leave request from November 10 to November 13 has been submitted and is currently pending HR review (#15). Since it exceeds three working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -305,8 +305,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3251,
-      "cost_usd": 0.000411
+      "tokens": 3253,
+      "cost_usd": 0.000412
     },
     {
       "id": "h2a04",
@@ -438,7 +438,7 @@
       "turns": [
         "I'll be on vacation the whole week starting Monday 7 December, please book it."
       ],
-      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved! You have 19 days remaining for 2026. Enjoy your vacation!",
+      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved. You have 19 days remaining for 2026. Enjoy your vacation!",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -523,7 +523,7 @@
         "answered"
       ],
       "tokens": 3277,
-      "cost_usd": 0.000302
+      "cost_usd": 0.000407
     },
     {
       "id": "h2a05",
@@ -585,7 +585,7 @@
         "answered"
       ],
       "tokens": 3252,
-      "cost_usd": 0.000403
+      "cost_usd": 0.000298
     }
   ]
 }

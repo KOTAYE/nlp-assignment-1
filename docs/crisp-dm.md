@@ -130,7 +130,7 @@ See the iteration log. Every prompt change bumped its `version:` header, which i
 ## 5. Evaluation
 Full analysis is in [`docs/report.md`](report.md) §5. Auto-generated tables are in [`docs/eval-results.md`](eval-results.md).
 - **Protocol:** tune on dev → measure test once (iteration 1) → first-failing-stage error analysis → general fixes (iteration 2) → measure test again plus a **holdout written before the fixes**.
-- **Final (iteration 2):**
+- **Iteration 2:**
   - information collection F1 1.0;
   - retrieval Hit@5 1.0 / MRR 0.925;
   - answer correctness 0.857 (test and holdout), with no contradictions;
@@ -144,7 +144,14 @@ Full analysis is in [`docs/report.md`](report.md) §5. Auto-generated tables are
   - faithfulness 1.0;
   - HR referral P/R 0.90/0.90 (F1 0.90);
   - leave agent pass^3 1.0.
-- **Next:** dual-path routing on low router confidence; a verifier check that the answer addresses the asked item; a learned injection classifier.
+- **Iteration 4** (measured on holdout-3, written before it): correctness 0.929 → 1.000; referral recall 0.70 → 0.80; leave agent pass^3 1.0. On test, referral recall rose to 1.000 but precision fell to 0.692 (over-referral), which iteration 5 targeted.
+- **Iteration 5, final** (measured on holdout-4, written before it; no prompt/eval overlap):
+  - correctness 0.583 → 1.000, with no contradictions;
+  - faithfulness 0.929 → 1.000;
+  - HR referral P/R 0.600 / 1.000 → 1.000 / 1.000;
+  - leave agent pass^3 0.667 → 1.000.
+  - Test: correctness 0.929, referral P/R 0.818 / 1.000, E2E 0.944. Contradiction rate is 0 on every split.
+- **Next:** a narrow second check against neighbouring-rule answers (a lexical check was tried and rejected, report §5.5); multi-query retrieval for the two test misses; a learned injection classifier.
 
 ## 6. Deployment
 - **Local deployment** (the brief: deployment optional, the app must be runnable for the demo): `streamlit run app/streamlit_app.py`. Setup steps are in `README.md`.
@@ -179,3 +186,10 @@ Full analysis is in [`docs/report.md`](report.md) §5. Auto-generated tables are
 | 14 | 2026-11-12 | Data Preparation | Holdout-2 (22 QA on the answer-vs-refer boundary + 6 natural-date agent scenarios) written and committed before iteration 3; the iteration-2 system was measured on it as a baseline | baseline holdout-2: correctness 0.833, referral P/R 0.818/0.900, agent pass^3 0.333 |
 | 15 | 2026-11-12 | Modeling (iteration 3) | Output guard (code HR-delegation rule + LLM claim verifier, eval on a controlled set); code date resolver for the agent; router v4 general rule | holdout-2: correctness 0.833 → 0.917; referral precision 0.818 → 0.900; faithfulness 0.975 → 1.000; agent pass^3 0.333 → 1.000 (after #16). Test referral F1 0.667 → 0.842; E2E 0.833 → 0.889 |
 | 16 | 2026-11-12 | Evaluation (regression) | Test caught a regression from #15: a bare "the 14th" was resolved to the wrong month in multi-turn dialogue → the resolver now defers to months named earlier in the conversation (+ unit test) | agent pass^3 on test 0.867 → 1.000 |
+| 17 | 2026-11-12 | Data Preparation | Holdout-3 (24 QA: silent topics, privacy and "Can I …?" rule questions, sensitive cases, delegating sections + 4 agent scenarios) written and committed before iteration 4; the iteration-3 system was measured on it as a baseline | baseline holdout-3: correctness 0.929, referral P/R 1.000/0.700, agent pass^3 1.000 |
+| 18 | 2026-11-12 | Modeling (iteration 4) | Verifier v2 (asked item + verbatim quote, quote checked in code); router v5 (rule questions vs actions, narrow sensitive class); prompt/eval leakage check (6-gram overlap, disclosed in the report) | holdout-3: correctness 0.929 → 1.000; referral recall 0.700 → 0.800. Test: referral recall 0.889 → 1.000, but precision 0.800 → 0.692 (over-referral) |
+| 19 | 2026-11-12 | Data Preparation | Holdout-4 (18 QA: table rows, exceptions in exclusion lists, procedure questions, silent named items + 3 agent scenarios) written and committed before iteration 5 (commit 6cc57e3); no overlap with any prompt | baseline holdout-4: correctness 0.583, referral P/R 0.600/1.000, agent pass^3 0.667 |
+| 20 | 2026-11-12 | Modeling (iteration 5) | Code: citation recovery (garbled "§"), table-row quotes checked cell by cell, one-day leave hint, collector fallback for named expense items. Prompts: router v6 (procedure vs incident), rewriter v3 (item-centred query), verifier v3 (exceptions, table rows) | holdout-4: correctness 0.583 → 1.000; referral P 0.600 → 1.000; agent pass^3 0.667 → 1.000. Test: correctness 0.857 → 0.929; referral precision 0.692 → 0.818 |
+| 21 | 2026-11-12 | Evaluation (regression) | A one-day rule first put into the agent prompt broke multi-day requests → moved into code (leave agent prompt back to v4) + unit test | agent pass^3: test 0.933 → 1.000, holdout-2 0.833 → 1.000 |
+| 22 | 2026-11-12 | Evaluation (regression) | E2E caught a verifier error after a clarification (it saw only the vague first question) → verifier v4 receives the collected facts | holdout-4 referral recall 0.833 → 1.000 and faithfulness 0.958 → 1.000 in the re-run; E2E test 0.889 → 0.944 (`e2e07` fixed) |
+| 23 | 2026-11-12 | Evaluation (rejected idea) | Code check "quote must share a content word with the asked item", tested offline on 117 logged verifier decisions | would reject 29/117, mostly correct (synonyms) → not shipped |

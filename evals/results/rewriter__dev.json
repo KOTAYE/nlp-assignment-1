@@ -42,11 +42,11 @@
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "rewriter": "2"
+    "rewriter": "3"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T00:48:47",
-  "git_commit": "d81e0ca",
+  "date": "2026-11-12T11:49:41",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "rw01",
@@ -205,7 +205,7 @@
     {
       "id": "rw11",
       "followup": "What about an income statement?",
-      "rewrite": "income statement employment certificate request process",
+      "rewrite": "income statement employment certificate request",
       "term_groups_ok": [
         true
       ],
@@ -321,7 +321,7 @@
     {
       "id": "rw18",
       "followup": "Can I get it if I hire someone into my own team as their manager?",
-      "rewrite": "referral bonus hiring own team manager",
+      "rewrite": "referral bonus hiring own team manager eligibility",
       "term_groups_ok": [
         true,
         true

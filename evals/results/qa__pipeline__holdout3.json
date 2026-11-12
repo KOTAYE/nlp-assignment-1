@@ -13,41 +13,39 @@
     "answers_with_citation": 1.0,
     "context_recall@5 (gold section in evidence)": 1.0,
     "referral_precision": 1.0,
-    "referral_recall": 0.8,
-    "referral_f1": 0.889,
+    "referral_recall": 0.9,
+    "referral_f1": 0.947,
     "referral_confusion": {
-      "tp": 8,
+      "tp": 9,
       "fp": 0,
-      "fn": 2,
+      "fn": 1,
       "tn": 14
     },
-    "ticket_category_accuracy": 0.75,
-    "avg_tokens_per_question": 4012,
-    "avg_cost_usd_per_question": 0.00058,
-    "avg_latency_s": 5.45,
+    "ticket_category_accuracy": 0.778,
+    "avg_tokens_per_question": 4399,
+    "avg_cost_usd_per_question": 0.00067,
+    "avg_latency_s": 6.77,
     "failing_stages": {
-      "router/answerer (answered instead of referring)": 1,
-      "route=clarification": 1
+      "router/answerer (answered instead of referring)": 1
     },
     "errors": [
-      "h3u04 'Will the company cover my mobile phone bill?': route=clarification verdict=None stage=route=clarification",
       "h3u08 'How does paternity leave work here?': route=answer verdict=None stage=router/answerer (answered instead of referring)"
     ]
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "router": "5",
-    "collector": "7",
-    "rewriter": "2",
+    "router": "6",
+    "collector": "8",
+    "rewriter": "3",
     "answerer": "3",
     "referral": "2",
     "judge_correctness": "1",
     "judge_faithfulness": "1"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:57:10",
-  "git_commit": "52682fd",
+  "date": "2026-11-12T12:39:54",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "h3q01",
@@ -55,7 +53,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Yes, HR will handle reports made through the ethics hotline confidentially. This means that your team lead will not be informed about your report, as retaliation against anyone who reports in good faith is forbidden according to the Code of Conduct [code-of-conduct §2.2].",
+      "reply": "Yes, HR will handle reports made through the ethics hotline confidentially. This means that your team lead will not be informed about your report unless you choose to disclose it yourself. Additionally, retaliation against anyone who reports in good faith is forbidden, ensuring your protection when using the hotline.\n\nSources: [code-of-conduct §2.2]",
       "citations": [
         "code-of-conduct §2.2"
       ],
@@ -73,14 +71,14 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4313,
-      "cost_usd": 0.000649,
-      "latency_s": 14.92,
+      "tokens": 4658,
+      "cost_usd": 0.000699,
+      "latency_s": 15.12,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate correctly states that HR will not inform the team lead and provides the correct reasons for confidentiality and protection against retaliation.",
+      "verdict_reason": "The candidate answer correctly states that HR will not inform the team lead and that retaliation is forbidden, aligning with the gold answer's key points.",
       "faithfulness": 0.6666666666666666,
       "unsupported_claims": [
-        "your team lead will not be informed about your report"
+        "your team lead will not be informed about your report unless you choose to disclose it yourself."
       ],
       "citation_hit": true,
       "failing_stage": null
@@ -109,11 +107,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4307,
-      "cost_usd": 0.000641,
-      "latency_s": 5.09,
+      "tokens": 4660,
+      "cost_usd": 0.000696,
+      "latency_s": 7.16,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer, stating that the company cannot see what was discussed and receives no information about who used the sessions or what was discussed.",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that the company cannot see what was discussed and receives no information about who used the sessions or what was discussed.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -125,7 +123,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Yes, you can use a sick day for your mental health. Lumora Tech treats mental health like physical health, allowing employees to take sick days under the same rules if they are not well enough to work. You can take up to 3 consecutive working days of sick leave without a medical certificate, and you need to register these days through the HR assistant ideally on the first day of illness and no later than 7 calendar days after the first day of illness [sick-leave-policy §3.4][sick-leave-policy §2.2].",
+      "reply": "Yes, you can use a sick day for your mental health. Lumora Tech treats mental health like physical health, so if you are not well enough to work, you may take sick days under the same rules as for physical illness. You can take up to 3 consecutive working days of sick leave without a medical certificate, but you need to register these days through the HR assistant ideally on the first day of illness and no later than 7 calendar days after the first day of illness [sick-leave-policy §3.4][sick-leave-policy §2.2].",
       "citations": [
         "sick-leave-policy §3.4",
         "sick-leave-policy §2.2"
@@ -135,20 +133,20 @@
       ],
       "evidence_ids": [
         "sick-leave-policy §3.4",
-        "sick-leave-policy §2.2",
         "sick-leave-policy §2.3",
-        "sick-leave-policy §2.4",
-        "sick-leave-policy §2.1"
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §2.1",
+        "sick-leave-policy §2.4"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4658,
-      "cost_usd": 0.00066,
-      "latency_s": 6.05,
+      "tokens": 5015,
+      "cost_usd": 0.000792,
+      "latency_s": 7.11,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer and provides additional, correct details about sick leave policy.",
+      "verdict_reason": "The candidate answer fully matches the gold answer and provides additional correct and relevant details about sick leave policy.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -169,18 +167,18 @@
       ],
       "evidence_ids": [
         "leave-policy §2.3",
-        "leave-policy §2.2",
+        "leave-policy §3.4",
         "leave-policy §3.3",
         "leave-policy §3.1",
-        "leave-policy §2.1"
+        "leave-policy §2.2"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4683,
-      "cost_usd": 0.000611,
-      "latency_s": 5.42,
+      "tokens": 5163,
+      "cost_usd": 0.000786,
+      "latency_s": 6.99,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer, including the main fact and the important nuance that the 5-day consecutive leave is a recommendation.",
       "faithfulness": 1.0,
@@ -194,7 +192,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "Yes, you can cancel your approved vacation before it starts by contacting the HR assistant. The cancelled days will be returned to your leave balance. However, once the leave has started, it cannot be cancelled by you and you would need to contact HR instead for that situation.\n\nSources: [leave-policy §3.5]",
+      "reply": "Yes, you can cancel your approved vacation before it starts by contacting the HR assistant. The cancelled days will be returned to your leave balance. However, once the leave has started, you cannot cancel it yourself and would need to contact HR instead [leave-policy §3.5].",
       "citations": [
         "leave-policy §3.5"
       ],
@@ -203,20 +201,20 @@
       ],
       "evidence_ids": [
         "leave-policy §3.5",
-        "leave-policy §3.3",
+        "leave-policy §3.2",
         "leave-policy §3.1",
-        "leave-policy §5.2",
-        "leave-policy §4.2"
+        "leave-policy §3.3",
+        "onboarding-policy §1.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4633,
-      "cost_usd": 0.000698,
-      "latency_s": 5.31,
+      "tokens": 5043,
+      "cost_usd": 0.00076,
+      "latency_s": 6.55,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by confirming that an approved vacation can be cancelled before it starts and that the days return to the balance. It also adds a relevant detail about contacting HR, which does not contradict the gold answer.",
+      "verdict_reason": "The candidate answer fully matches the gold answer by confirming that an approved vacation can be cancelled before it starts and that the days return to the balance. It also adds a relevant detail about contacting HR.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -239,16 +237,16 @@
         "leave-policy §6.2",
         "leave-policy §6.1",
         "leave-policy §2.1",
-        "equipment-policy §2.3",
+        "leave-policy §5.3",
         "leave-policy §2.2"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4615,
-      "cost_usd": 0.000616,
-      "latency_s": 5.37,
+      "tokens": 4962,
+      "cost_usd": 0.000748,
+      "latency_s": 7.09,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer, including the condition of prior manager approval and the 30-day timeframe for taking the alternative day off.",
       "faithfulness": 1.0,
@@ -262,10 +260,9 @@
       "employee_id": "E007",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "As a contractor, you do not have access to psychologist sessions. Instead, you can utilize the 24/7 support hotline provided by the company for psychological support. This is outlined in the benefits policy, which specifies that contractors are not eligible for the sessions but can access the hotline instead [benefits-policy §5.1].\n\nSources: [benefits-policy §1.1]",
+      "reply": "As a contractor, you do not have access to the psychologist sessions. Instead, you can utilize the 24/7 support hotline provided by the company for psychological support. This is outlined in the benefits policy, which specifies that contractors are not eligible for the sessions but can access the hotline instead [benefits-policy §5.1].",
       "citations": [
-        "benefits-policy §5.1",
-        "benefits-policy §1.1"
+        "benefits-policy §5.1"
       ],
       "gold_section_ids": [
         "benefits-policy §5.1"
@@ -273,17 +270,17 @@
       "evidence_ids": [
         "benefits-policy §5.1",
         "benefits-policy §5.2",
+        "expense-reimbursement-policy §1.2",
         "benefits-policy §1.1",
-        "sick-leave-policy §3.4",
-        "remote-work-policy §2.3"
+        "expense-reimbursement-policy §1.3"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4525,
-      "cost_usd": 0.0007,
-      "latency_s": 5.21,
+      "tokens": 4848,
+      "cost_usd": 0.000735,
+      "latency_s": 6.53,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate correctly states that contractors do not have access to psychologist sessions and instead can use the 24/7 support hotline, which fully matches the gold answer.",
       "faithfulness": 1.0,
@@ -316,9 +313,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4212,
-      "cost_usd": 0.00063,
-      "latency_s": 5.4,
+      "tokens": 4581,
+      "cost_usd": 0.000688,
+      "latency_s": 6.19,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer by stating that taxi rides to client meetings are reimbursed in full.",
       "faithfulness": 0.5,
@@ -334,7 +331,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You cannot install software downloaded from a torrent on your work laptop, as installing pirated software is explicitly forbidden according to the Equipment Policy [equipment-policy §4.1].",
+      "reply": "No, you cannot install software downloaded from a torrent on your work laptop. Installing pirated software is explicitly forbidden according to the equipment policy [equipment-policy §4.1].",
       "citations": [
         "equipment-policy §4.1"
       ],
@@ -343,20 +340,20 @@
       ],
       "evidence_ids": [
         "equipment-policy §4.1",
-        "remote-work-policy §4.1",
         "equipment-policy §1.1",
-        "internal-requests-policy §4.1",
-        "equipment-policy §1.2"
+        "remote-work-policy §4.1",
+        "remote-work-policy §1.3",
+        "remote-work-policy §1.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4265,
-      "cost_usd": 0.000624,
-      "latency_s": 5.04,
+      "tokens": 4617,
+      "cost_usd": 0.000683,
+      "latency_s": 6.24,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by stating that installing pirated software from a torrent is forbidden.",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that installing pirated software is forbidden and that software from torrents cannot be installed on work laptops.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -386,9 +383,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4260,
-      "cost_usd": 0.000639,
-      "latency_s": 5.78,
+      "tokens": 4605,
+      "cost_usd": 0.000689,
+      "latency_s": 6.31,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer by stating that working from a cafe on public Wi-Fi is allowed only with the company VPN turned on.",
       "faithfulness": 1.0,
@@ -420,9 +417,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4266,
-      "cost_usd": 0.000628,
-      "latency_s": 5.25,
+      "tokens": 4607,
+      "cost_usd": 0.000676,
+      "latency_s": 5.82,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer fully matches the gold answer by stating that prior approval from the team lead is required for all business trips.",
       "faithfulness": 1.0,
@@ -436,7 +433,7 @@
       "employee_id": "E016",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "You need to complete the Code of Conduct training within **30 calendar days** of your start date, which means by **November 14, 2026**.\n\nSources: [onboarding-policy §2.3]",
+      "reply": "You need to complete the Code of Conduct training within 30 calendar days of your start date, which means you have until November 14, 2026, to finish it.\n\nSources: [onboarding-policy §2.3]",
       "citations": [
         "onboarding-policy §2.3"
       ],
@@ -454,11 +451,11 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4304,
-      "cost_usd": 0.000633,
-      "latency_s": 4.92,
+      "tokens": 4664,
+      "cost_usd": 0.000691,
+      "latency_s": 6.35,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer correctly states the 30-calendar-day deadline and provides a specific date that aligns with this timeframe.",
+      "verdict_reason": "The candidate answer correctly states the 30-day deadline and provides an accurate example date.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -470,7 +467,7 @@
       "employee_id": "E003",
       "gold_outcome": "answer",
       "route": "answer",
-      "reply": "No, you cannot share customer data with a friend. According to the Code of Conduct, customer data must not be shared outside the company, which includes sharing it with friends or anyone not authorized within the organization [code-of-conduct §5.1].",
+      "reply": "No, you cannot share customer data with a friend. According to the Code of Conduct, customer data must not be shared outside the company, as it is considered confidential information [code-of-conduct §5.1].",
       "citations": [
         "code-of-conduct §5.1"
       ],
@@ -479,20 +476,20 @@
       ],
       "evidence_ids": [
         "code-of-conduct §5.1",
-        "benefits-policy §5.2",
         "equipment-policy §4.1",
-        "code-of-conduct §3.1",
+        "remote-work-policy §4.1",
+        "code-of-conduct §3.2",
         "internal-requests-policy §2.1"
       ],
       "context_hit": true,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4281,
-      "cost_usd": 0.000641,
-      "latency_s": 5.29,
+      "tokens": 4638,
+      "cost_usd": 0.000693,
+      "latency_s": 6.75,
       "verdict": "fully_matches",
-      "verdict_reason": "The candidate answer fully matches the gold answer by stating that customer data cannot be shared outside the company and explicitly mentioning that this includes friends.",
+      "verdict_reason": "The candidate correctly states that customer data cannot be shared outside the company, aligning with the gold answer's main point.",
       "faithfulness": 1.0,
       "unsupported_claims": [],
       "citation_hit": true,
@@ -524,9 +521,9 @@
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": null,
-      "tokens": 4286,
-      "cost_usd": 0.000642,
-      "latency_s": 5.09,
+      "tokens": 4635,
+      "cost_usd": 0.000695,
+      "latency_s": 6.7,
       "verdict": "fully_matches",
       "verdict_reason": "The candidate answer correctly states that gym memberships are covered and provides additional accurate details about what the sport compensation includes and excludes, without contradicting the gold answer.",
       "faithfulness": 1.0,
@@ -545,18 +542,18 @@
       "gold_section_ids": [],
       "evidence_ids": [
         "expense-reimbursement-policy §1.2",
-        "remote-work-policy §2.1",
         "expense-reimbursement-policy §1.3",
         "expense-reimbursement-policy §1.1",
-        "expense-reimbursement-policy §5.1"
+        "expense-reimbursement-policy §2.1",
+        "expense-reimbursement-policy §4.2"
       ],
       "context_hit": null,
       "ticket_id": 1,
       "ticket_category": "benefits",
       "gold_category": "benefits",
-      "tokens": 4857,
-      "cost_usd": 0.000747,
-      "latency_s": 6.53,
+      "tokens": 5184,
+      "cost_usd": 0.0008,
+      "latency_s": 8.08,
       "failing_stage": null
     },
     {
@@ -569,19 +566,19 @@
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
-        "benefits-policy §3.3",
         "remote-work-policy §2.3",
+        "benefits-policy §3.3",
         "remote-work-policy §1.3",
         "remote-work-policy §1.1",
-        "benefits-policy §6.1"
+        "internal-requests-policy §1.1"
       ],
       "context_hit": null,
       "ticket_id": 2,
       "ticket_category": "other",
       "gold_category": "benefits",
-      "tokens": 3963,
-      "cost_usd": 0.000578,
-      "latency_s": 4.9,
+      "tokens": 4212,
+      "cost_usd": 0.000615,
+      "latency_s": 6.02,
       "failing_stage": null
     },
     {
@@ -604,9 +601,9 @@
       "ticket_id": 3,
       "ticket_category": "benefits",
       "gold_category": "benefits",
-      "tokens": 4033,
-      "cost_usd": 0.000615,
-      "latency_s": 5.55,
+      "tokens": 4268,
+      "cost_usd": 0.000651,
+      "latency_s": 8.4,
       "failing_stage": null
     },
     {
@@ -614,19 +611,25 @@
       "question": "Will the company cover my mobile phone bill?",
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
-      "route": "clarification",
-      "reply": "What type of expense are you referring to?",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
-      "evidence_ids": [],
+      "evidence_ids": [
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §4.1",
+        "expense-reimbursement-policy §1.1"
+      ],
       "context_hit": null,
-      "ticket_id": null,
-      "ticket_category": null,
+      "ticket_id": 4,
+      "ticket_category": "benefits",
       "gold_category": "benefits",
-      "tokens": 1996,
-      "cost_usd": 0.000239,
-      "latency_s": 1.88,
-      "failing_stage": "route=clarification"
+      "tokens": 4278,
+      "cost_usd": 0.000661,
+      "latency_s": 7.08,
+      "failing_stage": null
     },
     {
       "id": "h3u05",
@@ -634,7 +637,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [
@@ -645,12 +648,12 @@
         "equipment-policy §3.1"
       ],
       "context_hit": null,
-      "ticket_id": 4,
+      "ticket_id": 5,
       "ticket_category": "leave_and_absence",
       "gold_category": "leave_and_absence",
-      "tokens": 4173,
-      "cost_usd": 0.000525,
-      "latency_s": 5.87,
+      "tokens": 4412,
+      "cost_usd": 0.00065,
+      "latency_s": 6.54,
       "failing_stage": null
     },
     {
@@ -659,7 +662,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "sick-leave-policy §3.3"
@@ -672,12 +675,12 @@
         "leave-policy §5.1"
       ],
       "context_hit": true,
-      "ticket_id": 5,
+      "ticket_id": 6,
       "ticket_category": "leave_and_absence",
       "gold_category": "leave_and_absence",
-      "tokens": 4149,
-      "cost_usd": 0.000568,
-      "latency_s": 5.57,
+      "tokens": 4380,
+      "cost_usd": 0.000679,
+      "latency_s": 6.9,
       "failing_stage": null
     },
     {
@@ -686,7 +689,7 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "remote-work-policy §3.2"
@@ -699,12 +702,12 @@
         "leave-policy §5.1"
       ],
       "context_hit": true,
-      "ticket_id": 6,
+      "ticket_id": 7,
       "ticket_category": "relocation_and_abroad",
       "gold_category": "relocation_and_abroad",
-      "tokens": 4166,
-      "cost_usd": 0.000574,
-      "latency_s": 5.85,
+      "tokens": 4419,
+      "cost_usd": 0.000697,
+      "latency_s": 6.8,
       "failing_stage": null
     },
     {
@@ -713,28 +716,27 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "answer",
-      "reply": "At Lumora Tech, you are entitled to **3 working days** of paid special leave for the birth of your child if you are the parent who is not taking maternity leave. This special leave is not deducted from your annual leave balance. You need to request this leave through the HR assistant, and it should be taken within **30 days** of the event. No notice period applies for this request.\n\nSources: [leave-policy §4.1], [leave-policy §4.2]",
+      "reply": "At Lumora Tech, employees are entitled to **3 working days** of paid special leave for the birth of a child if they are the parent who is not taking maternity leave. This leave is separate from your annual leave balance and is available for this life event. Since you have passed your probation, you are eligible for this benefit as a full-time employee.\n\nSources: [leave-policy §4.1]",
       "citations": [
-        "leave-policy §4.1",
-        "leave-policy §4.2"
+        "leave-policy §4.1"
       ],
       "gold_section_ids": [
         "leave-policy §7.1"
       ],
       "evidence_ids": [
         "leave-policy §2.1",
-        "leave-policy §4.2",
-        "leave-policy §3.2",
-        "leave-policy §4.1",
-        "leave-policy §3.3"
+        "benefits-policy §2.3",
+        "benefits-policy §1.1",
+        "leave-policy §5.3",
+        "leave-policy §4.1"
       ],
       "context_hit": false,
       "ticket_id": null,
       "ticket_category": null,
       "gold_category": "leave_and_absence",
-      "tokens": 4778,
-      "cost_usd": 0.000646,
-      "latency_s": 6.17,
+      "tokens": 4972,
+      "cost_usd": 0.000755,
+      "latency_s": 6.93,
       "failing_stage": "router/answerer (answered instead of referring)"
     },
     {
@@ -743,19 +745,19 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #8 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [
         "code-of-conduct §2.3"
       ],
       "evidence_ids": [],
       "context_hit": false,
-      "ticket_id": 7,
+      "ticket_id": 8,
       "ticket_category": "workplace_conduct",
       "gold_category": "workplace_conduct",
-      "tokens": 1289,
-      "cost_usd": 0.000231,
-      "latency_s": 1.98,
+      "tokens": 1383,
+      "cost_usd": 0.000243,
+      "latency_s": 2.34,
       "failing_stage": null
     },
     {
@@ -764,17 +766,17 @@
       "employee_id": "E003",
       "gold_outcome": "hr_referral",
       "route": "hr_referral",
-      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #8 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #9 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
       "citations": [],
       "gold_section_ids": [],
       "evidence_ids": [],
       "context_hit": null,
-      "ticket_id": 8,
+      "ticket_id": 9,
       "ticket_category": "compensation",
       "gold_category": "documents_and_data",
-      "tokens": 1277,
-      "cost_usd": 0.000228,
-      "latency_s": 2.32,
+      "tokens": 1376,
+      "cost_usd": 0.000243,
+      "latency_s": 2.54,
       "failing_stage": null
     }
   ]

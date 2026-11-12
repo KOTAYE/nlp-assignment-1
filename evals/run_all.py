@@ -29,8 +29,10 @@ def main() -> None:
         ["evals.run_leave_agent", "--split", split, "--k", "3" if split == "test" else "1"],
         ["evals.run_e2e", "--split", split],
     ]
-    if split == "test":  # unbiased estimate of the final system (holdout-2) + earlier holdout
+    if split == "test":  # unbiased estimate of the final system (holdout-4) + earlier holdouts
         jobs += [
+            ["evals.run_qa", "--split", "holdout4", "--variant", "pipeline"],
+            ["evals.run_leave_agent", "--split", "holdout4", "--k", "3"],
             ["evals.run_qa", "--split", "holdout3", "--variant", "pipeline"],
             ["evals.run_leave_agent", "--split", "holdout3", "--k", "3"],
             ["evals.run_qa", "--split", "holdout2", "--variant", "pipeline"],

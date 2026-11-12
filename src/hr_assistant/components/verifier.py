@@ -47,19 +47,38 @@ def _norm(text: str) -> str:
 
 
 def quote_in_evidence(quote: str | None, evidence: list[Chunk]) -> bool:
-    """Verbatim check (whitespace / markdown-insensitive). A quote shorter than 3 words does not count."""
+    """Verbatim check (whitespace / markdown-insensitive). A quote shorter than 3 words does not count.
+
+    A quoted TABLE ROW may skip columns ("Sport compensation | 500 UAH / month after probation"): then every
+    quoted cell must appear verbatim in one and the same table row of the evidence."""
     if not quote or len(quote.split()) < 3:
         return False
     q = _norm(quote).rstrip(".")
-    return any(q in _norm(c.text) for c in evidence)
+    if any(q in _norm(c.text) for c in evidence):
+        return True
+    cells = [_norm(x) for x in quote.split("|") if _norm(x)]
+    if len(cells) < 2:
+        return False
+    rows = [ln for c in evidence for ln in c.text.splitlines() if ln.lstrip().startswith("|")]
+    return any(all(cell in _norm(row) for cell in cells) for row in rows)
 
 
 def verify(
-    question: str, answer: str, evidence: list[Chunk], profile_facts: dict[str, str]
+    question: str,
+    answer: str,
+    evidence: list[Chunk],
+    profile_facts: dict[str, str],
+    facts: dict[str, str] | None = None,
 ) -> VerifierResult:
+    """`facts` are the situational facts collected in the conversation (iteration 5: after a clarification the
+    question alone is vague, e.g. "something I bought for work" + expense_category=taxi)."""
     profile = ", ".join(f"{k}={v}" for k, v in profile_facts.items() if k != "employee_id")
+    stated = ", ".join(f"{k}={v}" for k, v in (facts or {}).items() if k not in profile_facts) or "(none)"
     sections = "\n\n".join(c.text for c in evidence)
-    user = f"Employee profile: {profile}\n\nQuestion: {question}\n\nAnswer: {answer}\n\nEvidence:\n{sections}"
+    user = (
+        f"Employee profile: {profile}\nFacts the employee gave in the conversation: {stated}\n\n"
+        f"Question: {question}\n\nAnswer: {answer}\n\nEvidence:\n{sections}"
+    )
     out = complete_json("verifier", "verifier", user, VerifierOutput)
     found = quote_in_evidence(out.item_quote, evidence)
     reason = out.reason if found else f"no evidence sentence explicitly covers '{out.asked_item}'"

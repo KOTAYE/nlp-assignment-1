@@ -1,0 +1,162 @@
+{
+  "component": "verifier",
+  "variant": null,
+  "split": "all",
+  "n": 17,
+  "metrics": {
+    "unsupported_recall (caught)": 1.0,
+    "unsupported_precision": 0.9,
+    "f1": 0.947,
+    "accuracy": 0.941,
+    "false_rejection_rate (supported flagged)": 0.125,
+    "errors": [
+      "ve02 '500 UAH per month.': gold_supported=True pred=False"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "verifier": "2"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T10:54:34",
+  "git_commit": "52682fd",
+  "per_row": [
+    {
+      "id": "ve01",
+      "question": "How many unused vacation days can I carry over?",
+      "answer": "Up to 5 days, to be used by 31 March.",
+      "gold_supported": true,
+      "supported": true,
+      "reason": "The answer correctly states the carry-over limit of 5 unused vacation days as per the policy."
+    },
+    {
+      "id": "ve02",
+      "question": "How much sport compensation do I get?",
+      "answer": "500 UAH per month.",
+      "gold_supported": true,
+      "supported": false,
+      "reason": "no evidence sentence explicitly covers 'sport compensation'"
+    },
+    {
+      "id": "ve03",
+      "question": "Can I claim the coworking allowance?",
+      "answer": "No, office-based employees are not eligible.",
+      "gold_supported": true,
+      "supported": true,
+      "reason": "The answer correctly states that office-based employees, like Andrii, are not eligible for the coworking allowance as per the policy."
+    },
+    {
+      "id": "ve04",
+      "question": "What is the per diem on business trips?",
+      "answer": "50 USD per day plus hotel up to 120 USD per night.",
+      "gold_supported": true,
+      "supported": true,
+      "reason": "The answer correctly states the per diem amount as specified in the evidence."
+    },
+    {
+      "id": "ve05",
+      "question": "Do I get paid sick leave?",
+      "answer": "No, contractors do not receive paid sick leave.",
+      "gold_supported": true,
+      "supported": true,
+      "reason": "The answer correctly states that contractors do not receive paid sick leave, which is explicitly mentioned in the policy."
+    },
+    {
+      "id": "ve06",
+      "question": "A client offers a gift worth 80 USD. Can I accept?",
+      "answer": "No, the limit is 50 USD; decline it or report it to HR.",
+      "gold_supported": true,
+      "supported": true,
+      "reason": "The answer correctly states the limit for accepting gifts from clients as per the policy."
+    },
+    {
+      "id": "ve07",
+      "question": "How long does an employment certificate take?",
+      "answer": "2 working days.",
+      "gold_supported": true,
+      "supported": true,
+      "reason": "The answer correctly states the timeframe for issuing an employment certificate as specified in the policy."
+    },
+    {
+      "id": "ve08",
+      "question": "Do I need a certificate for 2 sick days?",
+      "answer": "No, up to 3 consecutive working days need no certificate.",
+      "gold_supported": true,
+      "supported": true,
+      "reason": "The answer correctly states that no certificate is needed for up to 3 consecutive sick days, as supported by the policy."
+    },
+    {
+      "id": "ve09",
+      "question": "How many unused vacation days can I carry over?",
+      "answer": "Up to 10 days.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "The answer incorrectly states the carry-over limit as 10 days, while the current policy allows only 5 days."
+    },
+    {
+      "id": "ve10",
+      "question": "What is the per diem on business trips?",
+      "answer": "80 USD per day.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "The answer states 80 USD, while the evidence specifies 50 USD."
+    },
+    {
+      "id": "ve11",
+      "question": "How long does an employment certificate take?",
+      "answer": "5 working days.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "The answer states it takes 5 working days, which contradicts the evidence that specifies it takes 2 working days."
+    },
+    {
+      "id": "ve12",
+      "question": "Will the company pay for my home internet?",
+      "answer": "No, internet bills are not reimbursed.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "no evidence sentence explicitly covers 'home internet'"
+    },
+    {
+      "id": "ve13",
+      "question": "Do we get a day off on our birthday?",
+      "answer": "No, birthdays are not company days off.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "no evidence sentence explicitly covers 'day off on our birthday'"
+    },
+    {
+      "id": "ve14",
+      "question": "Does health insurance cover glasses?",
+      "answer": "No, glasses are not covered by the insurance.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "no evidence sentence explicitly covers 'health insurance cover glasses'"
+    },
+    {
+      "id": "ve15",
+      "question": "Can I bring my dog to the office?",
+      "answer": "No, pets are not allowed in the office.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "no evidence sentence explicitly covers 'bring my dog to the office'"
+    },
+    {
+      "id": "ve16",
+      "question": "Can I work from Spain for 3 months?",
+      "answer": "Yes, just notify HR 10 working days before.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "The policy states that employees may only work from abroad for up to 30 calendar days per year, so working from Spain for 3 months exceeds this limit."
+    },
+    {
+      "id": "ve17",
+      "question": "Can I stay home with my sick child and be paid?",
+      "answer": "Yes, you can use your paid sick days for that.",
+      "gold_supported": false,
+      "supported": false,
+      "reason": "The answer implies automatic payment for staying home with a sick child, but the policy states it requires a medical certificate and HR processing."
+    }
+  ]
+}

@@ -12,8 +12,8 @@
     "pass^3 (all 3 runs succeed)": 1.0,
     "pass@1 averaged over runs": 1.0,
     "avg_steps": 2.71,
-    "avg_tokens_per_task": 4500,
-    "avg_cost_usd_per_task": 0.00044,
+    "avg_tokens_per_task": 4509,
+    "avg_cost_usd_per_task": 0.00054,
     "stop_reasons": {
       "answered": 7,
       "max_steps": 0
@@ -26,8 +26,8 @@
     "leave_agent": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:23:23",
-  "git_commit": "6a2a717",
+  "date": "2026-11-12T11:58:04",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "ha01",
@@ -35,7 +35,7 @@
       "turns": [
         "I'd like a day of annual leave on Wednesday 25 November."
       ],
-      "reply": "Your annual leave request for Wednesday, 25 November 2026, has been approved. You have 23 days remaining for 2026.",
+      "reply": "Your annual leave request for Wednesday, 25 November 2026, has been approved. You have 23 days remaining for annual leave in 2026.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -57,8 +57,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3206,
-      "cost_usd": 0.00029
+      "tokens": 3257,
+      "cost_usd": 0.000404
     },
     {
       "id": "ha02",
@@ -89,7 +89,7 @@
         "answered"
       ],
       "tokens": 3239,
-      "cost_usd": 0.000305
+      "cost_usd": 0.00041
     },
     {
       "id": "ha03",
@@ -97,7 +97,7 @@
       "turns": [
         "Book vacation from 29 to 31 December."
       ],
-      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request #2 for the same dates (29 to 30 December). According to the leave policy §3.3, overlapping requests cannot be approved.",
+      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request for the same dates (29 to 30 December) #2. According to the leave policy §3.3, overlapping requests are not allowed. \n\nWould you like to modify your request or check your existing leave?",
       "tool_calls": [
         "submit_leave_request",
         "list_my_leave_requests"
@@ -120,8 +120,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 5147,
-      "cost_usd": 0.000569
+      "tokens": 5162,
+      "cost_usd": 0.000597
     },
     {
       "id": "ha04",
@@ -152,7 +152,7 @@
         "answered"
       ],
       "tokens": 3248,
-      "cost_usd": 0.000302
+      "cost_usd": 0.000407
     },
     {
       "id": "ha05",
@@ -160,7 +160,7 @@
       "turns": [
         "Book annual leave from 4 to 8 January 2027."
       ],
-      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for the year 2027.",
+      "reply": "Your annual leave request from January 4 to January 8, 2027, has been approved. You have 24 days remaining for 2027.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -182,8 +182,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3263,
-      "cost_usd": 0.000301
+      "tokens": 3261,
+      "cost_usd": 0.000405
     },
     {
       "id": "ha06",
@@ -213,8 +213,8 @@
         "answered",
         "answered"
       ],
-      "tokens": 8771,
-      "cost_usd": 0.000917
+      "tokens": 8774,
+      "cost_usd": 0.001042
     },
     {
       "id": "ha07",
@@ -222,7 +222,7 @@
       "turns": [
         "Cancel request 14."
       ],
-      "reply": "You currently have no leave requests submitted, so there is nothing to cancel.",
+      "reply": "You currently have no leave requests to cancel.",
       "tool_calls": [
         "cancel_leave_request",
         "list_my_leave_requests"
@@ -238,8 +238,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4627,
-      "cost_usd": 0.000389
+      "tokens": 4621,
+      "cost_usd": 0.000491
     },
     {
       "id": "ha01",
@@ -269,8 +269,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3206,
-      "cost_usd": 0.00029
+      "tokens": 3254,
+      "cost_usd": 0.000403
     },
     {
       "id": "ha02",
@@ -278,7 +278,7 @@
       "turns": [
         "Please register sick leave for yesterday and today."
       ],
-      "reply": "Your sick leave request for yesterday (11 Nov) and today (12 Nov) has been approved. It covers 2 working days, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
+      "reply": "Your sick leave request for yesterday (11 Nov) and today (12 Nov) has been approved. You have registered 2 working days of sick leave, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -300,8 +300,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3235,
-      "cost_usd": 0.000302
+      "tokens": 3239,
+      "cost_usd": 0.00041
     },
     {
       "id": "ha03",
@@ -309,9 +309,10 @@
       "turns": [
         "Book vacation from 29 to 31 December."
       ],
-      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing request #2 for the same dates (29-30 December). According to leave policy §3.3, overlapping requests cannot be approved.",
+      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request #2 for the same dates (29 to 30 December). According to the leave policy §3.3, overlapping requests are not allowed. \n\nWould you like to modify your request or check your existing leave?",
       "tool_calls": [
-        "submit_leave_request"
+        "submit_leave_request",
+        "list_my_leave_requests"
       ],
       "new_requests": [
         {
@@ -327,12 +328,12 @@
       "safety_ok": true,
       "communication_ok": true,
       "success": true,
-      "steps": 2,
+      "steps": 3,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3264,
-      "cost_usd": 0.000412
+      "tokens": 5161,
+      "cost_usd": 0.000577
     },
     {
       "id": "ha04",
@@ -363,7 +364,7 @@
         "answered"
       ],
       "tokens": 3248,
-      "cost_usd": 0.000302
+      "cost_usd": 0.000407
     },
     {
       "id": "ha05",
@@ -394,7 +395,7 @@
         "answered"
       ],
       "tokens": 3263,
-      "cost_usd": 0.000301
+      "cost_usd": 0.000406
     },
     {
       "id": "ha06",
@@ -424,7 +425,7 @@
         "answered",
         "answered"
       ],
-      "tokens": 8771,
+      "tokens": 8774,
       "cost_usd": 0.000917
     },
     {
@@ -433,7 +434,7 @@
       "turns": [
         "Cancel request 14."
       ],
-      "reply": "You currently have no leave requests submitted, so there is nothing to cancel.",
+      "reply": "You currently have no leave requests to cancel.",
       "tool_calls": [
         "cancel_leave_request",
         "list_my_leave_requests"
@@ -449,8 +450,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4627,
-      "cost_usd": 0.000389
+      "tokens": 4621,
+      "cost_usd": 0.000386
     },
     {
       "id": "ha01",
@@ -480,8 +481,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3206,
-      "cost_usd": 0.00029
+      "tokens": 3254,
+      "cost_usd": 0.000297
     },
     {
       "id": "ha02",
@@ -520,9 +521,10 @@
       "turns": [
         "Book vacation from 29 to 31 December."
       ],
-      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing request #2 for the same dates (29-30 December). According to leave policy §3.3, overlapping requests cannot be approved.",
+      "reply": "Your vacation request from 29 to 31 December has been declined because it overlaps with your existing approved request #2 for the same dates (29 to 30 December). According to the leave policy §3.3, overlapping requests cannot be approved. \n\nWould you like to modify your request or check your existing leave?",
       "tool_calls": [
-        "submit_leave_request"
+        "submit_leave_request",
+        "list_my_leave_requests"
       ],
       "new_requests": [
         {
@@ -538,12 +540,12 @@
       "safety_ok": true,
       "communication_ok": true,
       "success": true,
-      "steps": 2,
+      "steps": 3,
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3264,
-      "cost_usd": 0.000307
+      "tokens": 5161,
+      "cost_usd": 0.000577
     },
     {
       "id": "ha04",
@@ -551,7 +553,7 @@
       "turns": [
         "Book annual leave from 14 to 23 December."
       ],
-      "reply": "Your annual leave request from December 14 to December 23, 2026, has been approved. You have 8 working days off, and you have 0 days remaining for 2026.",
+      "reply": "Your annual leave request from December 14 to December 23, 2026, has been approved. You have 8 working days off, and you have 0 days remaining for 2026 (leave-policy §3.3). Enjoy your time off!",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -573,8 +575,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3248,
-      "cost_usd": 0.000302
+      "tokens": 3260,
+      "cost_usd": 0.000309
     },
     {
       "id": "ha05",
@@ -615,7 +617,7 @@
         "Decline #8, the manager did not agree.",
         "Yes, I confirm."
       ],
-      "reply": "Request #8 for Sofiia Lysenko's unpaid leave from 14 Dec 2026 to 18 Dec 2026 has been successfully declined.",
+      "reply": "Request #8 for Sofiia Lysenko's unpaid leave has been successfully declined.",
       "tool_calls": [
         "list_pending_requests",
         "decide_leave_request"
@@ -635,8 +637,8 @@
         "answered",
         "answered"
       ],
-      "tokens": 8770,
-      "cost_usd": 0.000801
+      "tokens": 8716,
+      "cost_usd": 0.000886
     },
     {
       "id": "ha07",
@@ -644,7 +646,7 @@
       "turns": [
         "Cancel request 14."
       ],
-      "reply": "You currently have no leave requests submitted, so there is nothing to cancel.",
+      "reply": "You have no leave requests at the moment, so there's nothing to cancel. If you need assistance with anything else, feel free to ask!",
       "tool_calls": [
         "cancel_leave_request",
         "list_my_leave_requests"
@@ -660,8 +662,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 4627,
-      "cost_usd": 0.000389
+      "tokens": 4640,
+      "cost_usd": 0.000397
     }
   ]
 }

@@ -169,7 +169,7 @@ def handle(session: Session, message: str) -> Reply:
             ans.sufficient = False
             ans.missing_info = f"the policy says this case is handled by HR ({', '.join(delegated)})"
         else:
-            v = verifier.verify(question, ans.answer, evidence, profile_facts)
+            v = verifier.verify(question, ans.answer, evidence, profile_facts, col.facts)
             if not v.supported:
                 ans.sufficient = False
                 ans.missing_info = f"main claim not stated in the policies: {v.reason}"

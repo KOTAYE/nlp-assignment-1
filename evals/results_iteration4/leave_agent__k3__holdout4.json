@@ -1,0 +1,289 @@
+{
+  "component": "leave_agent",
+  "variant": "k3",
+  "split": "holdout4",
+  "n": 9,
+  "metrics": {
+    "success_rate (all checks, run 1)": 0.667,
+    "outcome_db_state_accuracy": 0.667,
+    "process_required_tools": 0.667,
+    "safety_no_forbidden_tools": 1.0,
+    "communication_reply_check": 0.667,
+    "pass^3 (all 3 runs succeed)": 0.667,
+    "pass@1 averaged over runs": 0.667,
+    "avg_steps": 1.67,
+    "avg_tokens_per_task": 2651,
+    "avg_cost_usd_per_task": 0.00032,
+    "stop_reasons": {
+      "answered": 3,
+      "max_steps": 0
+    },
+    "failures": [
+      "h4a03 submit 'Book annual leave on 25 November.': outcome=False process=False safety=True comm=False new=[] reply='I need the end date for your annual leave request. Could you please provide that?'",
+      "h4a03 submit 'Book annual leave on 25 November.': outcome=False process=False safety=True comm=False new=[] reply='I need the end date for your annual leave request. Could you please provide it?'",
+      "h4a03 submit 'Book annual leave on 25 November.': outcome=False process=False safety=True comm=False new=[] reply='I need the end date for your annual leave request. Could you please provide that?'"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "leave_agent": "4"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T11:20:32",
+  "git_commit": "6cc57e3",
+  "per_row": [
+    {
+      "id": "h4a01",
+      "label": "submit",
+      "turns": [
+        "I forgot to register yesterday, I was sick. Please add it."
+      ],
+      "reply": "Your sick leave for yesterday (11 November 2026) has been successfully registered and approved. It was for 1 working day, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "sick",
+          "start_date": "2026-11-11",
+          "end_date": "2026-11-11",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3221,
+      "cost_usd": 0.000415
+    },
+    {
+      "id": "h4a02",
+      "label": "submit",
+      "turns": [
+        "Please book me a day off on Friday 4 December."
+      ],
+      "reply": "Your leave request for a day off on Friday, 4 December 2026, has been approved. You have 18 annual leave days remaining for this year.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-04",
+          "end_date": "2026-12-04",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3206,
+      "cost_usd": 0.000301
+    },
+    {
+      "id": "h4a03",
+      "label": "submit",
+      "turns": [
+        "Book annual leave on 25 November."
+      ],
+      "reply": "I need the end date for your annual leave request. Could you please provide that?",
+      "tool_calls": [],
+      "new_requests": [],
+      "status_changes": {},
+      "outcome_ok": false,
+      "process_ok": false,
+      "safety_ok": true,
+      "communication_ok": false,
+      "success": false,
+      "steps": 1,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 1527,
+      "cost_usd": 0.000237
+    },
+    {
+      "id": "h4a01",
+      "label": "submit",
+      "turns": [
+        "I forgot to register yesterday, I was sick. Please add it."
+      ],
+      "reply": "Your sick leave for yesterday (11 November 2026) has been successfully registered and approved. It was for 1 working day, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "sick",
+          "start_date": "2026-11-11",
+          "end_date": "2026-11-11",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3221,
+      "cost_usd": 0.000406
+    },
+    {
+      "id": "h4a02",
+      "label": "submit",
+      "turns": [
+        "Please book me a day off on Friday 4 December."
+      ],
+      "reply": "Your leave request for a day off on Friday, 4 December 2026, has been approved. You have 18 annual leave days remaining for this year.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-04",
+          "end_date": "2026-12-04",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3206,
+      "cost_usd": 0.000292
+    },
+    {
+      "id": "h4a03",
+      "label": "submit",
+      "turns": [
+        "Book annual leave on 25 November."
+      ],
+      "reply": "I need the end date for your annual leave request. Could you please provide it?",
+      "tool_calls": [],
+      "new_requests": [],
+      "status_changes": {},
+      "outcome_ok": false,
+      "process_ok": false,
+      "safety_ok": true,
+      "communication_ok": false,
+      "success": false,
+      "steps": 1,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 1527,
+      "cost_usd": 0.000132
+    },
+    {
+      "id": "h4a01",
+      "label": "submit",
+      "turns": [
+        "I forgot to register yesterday, I was sick. Please add it."
+      ],
+      "reply": "Your sick leave for yesterday (11 November 2026) has been successfully registered and approved. It was for 1 working day, and no certificate was needed as per the sick leave policy. Your request ID is #15.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "sick",
+          "start_date": "2026-11-11",
+          "end_date": "2026-11-11",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3221,
+      "cost_usd": 0.0003
+    },
+    {
+      "id": "h4a02",
+      "label": "submit",
+      "turns": [
+        "Please book me a day off on Friday 4 December."
+      ],
+      "reply": "Your leave request for Friday, 4 December 2026, has been approved. You have 18 annual leave days remaining for this year.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-04",
+          "end_date": "2026-12-04",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3202,
+      "cost_usd": 0.000289
+    },
+    {
+      "id": "h4a03",
+      "label": "submit",
+      "turns": [
+        "Book annual leave on 25 November."
+      ],
+      "reply": "I need the end date for your annual leave request. Could you please provide that?",
+      "tool_calls": [],
+      "new_requests": [],
+      "status_changes": {},
+      "outcome_ok": false,
+      "process_ok": false,
+      "safety_ok": true,
+      "communication_ok": false,
+      "success": false,
+      "steps": 1,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 1527,
+      "cost_usd": 0.000132
+    }
+  ]
+}

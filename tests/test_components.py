@@ -157,3 +157,44 @@ def test_verifier_quote_must_exist_in_evidence():
     assert quote_in_evidence("Installing pirated software is forbidden.", ev)
     assert not quote_in_evidence("Contact lenses are not reimbursed.", ev)  # invented quote
     assert not quote_in_evidence(None, ev)
+
+
+def test_verifier_accepts_table_row_with_skipped_columns():
+    from hr_assistant.components.verifier import quote_in_evidence
+
+    ev = [c for c in load_chunks() if c.id == "benefits-policy §1.1"]
+    assert quote_in_evidence("Sport compensation | 500 UAH / month after probation", ev)
+    # cells taken from DIFFERENT rows do not count as one quote
+    assert not quote_in_evidence("Sport compensation | 300 USD / year after probation", ev)
+
+
+def test_garbled_citation_recovered_from_answer_text():
+    from hr_assistant.components.answerer import resolve_citations
+
+    ev = [c for c in load_chunks() if c.id in ("code-of-conduct §4.1", "expense-reimbursement-policy §5.1")]
+    text = "Yes, gifts up to 50 USD are fine [code-of-conduct §4.1]."
+    assert resolve_citations(["code-of-conduct \x167.1"], text, ev) == ["code-of-conduct §4.1"]
+    assert resolve_citations(["code-of-conduct \x1a4.1"], "Yes.", ev) == ["code-of-conduct §4.1"]
+    assert resolve_citations(["leave-policy §9.9"], "Yes.", ev) == []  # invented source dropped
+
+
+def test_one_day_request_is_stated_by_code():
+    from hr_assistant.components.leave_agent import with_dates
+
+    t = dt.date(2026, 11, 12)
+    assert "start_date = end_date = 2026-11-25" in with_dates("Book annual leave on 25 November.", t)
+    assert "One date only" not in with_dates("Book annual leave from 28 December to 5 January.", t)
+    assert "One date only" not in with_dates("The whole week starting Monday 7 December, please.", t)
+    # a second date given in a follow-up turn is not a one-day request
+    hist = [{"role": "user", "content": "I want leave from 14 December"}]
+    assert "One date only" not in with_dates("until 18 December", t, hist)
+
+
+def test_named_expense_item_needs_no_clarification():
+    from hr_assistant.components.collector import names_an_item
+
+    assert names_an_item("Is a taxi to a client meeting reimbursed?")
+    assert names_an_item("Will the company cover my mobile phone bill?")
+    assert not names_an_item("Can I get reimbursed for this?")
+    assert not names_an_item("Can I get money back for something I bought for work?")
+    assert not names_an_item("Can I get reimbursed?")

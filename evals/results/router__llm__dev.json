@@ -96,11 +96,11 @@
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "router": "5"
+    "router": "6"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:58:09",
-  "git_commit": "52682fd",
+  "date": "2026-11-12T11:48:59",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "rt01",
@@ -116,7 +116,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about coverage of a benefit provided by the company."
+      "reason": "The message asks about coverage, which relates to company policies."
     },
     {
       "id": "rt06",
@@ -124,7 +124,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the rules regarding health insurance eligibility for part-time employees."
+      "reason": "The message asks about the rules regarding health insurance for part-time employees."
     },
     {
       "id": "rt08",
@@ -132,7 +132,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the rules regarding the coworking allowance."
+      "reason": "The message asks about the rules regarding eligibility for the coworking allowance."
     },
     {
       "id": "rt11",
@@ -140,7 +140,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the process for requesting an employment certificate, which is a question about company policy."
+      "reason": "The message asks about the procedure for requesting an employment certificate, which is a policy-related question."
     },
     {
       "id": "rt13",
@@ -148,7 +148,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks whether it is allowed to work from abroad, which is a policy-related question."
+      "reason": "The message asks whether it is allowed to work from abroad, which is a question about company policy."
     },
     {
       "id": "rt16",
@@ -156,7 +156,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks whether approval is needed for a specific action related to company policy."
+      "reason": "The message asks about the rules regarding working on a company holiday."
     },
     {
       "id": "rt18",
@@ -212,7 +212,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message asks about the employee's own sick leave usage, which is a request to check their own balance."
+      "reason": "The message is a request to check the employee's own sick leave usage."
     },
     {
       "id": "rt35",
@@ -227,7 +227,7 @@
       "message": "Yes, confirm",
       "gold": "leave_action",
       "pred": "leave_action",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "reason": "The user is confirming an action to approve a leave request."
     },
     {
@@ -236,7 +236,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message indicates a request to take sick leave due to illness."
+      "reason": "The employee is requesting to take sick leave for tomorrow."
     },
     {
       "id": "rt43",
@@ -244,7 +244,7 @@
       "gold": "hr_referral",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about salary ranges, which falls under company policy questions."
+      "reason": "The question asks about salary ranges, which falls under company policy."
     },
     {
       "id": "rt45",
@@ -268,7 +268,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message indicates a personal sensitive case regarding the employee's promotion."
+      "reason": "The message indicates a personal sensitive case regarding a promotion discussion."
     },
     {
       "id": "rt53",
@@ -339,8 +339,8 @@
       "message": "asdfgh",
       "gold": "unclear",
       "pred": "unclear",
-      "confidence": 0.5,
-      "reason": "The message is too vague and does not provide clear information or a request."
+      "confidence": 0.9,
+      "reason": "The message is too vague and garbled to determine an intent."
     },
     {
       "id": "rt74",

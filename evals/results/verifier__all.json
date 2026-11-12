@@ -5,22 +5,20 @@
   "n": 17,
   "metrics": {
     "unsupported_recall (caught)": 1.0,
-    "unsupported_precision": 0.9,
-    "f1": 0.947,
-    "accuracy": 0.941,
-    "false_rejection_rate (supported flagged)": 0.125,
-    "errors": [
-      "ve02 '500 UAH per month.': gold_supported=True pred=False"
-    ]
+    "unsupported_precision": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "false_rejection_rate (supported flagged)": 0.0,
+    "errors": []
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "verifier": "2"
+    "verifier": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:54:34",
-  "git_commit": "52682fd",
+  "date": "2026-11-12T12:29:05",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "ve01",
@@ -28,15 +26,15 @@
       "answer": "Up to 5 days, to be used by 31 March.",
       "gold_supported": true,
       "supported": true,
-      "reason": "The answer correctly states the carry-over limit of 5 unused vacation days as per the policy."
+      "reason": "The answer correctly states the limit of unused vacation days that can be carried over according to the policy."
     },
     {
       "id": "ve02",
       "question": "How much sport compensation do I get?",
       "answer": "500 UAH per month.",
       "gold_supported": true,
-      "supported": false,
-      "reason": "no evidence sentence explicitly covers 'sport compensation'"
+      "supported": true,
+      "reason": "The answer correctly states the amount of sport compensation for part-time employees after passing probation."
     },
     {
       "id": "ve03",
@@ -44,7 +42,7 @@
       "answer": "No, office-based employees are not eligible.",
       "gold_supported": true,
       "supported": true,
-      "reason": "The answer correctly states that office-based employees, like Andrii, are not eligible for the coworking allowance as per the policy."
+      "reason": "The answer correctly states that office-based employees are not eligible for the coworking allowance as per the policy."
     },
     {
       "id": "ve04",
@@ -68,7 +66,7 @@
       "answer": "No, the limit is 50 USD; decline it or report it to HR.",
       "gold_supported": true,
       "supported": true,
-      "reason": "The answer correctly states the limit for accepting gifts from clients as per the policy."
+      "reason": "The answer correctly applies the policy that gifts over 50 USD must be declined or reported to HR."
     },
     {
       "id": "ve07",
@@ -84,7 +82,7 @@
       "answer": "No, up to 3 consecutive working days need no certificate.",
       "gold_supported": true,
       "supported": true,
-      "reason": "The answer correctly states that no certificate is needed for up to 3 consecutive sick days, as supported by the policy."
+      "reason": "The answer correctly states that no certificate is needed for up to 3 consecutive sick days, which is supported by the policy evidence."
     },
     {
       "id": "ve09",
@@ -92,7 +90,7 @@
       "answer": "Up to 10 days.",
       "gold_supported": false,
       "supported": false,
-      "reason": "The answer incorrectly states the carry-over limit as 10 days, while the current policy allows only 5 days."
+      "reason": "The answer incorrectly states the carry-over limit as 10 days, while the policy specifies it is 5 days from 1 January 2026."
     },
     {
       "id": "ve10",
@@ -100,7 +98,7 @@
       "answer": "80 USD per day.",
       "gold_supported": false,
       "supported": false,
-      "reason": "The answer states 80 USD, while the evidence specifies 50 USD."
+      "reason": "The answer states 80 USD, but the evidence specifies a per diem of 50 USD."
     },
     {
       "id": "ve11",
@@ -108,7 +106,7 @@
       "answer": "5 working days.",
       "gold_supported": false,
       "supported": false,
-      "reason": "The answer states it takes 5 working days, which contradicts the evidence that specifies it takes 2 working days."
+      "reason": "The evidence states that HR issues the employment certificate within 2 working days, not 5."
     },
     {
       "id": "ve12",
@@ -124,7 +122,7 @@
       "answer": "No, birthdays are not company days off.",
       "gold_supported": false,
       "supported": false,
-      "reason": "no evidence sentence explicitly covers 'day off on our birthday'"
+      "reason": "no evidence sentence explicitly covers 'birthday'"
     },
     {
       "id": "ve14",
@@ -132,7 +130,7 @@
       "answer": "No, glasses are not covered by the insurance.",
       "gold_supported": false,
       "supported": false,
-      "reason": "no evidence sentence explicitly covers 'health insurance cover glasses'"
+      "reason": "no evidence sentence explicitly covers 'glasses'"
     },
     {
       "id": "ve15",
@@ -140,7 +138,7 @@
       "answer": "No, pets are not allowed in the office.",
       "gold_supported": false,
       "supported": false,
-      "reason": "no evidence sentence explicitly covers 'bring my dog to the office'"
+      "reason": "no evidence sentence explicitly covers 'dog in the office'"
     },
     {
       "id": "ve16",
@@ -148,7 +146,7 @@
       "answer": "Yes, just notify HR 10 working days before.",
       "gold_supported": false,
       "supported": false,
-      "reason": "The policy states that employees may only work from abroad for up to 30 calendar days per year, so working from Spain for 3 months exceeds this limit."
+      "reason": "The policy states that employees may only work from abroad for up to 30 calendar days per year, so working from Spain for 3 months is not allowed."
     },
     {
       "id": "ve17",
@@ -156,7 +154,7 @@
       "answer": "Yes, you can use your paid sick days for that.",
       "gold_supported": false,
       "supported": false,
-      "reason": "The answer implies automatic payment for staying home with a sick child, but the policy states it requires a medical certificate and HR processing."
+      "reason": "The answer implies reimbursement for sick days without mentioning the requirement of a medical certificate and HR processing, which is necessary according to the policy."
     }
   ]
 }

@@ -4,16 +4,16 @@
   "split": "dev",
   "n": 12,
   "metrics": {
-    "scenario_success_rate": 0.917,
+    "scenario_success_rate": 1.0,
     "per_check_pass_rate": {
-      "citation": 0.8,
+      "citation": 1.0,
       "db": 1.0,
-      "reply": 0.75,
-      "route": 0.917,
+      "reply": 1.0,
+      "route": 1.0,
       "ticket": 1.0
     },
     "success_by_label": {
-      "answer": "3/4",
+      "answer": "4/4",
       "clarify_then_referral": "1/1",
       "follow_up": "1/1",
       "hr": "1/1",
@@ -22,18 +22,16 @@
       "unclear": "1/1"
     },
     "tracer_coverage": 1.0,
-    "avg_cost_usd_per_conversation": 0.00069,
-    "avg_latency_s_per_conversation": 6.53,
-    "failures": [
-      "e2e26 answer ['When do I have to finish the security training?']: routes=['hr_referral'] checks={'route': False, 'citation': False, 'reply': False} last=\"The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (other). HR replies within 2 working days, or you \""
-    ]
+    "avg_cost_usd_per_conversation": 0.00072,
+    "avg_latency_s_per_conversation": 6.84,
+    "failures": []
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T11:03:24",
-  "git_commit": "52682fd",
+  "date": "2026-11-12T12:52:22",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "e2e01",
@@ -57,9 +55,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000654,
-      "tokens": 4382,
-      "latency_s": 14.23
+      "cost_usd": 0.000707,
+      "tokens": 4732,
+      "latency_s": 15.0
     },
     {
       "id": "e2e03",
@@ -71,7 +69,7 @@
         "answer"
       ],
       "replies": [
-        "As a contractor at Lumora Tech, you do not receive paid sick leave. The sick leave policy applies only to full-time and part-time employees, and contractors are advised to inform their manager about any absence according to their service agreement [sick-leave-policy §1.1]."
+        "As a contractor at Lumora Tech, you do not receive paid sick leave. The sick leave policy applies only to full-time and part-time employees, so you should inform your manager about any absence according to your service agreement instead of relying on paid sick leave benefits.\n\nSources: [sick-leave-policy §1.1]"
       ],
       "citations": [
         "sick-leave-policy §1.1"
@@ -83,9 +81,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000667,
-      "tokens": 4420,
-      "latency_s": 5.75
+      "cost_usd": 0.000726,
+      "tokens": 4831,
+      "latency_s": 6.83
     },
     {
       "id": "e2e06",
@@ -109,9 +107,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000761,
-      "tokens": 5442,
-      "latency_s": 7.04
+      "cost_usd": 0.000807,
+      "tokens": 5748,
+      "latency_s": 7.44
     },
     {
       "id": "e2e08",
@@ -132,9 +130,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000603,
-      "tokens": 4050,
-      "latency_s": 5.12
+      "cost_usd": 0.000638,
+      "tokens": 4283,
+      "latency_s": 5.86
     },
     {
       "id": "e2e11",
@@ -155,9 +153,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000231,
-      "tokens": 1287,
-      "latency_s": 2.34
+      "cost_usd": 0.000247,
+      "tokens": 1388,
+      "latency_s": 2.56
     },
     {
       "id": "e2e13",
@@ -169,7 +167,7 @@
         "leave_action"
       ],
       "replies": [
-        "Your annual leave request for 28-30 December has been submitted and is currently pending HR approval (#15). The reason for the pending status is that two team members already have approved leave on 29 December. HR will confirm with your team lead within 3 working days."
+        "Your annual leave request for 28-30 December has been submitted and is currently pending HR approval (#15). The reason for the pending status is that two team members already have approved leave on 29 December. HR will confirm with your team lead within three working days."
       ],
       "citations": [],
       "checks": {
@@ -178,9 +176,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000538,
-      "tokens": 3993,
-      "latency_s": 3.85
+      "cost_usd": 0.000552,
+      "tokens": 4091,
+      "latency_s": 3.93
     },
     {
       "id": "e2e16",
@@ -196,9 +194,9 @@
         "leave_action"
       ],
       "replies": [
-        "Here are the pending leave requests:\n\n1. **#10 Nazar Savchenko**, sick, **14–18 Sep 2026** (pending HR)\n2. **#8 Sofiia Lysenko**, unpaid, **14–18 Dec 2026** (pending HR)",
-        "Please confirm that you want to approve request #8 for Sofiia Lysenko (unpaid leave, 14–18 Dec 2026).",
-        "Request #8 for Sofiia Lysenko (unpaid leave, 14–18 Dec 2026) has been approved."
+        "Here are the pending leave requests:\n\n1. **#10 Nazar Savchenko, sick, 14–18 Sep** (pending HR review)\n2. **#8 Sofiia Lysenko, unpaid, 14–18 Dec** (pending HR review)",
+        "Please confirm that you want to approve request #8 for Sofiia Lysenko (unpaid leave, 14–18 Dec).",
+        "Request #8 for Sofiia Lysenko (unpaid leave, 14–18 Dec) has been approved."
       ],
       "citations": [],
       "checks": {
@@ -207,9 +205,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.001396,
-      "tokens": 10996,
-      "latency_s": 8.46
+      "cost_usd": 0.00143,
+      "tokens": 11256,
+      "latency_s": 8.5
     },
     {
       "id": "e2e18",
@@ -229,9 +227,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000121,
-      "tokens": 721,
-      "latency_s": 1.0
+      "cost_usd": 0.000136,
+      "tokens": 820,
+      "latency_s": 1.16
     },
     {
       "id": "e2e21",
@@ -245,8 +243,8 @@
         "answer"
       ],
       "replies": [
-        "Yes, as a fully remote full-time employee, you are eligible for a one-time home office allowance of **300 USD** for items like a monitor, chair, or desk. Since you have passed your probation, you can claim this allowance through the expense process [equipment-policy §3.1].\n\nSources: [remote-work-policy §2.2]",
-        "To claim your home office allowance of **300 USD**, you need to submit your receipt through the expense process. Make sure to do this after your probation period, which you have already passed [equipment-policy §3.1].\n\nSources: [remote-work-policy §2.2]"
+        "As a fully remote full-time employee, you are eligible for a one-time home office allowance of **300 USD** for items like a monitor, chair, or desk. Since you have passed your probation, you can claim this allowance through the expense process.\n\nSources: [equipment-policy §3.1], [remote-work-policy §2.2]",
+        "To claim your home office allowance of **300 USD**, you need to submit your receipt through the expense process. Make sure to do this by the 25th of the month to receive the compensation with your next salary.\n\nSources: [equipment-policy §3.1], [remote-work-policy §2.2]"
       ],
       "citations": [
         "equipment-policy §3.1",
@@ -258,9 +256,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.001365,
-      "tokens": 8912,
-      "latency_s": 10.91
+      "cost_usd": 0.001453,
+      "tokens": 9572,
+      "latency_s": 14.14
     },
     {
       "id": "e2e23",
@@ -284,9 +282,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000692,
-      "tokens": 4671,
-      "latency_s": 5.68
+      "cost_usd": 0.000744,
+      "tokens": 5019,
+      "latency_s": 6.73
     },
     {
       "id": "e2e26",
@@ -295,22 +293,24 @@
         "When do I have to finish the security training?"
       ],
       "routes": [
-        "hr_referral"
+        "answer"
       ],
       "replies": [
-        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (other). HR replies within 2 working days, or you can write to hr@lumora.example."
+        "You need to complete the Information Security Training within 14 calendar days of your start date, which means by November 28, 2026. Access to production systems will only be granted after you finish this training.\n\nSources: [onboarding-policy §2.3]"
       ],
-      "citations": [],
+      "citations": [
+        "onboarding-policy §2.3"
+      ],
       "checks": {
-        "route": false,
-        "citation": false,
-        "reply": false
+        "route": true,
+        "citation": true,
+        "reply": true
       },
-      "success": false,
+      "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000754,
-      "tokens": 4885,
-      "latency_s": 7.52
+      "cost_usd": 0.000697,
+      "tokens": 4667,
+      "latency_s": 6.71
     },
     {
       "id": "e2e28",
@@ -331,9 +331,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000528,
-      "tokens": 3922,
-      "latency_s": 6.47
+      "cost_usd": 0.00054,
+      "tokens": 4069,
+      "latency_s": 3.2
     }
   ]
 }

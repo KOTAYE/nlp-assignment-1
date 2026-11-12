@@ -2,9 +2,35 @@
 
 from __future__ import annotations
 
+import re
+
 from ..llm import complete_json
 from ..retrieval import Chunk
 from ..schemas import Answer
+
+_REF = re.compile(r"([a-z]+(?:-[a-z]+)+)\W{0,3}?(\d+\.\d+)")
+
+
+def _ref_key(text: str) -> tuple[str, str] | None:
+    m = _REF.search(text.lower())
+    return (m.group(1), m.group(2)) if m else None
+
+
+def resolve_citations(cited: list[str], answer_text: str, evidence: list[Chunk]) -> list[str]:
+    """Map model citations to evidence IDs by (doc_id, section number), tolerant of a garbled "§" sign.
+
+    Exact IDs are kept first; then IDs referenced inline in the answer text ("[code-of-conduct §4.1]") are
+    added, which recovers a citation the model wrote correctly in the text but garbled in the list.
+    Only IDs that exist in the evidence survive (no invented sources)."""
+    by_key = {_ref_key(c.id): c.id for c in evidence}
+    out: list[str] = []
+    candidates = [*cited, *re.findall(r"\[([^\]]+)\]", answer_text)]
+    for raw in candidates:
+        for part in raw.split(","):
+            cid = part.strip() if part.strip() in by_key.values() else by_key.get(_ref_key(part))
+            if cid and cid not in out:
+                out.append(cid)
+    return out
 
 
 def answer(
@@ -24,8 +50,7 @@ def answer(
     )
     result = complete_json("answerer", "answerer", user, Answer)
     # Citation validation: keep only IDs that were actually in the evidence (no invented sources).
-    allowed = {c.id for c in evidence}
-    result.citations = [c for c in dict.fromkeys(result.citations) if c in allowed]
+    result.citations = resolve_citations(result.citations, result.answer, evidence)
     if result.sufficient and not result.citations:
         result.sufficient = False
         result.missing_info = result.missing_info or "The answer could not be linked to a policy section."

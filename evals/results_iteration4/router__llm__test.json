@@ -1,0 +1,472 @@
+{
+  "component": "router",
+  "variant": "llm",
+  "split": "test",
+  "n": 46,
+  "metrics": {
+    "accuracy": 0.957,
+    "macro_f1": 0.961,
+    "mcc": 0.946,
+    "per_class": {
+      "policy_question": {
+        "precision": 0.867,
+        "recall": 1.0,
+        "f1": 0.929,
+        "support": 13
+      },
+      "leave_action": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 12
+      },
+      "hr_referral": {
+        "precision": 1.0,
+        "recall": 0.778,
+        "f1": 0.875,
+        "support": 9
+      },
+      "smalltalk": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6
+      },
+      "unclear": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "policy_question",
+        "leave_action",
+        "hr_referral",
+        "smalltalk",
+        "unclear"
+      ],
+      "rows_gold_cols_pred": [
+        [
+          13,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          7,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6
+        ]
+      ]
+    },
+    "hr_referral_recall": 0.778,
+    "errors": [
+      "'Can the company help me relocate to Germany?': hr_referral -> policy_question",
+      "'If I see a coworker breaking the law at work, what should I do?': hr_referral -> policy_question"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "router": "5"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T10:58:56",
+  "git_commit": "52682fd",
+  "per_row": [
+    {
+      "id": "rt02",
+      "message": "Do I need a sick note for a 2-day illness?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the requirement for a sick note, which is a question about company policy."
+    },
+    {
+      "id": "rt04",
+      "message": "What is the per diem for business trips?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules regarding per diem for business trips."
+    },
+    {
+      "id": "rt05",
+      "message": "how long is probation",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the duration of the probation period, which is a policy-related question."
+    },
+    {
+      "id": "rt07",
+      "message": "What's the limit for client dinners?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules regarding the limit for client dinners."
+    },
+    {
+      "id": "rt09",
+      "message": "What are the company holidays in 2027?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the company's rules regarding holidays."
+    },
+    {
+      "id": "rt10",
+      "message": "Can I accept a gift from a client?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules regarding accepting gifts from clients."
+    },
+    {
+      "id": "rt12",
+      "message": "What happens if I lose my laptop?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules or consequences related to losing a company laptop."
+    },
+    {
+      "id": "rt14",
+      "message": "How many days of special leave do I get for a wedding?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules regarding special leave for a wedding."
+    },
+    {
+      "id": "rt15",
+      "message": "What is the referral bonus?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules regarding the referral bonus."
+    },
+    {
+      "id": "rt17",
+      "message": "Can employees share confidential information with anyone inside the company?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules regarding sharing confidential information within the company."
+    },
+    {
+      "id": "rt19",
+      "message": "How should employees ensure workspace and data security while working from home?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about rules regarding workspace and data security for remote work."
+    },
+    {
+      "id": "rt20",
+      "message": "Does Lumora Tech protect employees who report issues in good faith?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the company's policy on protecting employees who report issues."
+    },
+    {
+      "id": "rt22",
+      "message": "and what about contractors?",
+      "gold": "policy_question",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The user is asking about the health insurance policy for contractors, which is a question about rules and coverage."
+    },
+    {
+      "id": "rt24",
+      "message": "Book me annual leave from 7 to 11 December",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 1.0,
+      "reason": "The message is an explicit request to book annual leave for specific dates."
+    },
+    {
+      "id": "rt26",
+      "message": "I want to take Friday off",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is an explicit request to take leave on a specific day."
+    },
+    {
+      "id": "rt27",
+      "message": "Cancel my leave request for next week",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 1.0,
+      "reason": "The message is an explicit request to cancel a leave request."
+    },
+    {
+      "id": "rt29",
+      "message": "Show me my leave requests",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is a request to check the employee's own leave requests."
+    },
+    {
+      "id": "rt31",
+      "message": "Can you register sick days for Monday and Tuesday?",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 1.0,
+      "reason": "The message is an explicit request to register sick days."
+    },
+    {
+      "id": "rt32",
+      "message": "I'm getting married on 5 December, I want special leave 1-3 December",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is an explicit request to take special leave on specific dates."
+    },
+    {
+      "id": "rt34",
+      "message": "Please book vacation 28 Dec - 5 Jan",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is an explicit request to book vacation days."
+    },
+    {
+      "id": "rt36",
+      "message": "Approve request #8, the team lead agreed",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is an explicit request to approve a leave request."
+    },
+    {
+      "id": "rt37",
+      "message": "Decline request 9 please",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is an explicit request to decline a specific leave request."
+    },
+    {
+      "id": "rt39",
+      "message": "Change my leave to start on Tuesday instead",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is a clear request to change the start date of leave."
+    },
+    {
+      "id": "rt41",
+      "message": "Do I have enough days left for a two-week holiday in December?",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message asks about the employee's own balance of vacation days."
+    },
+    {
+      "id": "rt42",
+      "message": "remove my vacation on 23-27 November",
+      "gold": "leave_action",
+      "pred": "leave_action",
+      "confidence": 0.9,
+      "reason": "The message is an explicit request to remove a vacation."
+    },
+    {
+      "id": "rt44",
+      "message": "When will I get a raise?",
+      "gold": "hr_referral",
+      "pred": "hr_referral",
+      "confidence": 0.9,
+      "reason": "The question is about a personal decision regarding the employee's raise."
+    },
+    {
+      "id": "rt46",
+      "message": "I want to report harassment by a colleague",
+      "gold": "hr_referral",
+      "pred": "hr_referral",
+      "confidence": 1.0,
+      "reason": "The message indicates a personal sensitive case involving harassment."
+    },
+    {
+      "id": "rt47",
+      "message": "My manager keeps shouting at me",
+      "gold": "hr_referral",
+      "pred": "hr_referral",
+      "confidence": 0.9,
+      "reason": "This message reports a personal sensitive case of conflict with a manager."
+    },
+    {
+      "id": "rt49",
+      "message": "Can the company help me relocate to Germany?",
+      "gold": "hr_referral",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about company support for relocation, which is a policy-related question."
+    },
+    {
+      "id": "rt51",
+      "message": "I have a legal dispute with my landlord, can HR help?",
+      "gold": "hr_referral",
+      "pred": "hr_referral",
+      "confidence": 0.9,
+      "reason": "The message refers to a personal sensitive case involving a legal dispute."
+    },
+    {
+      "id": "rt52",
+      "message": "Show me Andrii Koval's leave requests and his address",
+      "gold": "hr_referral",
+      "pred": "hr_referral",
+      "confidence": 0.9,
+      "reason": "The message requests personal sensitive information about another employee."
+    },
+    {
+      "id": "rt54",
+      "message": "If I see a coworker breaking the law at work, what should I do?",
+      "gold": "hr_referral",
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the appropriate action regarding a coworker breaking the law, which relates to company policies."
+    },
+    {
+      "id": "rt56",
+      "message": "I disagree with my performance review",
+      "gold": "hr_referral",
+      "pred": "hr_referral",
+      "confidence": 0.9,
+      "reason": "The message indicates a personal sensitive case regarding a performance dispute."
+    },
+    {
+      "id": "rt57",
+      "message": "Someone from another team is bullying me online",
+      "gold": "hr_referral",
+      "pred": "hr_referral",
+      "confidence": 1.0,
+      "reason": "The message reports a concrete incident of bullying."
+    },
+    {
+      "id": "rt60",
+      "message": "Thanks, that helps",
+      "gold": "smalltalk",
+      "pred": "smalltalk",
+      "confidence": 1.0,
+      "reason": "The message expresses gratitude and does not relate to HR or policy questions."
+    },
+    {
+      "id": "rt62",
+      "message": "What can you do?",
+      "gold": "smalltalk",
+      "pred": "smalltalk",
+      "confidence": 1.0,
+      "reason": "The message is an off-topic question unrelated to work or HR."
+    },
+    {
+      "id": "rt63",
+      "message": "bye",
+      "gold": "smalltalk",
+      "pred": "smalltalk",
+      "confidence": 1.0,
+      "reason": "The message is a farewell."
+    },
+    {
+      "id": "rt65",
+      "message": "Tell me a joke",
+      "gold": "smalltalk",
+      "pred": "smalltalk",
+      "confidence": 1.0,
+      "reason": "The message is a request for a joke, which falls under smalltalk."
+    },
+    {
+      "id": "rt67",
+      "message": "Hello, who are you?",
+      "gold": "smalltalk",
+      "pred": "smalltalk",
+      "confidence": 1.0,
+      "reason": "The message is a greeting and an off-topic question."
+    },
+    {
+      "id": "rt68",
+      "message": "thank you so much!",
+      "gold": "smalltalk",
+      "pred": "smalltalk",
+      "confidence": 1.0,
+      "reason": "The message is a expression of gratitude, which falls under smalltalk."
+    },
+    {
+      "id": "rt70",
+      "message": "hi I need the thing",
+      "gold": "unclear",
+      "pred": "unclear",
+      "confidence": 0.5,
+      "reason": "The message is too vague to determine a specific intent."
+    },
+    {
+      "id": "rt72",
+      "message": "the form",
+      "gold": "unclear",
+      "pred": "unclear",
+      "confidence": 0.5,
+      "reason": "The message is too vague to determine the intent."
+    },
+    {
+      "id": "rt73",
+      "message": "and?",
+      "gold": "unclear",
+      "pred": "unclear",
+      "confidence": 0.5,
+      "reason": "The message is too vague to determine a specific intent."
+    },
+    {
+      "id": "rt75",
+      "message": "help",
+      "gold": "unclear",
+      "pred": "unclear",
+      "confidence": 0.5,
+      "reason": "The message is too vague to determine a specific intent."
+    },
+    {
+      "id": "rt77",
+      "message": "i need it by monday",
+      "gold": "unclear",
+      "pred": "unclear",
+      "confidence": 0.5,
+      "reason": "The message is too vague to determine the specific intent."
+    },
+    {
+      "id": "rt78",
+      "message": "that one",
+      "gold": "unclear",
+      "pred": "unclear",
+      "confidence": 0.5,
+      "reason": "The message is too vague to determine a specific intent."
+    }
+  ]
+}

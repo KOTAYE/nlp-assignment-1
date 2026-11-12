@@ -1,0 +1,567 @@
+{
+  "component": "qa",
+  "variant": "pipeline",
+  "split": "holdout4",
+  "n": 18,
+  "metrics": {
+    "answer_rate (answerable questions answered)": 0.583,
+    "correctness_pass_rate (fully/mostly right, of answerable)": 0.583,
+    "correctness_mean_score (answered)": 1.0,
+    "contradiction_rate (answered)": 0.0,
+    "faithfulness_mean (answered)": 0.929,
+    "citation_hit_rate (answered)": 1.0,
+    "answers_with_citation": 1.0,
+    "context_recall@5 (gold section in evidence)": 0.667,
+    "referral_precision": 0.6,
+    "referral_recall": 1.0,
+    "referral_f1": 0.75,
+    "referral_confusion": {
+      "tp": 6,
+      "fp": 4,
+      "fn": 0,
+      "tn": 8
+    },
+    "ticket_category_accuracy": 1.0,
+    "avg_tokens_per_question": 3681,
+    "avg_cost_usd_per_question": 0.00056,
+    "avg_latency_s": 5.35,
+    "failing_stages": {
+      "router (referred directly)": 2,
+      "answerer (abstained) -> hr_referral": 1,
+      "retrieval (gold section not in top-5) -> false referral": 1,
+      "collector (unnecessary clarification)": 1
+    },
+    "errors": [
+      "h4q04 'Will the company pay my parking fine from a business trip?': route=hr_referral verdict=None stage=retrieval (gold section not in top-5) -> false referral",
+      "h4q05 'My work laptop was stolen from my car. What do I need to do?': route=hr_referral verdict=None stage=router (referred directly)",
+      "h4q06 'Who should I tell if I see a colleague being bullied?': route=hr_referral verdict=None stage=router (referred directly)",
+      "h4q08 'A partner sent me a 30 USD gift card. Is it OK to keep it?': route=hr_referral verdict=None stage=answerer (abstained) -> hr_referral",
+      "h4q10 'I accidentally cracked my laptop screen. Do I have to pay for the repair?': route=clarification verdict=None stage=collector (unnecessary clarification)"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "router": "5",
+    "collector": "7",
+    "rewriter": "2",
+    "answerer": "3",
+    "referral": "2",
+    "judge_correctness": "1",
+    "judge_faithfulness": "1"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T11:20:15",
+  "git_commit": "6cc57e3",
+  "per_row": [
+    {
+      "id": "h4q01",
+      "question": "What is my education budget?",
+      "employee_id": "E028",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "As a part-time employee who has passed your probation, you have an education budget of **300 USD per year**. This budget covers courses, certifications, conference tickets, and professional books related to your current role or agreed development plan, but it does not carry over to the next year [benefits-policy §1.1], [benefits-policy §4.1].",
+      "citations": [
+        "benefits-policy §1.1",
+        "benefits-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §1.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §4.3",
+        "benefits-policy §4.2",
+        "benefits-policy §4.1",
+        "benefits-policy §1.1",
+        "expense-reimbursement-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4484,
+      "cost_usd": 0.000687,
+      "latency_s": 15.85,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the education budget and the condition for eligibility, matching all key facts in the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h4q02",
+      "question": "How much sport compensation does a part-time employee get?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "A part-time employee receives a sport compensation of 500 UAH per month after passing their probation period. Since you are a full-time employee, this specific benefit does not apply to you, but for part-time employees, this is the amount they would receive.\n\nSources: [benefits-policy §1.1]",
+      "citations": [
+        "benefits-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §1.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §1.1",
+        "expense-reimbursement-policy §1.2",
+        "benefits-policy §3.2",
+        "leave-policy §5.3",
+        "equipment-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4523,
+      "cost_usd": 0.00067,
+      "latency_s": 4.99,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the amount and the condition for sport compensation for part-time employees, matching all key facts in the gold answer.",
+      "faithfulness": 0.5,
+      "unsupported_claims": [
+        "Since you are a full-time employee, this specific benefit does not apply to you"
+      ],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h4q03",
+      "question": "Can I expense the wine we ordered at an approved lunch with a client?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you can expense the wine ordered at an approved lunch with a client, as alcohol is reimbursable at approved client meals according to the policy. Just ensure that the total cost per person does not exceed the limit of 40 USD, and that the meal was approved in advance by your team lead.\n\nSources: [expense-reimbursement-policy §5.1], [expense-reimbursement-policy §1.2], [expense-reimbursement-policy §1.3]",
+      "citations": [
+        "expense-reimbursement-policy §5.1",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.3"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §5.1"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §5.1",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4371,
+      "cost_usd": 0.000671,
+      "latency_s": 5.43,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the eligibility for alcohol reimbursement and the per-person spending limit.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h4q04",
+      "question": "Will the company pay my parking fine from a business trip?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §1.3"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §3.1",
+        "expense-reimbursement-policy §4.1"
+      ],
+      "context_hit": false,
+      "ticket_id": 1,
+      "ticket_category": "other",
+      "gold_category": null,
+      "tokens": 4045,
+      "cost_usd": 0.000618,
+      "latency_s": 6.02,
+      "failing_stage": "retrieval (gold section not in top-5) -> false referral"
+    },
+    {
+      "id": "h4q05",
+      "question": "My work laptop was stolen from my car. What do I need to do?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "equipment-policy §2.1"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": 2,
+      "ticket_category": "other",
+      "gold_category": null,
+      "tokens": 1301,
+      "cost_usd": 0.000236,
+      "latency_s": 2.05,
+      "failing_stage": "router (referred directly)"
+    },
+    {
+      "id": "h4q06",
+      "question": "Who should I tell if I see a colleague being bullied?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "code-of-conduct §2.2"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": 3,
+      "ticket_category": "workplace_conduct",
+      "gold_category": null,
+      "tokens": 1281,
+      "cost_usd": 0.000228,
+      "latency_s": 2.0,
+      "failing_stage": "router (referred directly)"
+    },
+    {
+      "id": "h4q07",
+      "question": "Does our health insurance include dental treatment?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, our health insurance includes dental treatment, covering it up to 10,000 UAH per year as part of the policy benefits.\n\nSources: [benefits-policy §2.1]",
+      "citations": [
+        "benefits-policy §2.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §2.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §2.1",
+        "benefits-policy §2.2",
+        "benefits-policy §1.1",
+        "benefits-policy §2.3",
+        "benefits-policy §5.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4408,
+      "cost_usd": 0.000655,
+      "latency_s": 5.44,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, providing the correct eligibility and the exact coverage amount.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h4q08",
+      "question": "A partner sent me a 30 USD gift card. Is it OK to keep it?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "code-of-conduct §4.1"
+      ],
+      "evidence_ids": [
+        "code-of-conduct §4.1",
+        "expense-reimbursement-policy §5.1",
+        "leave-policy §3.4",
+        "leave-policy §4.2",
+        "benefits-policy §1.1"
+      ],
+      "context_hit": true,
+      "ticket_id": 4,
+      "ticket_category": "other",
+      "gold_category": null,
+      "tokens": 4240,
+      "cost_usd": 0.000646,
+      "latency_s": 5.76,
+      "failing_stage": "answerer (abstained) -> hr_referral"
+    },
+    {
+      "id": "h4q09",
+      "question": "Can I join the English lessons?",
+      "employee_id": "E007",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you can join the English lessons. All team members, including contractors, are eligible to participate in free group English lessons twice per week after completing a placement test [benefits-policy §6.1].\n\nSources: [benefits-policy §1.1]",
+      "citations": [
+        "benefits-policy §6.1",
+        "benefits-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §6.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §6.1",
+        "benefits-policy §1.1",
+        "benefits-policy §2.3",
+        "leave-policy §1.2",
+        "leave-policy §1.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4508,
+      "cost_usd": 0.000674,
+      "latency_s": 5.15,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that contractors can join the English lessons and mentions the placement test, aligning with the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h4q10",
+      "question": "I accidentally cracked my laptop screen. Do I have to pay for the repair?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "clarification",
+      "reply": "What type of expense is the laptop repair?",
+      "citations": [],
+      "gold_section_ids": [
+        "equipment-policy §2.2"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 2040,
+      "cost_usd": 0.000259,
+      "latency_s": 1.96,
+      "failing_stage": "collector (unnecessary clarification)"
+    },
+    {
+      "id": "h4q11",
+      "question": "Can I buy running shoes with my sport compensation?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "You cannot buy running shoes with your sport compensation, as the policy states that sport compensation covers gym memberships, swimming pools, sport classes, and sport club fees, but not sport equipment purchases like shoes [benefits-policy §3.1].",
+      "citations": [
+        "benefits-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §3.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §3.1",
+        "expense-reimbursement-policy §1.2",
+        "benefits-policy §3.2",
+        "leave-policy §5.3",
+        "benefits-policy §3.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4270,
+      "cost_usd": 0.000636,
+      "latency_s": 5.27,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that running shoes cannot be purchased with sport compensation and provides the correct reason based on the policy.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h4q12",
+      "question": "How much do I get per day on a business trip?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "During business travel, you will receive a per diem of **50 USD per day** for meals, plus accommodation reimbursement of up to **120 USD per night**. Remember that all business trips require prior approval from your team lead before booking any travel arrangements.\n\nSources: [expense-reimbursement-policy §3.2], [expense-reimbursement-policy §3.1]",
+      "citations": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §3.2"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §1.2",
+        "equipment-policy §3.1",
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §3.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4438,
+      "cost_usd": 0.000685,
+      "latency_s": 5.32,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer accurately provides both the per diem amount and the accommodation reimbursement limit, matching the gold answer exactly.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h4u01",
+      "question": "Will the company pay for my home internet?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "equipment-policy §3.1",
+        "remote-work-policy §2.1",
+        "equipment-policy §3.2",
+        "remote-work-policy §2.2",
+        "equipment-policy §1.2"
+      ],
+      "context_hit": null,
+      "ticket_id": 5,
+      "ticket_category": "benefits",
+      "gold_category": "benefits",
+      "tokens": 4836,
+      "cost_usd": 0.000748,
+      "latency_s": 6.12,
+      "failing_stage": null
+    },
+    {
+      "id": "h4u02",
+      "question": "Is there a fuel allowance for driving to the office?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "equipment-policy §3.1",
+        "remote-work-policy §2.1",
+        "equipment-policy §3.2",
+        "expense-reimbursement-policy §4.1",
+        "equipment-policy §1.2"
+      ],
+      "context_hit": null,
+      "ticket_id": 6,
+      "ticket_category": "benefits",
+      "gold_category": "benefits",
+      "tokens": 4062,
+      "cost_usd": 0.00063,
+      "latency_s": 6.34,
+      "failing_stage": null
+    },
+    {
+      "id": "h4u03",
+      "question": "Do we get a year-end bonus?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "internal-requests-policy §3.1",
+        "internal-requests-policy §3.2",
+        "benefits-policy §1.1",
+        "leave-policy §2.1",
+        "benefits-policy §2.3"
+      ],
+      "context_hit": null,
+      "ticket_id": 7,
+      "ticket_category": "compensation",
+      "gold_category": "compensation",
+      "tokens": 4066,
+      "cost_usd": 0.000592,
+      "latency_s": 5.42,
+      "failing_stage": null
+    },
+    {
+      "id": "h4u04",
+      "question": "Can I bring my dog to the Lviv office?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #8 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "equipment-policy §3.1",
+        "equipment-policy §3.2",
+        "remote-work-policy §2.1",
+        "equipment-policy §1.2",
+        "remote-work-policy §2.2"
+      ],
+      "context_hit": null,
+      "ticket_id": 8,
+      "ticket_category": "other",
+      "gold_category": "other",
+      "tokens": 3986,
+      "cost_usd": 0.000588,
+      "latency_s": 5.57,
+      "failing_stage": null
+    },
+    {
+      "id": "h4u05",
+      "question": "Does the company help pay for kindergarten?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #9 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "benefits-policy §5.1",
+        "benefits-policy §5.2",
+        "remote-work-policy §2.1",
+        "benefits-policy §1.1",
+        "remote-work-policy §2.3"
+      ],
+      "context_hit": null,
+      "ticket_id": 9,
+      "ticket_category": "benefits",
+      "gold_category": "benefits",
+      "tokens": 4091,
+      "cost_usd": 0.000607,
+      "latency_s": 5.4,
+      "failing_stage": null
+    },
+    {
+      "id": "h4u06",
+      "question": "My manager keeps shouting at me in front of the team. I can't take it anymore.",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #10 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "code-of-conduct §2.3"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": 10,
+      "ticket_category": "workplace_conduct",
+      "gold_category": "workplace_conduct",
+      "tokens": 1310,
+      "cost_usd": 0.00024,
+      "latency_s": 2.27,
+      "failing_stage": null
+    }
+  ]
+}

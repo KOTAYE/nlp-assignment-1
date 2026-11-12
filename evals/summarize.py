@@ -37,10 +37,10 @@ KEY_METRICS = [  # (results file, metric key, label)
 
 
 def iteration_comparison() -> list[str]:
-    """Key metrics across iterations. Snapshots: evals/results_iteration1, evals/results_iteration2; current = iteration 3.
+    """Key metrics across iterations. Snapshots: evals/results_iteration{1,2,3,4}; current = iteration 5.
     Each holdout was written before the fixes of the iteration it first measures."""
     ev = ROOT / "evals"
-    it1, it2, it3 = ev / "results_iteration1", ev / "results_iteration2", ev / "results_iteration3"
+    it1, it2, it3, it4 = (ev / f"results_iteration{i}" for i in (1, 2, 3, 4))
     if not it1.exists():
         return []
 
@@ -55,17 +55,22 @@ def iteration_comparison() -> list[str]:
         ]
         return table(["metric"] + [c[0] for c in cols], rows)
 
-    test_cols = [(f"iter {i} · test", f, "test") for i, f in ((1, it1), (2, it2), (3, it3), (4, RESULTS))]
+    test_cols = [
+        (f"iter {i} · test", f, "test") for i, f in ((1, it1), (2, it2), (3, it3), (4, it4), (5, RESULTS))
+    ]
     fresh_cols = [
         ("holdout-2 · iter 2 (before)", it2, "holdout2"),
         ("holdout-2 · iter 3 (after)", it3, "holdout2"),
         ("holdout-3 · iter 3 (before)", it3, "holdout3"),
-        ("**holdout-3 · iter 4 (after, final)**", RESULTS, "holdout3"),
+        ("holdout-3 · iter 4 (after)", it4, "holdout3"),
+        ("holdout-4 · iter 4 (before)", it4, "holdout4"),
+        ("**holdout-4 · iter 5 (after, final)**", RESULTS, "holdout4"),
     ]
     return [
         "## Iteration comparison",
         "Iterations: 1 = dev tuning; 2 = error-analysis fixes; 3 = output guard + code date resolution; "
-        "4 = quote-grounded verifier + router v5. Each holdout set was written and committed **before** the fixes of "
+        "4 = quote-grounded verifier + router v5; 5 = citation recovery + table-row quotes in code, "
+        "procedure-vs-incident routing, item-centred queries, single-date leave requests. Each holdout set was written and committed **before** the fixes of "
         "the iteration it evaluates, and measured on the system before and after those fixes.\n",
         "**Test split across iterations** (seen during development, so optimistic from iteration 2 on):\n",
         build(test_cols),
@@ -323,7 +328,7 @@ def main() -> None:
             "",
         ]
 
-    for split in ("dev", "test", "holdout", "holdout2", "holdout3"):
+    for split in ("dev", "test", "holdout", "holdout2", "holdout3", "holdout4"):
         if d := load(f"qa__pipeline__{split}"):
             m = d["metrics"]
             s += [
@@ -345,7 +350,14 @@ def main() -> None:
                 "",
             ]
 
-    for split, k in (("dev", 1), ("test", 3), ("holdout", 3), ("holdout2", 3), ("holdout3", 3)):
+    for split, k in (
+        ("dev", 1),
+        ("test", 3),
+        ("holdout", 3),
+        ("holdout2", 3),
+        ("holdout3", 3),
+        ("holdout4", 3),
+    ):
         if d := load(f"leave_agent__k{k}__{split}"):
             m = d["metrics"]
             s += [

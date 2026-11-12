@@ -5,7 +5,7 @@
   "n": 12,
   "metrics": {
     "key_term_coverage": 1.0,
-    "avg_query_words": 5.2,
+    "avg_query_words": 5.4,
     "retrieval_ablation": {
       "raw_followup": {
         "hit@1": 0.333,
@@ -42,11 +42,11 @@
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "rewriter": "2"
+    "rewriter": "3"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:19:52",
-  "git_commit": "071bb69",
+  "date": "2026-11-12T11:27:09",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "rw02",
@@ -207,7 +207,7 @@
     {
       "id": "rw09",
       "followup": "And if it's more expensive?",
-      "rewrite": "gifts from clients exceeding 50 USD limit",
+      "rewrite": "accepting gifts from clients over 50 USD limit",
       "term_groups_ok": [
         true,
         true
@@ -402,7 +402,7 @@
     {
       "id": "rw17",
       "followup": "Is alcohol covered?",
-      "rewrite": "expense reimbursement alcohol coverage",
+      "rewrite": "expense reimbursement alcohol covered not covered",
       "term_groups_ok": [
         true
       ],
@@ -433,7 +433,7 @@
         "top3": [
           "expense-reimbursement-policy §1.3",
           "expense-reimbursement-policy §1.2",
-          "expense-reimbursement-policy §1.1"
+          "benefits-policy §4.2"
         ]
       }
     },
@@ -479,7 +479,7 @@
     {
       "id": "rw20",
       "followup": "What if I skip the security one?",
-      "rewrite": "onboarding training security requirements consequences",
+      "rewrite": "security training onboarding consequences skipping",
       "term_groups_ok": [
         true,
         true
@@ -511,7 +511,7 @@
         "top3": [
           "onboarding-policy §2.3",
           "internal-requests-policy §4.1",
-          "onboarding-policy §3.1"
+          "onboarding-policy §3.2"
         ]
       }
     }

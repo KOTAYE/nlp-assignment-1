@@ -56,6 +56,54 @@ def extract_duration(fact: str, texts: list[str]) -> str | None:
     return None
 
 
+_VAGUE = re.compile(r"\b(?:something|anything|stuff|this|that|these|those|it)\b", re.I)
+_FRAME = set(
+    [
+        "can",
+        "could",
+        "i",
+        "we",
+        "get",
+        "be",
+        "is",
+        "are",
+        "will",
+        "would",
+        "do",
+        "does",
+        "me",
+        "my",
+        "the",
+        "a",
+        "an",
+        "it",
+        "for",
+        "reimbursed",
+        "reimburse",
+        "expensed",
+        "expense",
+        "money",
+        "back",
+        "covered",
+        "cover",
+        "compensated",
+        "paid",
+        "pay",
+        "company",
+        "refund",
+    ]
+)
+
+
+def names_an_item(question: str) -> bool:
+    """Iteration 5, code fallback: the expense category is unknown only when the question refers to it vaguely
+    ("this", "something I bought") or not at all ("Can I get reimbursed?"). A question that names the item
+    ("Is a taxi to a client meeting reimbursed?") already states it, so no clarifying question is asked
+    (the LLM left the value empty on such questions although its own follow-up question repeated the item)."""
+    content = [w for w in re.findall(r"[a-z']+", question.lower()) if w not in _FRAME]
+    return bool(content) and not _VAGUE.search(question)
+
+
 def collect(question: str, history: list[dict], profile_facts: dict[str, str]) -> Collected:
     convo = "\n".join(f"{m['role']}: {m['content']}" for m in history[-6:]) or "(none)"
     user = f"Conversation so far:\n{convo}\n\nQuestion to answer:\n{question}"
@@ -76,6 +124,8 @@ def collect(question: str, history: list[dict], profile_facts: dict[str, str]) -
             v := extract_duration(f.name, [m["content"] for m in history if m["role"] == "user"] + [question])
         ):
             facts[f.name] = v
+        elif f.name == "expense_category" and names_an_item(question):
+            facts[f.name] = "the item named in the question"
         else:
             missing.append(f.name)
     question_text = out.clarifying_question if missing else None

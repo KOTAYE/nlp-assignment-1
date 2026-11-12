@@ -50,8 +50,8 @@
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:53:55",
-  "git_commit": "b03ab9d",
+  "date": "2026-11-12T12:28:38",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "dataset": "agent_holdout3",

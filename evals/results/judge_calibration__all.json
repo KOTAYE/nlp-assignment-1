@@ -24,8 +24,8 @@
     "judge_correctness": "1"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T01:20:25",
-  "git_commit": "071bb69",
+  "date": "2026-11-12T11:27:44",
+  "git_commit": "6cc57e3",
   "per_row": [
     {
       "id": "cal01",
@@ -167,7 +167,7 @@
       "id": "cal18",
       "expected": "fully_matches",
       "judge": "fully_matches",
-      "reason": "The candidate answer correctly states the 14-calendar-day requirement and implies it's for longer leave, matching the gold answer.",
+      "reason": "The candidate answer correctly states the 14-calendar-day requirement and the condition for leave longer than 3 working days, matching the gold answer.",
       "exact": true,
       "adjacent": true
     },
