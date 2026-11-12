@@ -1648,7 +1648,220 @@ def build_holdout_agent() -> list[dict]:
     return S
 
 
+# ====================================================================================== HOLDOUT-2 (written after
+# iteration 2 and BEFORE the iteration-3 fixes; never used for tuning). Focus: the answer-vs-refer boundary
+# (sections that delegate to HR, topics the policies are silent about, negative answers that ARE stated) and
+# natural date phrasing for the leave agent.
+HOLDOUT2_QA = [
+    (
+        "E007",
+        "Am I eligible for the education budget?",
+        ["benefits-policy §1.1"],
+        "No, the education budget is not provided to contractors.",
+    ),
+    (
+        "E011",
+        "Can I get the home office allowance?",
+        ["equipment-policy §3.2", "equipment-policy §3.1"],
+        "No: you are office-based (Lviv), and the home office allowance is only for fully remote employees.",
+    ),
+    (
+        "E003",
+        "Do I need my team lead's agreement to work from home two days a week?",
+        ["remote-work-policy §1.2"],
+        "Yes, remote days (up to 3 per week) are by agreement with the team lead.",
+    ),
+    (
+        "E003",
+        "What happens to the vacation days above the carry-over limit that I don't use by the end of the year?",
+        ["leave-policy §3.4"],
+        "They expire on 31 December (only up to 5 days can be carried over).",
+    ),
+    (
+        "E003",
+        "Can I take my wedding leave two months after the wedding?",
+        ["leave-policy §4.2"],
+        "Special leave should be taken within 30 days of the event, so two months later is outside the rule.",
+    ),
+    (
+        "E003",
+        "Do I have to tell my team lead when I call in sick?",
+        ["sick-leave-policy §3.1"],
+        "Yes, inform your team lead in the team channel as early as possible on the first day, in addition to registering the sick days.",
+    ),
+    (
+        "E003",
+        "Is alcohol at a client dinner reimbursed?",
+        ["expense-reimbursement-policy §1.3"],
+        "Alcohol is reimbursed only at approved client meals; otherwise not.",
+    ),
+    (
+        "E003",
+        "Who pays if I accidentally break my laptop?",
+        ["equipment-policy §2.2"],
+        "Accidental damage is repaired at the company's cost.",
+    ),
+    (
+        "E016",
+        "When will my probation review happen and who takes part?",
+        ["onboarding-policy §3.2"],
+        "Near the end of probation, with the team lead and HR.",
+    ),
+    (
+        "E003",
+        "If the person I recommended joins as a contractor, do I still get the referral bonus?",
+        ["internal-requests-policy §3.1"],
+        "Yes, after 3 months of cooperation.",
+    ),
+    (
+        "E003",
+        "During which hours do I have to be available for meetings?",
+        ["remote-work-policy §1.3"],
+        "Core hours 11:00–16:00 Kyiv time.",
+    ),
+    (
+        "E003",
+        "Will my manager find out that I see the company psychologist?",
+        ["benefits-policy §5.2"],
+        "No, the company receives no information about who used the sessions.",
+    ),
+]
+HOLDOUT2_REFER = [
+    (
+        "E003",
+        "My wife is pregnant. How long is the parental leave I can take?",
+        ["leave-policy §7.1"],
+        "leave_and_absence",
+    ),
+    (
+        "E003",
+        "I'd like to work from Thailand for two months this winter.",
+        ["remote-work-policy §3.2"],
+        "relocation_and_abroad",
+    ),
+    (
+        "E003",
+        "My mother is in hospital. Can I take paid days off to look after her?",
+        ["sick-leave-policy §3.3"],
+        "leave_and_absence",
+    ),
+    (
+        "E003",
+        "I think I deserve a raise. Who decides on that and when?",
+        ["internal-requests-policy §5.1"],
+        "compensation",
+    ),
+    (
+        "E003",
+        "A colleague keeps sending me inappropriate messages. I want to report it.",
+        ["code-of-conduct §2.3"],
+        "workplace_conduct",
+    ),
+    ("E003", "Does the company pay for my glasses?", [], "benefits"),
+    ("E003", "Is there a company car I can use?", [], "benefits"),
+    ("E003", "Do we get a meal allowance on office days?", [], "benefits"),
+    ("E003", "Do we get a day off on our birthday?", [], "leave_and_absence"),
+    ("E003", "Is there a discount for a kindergarten for employees' kids?", [], "benefits"),
+]
+
+
+def build_holdout2_qa() -> list[dict]:
+    rows = []
+    for i, (emp, q, secs, ans) in enumerate(HOLDOUT2_QA, 1):
+        rows.append(
+            {
+                "id": f"h2q{i:02d}",
+                "employee_id": emp,
+                "question": q,
+                "gold_section_ids": secs,
+                "gold_answer": ans,
+                "gold_outcome": "answer",
+                "gold_category": None,
+                "origin": "manual",
+                "split": "holdout2",
+            }
+        )
+    for i, (emp, q, secs, cat) in enumerate(HOLDOUT2_REFER, 1):
+        rows.append(
+            {
+                "id": f"h2u{i:02d}",
+                "employee_id": emp,
+                "question": q,
+                "gold_section_ids": secs,
+                "gold_answer": None,
+                "gold_outcome": "hr_referral",
+                "gold_category": cat,
+                "origin": "manual",
+                "split": "holdout2",
+            }
+        )
+    return rows
+
+
+def build_holdout2_agent() -> list[dict]:
+    S = []
+
+    def add(emp, turns, label, new):
+        S.append(
+            {
+                "id": f"h2a{len(S) + 1:02d}",
+                "employee_id": emp,
+                "turns": turns,
+                "label": label,
+                "split": "holdout2",
+                "expect": {
+                    "new": new,
+                    "status_changes": {},
+                    "tools_required": ["submit_leave_request"],
+                    "tools_forbidden": [],
+                    "reply_any": [],
+                    "reply_regex": None,
+                },
+            }
+        )
+
+    add(
+        "E026",
+        ["Book annual leave for Friday the 20th."],
+        "submit",
+        [{"type": "annual", "days": wd("2026-11-20", "2026-11-20"), "status": "approved"}],
+    )
+    add(
+        "E018",
+        ["I'll be on vacation the whole week starting Monday 7 December, please book it."],
+        "submit",
+        [{"type": "annual", "days": wd("2026-12-07", "2026-12-11"), "status": "approved"}],
+    )
+    add(
+        "E030",
+        ["I've been sick since Tuesday, please register it until tomorrow."],
+        "submit",
+        [{"type": "sick", "days": wd("2026-11-10", "2026-11-13"), "status": "pending_hr"}],
+    )
+    add(
+        "E023",
+        ["Please book annual leave from the 1st to the 4th of February."],
+        "submit",
+        [{"type": "annual", "days": wd("2027-02-01", "2027-02-04"), "status": "approved"}],
+    )
+    add(
+        "E026",
+        ["Take Thursday and Friday next week off as annual leave."],
+        "submit",
+        [{"type": "annual", "days": wd("2026-11-19", "2026-11-20"), "status": "approved"}],
+    )
+    add(
+        "E019",
+        ["Book annual leave from Monday 21 to Wednesday 23 December."],
+        "submit",
+        [{"type": "annual", "days": wd("2026-12-21", "2026-12-23"), "status": "approved"}],
+    )
+    return S
+
+
 def main() -> None:
+    write("qa_holdout2", build_holdout2_qa(), None)
+    write("agent_holdout2", build_holdout2_agent(), None)
     write("qa", build_qa(), "gold_outcome")
     write("router", build_router(), "gold_intent")
     write("collector", build_collector(), "gold_needs_clarification")
