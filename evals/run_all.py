@@ -14,6 +14,7 @@ from evals.common import ROOT
 def main() -> None:
     split = sys.argv[sys.argv.index("--split") + 1] if "--split" in sys.argv else "test"
     jobs = [
+        ["evals.check_leakage"],
         ["evals.run_rules"],
         ["evals.run_guard", "--split", split],
         ["evals.run_indexer", "--split", "all"],
@@ -30,6 +31,8 @@ def main() -> None:
     ]
     if split == "test":  # unbiased estimate of the final system (holdout-2) + earlier holdout
         jobs += [
+            ["evals.run_qa", "--split", "holdout3", "--variant", "pipeline"],
+            ["evals.run_leave_agent", "--split", "holdout3", "--k", "3"],
             ["evals.run_qa", "--split", "holdout2", "--variant", "pipeline"],
             ["evals.run_leave_agent", "--split", "holdout2", "--k", "3"],
             ["evals.run_qa", "--split", "holdout", "--variant", "pipeline"],

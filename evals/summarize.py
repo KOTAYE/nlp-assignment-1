@@ -39,7 +39,8 @@ KEY_METRICS = [  # (results file, metric key, label)
 def iteration_comparison() -> list[str]:
     """Key metrics across iterations. Snapshots: evals/results_iteration1, evals/results_iteration2; current = iteration 3.
     Each holdout was written before the fixes of the iteration it first measures."""
-    it1, it2 = ROOT / "evals" / "results_iteration1", ROOT / "evals" / "results_iteration2"
+    ev = ROOT / "evals"
+    it1, it2, it3 = ev / "results_iteration1", ev / "results_iteration2", ev / "results_iteration3"
     if not it1.exists():
         return []
 
@@ -47,25 +48,30 @@ def iteration_comparison() -> list[str]:
         p = folder / f"{file}.json"
         return json.loads(p.read_text(encoding="utf-8"))["metrics"].get(key) if p.exists() else None
 
-    cols = [
-        ("iter 1 · test", it1, "test"),
-        ("iter 2 · test", it2, "test"),
-        ("iter 3 · test", RESULTS, "test"),
-        ("iter 2 · holdout", it2, "holdout"),
-        ("iter 3 · holdout", RESULTS, "holdout"),
-        ("iter 2 · holdout-2", it2, "holdout2"),
-        ("**iter 3 · holdout-2**", RESULTS, "holdout2"),
-    ]
-    rows = [
-        [label] + [get(folder, file.format(split=sp), key) for _, folder, sp in cols]
-        for file, key, label in KEY_METRICS
+    def build(cols: list[tuple[str, Path, str]]) -> str:
+        rows = [
+            [label] + [get(folder, file.format(split=sp), key) for _, folder, sp in cols]
+            for file, key, label in KEY_METRICS
+        ]
+        return table(["metric"] + [c[0] for c in cols], rows)
+
+    test_cols = [(f"iter {i} · test", f, "test") for i, f in ((1, it1), (2, it2), (3, it3), (4, RESULTS))]
+    fresh_cols = [
+        ("holdout-2 · iter 2 (before)", it2, "holdout2"),
+        ("holdout-2 · iter 3 (after)", it3, "holdout2"),
+        ("holdout-3 · iter 3 (before)", it3, "holdout3"),
+        ("**holdout-3 · iter 4 (after, final)**", RESULTS, "holdout3"),
     ]
     return [
         "## Iteration comparison",
-        "Iteration 1 = after dev tuning; iteration 2 = after error analysis of iteration 1 (holdout written before it); "
-        "iteration 3 = output guard + code date resolution (holdout-2 written before it). The **last column** is the "
-        "unbiased estimate of the final system; earlier sets were seen during development.\n",
-        table(["metric"] + [c[0] for c in cols], rows),
+        "Iterations: 1 = dev tuning; 2 = error-analysis fixes; 3 = output guard + code date resolution; "
+        "4 = quote-grounded verifier + router v5. Each holdout set was written and committed **before** the fixes of "
+        "the iteration it evaluates, and measured on the system before and after those fixes.\n",
+        "**Test split across iterations** (seen during development, so optimistic from iteration 2 on):\n",
+        build(test_cols),
+        "",
+        "**Fresh holdout sets, before → after the iteration they were written for** (the unbiased evidence):\n",
+        build(fresh_cols),
         "",
     ]
 
@@ -317,7 +323,7 @@ def main() -> None:
             "",
         ]
 
-    for split in ("dev", "test", "holdout", "holdout2"):
+    for split in ("dev", "test", "holdout", "holdout2", "holdout3"):
         if d := load(f"qa__pipeline__{split}"):
             m = d["metrics"]
             s += [
@@ -339,7 +345,7 @@ def main() -> None:
                 "",
             ]
 
-    for split, k in (("dev", 1), ("test", 3), ("holdout", 3), ("holdout2", 3)):
+    for split, k in (("dev", 1), ("test", 3), ("holdout", 3), ("holdout2", 3), ("holdout3", 3)):
         if d := load(f"leave_agent__k{k}__{split}"):
             m = d["metrics"]
             s += [

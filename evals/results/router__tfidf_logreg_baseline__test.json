@@ -91,8 +91,8 @@
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:02:14",
-  "git_commit": "6a2a717",
+  "date": "2026-11-12T10:58:56",
+  "git_commit": "52682fd",
   "per_row": [
     {
       "id": "rt02",

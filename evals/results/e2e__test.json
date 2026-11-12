@@ -4,13 +4,13 @@
   "split": "test",
   "n": 18,
   "metrics": {
-    "scenario_success_rate": 0.889,
+    "scenario_success_rate": 0.944,
     "per_check_pass_rate": {
       "citation": 0.875,
       "db": 1.0,
       "reply": 0.889,
-      "route": 0.889,
-      "ticket": 0.75
+      "route": 0.944,
+      "ticket": 1.0
     },
     "success_by_label": {
       "answer": "4/4",
@@ -19,23 +19,22 @@
       "guard": "1/1",
       "leave": "2/2",
       "leave_multi": "1/1",
-      "referral": "3/4",
+      "referral": "4/4",
       "smalltalk": "2/2"
     },
     "tracer_coverage": 1.0,
-    "avg_cost_usd_per_conversation": 0.00059,
-    "avg_latency_s_per_conversation": 5.47,
+    "avg_cost_usd_per_conversation": 0.00063,
+    "avg_latency_s_per_conversation": 5.61,
     "failures": [
-      "e2e05 clarify_then_answer ['Can I work from abroad?', 'Three weeks in Croatia']: routes=['clarification', 'hr_referral'] checks={'route': False, 'citation': False, 'reply': False} last=\"The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (relocation and abroad). HR replies within 2 worki\"",
-      "e2e25 referral ['Will the company pay for my home internet?']: routes=['answer'] checks={'route': False, 'ticket': False} last='As a full-time employee based in the Lviv office, you are considered an office-based employee. According to the policy, office-based employees are not'"
+      "e2e07 clarify_then_answer ['Can I get money back for something I bought for work?', 'A taxi home at 23:30 after a release']: routes=['clarification', 'hr_referral'] checks={'route': False, 'citation': False, 'reply': False} last=\"The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (compensation). HR replies within 2 working days, \""
     ]
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {},
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:25:13",
-  "git_commit": "6a2a717",
+  "date": "2026-11-12T11:09:18",
+  "git_commit": "52682fd",
   "per_row": [
     {
       "id": "e2e02",
@@ -61,9 +60,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000667,
-      "tokens": 4379,
-      "latency_s": 15.5
+      "cost_usd": 0.000682,
+      "tokens": 4489,
+      "latency_s": 14.11
     },
     {
       "id": "e2e04",
@@ -90,9 +89,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000789,
-      "tokens": 5710,
-      "latency_s": 6.74
+      "cost_usd": 0.000822,
+      "tokens": 5849,
+      "latency_s": 8.46
     },
     {
       "id": "e2e05",
@@ -103,23 +102,25 @@
       ],
       "routes": [
         "clarification",
-        "hr_referral"
+        "answer"
       ],
       "replies": [
         "For how many days do you plan to work from abroad?",
-        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example."
+        "Yes, you can work from abroad for up to 30 calendar days per calendar year. Since you plan to work for three weeks (21 days) in Croatia, you are within the limit. However, you must notify HR at least 10 working days before your departure and confirm that Croatia is not under sanctions and that you have a stable internet connection.\n\nSources: [remote-work-policy §3.1]"
       ],
-      "citations": [],
+      "citations": [
+        "remote-work-policy §3.1"
+      ],
       "checks": {
-        "route": false,
-        "citation": false,
-        "reply": false
+        "route": true,
+        "citation": true,
+        "reply": true
       },
-      "success": false,
+      "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000745,
-      "tokens": 5388,
-      "latency_s": 6.91
+      "cost_usd": 0.000803,
+      "tokens": 5716,
+      "latency_s": 7.57
     },
     {
       "id": "e2e07",
@@ -130,26 +131,23 @@
       ],
       "routes": [
         "clarification",
-        "answer"
+        "hr_referral"
       ],
       "replies": [
         "What did you buy for work?",
-        "Yes, you can get reimbursed for your taxi ride home after working past 22:00. The company reimburses taxi rides up to 400 UAH per ride for office-based employees in such cases [expense-reimbursement-policy §4.1].\n\nSources: [expense-reimbursement-policy §1.1]"
+        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example."
       ],
-      "citations": [
-        "expense-reimbursement-policy §4.1",
-        "expense-reimbursement-policy §1.1"
-      ],
+      "citations": [],
       "checks": {
-        "route": true,
-        "citation": true,
-        "reply": true
+        "route": false,
+        "citation": false,
+        "reply": false
       },
-      "success": true,
+      "success": false,
       "trace_complete": true,
-      "cost_usd": 0.000771,
-      "tokens": 5587,
-      "latency_s": 6.88
+      "cost_usd": 0.000929,
+      "tokens": 6343,
+      "latency_s": 8.43
     },
     {
       "id": "e2e09",
@@ -170,9 +168,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000573,
-      "tokens": 3925,
-      "latency_s": 4.9
+      "cost_usd": 0.000583,
+      "tokens": 3971,
+      "latency_s": 5.02
     },
     {
       "id": "e2e10",
@@ -193,9 +191,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000631,
-      "tokens": 4225,
-      "latency_s": 6.07
+      "cost_usd": 0.00055,
+      "tokens": 4261,
+      "latency_s": 5.31
     },
     {
       "id": "e2e12",
@@ -216,9 +214,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000514,
-      "tokens": 3930,
-      "latency_s": 2.83
+      "cost_usd": 0.000523,
+      "tokens": 3972,
+      "latency_s": 2.87
     },
     {
       "id": "e2e14",
@@ -239,9 +237,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.00038,
-      "tokens": 3785,
-      "latency_s": 2.47
+      "cost_usd": 0.000491,
+      "tokens": 3822,
+      "latency_s": 2.56
     },
     {
       "id": "e2e15",
@@ -265,9 +263,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000973,
-      "tokens": 9783,
-      "latency_s": 6.49
+      "cost_usd": 0.001219,
+      "tokens": 9862,
+      "latency_s": 6.48
     },
     {
       "id": "e2e17",
@@ -287,9 +285,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.00011,
-      "tokens": 676,
-      "latency_s": 0.86
+      "cost_usd": 0.000115,
+      "tokens": 712,
+      "latency_s": 0.8
     },
     {
       "id": "e2e19",
@@ -327,11 +325,10 @@
       ],
       "replies": [
         "As a full-time employee, you can work from home **up to 3 days per week** by agreement with your team lead. Additionally, your team may set one common office day per week.\n\nSources: [remote-work-policy §1.2]",
-        "As a full-time employee based in the Lviv office, you are not eligible for the coworking allowance, as this is only available to fully remote employees. Office-based employees do not qualify for this allowance because they have access to an office space.\n\nSources: [remote-work-policy §2.1], [equipment-policy §3.2]"
+        "As a full-time employee based in the Lviv office, you are not eligible for the coworking allowance, which is only available to fully remote employees. Since you have access to an office, this allowance does not apply to you.\n\nSources: [remote-work-policy §2.1]"
       ],
       "citations": [
-        "remote-work-policy §2.1",
-        "equipment-policy §3.2"
+        "remote-work-policy §2.1"
       ],
       "checks": {
         "route": true,
@@ -340,9 +337,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.001297,
-      "tokens": 8766,
-      "latency_s": 10.6
+      "cost_usd": 0.00126,
+      "tokens": 9000,
+      "latency_s": 10.04
     },
     {
       "id": "e2e22",
@@ -366,9 +363,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000641,
-      "tokens": 4310,
-      "latency_s": 5.54
+      "cost_usd": 0.000586,
+      "tokens": 4431,
+      "latency_s": 5.27
     },
     {
       "id": "e2e24",
@@ -380,7 +377,7 @@
         "answer"
       ],
       "replies": [
-        "According to the Code of Conduct, you may accept gifts from clients worth up to **50 USD**. Since the watch is valued at **120 USD**, you must decline it or report it to HR as it exceeds the limit set for gifts from clients and partners [code-of-conduct §4.1]."
+        "According to the Code of Conduct, team members may accept gifts from clients or partners worth up to **50 USD**. Since the watch is valued at **120 USD**, you must decline the gift or report it to HR as it exceeds the limit set by the policy [code-of-conduct §4.1]."
       ],
       "citations": [
         "code-of-conduct §4.1"
@@ -392,9 +389,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000616,
-      "tokens": 4147,
-      "latency_s": 5.6
+      "cost_usd": 0.000666,
+      "tokens": 4382,
+      "latency_s": 5.21
     },
     {
       "id": "e2e25",
@@ -403,23 +400,21 @@
         "Will the company pay for my home internet?"
       ],
       "routes": [
-        "answer"
+        "hr_referral"
       ],
       "replies": [
-        "As a full-time employee based in the Lviv office, you are considered an office-based employee. According to the policy, office-based employees are not eligible for a home office allowance or any reimbursement for home internet costs, as they have access to an office [equipment-policy §3.2]."
+        "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example."
       ],
-      "citations": [
-        "equipment-policy §3.2"
-      ],
+      "citations": [],
       "checks": {
-        "route": false,
-        "ticket": false
+        "route": true,
+        "ticket": true
       },
-      "success": false,
+      "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000615,
-      "tokens": 4146,
-      "latency_s": 4.94
+      "cost_usd": 0.000751,
+      "tokens": 4840,
+      "latency_s": 6.83
     },
     {
       "id": "e2e27",
@@ -439,9 +434,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000112,
-      "tokens": 681,
-      "latency_s": 0.83
+      "cost_usd": 0.000117,
+      "tokens": 717,
+      "latency_s": 0.92
     },
     {
       "id": "e2e29",
@@ -465,9 +460,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000631,
-      "tokens": 4313,
-      "latency_s": 5.07
+      "cost_usd": 0.00066,
+      "tokens": 4447,
+      "latency_s": 5.35
     },
     {
       "id": "e2e30",
@@ -488,9 +483,9 @@
       },
       "success": true,
       "trace_complete": true,
-      "cost_usd": 0.000638,
-      "tokens": 4130,
-      "latency_s": 6.31
+      "cost_usd": 0.000634,
+      "tokens": 4149,
+      "latency_s": 5.72
     }
   ]
 }

@@ -13,7 +13,7 @@
     "pass@1 averaged over runs": 1.0,
     "avg_steps": 2.0,
     "avg_tokens_per_task": 3198,
-    "avg_cost_usd_per_task": 0.0004,
+    "avg_cost_usd_per_task": 0.00032,
     "stop_reasons": {
       "answered": 4,
       "max_steps": 0
@@ -26,8 +26,8 @@
     "leave_agent": "4"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T10:52:08",
-  "git_commit": "b03ab9d",
+  "date": "2026-11-12T10:57:34",
+  "git_commit": "52682fd",
   "per_row": [
     {
       "id": "h3a01",
@@ -35,7 +35,7 @@
       "turns": [
         "I'm sick today and tomorrow, please register it."
       ],
-      "reply": "Your sick leave request has been approved for today and tomorrow (#15). No certificate is needed as per the sick leave policy.",
+      "reply": "Your sick leave request has been approved for today and tomorrow (#15). You are registered for 2 working days, and no certificate is needed as per the sick leave policy.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -57,8 +57,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3218,
-      "cost_usd": 0.000396
+      "tokens": 3228,
+      "cost_usd": 0.000402
     },
     {
       "id": "h3a02",
@@ -89,7 +89,7 @@
         "answered"
       ],
       "tokens": 3191,
-      "cost_usd": 0.000402
+      "cost_usd": 0.000287
     },
     {
       "id": "h3a03",
@@ -120,7 +120,7 @@
         "answered"
       ],
       "tokens": 3267,
-      "cost_usd": 0.000416
+      "cost_usd": 0.00031
     },
     {
       "id": "h3a04",
@@ -128,7 +128,7 @@
       "turns": [
         "How many vacation days do I have left?"
       ],
-      "reply": "You have 0 vacation days left for 2026. You were entitled to 24 days, but all have been used or reserved.",
+      "reply": "You have 0 vacation days left for 2026. You used all 24 days of your entitlement.",
       "tool_calls": [
         "get_leave_balance"
       ],
@@ -143,8 +143,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3114,
-      "cost_usd": 0.00038
+      "tokens": 3108,
+      "cost_usd": 0.000261
     },
     {
       "id": "h3a01",
@@ -152,7 +152,7 @@
       "turns": [
         "I'm sick today and tomorrow, please register it."
       ],
-      "reply": "Your sick leave request has been approved for today and tomorrow (#15). No certificate is needed as per the sick leave policy.",
+      "reply": "Your sick leave request has been approved for today and tomorrow (#15). You are registered for 2 working days, and no certificate is needed as per the sick leave policy.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -174,8 +174,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3218,
-      "cost_usd": 0.000396
+      "tokens": 3228,
+      "cost_usd": 0.000296
     },
     {
       "id": "h3a02",
@@ -206,7 +206,7 @@
         "answered"
       ],
       "tokens": 3191,
-      "cost_usd": 0.000402
+      "cost_usd": 0.000287
     },
     {
       "id": "h3a03",
@@ -237,7 +237,7 @@
         "answered"
       ],
       "tokens": 3267,
-      "cost_usd": 0.000416
+      "cost_usd": 0.00031
     },
     {
       "id": "h3a04",
@@ -261,7 +261,7 @@
         "answered"
       ],
       "tokens": 3114,
-      "cost_usd": 0.00037
+      "cost_usd": 0.000264
     },
     {
       "id": "h3a01",
@@ -269,7 +269,7 @@
       "turns": [
         "I'm sick today and tomorrow, please register it."
       ],
-      "reply": "Your sick leave request has been approved for today and tomorrow (#15). You are not required to provide a certificate as per the sick leave policy.",
+      "reply": "Your sick leave request has been approved for today and tomorrow (#15). You are registered for 2 working days, and no certificate is needed as per the sick leave policy.",
       "tool_calls": [
         "submit_leave_request"
       ],
@@ -291,8 +291,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3222,
-      "cost_usd": 0.000293
+      "tokens": 3228,
+      "cost_usd": 0.000296
     },
     {
       "id": "h3a02",
@@ -362,7 +362,7 @@
       "turns": [
         "How many vacation days do I have left?"
       ],
-      "reply": "You have 0 vacation days left for 2026. You were entitled to 24 days, but all have been used or reserved.",
+      "reply": "You have 0 vacation days left for 2026. You used all 24 days of your entitlement this year.",
       "tool_calls": [
         "get_leave_balance"
       ],
@@ -377,8 +377,8 @@
       "stop_reasons": [
         "answered"
       ],
-      "tokens": 3114,
-      "cost_usd": 0.000264
+      "tokens": 3110,
+      "cost_usd": 0.000262
     }
   ]
 }

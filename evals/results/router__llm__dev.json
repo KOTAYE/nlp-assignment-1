@@ -4,14 +4,14 @@
   "split": "dev",
   "n": 32,
   "metrics": {
-    "accuracy": 0.938,
-    "macro_f1": 0.937,
-    "mcc": 0.921,
+    "accuracy": 0.875,
+    "macro_f1": 0.884,
+    "mcc": 0.856,
     "per_class": {
       "policy_question": {
-        "precision": 1.0,
-        "recall": 0.889,
-        "f1": 0.941,
+        "precision": 0.692,
+        "recall": 1.0,
+        "f1": 0.818,
         "support": 9
       },
       "leave_action": {
@@ -21,9 +21,9 @@
         "support": 8
       },
       "hr_referral": {
-        "precision": 0.857,
-        "recall": 0.857,
-        "f1": 0.857,
+        "precision": 1.0,
+        "recall": 0.429,
+        "f1": 0.6,
         "support": 7
       },
       "smalltalk": {
@@ -33,9 +33,9 @@
         "support": 4
       },
       "unclear": {
-        "precision": 0.8,
+        "precision": 1.0,
         "recall": 1.0,
-        "f1": 0.889,
+        "f1": 1.0,
         "support": 4
       }
     },
@@ -49,25 +49,25 @@
       ],
       "rows_gold_cols_pred": [
         [
-          8,
+          9,
           0,
-          1,
-          0,
-          0
-        ],
-        [
-          0,
-          8,
           0,
           0,
           0
         ],
         [
           0,
+          8,
           0,
-          6,
           0,
-          1
+          0
+        ],
+        [
+          4,
+          0,
+          3,
+          0,
+          0
         ],
         [
           0,
@@ -85,20 +85,22 @@
         ]
       ]
     },
-    "hr_referral_recall": 0.857,
+    "hr_referral_recall": 0.429,
     "errors": [
-      "\"Who should I contact if I'm unsure about accepting a gift at Lumora Tech?\": policy_question -> hr_referral",
-      "\"Can the panel's recommendations be challenged or appealed?\": hr_referral -> unclear"
+      "'What is the salary of a senior engineer?': hr_referral -> policy_question",
+      "'Are there going to be layoffs?': hr_referral -> policy_question",
+      "'Does the company offer stock options?': hr_referral -> policy_question",
+      "\"Can the panel's recommendations be challenged or appealed?\": hr_referral -> policy_question"
     ]
   },
   "model": "openai/gpt-4o-mini",
   "judge_model": "google/gemini-2.5-flash",
   "prompt_versions": {
-    "router": "2"
+    "router": "5"
   },
   "business_date": "2026-11-12",
-  "date": "2026-11-12T00:46:47",
-  "git_commit": "d81e0ca",
+  "date": "2026-11-12T10:58:09",
+  "git_commit": "52682fd",
   "per_row": [
     {
       "id": "rt01",
@@ -106,7 +108,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the rule regarding vacation days allocated per year."
+      "reason": "The message asks about the rules regarding vacation days for employees."
     },
     {
       "id": "rt03",
@@ -114,7 +116,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about a company policy regarding gym coverage."
+      "reason": "The message asks about coverage of a benefit provided by the company."
     },
     {
       "id": "rt06",
@@ -122,7 +124,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question pertains to HR policies regarding health insurance eligibility for part-time employees."
+      "reason": "The message asks about the rules regarding health insurance eligibility for part-time employees."
     },
     {
       "id": "rt08",
@@ -138,7 +140,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the procedure for requesting a document, which falls under HR policies."
+      "reason": "The message asks about the process for requesting an employment certificate, which is a question about company policy."
     },
     {
       "id": "rt13",
@@ -146,7 +148,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about the rules regarding remote work from abroad."
+      "reason": "The message asks whether it is allowed to work from abroad, which is a policy-related question."
     },
     {
       "id": "rt16",
@@ -154,15 +156,15 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question pertains to HR procedures regarding working on a company holiday."
+      "reason": "The message asks whether approval is needed for a specific action related to company policy."
     },
     {
       "id": "rt18",
       "message": "Who should I contact if I'm unsure about accepting a gift at Lumora Tech?",
       "gold": "policy_question",
-      "pred": "hr_referral",
+      "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "This question pertains to a situation that should be handled by HR regarding company policies on gifts."
+      "reason": "The message asks about the rules regarding accepting gifts, which falls under company policy."
     },
     {
       "id": "rt21",
@@ -170,7 +172,7 @@
       "gold": "policy_question",
       "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message asks about company policy regarding remote work."
+      "reason": "The message asks about the company's rules regarding remote work."
     },
     {
       "id": "rt23",
@@ -178,7 +180,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message asks about the employee's personal vacation balance."
+      "reason": "The message asks about the employee's own balance of vacation days."
     },
     {
       "id": "rt25",
@@ -186,7 +188,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 1.0,
-      "reason": "The employee is reporting sickness and requesting to register it as leave."
+      "reason": "The message is an explicit request to register sick leave."
     },
     {
       "id": "rt28",
@@ -194,7 +196,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The employee is inquiring about the status of their own leave request."
+      "reason": "The message is a request to check the status of the employee's own leave request."
     },
     {
       "id": "rt30",
@@ -202,7 +204,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The employee is requesting to take unpaid leave for specific dates."
+      "reason": "The message is an explicit request to take unpaid leave on specific dates."
     },
     {
       "id": "rt33",
@@ -210,15 +212,15 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The message asks about the employee's own sick leave usage, which is a personal leave inquiry."
+      "reason": "The message asks about the employee's own sick leave usage, which is a request to check their own balance."
     },
     {
       "id": "rt35",
       "message": "Show pending leave requests",
       "gold": "leave_action",
       "pred": "leave_action",
-      "confidence": 1.0,
-      "reason": "The employee wants to see their own leave data regarding pending requests."
+      "confidence": 0.9,
+      "reason": "The message is a request to check the status of pending leave requests."
     },
     {
       "id": "rt38",
@@ -226,7 +228,7 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 1.0,
-      "reason": "The user is confirming an action related to a leave request."
+      "reason": "The user is confirming an action to approve a leave request."
     },
     {
       "id": "rt40",
@@ -234,15 +236,15 @@
       "gold": "leave_action",
       "pred": "leave_action",
       "confidence": 0.9,
-      "reason": "The employee is indicating they cannot work due to illness, which implies a need to take sick leave."
+      "reason": "The message indicates a request to take sick leave due to illness."
     },
     {
       "id": "rt43",
       "message": "What is the salary of a senior engineer?",
       "gold": "hr_referral",
-      "pred": "hr_referral",
+      "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question is about salary, which is handled by HR."
+      "reason": "The message asks about salary ranges, which falls under company policy questions."
     },
     {
       "id": "rt45",
@@ -250,15 +252,15 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message asks about another employee's salary, which is a topic for HR."
+      "reason": "The question is about another person's salary, which is a personal sensitive case."
     },
     {
       "id": "rt48",
       "message": "Are there going to be layoffs?",
       "gold": "hr_referral",
-      "pred": "hr_referral",
+      "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The message inquires about layoffs, which is a topic that must be handled by a person."
+      "reason": "The message asks about layoffs in general, which is a policy-related question."
     },
     {
       "id": "rt50",
@@ -266,23 +268,23 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "The message is about a promotion, which is outside company policy and should be handled by HR."
+      "reason": "The message indicates a personal sensitive case regarding the employee's promotion."
     },
     {
       "id": "rt53",
       "message": "Does the company offer stock options?",
       "gold": "hr_referral",
-      "pred": "hr_referral",
+      "pred": "policy_question",
       "confidence": 0.9,
-      "reason": "The question is about stock options, which is outside company policy."
+      "reason": "The message asks about company policy regarding stock options."
     },
     {
       "id": "rt55",
       "message": "Can the panel's recommendations be challenged or appealed?",
       "gold": "hr_referral",
-      "pred": "unclear",
-      "confidence": 0.5,
-      "reason": "The message is too vague and does not specify the context related to HR."
+      "pred": "policy_question",
+      "confidence": 0.9,
+      "reason": "The message asks about the rules regarding challenging or appealing panel recommendations."
     },
     {
       "id": "rt58",
@@ -290,7 +292,7 @@
       "gold": "hr_referral",
       "pred": "hr_referral",
       "confidence": 0.9,
-      "reason": "Negotiating contract terms is a matter that must be handled by HR."
+      "reason": "The message indicates a personal sensitive case regarding contract negotiation."
     },
     {
       "id": "rt59",
@@ -330,15 +332,15 @@
       "gold": "unclear",
       "pred": "unclear",
       "confidence": 0.5,
-      "reason": "The message is too vague to determine a specific action or question."
+      "reason": "The message is too vague to determine a specific intent."
     },
     {
       "id": "rt71",
       "message": "asdfgh",
       "gold": "unclear",
       "pred": "unclear",
-      "confidence": 0.1,
-      "reason": "The message is too vague and does not provide any clear intent."
+      "confidence": 0.5,
+      "reason": "The message is too vague and does not provide clear information or a request."
     },
     {
       "id": "rt74",
@@ -354,7 +356,7 @@
       "gold": "unclear",
       "pred": "unclear",
       "confidence": 0.5,
-      "reason": "The message is too vague and does not provide enough context."
+      "reason": "The message is too vague and does not provide enough information to classify."
     }
   ]
 }
