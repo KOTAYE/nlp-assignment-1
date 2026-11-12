@@ -1,0 +1,782 @@
+{
+  "component": "qa",
+  "variant": "pipeline",
+  "split": "holdout3",
+  "n": 24,
+  "metrics": {
+    "answer_rate (answerable questions answered)": 0.929,
+    "correctness_pass_rate (fully/mostly right, of answerable)": 0.929,
+    "correctness_mean_score (answered)": 1.0,
+    "contradiction_rate (answered)": 0.0,
+    "faithfulness_mean (answered)": 0.936,
+    "citation_hit_rate (answered)": 1.0,
+    "answers_with_citation": 1.0,
+    "context_recall@5 (gold section in evidence)": 0.929,
+    "referral_precision": 1.0,
+    "referral_recall": 0.7,
+    "referral_f1": 0.824,
+    "referral_confusion": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 3,
+      "tn": 14
+    },
+    "ticket_category_accuracy": 0.714,
+    "avg_tokens_per_question": 3889,
+    "avg_cost_usd_per_question": 0.00059,
+    "avg_latency_s": 5.73,
+    "failing_stages": {
+      "router/answerer (answered instead of referring)": 3,
+      "router -> leave_action": 1
+    },
+    "errors": [
+      "h3q05 'Can I cancel my approved vacation before it starts?': route=leave_action verdict=None stage=router -> leave_action",
+      "h3u01 'Does the company pay for contact lenses?': route=answer verdict=None stage=router/answerer (answered instead of referring)",
+      "h3u04 'Will the company cover my mobile phone bill?': route=answer verdict=None stage=router/answerer (answered instead of referring)",
+      "h3u08 'How does paternity leave work here?': route=answer verdict=None stage=router/answerer (answered instead of referring)"
+    ]
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "router": "4",
+    "collector": "7",
+    "rewriter": "2",
+    "answerer": "3",
+    "referral": "2",
+    "judge_correctness": "1",
+    "judge_faithfulness": "1"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T10:51:43",
+  "git_commit": "b03ab9d",
+  "per_row": [
+    {
+      "id": "h3q01",
+      "question": "Will HR tell my team lead if I use the ethics hotline?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, HR will handle reports made through the ethics hotline confidentially. This means that your team lead will not be informed about your report, as retaliation against anyone who reports in good faith is forbidden according to the Code of Conduct [code-of-conduct §2.2].",
+      "citations": [
+        "code-of-conduct §2.2"
+      ],
+      "gold_section_ids": [
+        "code-of-conduct §2.2"
+      ],
+      "evidence_ids": [
+        "code-of-conduct §2.2",
+        "onboarding-policy §3.2",
+        "code-of-conduct §3.1",
+        "sick-leave-policy §3.1",
+        "benefits-policy §5.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4185,
+      "cost_usd": 0.000709,
+      "latency_s": 18.99,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that HR will not inform the team lead and provides the correct reasons for confidentiality and protection against retaliation.",
+      "faithfulness": 0.6666666666666666,
+      "unsupported_claims": [
+        "your team lead will not be informed about your report"
+      ],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q02",
+      "question": "Can the company see what I discussed with the psychologist?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "No, the company cannot see what you discussed with the psychologist. According to the benefits policy, the company does not receive any information about who used the sessions or what was discussed during those sessions [benefits-policy §5.2].",
+      "citations": [
+        "benefits-policy §5.2"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §5.2"
+      ],
+      "evidence_ids": [
+        "benefits-policy §5.2",
+        "benefits-policy §5.1",
+        "code-of-conduct §5.1",
+        "code-of-conduct §2.2",
+        "internal-requests-policy §4.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4185,
+      "cost_usd": 0.000618,
+      "latency_s": 5.27,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, stating that the company cannot see what was discussed and receives no information about who used the sessions or what was discussed.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q03",
+      "question": "Can I use a sick day for my mental health?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you can use a sick day for your mental health. Lumora Tech treats mental health like physical health, allowing employees to take sick days under the same rules if they are not well enough to work. You can take up to 3 consecutive working days of sick leave without a medical certificate, and you need to register these days through the HR assistant ideally on the first day of illness and no later than 7 calendar days after the first day of illness [sick-leave-policy §3.4][sick-leave-policy §2.2].",
+      "citations": [
+        "sick-leave-policy §3.4",
+        "sick-leave-policy §2.2"
+      ],
+      "gold_section_ids": [
+        "sick-leave-policy §3.4"
+      ],
+      "evidence_ids": [
+        "sick-leave-policy §3.4",
+        "sick-leave-policy §2.2",
+        "sick-leave-policy §2.3",
+        "sick-leave-policy §2.4",
+        "sick-leave-policy §2.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4520,
+      "cost_usd": 0.000705,
+      "latency_s": 6.24,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer and provides additional, correct details about sick leave policy.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q04",
+      "question": "Can I split my annual leave into several parts?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you can split your annual leave into several parts. However, at least one part of your annual leave in a calendar year should be no shorter than 5 consecutive working days to ensure proper rest. This is a recommendation, not a condition for approval.\n\nSources: [leave-policy §2.3]",
+      "citations": [
+        "leave-policy §2.3"
+      ],
+      "gold_section_ids": [
+        "leave-policy §2.3"
+      ],
+      "evidence_ids": [
+        "leave-policy §2.3",
+        "leave-policy §2.2",
+        "leave-policy §3.3",
+        "leave-policy §3.1",
+        "leave-policy §2.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4555,
+      "cost_usd": 0.000671,
+      "latency_s": 5.7,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the main fact and the important nuance that the 5-day consecutive leave is a recommendation.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q05",
+      "question": "Can I cancel my approved vacation before it starts?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "leave_action",
+      "reply": "Yes, you can cancel your approved vacation as long as it has not started yet. Would you like me to check your current leave requests to find the one you want to cancel?",
+      "citations": [],
+      "gold_section_ids": [
+        "leave-policy §3.5"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 2212,
+      "cost_usd": 0.000362,
+      "latency_s": 2.3,
+      "failing_stage": "router -> leave_action"
+    },
+    {
+      "id": "h3q06",
+      "question": "Can I work on a company holiday and take another day off instead?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you can work on a company holiday with prior manager approval, and you will be compensated with another day off within 30 days of working that holiday. Make sure to get the necessary approval from your manager before doing so.\n\nSources: [leave-policy §6.2]",
+      "citations": [
+        "leave-policy §6.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §6.2"
+      ],
+      "evidence_ids": [
+        "leave-policy §6.2",
+        "leave-policy §6.1",
+        "leave-policy §2.1",
+        "equipment-policy §2.3",
+        "leave-policy §2.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4502,
+      "cost_usd": 0.000676,
+      "latency_s": 5.13,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer, including the condition of prior manager approval and the 30-day timeframe for taking the alternative day off.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q07",
+      "question": "Can I use the psychologist sessions?",
+      "employee_id": "E007",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "As a contractor, you do not have access to psychologist sessions. Instead, you can utilize the 24/7 support hotline provided by the company for psychological support. This is outlined in the benefits policy, which specifies that contractors are not eligible for the sessions but can access the hotline instead [benefits-policy §5.1].\n\nSources: [benefits-policy §1.1]",
+      "citations": [
+        "benefits-policy §5.1",
+        "benefits-policy §1.1"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §5.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §5.1",
+        "benefits-policy §5.2",
+        "benefits-policy §1.1",
+        "sick-leave-policy §3.4",
+        "remote-work-policy §2.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4395,
+      "cost_usd": 0.000663,
+      "latency_s": 5.64,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that contractors do not have access to psychologist sessions and instead can use the 24/7 support hotline, which fully matches the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q08",
+      "question": "Is a taxi to a client meeting reimbursed?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, taxi rides to client meetings are reimbursed in full according to the policy. This applies to your situation as a full-time employee who has passed probation.\n\nSources: [expense-reimbursement-policy §4.2], [expense-reimbursement-policy §1.2]",
+      "citations": [
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §1.2"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §4.2"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §4.2",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §4.1",
+        "expense-reimbursement-policy §5.1",
+        "expense-reimbursement-policy §1.3"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4081,
+      "cost_usd": 0.000603,
+      "latency_s": 5.51,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that taxi rides to client meetings are reimbursed in full.",
+      "faithfulness": 0.5,
+      "unsupported_claims": [
+        "This applies to your situation as a full-time employee who has passed probation."
+      ],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q09",
+      "question": "Can I install software I downloaded from a torrent on my work laptop?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "No, you cannot install software downloaded from a torrent on your work laptop. Installing pirated software is explicitly forbidden according to the equipment policy [equipment-policy §4.1].",
+      "citations": [
+        "equipment-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "equipment-policy §4.1"
+      ],
+      "evidence_ids": [
+        "equipment-policy §4.1",
+        "equipment-policy §1.1",
+        "remote-work-policy §4.1",
+        "remote-work-policy §1.3",
+        "equipment-policy §1.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4120,
+      "cost_usd": 0.0006,
+      "latency_s": 5.08,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that installing pirated software is forbidden and that software from torrents cannot be installed on work laptops.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q10",
+      "question": "Can I work from a cafe on public Wi-Fi?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you can work from a cafe on public Wi-Fi, but you must use a company-provided device and ensure that the company VPN is turned on while connected to the public network to maintain security. This is outlined in the Remote Work Policy, section 4.1.\n\nSources: [remote-work-policy §4.1]",
+      "citations": [
+        "remote-work-policy §4.1"
+      ],
+      "gold_section_ids": [
+        "remote-work-policy §4.1"
+      ],
+      "evidence_ids": [
+        "remote-work-policy §4.1",
+        "remote-work-policy §2.1",
+        "equipment-policy §3.1",
+        "equipment-policy §3.2",
+        "remote-work-policy §2.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4141,
+      "cost_usd": 0.000617,
+      "latency_s": 5.39,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that working from a cafe on public Wi-Fi is allowed only with the company VPN turned on.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q11",
+      "question": "Do I need approval before a business trip?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, you need prior approval from your team lead for all business trips, as stated in the Expense Reimbursement Policy [expense-reimbursement-policy §3.1].",
+      "citations": [
+        "expense-reimbursement-policy §3.1"
+      ],
+      "gold_section_ids": [
+        "expense-reimbursement-policy §3.1"
+      ],
+      "evidence_ids": [
+        "expense-reimbursement-policy §3.1",
+        "benefits-policy §4.2",
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §4.2",
+        "code-of-conduct §1.2"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4110,
+      "cost_usd": 0.000598,
+      "latency_s": 5.01,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer fully matches the gold answer by stating that prior approval from the team lead is required for all business trips.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q12",
+      "question": "By when do I have to complete the Code of Conduct training?",
+      "employee_id": "E016",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "You need to complete the Code of Conduct training within **30 calendar days** of your start date, which means by **November 14, 2026**.\n\nSources: [onboarding-policy §2.3]",
+      "citations": [
+        "onboarding-policy §2.3"
+      ],
+      "gold_section_ids": [
+        "onboarding-policy §2.3"
+      ],
+      "evidence_ids": [
+        "onboarding-policy §2.3",
+        "code-of-conduct §1.2",
+        "code-of-conduct §2.3",
+        "code-of-conduct §4.1",
+        "code-of-conduct §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4209,
+      "cost_usd": 0.000626,
+      "latency_s": 5.51,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states the 30-calendar-day deadline and provides a correct example date.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q13",
+      "question": "Can I share customer data with a friend who is helping me with a task?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "No, you cannot share customer data with a friend. According to the Code of Conduct, customer data must not be shared outside the company, which includes sharing it with friends or anyone not authorized within the organization [code-of-conduct §5.1].",
+      "citations": [
+        "code-of-conduct §5.1"
+      ],
+      "gold_section_ids": [
+        "code-of-conduct §5.1"
+      ],
+      "evidence_ids": [
+        "code-of-conduct §5.1",
+        "benefits-policy §5.2",
+        "equipment-policy §4.1",
+        "code-of-conduct §3.1",
+        "internal-requests-policy §2.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4143,
+      "cost_usd": 0.000609,
+      "latency_s": 5.5,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate correctly states that customer data cannot be shared with a friend and reinforces the reason that it must not be shared outside the company.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3q14",
+      "question": "Does the company pay for my gym membership?",
+      "employee_id": "E003",
+      "gold_outcome": "answer",
+      "route": "answer",
+      "reply": "Yes, the company covers gym memberships as part of the sport compensation benefits. This includes gym memberships, swimming pools, sport classes, and sport club fees, but does not cover sport equipment purchases. You can submit your gym membership for reimbursement under the sport compensation policy.\n\nSources: [benefits-policy §3.1], [expense-reimbursement-policy §1.2]",
+      "citations": [
+        "benefits-policy §3.1",
+        "expense-reimbursement-policy §1.2"
+      ],
+      "gold_section_ids": [
+        "benefits-policy §1.1",
+        "benefits-policy §3.1"
+      ],
+      "evidence_ids": [
+        "benefits-policy §3.1",
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §3.2",
+        "expense-reimbursement-policy §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": null,
+      "tokens": 4154,
+      "cost_usd": 0.000614,
+      "latency_s": 5.89,
+      "verdict": "fully_matches",
+      "verdict_reason": "The candidate answer correctly states that gym memberships are covered and provides additional accurate details about what the sport compensation includes and excludes, without contradicting the gold answer.",
+      "faithfulness": 1.0,
+      "unsupported_claims": [],
+      "citation_hit": true,
+      "failing_stage": null
+    },
+    {
+      "id": "h3u01",
+      "question": "Does the company pay for contact lenses?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "answer",
+      "reply": "The company does not reimburse expenses for contact lenses, as they are not listed among the reimbursable expenses in the Expense Reimbursement Policy. Reimbursable expenses include business travel, client meals, and education expenses, but personal health items like contact lenses are not covered [expense-reimbursement-policy §1.2].\n\nSources: [expense-reimbursement-policy §1.3]",
+      "citations": [
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.3"
+      ],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "expense-reimbursement-policy §1.2",
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §1.1",
+        "expense-reimbursement-policy §5.1"
+      ],
+      "context_hit": null,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": "benefits",
+      "tokens": 4191,
+      "cost_usd": 0.000627,
+      "latency_s": 6.14,
+      "failing_stage": "router/answerer (answered instead of referring)"
+    },
+    {
+      "id": "h3u02",
+      "question": "Is there a free lunch in the Kyiv office?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #1 (other). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "benefits-policy §3.3",
+        "remote-work-policy §2.3",
+        "remote-work-policy §1.3",
+        "remote-work-policy §1.1",
+        "benefits-policy §6.1"
+      ],
+      "context_hit": null,
+      "ticket_id": 1,
+      "ticket_category": "other",
+      "gold_category": "benefits",
+      "tokens": 3927,
+      "cost_usd": 0.000573,
+      "latency_s": 5.03,
+      "failing_stage": null
+    },
+    {
+      "id": "h3u03",
+      "question": "Can I get an allowance for cycling to work?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #2 (benefits). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "expense-reimbursement-policy §1.2",
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §4.1",
+        "expense-reimbursement-policy §1.1",
+        "expense-reimbursement-policy §4.2"
+      ],
+      "context_hit": null,
+      "ticket_id": 2,
+      "ticket_category": "benefits",
+      "gold_category": "benefits",
+      "tokens": 3991,
+      "cost_usd": 0.000606,
+      "latency_s": 5.48,
+      "failing_stage": null
+    },
+    {
+      "id": "h3u04",
+      "question": "Will the company cover my mobile phone bill?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "answer",
+      "reply": "The company does not cover mobile phone bills as they are not listed as reimbursable expenses in the Expense Reimbursement Policy. Reimbursable expenses include business travel, client meals, and coworking allowances, but not personal expenses like mobile phone bills [expense-reimbursement-policy §1.2].\n\nSources: [expense-reimbursement-policy §1.3]",
+      "citations": [
+        "expense-reimbursement-policy §1.2",
+        "expense-reimbursement-policy §1.3"
+      ],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "expense-reimbursement-policy §1.2",
+        "remote-work-policy §2.1",
+        "expense-reimbursement-policy §1.3",
+        "expense-reimbursement-policy §4.1",
+        "expense-reimbursement-policy §4.2"
+      ],
+      "context_hit": null,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": "benefits",
+      "tokens": 4152,
+      "cost_usd": 0.000619,
+      "latency_s": 5.73,
+      "failing_stage": "router/answerer (answered instead of referring)"
+    },
+    {
+      "id": "h3u05",
+      "question": "Do we get a wellness day off every quarter?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #3 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [
+        "leave-policy §6.1",
+        "leave-policy §6.2",
+        "sick-leave-policy §2.2",
+        "leave-policy §2.2",
+        "equipment-policy §3.1"
+      ],
+      "context_hit": null,
+      "ticket_id": 3,
+      "ticket_category": "leave_and_absence",
+      "gold_category": "leave_and_absence",
+      "tokens": 4140,
+      "cost_usd": 0.000608,
+      "latency_s": 5.32,
+      "failing_stage": null
+    },
+    {
+      "id": "h3u06",
+      "question": "My father needs care after surgery. Can I take paid leave to look after him?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #4 (leave and absence). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "sick-leave-policy §3.3"
+      ],
+      "evidence_ids": [
+        "leave-policy §4.1",
+        "sick-leave-policy §3.3",
+        "leave-policy §2.1",
+        "sick-leave-policy §2.1",
+        "leave-policy §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": 4,
+      "ticket_category": "leave_and_absence",
+      "gold_category": "leave_and_absence",
+      "tokens": 4113,
+      "cost_usd": 0.00064,
+      "latency_s": 6.0,
+      "failing_stage": null
+    },
+    {
+      "id": "h3u07",
+      "question": "I want to work remotely from Portugal for five months.",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #5 (relocation and abroad). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "remote-work-policy §3.2"
+      ],
+      "evidence_ids": [
+        "remote-work-policy §3.1",
+        "remote-work-policy §3.2",
+        "leave-policy §2.2",
+        "leave-policy §2.3",
+        "leave-policy §5.1"
+      ],
+      "context_hit": true,
+      "ticket_id": 5,
+      "ticket_category": "relocation_and_abroad",
+      "gold_category": "relocation_and_abroad",
+      "tokens": 4132,
+      "cost_usd": 0.000646,
+      "latency_s": 6.2,
+      "failing_stage": null
+    },
+    {
+      "id": "h3u08",
+      "question": "How does paternity leave work here?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "answer",
+      "reply": "At Lumora Tech, you are entitled to **3 working days** of paid special leave for the birth of your child if you are the parent who is not taking maternity leave. This special leave is not deducted from your annual leave balance. You need to request this leave through the HR assistant, and it should be taken within **30 days** of the event. No notice period applies for this request, but it is advisable to submit it as soon as possible to ensure approval.\n\nSources: [leave-policy §4.1], [leave-policy §4.2]",
+      "citations": [
+        "leave-policy §4.1",
+        "leave-policy §4.2"
+      ],
+      "gold_section_ids": [
+        "leave-policy §7.1"
+      ],
+      "evidence_ids": [
+        "leave-policy §2.1",
+        "leave-policy §4.2",
+        "leave-policy §3.2",
+        "leave-policy §4.1",
+        "leave-policy §3.3"
+      ],
+      "context_hit": false,
+      "ticket_id": null,
+      "ticket_category": null,
+      "gold_category": "leave_and_absence",
+      "tokens": 4677,
+      "cost_usd": 0.000716,
+      "latency_s": 6.34,
+      "failing_stage": "router/answerer (answered instead of referring)"
+    },
+    {
+      "id": "h3u09",
+      "question": "My team lead makes sexist jokes in meetings and I want to complain.",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #6 (workplace conduct). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [
+        "code-of-conduct §2.3"
+      ],
+      "evidence_ids": [],
+      "context_hit": false,
+      "ticket_id": 6,
+      "ticket_category": "workplace_conduct",
+      "gold_category": "workplace_conduct",
+      "tokens": 1254,
+      "cost_usd": 0.000226,
+      "latency_s": 2.01,
+      "failing_stage": null
+    },
+    {
+      "id": "h3u10",
+      "question": "How much does my colleague Andrii earn?",
+      "employee_id": "E003",
+      "gold_outcome": "hr_referral",
+      "route": "hr_referral",
+      "reply": "The company policies don't fully cover this, so I've passed your question to the HR team: ticket #7 (compensation). HR replies within 2 working days, or you can write to hr@lumora.example.",
+      "citations": [],
+      "gold_section_ids": [],
+      "evidence_ids": [],
+      "context_hit": null,
+      "ticket_id": 7,
+      "ticket_category": "compensation",
+      "gold_category": "documents_and_data",
+      "tokens": 1247,
+      "cost_usd": 0.000226,
+      "latency_s": 2.22,
+      "failing_stage": null
+    }
+  ]
+}

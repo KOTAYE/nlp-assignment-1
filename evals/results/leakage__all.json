@@ -1,0 +1,545 @@
+{
+  "component": "leakage",
+  "variant": null,
+  "split": "all",
+  "n": 43,
+  "metrics": {
+    "overlapping_items": 43,
+    "exact_items_copied_into_prompts": [
+      "agent_holdout3:h3a04 (holdout3) -> router",
+      "collector:co01 (dev) -> collector",
+      "collector:co01 (dev) -> rewriter",
+      "collector:co08 (test) -> collector",
+      "collector:co15 (test) -> collector",
+      "collector:co18 (dev) -> collector",
+      "collector:co21 (dev) -> collector",
+      "collector:co21 (dev) -> rewriter",
+      "e2e:e2e03 (dev) -> collector",
+      "e2e:e2e04 (test) -> collector",
+      "e2e:e2e04 (test) -> rewriter",
+      "e2e:e2e14 (test) -> router",
+      "e2e:e2e21 (dev) -> collector",
+      "guard:gu19 (dev) -> router",
+      "leave_agent:ag11 (dev) -> router",
+      "qa:qa19 (test) -> collector",
+      "qa:qa41 (dev) -> collector",
+      "rewriter:rw06 (dev) -> rewriter",
+      "router:rt23 (dev) -> router",
+      "verifier:ve05 (test) -> collector"
+    ],
+    "by_dataset_split": {
+      "agent_holdout3:holdout3": 1,
+      "collector:dev": 9,
+      "collector:test": 4,
+      "e2e:dev": 2,
+      "e2e:test": 3,
+      "guard:dev": 1,
+      "judge_calibration:None": 3,
+      "leave_agent:test": 1,
+      "leave_agent:dev": 1,
+      "qa:test": 4,
+      "qa:dev": 5,
+      "qa_holdout:holdout": 1,
+      "rewriter:dev": 1,
+      "router:dev": 2,
+      "router:test": 2,
+      "verifier:test": 3
+    }
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {},
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T10:53:55",
+  "git_commit": "b03ab9d",
+  "per_row": [
+    {
+      "dataset": "agent_holdout3",
+      "id": "h3a04",
+      "split": "holdout3",
+      "prompt": "router",
+      "item": "How many vacation days do I have left?",
+      "shared": [
+        "how many vacation days do i",
+        "many vacation days do i have"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "collector",
+      "id": "co01",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "collector",
+      "id": "co01",
+      "split": "dev",
+      "prompt": "rewriter",
+      "item": "Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "collector",
+      "id": "co02",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "I've been sick for 2 days, do I need a medical certificate?",
+      "shared": [
+        "do i need a medical certificate"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "collector",
+      "id": "co03",
+      "split": "test",
+      "prompt": "collector",
+      "item": "Do I need a sick note if I'm ill from Monday to Thursday?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "collector",
+      "id": "co03",
+      "split": "test",
+      "prompt": "rewriter",
+      "item": "Do I need a sick note if I'm ill from Monday to Thursday?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "collector",
+      "id": "co05",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "I fell ill during my vacation and I have a doctor's certificate. Do I get the days back?",
+      "shared": [
+        "and i have a doctor s",
+        "vacation and i have a doctor"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "collector",
+      "id": "co08",
+      "split": "test",
+      "prompt": "collector",
+      "item": "Can I get reimbursed for this?",
+      "shared": [
+        "can i get reimbursed for this"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "collector",
+      "id": "co13",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "How long does it take to get an income statement for my visa?",
+      "shared": [
+        "does it take to get an",
+        "how long does it take to"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "collector",
+      "id": "co15",
+      "split": "test",
+      "prompt": "collector",
+      "item": "Who do I report harassment to?",
+      "shared": [
+        "who do i report harassment to"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "collector",
+      "id": "co16",
+      "split": "dev",
+      "prompt": "router",
+      "item": "How many vacation days do I get per year?",
+      "shared": [
+        "how many vacation days do i"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "collector",
+      "id": "co18",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "Can I get a home office allowance?",
+      "shared": [
+        "can i get a home office",
+        "i get a home office allowance"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "collector",
+      "id": "co21",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "collector",
+      "id": "co21",
+      "split": "dev",
+      "prompt": "rewriter",
+      "item": "Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "e2e",
+      "id": "e2e03",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "Do I get paid sick leave?",
+      "shared": [
+        "do i get paid sick leave"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "e2e",
+      "id": "e2e04",
+      "split": "test",
+      "prompt": "collector",
+      "item": "Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "e2e",
+      "id": "e2e04",
+      "split": "test",
+      "prompt": "rewriter",
+      "item": "Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "e2e",
+      "id": "e2e14",
+      "split": "test",
+      "prompt": "router",
+      "item": "How many vacation days do I have left?",
+      "shared": [
+        "how many vacation days do i",
+        "many vacation days do i have"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "e2e",
+      "id": "e2e21",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "Can I get a home office allowance?",
+      "shared": [
+        "can i get a home office",
+        "i get a home office allowance"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "guard",
+      "id": "gu19",
+      "split": "dev",
+      "prompt": "router",
+      "item": "How many vacation days do I have left?",
+      "shared": [
+        "how many vacation days do i",
+        "many vacation days do i have"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "judge_calibration",
+      "id": "cal12",
+      "split": null,
+      "prompt": "rewriter",
+      "item": "What is the per diem on business trips?",
+      "shared": [
+        "the per diem on business trips"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "judge_calibration",
+      "id": "cal13",
+      "split": null,
+      "prompt": "rewriter",
+      "item": "What is the per diem on business trips?",
+      "shared": [
+        "the per diem on business trips"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "judge_calibration",
+      "id": "cal14",
+      "split": null,
+      "prompt": "rewriter",
+      "item": "What is the per diem on business trips?",
+      "shared": [
+        "the per diem on business trips"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "leave_agent",
+      "id": "ag10",
+      "split": "test",
+      "prompt": "router",
+      "item": "How many vacation days do I have left this year?",
+      "shared": [
+        "how many vacation days do i",
+        "many vacation days do i have"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "leave_agent",
+      "id": "ag11",
+      "split": "dev",
+      "prompt": "router",
+      "item": "How many vacation days do I have left?",
+      "shared": [
+        "how many vacation days do i",
+        "many vacation days do i have"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "qa",
+      "id": "qa02",
+      "split": "test",
+      "prompt": "router",
+      "item": "I joined on 1 September. How many vacation days do I get this year?",
+      "shared": [
+        "how many vacation days do i"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "qa",
+      "id": "qa15",
+      "split": "test",
+      "prompt": "collector",
+      "item": "I've been sick for 2 days. Do I need a medical certificate?",
+      "shared": [
+        "do i need a medical certificate"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "qa",
+      "id": "qa16",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "I'm going to be ill for 5 days. Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "qa",
+      "id": "qa16",
+      "split": "dev",
+      "prompt": "rewriter",
+      "item": "I'm going to be ill for 5 days. Do I need a sick note?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "qa",
+      "id": "qa19",
+      "split": "test",
+      "prompt": "collector",
+      "item": "Do I get paid sick leave?",
+      "shared": [
+        "do i get paid sick leave"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "qa",
+      "id": "qa21",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "Can I get money for a coworking space?",
+      "shared": [
+        "can i get money for a"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "qa",
+      "id": "qa36",
+      "split": "dev",
+      "prompt": "rewriter",
+      "item": "What is the per diem on business trips?",
+      "shared": [
+        "the per diem on business trips"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "qa",
+      "id": "qa41",
+      "split": "dev",
+      "prompt": "collector",
+      "item": "Can I get money for a chair for my home office?",
+      "shared": [
+        "a chair for my home office",
+        "can i get money for a"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "qa",
+      "id": "qa45",
+      "split": "test",
+      "prompt": "collector",
+      "item": "How long does it take to get an employment certificate?",
+      "shared": [
+        "does it take to get an",
+        "how long does it take to"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "qa_holdout",
+      "id": "hq13",
+      "split": "holdout",
+      "prompt": "collector",
+      "item": "If my illness lasts exactly 3 working days, do I need a medical certificate?",
+      "shared": [
+        "do i need a medical certificate"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "rewriter",
+      "id": "rw06",
+      "split": "dev",
+      "prompt": "rewriter",
+      "item": "What if it's longer than that?",
+      "shared": [
+        "if it s longer than that",
+        "what if it s longer than"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "router",
+      "id": "rt01",
+      "split": "dev",
+      "prompt": "router",
+      "item": "How many vacation days does an employee get per year?",
+      "shared": [
+        "how many vacation days does an",
+        "many vacation days does an employee"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "router",
+      "id": "rt02",
+      "split": "test",
+      "prompt": "collector",
+      "item": "Do I need a sick note for a 2-day illness?",
+      "shared": [
+        "do i need a sick note"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "router",
+      "id": "rt02",
+      "split": "test",
+      "prompt": "rewriter",
+      "item": "Do I need a sick note for a 2-day illness?",
+      "shared": [
+        "do i need a sick note",
+        "i need a sick note for"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "router",
+      "id": "rt23",
+      "split": "dev",
+      "prompt": "router",
+      "item": "How many vacation days do I have left?",
+      "shared": [
+        "how many vacation days do i",
+        "many vacation days do i have"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "verifier",
+      "id": "ve04",
+      "split": "test",
+      "prompt": "rewriter",
+      "item": "What is the per diem on business trips?",
+      "shared": [
+        "the per diem on business trips"
+      ],
+      "exact_item_in_prompt": false
+    },
+    {
+      "dataset": "verifier",
+      "id": "ve05",
+      "split": "test",
+      "prompt": "collector",
+      "item": "Do I get paid sick leave?",
+      "shared": [
+        "do i get paid sick leave"
+      ],
+      "exact_item_in_prompt": true
+    },
+    {
+      "dataset": "verifier",
+      "id": "ve10",
+      "split": "test",
+      "prompt": "rewriter",
+      "item": "What is the per diem on business trips?",
+      "shared": [
+        "the per diem on business trips"
+      ],
+      "exact_item_in_prompt": false
+    }
+  ]
+}

@@ -148,3 +148,12 @@ def test_bare_day_uses_month_from_conversation():
     t = dt.date(2026, 11, 12)
     assert resolve("From the 14th to the 18th.", t, context="I want annual leave in December.") == []
     assert [d.isoformat() for _, d in resolve("Friday the 20th", t)] == ["2026-11-20"]
+
+
+def test_verifier_quote_must_exist_in_evidence():
+    from hr_assistant.components.verifier import quote_in_evidence
+
+    ev = [c for c in load_chunks() if c.id in ("equipment-policy §4.1", "expense-reimbursement-policy §1.2")]
+    assert quote_in_evidence("Installing pirated software is forbidden.", ev)
+    assert not quote_in_evidence("Contact lenses are not reimbursed.", ev)  # invented quote
+    assert not quote_in_evidence(None, ev)

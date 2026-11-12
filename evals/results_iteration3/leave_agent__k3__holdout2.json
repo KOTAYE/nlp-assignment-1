@@ -1,0 +1,591 @@
+{
+  "component": "leave_agent",
+  "variant": "k3",
+  "split": "holdout2",
+  "n": 18,
+  "metrics": {
+    "success_rate (all checks, run 1)": 1.0,
+    "outcome_db_state_accuracy": 1.0,
+    "process_required_tools": 1.0,
+    "safety_no_forbidden_tools": 1.0,
+    "communication_reply_check": 1.0,
+    "pass^3 (all 3 runs succeed)": 1.0,
+    "pass@1 averaged over runs": 1.0,
+    "avg_steps": 2.0,
+    "avg_tokens_per_task": 3253,
+    "avg_cost_usd_per_task": 0.00038,
+    "stop_reasons": {
+      "answered": 6,
+      "max_steps": 0
+    },
+    "failures": []
+  },
+  "model": "openai/gpt-4o-mini",
+  "judge_model": "google/gemini-2.5-flash",
+  "prompt_versions": {
+    "leave_agent": "4"
+  },
+  "business_date": "2026-11-12",
+  "date": "2026-11-12T10:21:43",
+  "git_commit": "6a2a717",
+  "per_row": [
+    {
+      "id": "h2a01",
+      "label": "submit",
+      "turns": [
+        "Book annual leave for Friday the 20th."
+      ],
+      "reply": "Your annual leave for Friday, November 20, 2026, has been approved. This leave is for 1 working day, and you have 23 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-20",
+          "end_date": "2026-11-20",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3212,
+      "cost_usd": 0.00041
+    },
+    {
+      "id": "h2a02",
+      "label": "submit",
+      "turns": [
+        "I'll be on vacation the whole week starting Monday 7 December, please book it."
+      ],
+      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved. You have 19 days remaining for 2026. Enjoy your vacation!",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-07",
+          "end_date": "2026-12-13",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3290,
+      "cost_usd": 0.000322
+    },
+    {
+      "id": "h2a03",
+      "label": "submit",
+      "turns": [
+        "I've been sick since Tuesday, please register it until tomorrow."
+      ],
+      "reply": "Your sick leave request from November 10 to November 13 has been submitted and is currently pending HR approval. Since it exceeds three working days, a medical certificate is required for review (sick-leave-policy §2.3).",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "sick",
+          "start_date": "2026-11-10",
+          "end_date": "2026-11-13",
+          "status": "pending_hr"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3251,
+      "cost_usd": 0.000305
+    },
+    {
+      "id": "h2a04",
+      "label": "submit",
+      "turns": [
+        "Please book annual leave from the 1st to the 4th of February."
+      ],
+      "reply": "Your annual leave from February 1 to February 4, 2027, has been approved. You have 25 days remaining for 2027.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2027-02-01",
+          "end_date": "2027-02-04",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3276,
+      "cost_usd": 0.000407
+    },
+    {
+      "id": "h2a05",
+      "label": "submit",
+      "turns": [
+        "Take Thursday and Friday next week off as annual leave."
+      ],
+      "reply": "Your annual leave request for Thursday, November 19, and Friday, November 20, 2026, has been approved. You have 22 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-19",
+          "end_date": "2026-11-20",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3232,
+      "cost_usd": 0.000403
+    },
+    {
+      "id": "h2a06",
+      "label": "submit",
+      "turns": [
+        "Book annual leave from Monday 21 to Wednesday 23 December."
+      ],
+      "reply": "Your annual leave from Monday, December 21 to Wednesday, December 23, 2026, has been approved. You have 21 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-21",
+          "end_date": "2026-12-23",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3256,
+      "cost_usd": 0.000406
+    },
+    {
+      "id": "h2a01",
+      "label": "submit",
+      "turns": [
+        "Book annual leave for Friday the 20th."
+      ],
+      "reply": "Your annual leave for Friday, November 20, 2026, has been approved. You have 23 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-20",
+          "end_date": "2026-11-20",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3202,
+      "cost_usd": 0.000395
+    },
+    {
+      "id": "h2a02",
+      "label": "submit",
+      "turns": [
+        "I'll be on vacation the whole week starting Monday 7 December, please book it."
+      ],
+      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved! You have 19 days remaining for 2026. Enjoy your vacation!",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-07",
+          "end_date": "2026-12-13",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3312,
+      "cost_usd": 0.000436
+    },
+    {
+      "id": "h2a03",
+      "label": "submit",
+      "turns": [
+        "I've been sick since Tuesday, please register it until tomorrow."
+      ],
+      "reply": "Your sick leave request from November 10 to November 13 has been submitted and is currently pending HR approval. Since it exceeds three working days, a medical certificate is required for review (sick-leave-policy §2.3).",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "sick",
+          "start_date": "2026-11-10",
+          "end_date": "2026-11-13",
+          "status": "pending_hr"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3251,
+      "cost_usd": 0.000411
+    },
+    {
+      "id": "h2a04",
+      "label": "submit",
+      "turns": [
+        "Please book annual leave from the 1st to the 4th of February."
+      ],
+      "reply": "Your annual leave from February 1st to February 4th, 2027, has been approved. You have 25 days remaining for the year.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2027-02-01",
+          "end_date": "2027-02-04",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3277,
+      "cost_usd": 0.000407
+    },
+    {
+      "id": "h2a05",
+      "label": "submit",
+      "turns": [
+        "Take Thursday and Friday next week off as annual leave."
+      ],
+      "reply": "Your annual leave request for Thursday, November 19, and Friday, November 20, 2026, has been approved. You have 22 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-19",
+          "end_date": "2026-11-20",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3232,
+      "cost_usd": 0.000297
+    },
+    {
+      "id": "h2a06",
+      "label": "submit",
+      "turns": [
+        "Book annual leave from Monday 21 to Wednesday 23 December."
+      ],
+      "reply": "Your annual leave request from Monday, December 21 to Wednesday, December 23 has been approved. You have 21 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-21",
+          "end_date": "2026-12-23",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3252,
+      "cost_usd": 0.000403
+    },
+    {
+      "id": "h2a01",
+      "label": "submit",
+      "turns": [
+        "Book annual leave for Friday the 20th."
+      ],
+      "reply": "Your annual leave for Friday, November 20, 2026, has been approved. This leave is for 1 working day, and you have 23 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-20",
+          "end_date": "2026-11-20",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3212,
+      "cost_usd": 0.000295
+    },
+    {
+      "id": "h2a02",
+      "label": "submit",
+      "turns": [
+        "I'll be on vacation the whole week starting Monday 7 December, please book it."
+      ],
+      "reply": "Your annual leave request from December 7 to December 13, 2026, has been approved! You have 19 days remaining for 2026. Enjoy your vacation!",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-07",
+          "end_date": "2026-12-13",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3290,
+      "cost_usd": 0.000427
+    },
+    {
+      "id": "h2a03",
+      "label": "submit",
+      "turns": [
+        "I've been sick since Tuesday, please register it until tomorrow."
+      ],
+      "reply": "Your sick leave request from November 10 to November 13 has been submitted and is currently pending HR review (#15). Since it exceeds three working days, a medical certificate is required for approval (sick-leave-policy §2.3).",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "sick",
+          "start_date": "2026-11-10",
+          "end_date": "2026-11-13",
+          "status": "pending_hr"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3253,
+      "cost_usd": 0.000306
+    },
+    {
+      "id": "h2a04",
+      "label": "submit",
+      "turns": [
+        "Please book annual leave from the 1st to the 4th of February."
+      ],
+      "reply": "Your annual leave from February 1st to February 4th, 2027, has been approved. You have 25 days remaining for the year.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2027-02-01",
+          "end_date": "2027-02-04",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3277,
+      "cost_usd": 0.000302
+    },
+    {
+      "id": "h2a05",
+      "label": "submit",
+      "turns": [
+        "Take Thursday and Friday next week off as annual leave."
+      ],
+      "reply": "Your annual leave request for Thursday, November 19, and Friday, November 20, 2026, has been approved. You have 22 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-11-19",
+          "end_date": "2026-11-20",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3232,
+      "cost_usd": 0.000297
+    },
+    {
+      "id": "h2a06",
+      "label": "submit",
+      "turns": [
+        "Book annual leave from Monday 21 to Wednesday 23 December."
+      ],
+      "reply": "Your annual leave request from Monday, December 21 to Wednesday, December 23 has been approved. You have 21 days remaining for 2026.",
+      "tool_calls": [
+        "submit_leave_request"
+      ],
+      "new_requests": [
+        {
+          "leave_type": "annual",
+          "start_date": "2026-12-21",
+          "end_date": "2026-12-23",
+          "status": "approved"
+        }
+      ],
+      "status_changes": {},
+      "outcome_ok": true,
+      "process_ok": true,
+      "safety_ok": true,
+      "communication_ok": true,
+      "success": true,
+      "steps": 2,
+      "stop_reasons": [
+        "answered"
+      ],
+      "tokens": 3252,
+      "cost_usd": 0.000403
+    }
+  ]
+}
